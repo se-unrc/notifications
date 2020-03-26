@@ -1,8 +1,8 @@
 # Software Requirements Specification
-## For <Systems Analysis & Design Project>
+## For <Document Notification System>
 
 Version 0.1  
-Prepared by <Juan Ignacio Alanis><Jeremias Parladorio>  
+Prepared by <Juan Ignacio Alanis> <Jeremias Parladorio>  
 <organization>  
 <date created>  
 
@@ -57,11 +57,11 @@ Table of Contents
 This document provides specifications of the characteristics and general requirements of the project's software.
 
 ### 1.1 Document Purpose
-The purpose of this document is to provide a detailed description of the software "Notifications".
+The purpose of this document is to provide a detailed description of the software "Notifications". This will illustrate the system's development and will also explain its functionality, its limitations, its interface and the interaction with its possible users. This document is mainly destined to be proposed to a professor for its approval and also to serve as a reference to develop the system.
 
 
 ### 1.2 Product Scope
-Identify the product whose software requirements are specified in this document, including the revision or release number. Explain what the product that is covered by this SRS will do, particularly if this SRS describes only part of the system or a single subsystem. Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.
+
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 
@@ -94,10 +94,6 @@ Identify the various user classes that you anticipate will use this product. Use
 ### 2.5 Assumptions and Dependencies
 List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
 
-### 2.6 Apportioning of Requirements
-Apportion the software requirements to software elements. For requirements that will require implementation over multiple software elements, or when allocation to a software element is initially undefined, this should be so stated. A cross reference table by function and software element should be used to summarize the apportioning.
-
-Identify requirements that may be delayed until future versions of the system (e.g., blocks and/or increments).
 
 ## 3. Requirements
 > This section specifies the software product's requirements. Specify all of the software requirements to a level of detail sufficient to enable designers to design a software system to satisfy those requirements, and to enable testers to test that the software system satisfies those requirements.
@@ -135,58 +131,21 @@ Describe the logical and physical characteristics of each interface between the 
 #### 3.1.3 Software interfaces
 Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
 
+##### 3.1.4 Communication interfaces
+Whatever it is.
+
 ### 3.2 Functional
 > This section specifies the requirements of functional effects that the software-to-be is to have on its environment.
 
-### 3.3 Quality of Service
-> This section states additional, quality-related property requirements that the functional effects of the software should present.
+#### 3.2.1 Class Diagram
 
-#### 3.3.1 Performance
-If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
+#### 3.2.2 User Stories 
 
-#### 3.3.2 Security
-Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
+### 3.3 Design Requirements 
 
-#### 3.3.3 Reliability
-Specify the factors required to establish the required reliability of the software system at time of delivery.
+### 3.4 Design Constraints
 
-#### 3.3.4 Availability
-Specify the factors required to guarantee a defined availability level for the entire system such as checkpoint, recovery, and restart.
-
-### 3.4 Compliance
-Specify the requirements derived from existing standards or regulations, including:  
-* Report format
-* Data naming
-* Accounting procedures
-* Audit tracing
-
-For example, this could specify the requirement for software to trace processing activity. Such traces are needed for some applications to meet minimum regulatory or financial standards. An audit trace requirement may, for example, state that all changes to a payroll database shall be recorded in a trace file with before and after values.
-
-### 3.5 Design and Implementation
-
-#### 3.5.1 Installation
-Constraints to ensure that the software-to-be will run smoothly on the target implementation platform.
-
-#### 3.5.2 Distribution
-Constraints on software components to fit the geographically distributed structure of the host organization, the distribution of data to be processed, or the distribution of devices to be controlled.
-
-#### 3.5.3 Maintainability
-Specify attributes of software that relate to the ease of maintenance of the software itself. These may include requirements for certain modularity, interfaces, or complexity limitation. Requirements should not be placed here just because they are thought to be good design practices.
-
-#### 3.5.4 Reusability
-<!-- TODO: come up with a description -->
-
-#### 3.5.5 Portability
-Specify attributes of software that relate to the ease of porting the software to other host machines and/or operating systems.
-
-#### 3.5.6 Cost
-Specify monetary cost of the software product.
-
-#### 3.5.7 Deadline
-Specify schedule for delivery of the software product.
-
-#### 3.5.8 Proof of Concept
-<!-- TODO: come up with a description -->
+### 3.5 Attributes
 
 ## 4. Verification
 > This section provides the verification approaches and methods planned to qualify the software. The information items for verification are recommended to be given in a parallel manner with the requirement items in Section 3. The purpose of the verification process is to provide objective evidence that a system or system element fulfills its specified requirements and characteristics.
