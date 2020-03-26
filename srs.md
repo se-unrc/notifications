@@ -1,9 +1,9 @@
 # Software Requirements Specification
 ## For <project name>
 
+![Licence](https://github.com/juanyachino/notifications/blob/master/LICENSE.txt)  
 Version 0.1   
 Prepared by <author>
-![Licence](https://github.com/juanyachino/notifications/blob/master/LICENSE.txt)  
 <organization>  
 <date created>  
 
