@@ -1,8 +1,8 @@
 # Software Requirements Specification
-## For <Document Notification System>
+## For Document Notification System
 
 Version 0.1  
-Prepared by <Juan Ignacio Alanis> <Jeremias Parladorio>  
+Prepared by Juan Ignacio Alanis Jeremias Parladorio 
 <organization>  
 <date created>  
 
@@ -56,19 +56,39 @@ Table of Contents
 This document provides specifications of the characteristics and general requirements of the project's software.
 
 ### 1.1 Document Purpose
-The purpose of this document is to provide a detailed description of the software "Notifications". This will illustrate the system's development and will also explain its functionality, its limitations, its interface and the interaction with its possible users. This document is mainly destined to be proposed to a professor for its approval and also to serve as a reference during the system's development.
+The purpose of this document is to provide a detailed description of the software "Document Notifications System". This will illustrate the system's development and will also explain its functionality, its limitations, its interface and the interaction with its possible users. This document is mainly destined to be proposed to a professor for its approval and also to serve as a reference to develop the system.
 
 
 ### 1.2 Product Scope
-
+The "Document Notifications System" is a web-based software intended to be utilized to upload official Universidad Nacional de Rio Cuarto's documents. In this software users will be able to log in, either as administrators (those who permission to do so) or common users. 
+Administrators are going to use this software to upload the documents where they're going to tag the users named in the aforementioned documents who have a system account. Furthermore, they are going to tag the category to which the document belongs to. The registered users are going to use this software to read the uploaded documents and will also be notified of the documents they are either tagged in or that belong to the user's interest category. Invited users on the other hand are only going to be able to use this software to read the documents that have been uploaded.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
+
+| Term          | Definition                                                       | 
+| :------------:|:-----------------------------------------------------------------| 
+| Admins        | Registered users with administrating permission, meaning they    |
+|               | will be able to upload documents and tag users and categories    |
+| Register      | Users who are registered in the system and dont have             |
+| users         | administrating permission. They are able to read the             |
+|               | documents and get notified of a new upload if they are           | 
+|               |  tagged in it or belongs to their interest category.             |
+| Invited users | Users who have not registered but can access and read the        |
+|               | uploaded documents.                                              | 
+| Notification  | A email to the person who has been tagged in in a document or if |
+|               | that uploaded document belongs to their interest category.       |
+| Document      | Universidad Nacional de Rio Cuarto's official record documents.  |
+| Tagged user   | Registered user who has been tagged in a document.               |
+| Category      | Topic to which the document refers to.                           |
+| Software      | Document Notification System.                                    |
+
 
 ### 1.4 References
 List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
 
 ### 1.5 Document Overview
-Describe what the rest of the document contains and how it is organized.
+El resto de este documento incluye 2 capitulos mas. El segundo capitulo proporciona una descripcion general de la funcionalidad del software y la interaccion del sistema con los diferentes tipos de usuarios. Ademas tambien menciona las restricciones del software y sus dependencias.
+El tercer capitulo proporciona los requisitos del software, una descripcion de las interfaces, caracteristicas y restricciones del diseño y los atributos del mismo.
 
 ## 2. Product Overview
 > This section should describe the general factors that affect the product and its requirements. This section does not state specific requirements. Instead, it provides a background for those requirements, which are defined in detail in Section 3, and makes them easier to understand.
@@ -80,7 +100,7 @@ Describe the context and origin of the product being specified in this SRS. For 
 Summarize the major functions the product must perform or must let the user perform. Details will be provided in Section 3, so only a high level summary (such as a bullet list) is needed here. Organize the functions to make them understandable to any reader of the SRS. A picture of the major groups of related requirements and how they relate, such as a top level data flow diagram or object class diagram, is often effective.
 
 ### 2.3 Product Constraints
-This subsection should provide a general description of any other items that will limit the developer’s options. These may include:  
+This subsection should provide a general description of any other items that will limit the developerâ€™s options. These may include:  
 
 * Interfaces to users, other applications or hardware.  
 * Quality of service constraints.  
