@@ -21,7 +21,6 @@ Table of Contents
   * 2.3 [Product Constraints](#23-product-constraints)
   * 2.4 [User Characteristics](#24-user-characteristics)
   * 2.5 [Assumptions and Dependencies](#25-assumptions-and-dependencies)
-  * 2.6 [Apportioning of Requirements](#26-apportioning-of-requirements)
 * 3 [Requirements](#3-requirements)
   * 3.1 [External Interfaces](#31-external-interfaces)
     * 3.1.1 [User Interfaces](#311-user-interfaces)
@@ -57,7 +56,7 @@ Table of Contents
 This document provides specifications of the characteristics and general requirements of the project's software.
 
 ### 1.1 Document Purpose
-The purpose of this document is to provide a detailed description of the software "Notifications". This will illustrate the system's development and will also explain its functionality, its limitations, its interface and the interaction with its possible users. This document is mainly destined to be proposed to a professor for its approval and also to serve as a reference to develop the system.
+The purpose of this document is to provide a detailed description of the software "Notifications". This will illustrate the system's development and will also explain its functionality, its limitations, its interface and the interaction with its possible users. This document is mainly destined to be proposed to a professor for its approval and also to serve as a reference during the system's development.
 
 
 ### 1.2 Product Scope
