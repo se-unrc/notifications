@@ -23,6 +23,6 @@ This is a sample readme file
   * Juan Yachino
 
 # Licence
-(link)[licence]
+![Licence](https://github.com/juanyachino/notifications/blob/master/LICENSE.txt)  
 
 >>>>>>> 57a45cc82b721ab26521f57fdb7cc29cbb1129ff
