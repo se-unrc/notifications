@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 # ProyectoAyDS 2020 :
-# readme de adorno para pr
-# vamos loco
-# hacer diamagrama de clases en el SRS para el miercoles 
+# 
+# 
+# TODO: diamagrama de clases en el SRS para el miercoles 
 =======
 # Description
 
@@ -19,8 +18,9 @@ This is a sample readme file
 
 ## Core
 
-  * SE UNRC
-  * SE UNRC 2
+  * Emiliano Baez
+  * Leonardo Gaitan
+  * Juan Yachino
 
 # Licence
 (link)[licence]
