@@ -8,4 +8,15 @@ class App < Sinatra::Base
   get "/" do
     "hello cruel world!!!"
   end
+
+  post "/users" do
+    # Crear el usuario en DB posiblemente
+
+    logger.info "--------"
+    logger.info params
+    logger.info JSON.parse(request.body.read)
+    logger.info "--------"
+
+    "USER CREATED"
+  end
 end
