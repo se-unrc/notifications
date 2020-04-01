@@ -56,7 +56,8 @@ Table of Contents
 > This section should provide an overview of the entire document
 
 ### 1.1 Document Purpose
-The purpose of this software Requirements specification document is to define the design, specifications and functionality of the notification system. This document will be useful to both developers and the client to reach an understanding between both parties.
+ This Project's purpose is to build a system capable of reporting whenever a member of the UNRC's (Universidad Nacional de Rio Cuarto) Computer Department is named or referenced in either a resolution or record.
+
 
 ### 1.2 Product Scope
 The notification system called "Notifications" is an application that will allow the loading of documents and the notification to the mentioned persons, a person is mentioned with the use of the DNI
