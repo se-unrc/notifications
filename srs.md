@@ -137,9 +137,9 @@ Describe the connections between this product and other specific software compon
 
 ### 3.2 Functional
 > Class Diagram (*Work In Progress*)
-![Class Diagram](https://i.imgur.com/BzjGdyR.jpg)
+![Class Diagram](https://i.imgur.com/xxGumvO.jpg)
 [Source](https://app.genmymodel.com/api/repository/juanyachino/TP%20AyDS2020) 
-
+![Class Diagram] (https://app.genmymodel.com/api/projects/_EhBYMHO0EeqHBZyMlFJVZw/diagrams/_EhBYM3O0EeqHBZyMlFJVZw/jpeg)
 ### 3.3 Quality of Service
 > This section states additional, quality-related property requirements that the functional effects of the software should present.
 
