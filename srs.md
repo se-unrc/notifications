@@ -58,12 +58,22 @@ Table of Contents
 > This section should provide an overview of the entire document
 
 ### 1.1 Document Purpose
-Describe the purpose of the SRS and its intended audience.
+El proposito del presente documento es dejar en claro lo que va a hacer nuestra app y esta destinado a los profesores y alumnos de  Analisis y Diseño de Sistemas 2020.   esta en progreso y lo iremos completando .
 
 ### 1.2 Product Scope
-Identify the product whose software requirements are specified in this document, including the revision or release number. Explain what the product that is covered by this SRS will do, particularly if this SRS describes only part of the system or a single subsystem. Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.
+La applicacion de Notificaciones de actas de la UNRC servira para notificar a los usuarios sobre nuevas actas publicadas por el consejo directivo donde dicho usuario sea nombrado.
+En la aplicacion habra usuarios administradores (encargados de cargar las actas y 'tagear' a las personas) y usuarios (Tagged) que recibiran una notificacion sobre la publicacion de dicha acta.
+Existira la posibilidad de que los usuarios se suscriban a tags o topicos , para ser notificados cuando una acta contiene un tema de interes relacionado con dicho tag.
+La app esta destinada a usuarios de la UNRC , ya sean administrativos, alumnos docentes y no-docentes.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
+Definition | Description
+------------ | -------------
+Admin | Usuario con permiso de subir actas y tagear personas.
+Tagged | Usuario registrado, puede ver actas y subscribirse a tags.
+Notificacion | Aviso via email o app al usuario tageado con el documento.
+Actas | Documentos oficiales publicados por el consejo directivo de la UNRC
+Tags/topicos | temas de interes que puede tener una acta, por ejemplo: concurso docente
 
 ### 1.4 References
 List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
@@ -136,6 +146,7 @@ Describe the logical and physical characteristics of each interface between the 
 Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
 
 ### 3.2 Functional
+#### 3.2.1 Class Diagram
 > Class Diagram (*Work In Progress*)
 ![Class Diagram](https://app.genmymodel.com/api/projects/_EhBYMHO0EeqHBZyMlFJVZw/diagrams/_EhBYM3O0EeqHBZyMlFJVZw/jpeg)
 [Source](https://app.genmymodel.com/api/repository/juanyachino/TP%20AyDS2020) 
