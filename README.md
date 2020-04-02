@@ -1,7 +1,7 @@
 # ProyectoAyDS 2020 :
 # 
 # 
-# TODO: diamagrama de clases en el SRS para el miercoles 
+# TODO: para el jueves: agregar stories a la tab project en github
 =======
 # Description
 
