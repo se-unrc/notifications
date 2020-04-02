@@ -1,10 +1,10 @@
 # Software Requirements Specification
 ## For Document Upload & Notification System
 
-Version 0.1  
-Prepared by Juan Ignacio Alanis Jeremias Parladorio 
-Universidad Nacional de Rio Cuarto 
-2nd April 2020
+Version 0.1              
+Prepared by Juan Ignacio Alanis, Jeremias Parladorio                    
+Universidad Nacional de Rio Cuarto                     
+2nd April 2020                     
 
 Table of Contents
 =================
@@ -216,27 +216,27 @@ This section includes all fundamental requierements that specify all the system'
 ##### 3.2.2.1 All User Classes - The General User
 
 ###### User story 1.1
-
-**ID:** US1
-TITLE: See documents online
+    
+**ID:** US1                    
+TITLE: See documents online        
 DESC: All users should be allowed to see the uploaded documents in the website. 
-RAT: In order for a user to see documents online.
+RAT: In order for a user to see documents online.     
 DEP: None.
 
 ###### User story 1.2
 
-**ID:** US2
-TITLE: Download uploaded documents
-DESC: All users should be allowed to download the documents uploaded to the site by clicking on an icon next the document file.
-RAT: In order for a user to see download documents.
-DEP: None.
+**ID:** US2      
+TITLE: Download uploaded documents                                 
+DESC: All users should be allowed to download the documents uploaded to the site by clicking on an icon next the document file.          
+RAT: In order for a user to see download documents.       
+DEP: None.      
 
 ###### User story 1.3
 
-**ID:** US3
-TITLE: Search documents
-DESC: All users should be allowed to search documents by the following criteria: users involved, date, and category. This includes searching them by only one of those filters, or by any combination of them.
-RAT: In order for a user to search for documents.
+**ID:** US3      
+TITLE: Search documents     
+DESC: All users should be allowed to search documents by the following criteria: users involved, date, and category. This includes searching them by only one of those filters, or by any combination of them.       
+RAT: In order for a user to search for documents.         
 DEP: None.
 
 
@@ -244,138 +244,140 @@ DEP: None.
 
 ###### User story 2.1
 
-**ID:** US4
-TITLE: Sign up
-DESC: Given that the user has now accesed the website, they should be a allowed to register into the site. They will have to provide their full name, ID number, username, email, and password.
-RAT: In order for an unregistered user to sign up.
+**ID:** US4         
+TITLE: Sign up                   
+DESC: Given that the user has now accesed the website, they should be a allowed to register into the site. They will have to provide their full name, ID number, username, email, and password.              
+RAT: In order for an unregistered user to sign up.                 
 DEP: None.
 
 ##### 3.2.2.3 User Class 3 - The Registered User
 
 ###### User story 3.1
 
-**ID:** US5
-TITLE: Receive notifications when tagged
+**ID:** US5                                   
+TITLE: Receive notifications when tagged                        
 DESC: As a RU, I want to receive notifications when I am tagged in a document.
-RAT: In order for a RU to receive notifications whenever tagged.
+RAT: In order for a RU to receive notifications whenever tagged.             
 DEP: US4
 
 ###### User story 3.2
 
-**ID:** US6
-TITLE: Log in
-DESC: As a RU, I want to log into my account. For this I need my email account and my password.
-RAT: In order for a registered user to log in.
-DEP: US4
+**ID:** US6                          
+TITLE: Log in                                         
+DESC: As a RU, I want to log into my account. For this I need my email account and my password.               
+RAT: In order for a registered user to log in.                                       
+DEP: US4        
 
 ###### User story 3.3.
 
-**ID:** US7
-TITLE: Forgot my password
-DESC: As a RU, I forgot my password. To retrieve it I need to give the website my email account.
-RAT: In order for a RU to retrieve their password.
-DEP: US4
+**ID:** US7             
+TITLE: Forgot my password               
+DESC: As a RU, I forgot my password. To retrieve it I need to give the website my email account.                 
+RAT: In order for a RU to retrieve their password.                 
+DEP: US4 
 
 ###### User story 3.4
 
-**ID:** US8
-TITLE: Edit my profile
-DESC: As a RU, I wanto be able to edit my profile: change my full name, my username, my password, my email, and my ID number.
-RAT: In order for a RU to edit their profile.
-DEP: US6
+**ID:** US8                   
+TITLE: Edit my profile                    
+DESC: As a RU, I wanto be able to edit my profile: change my full name, my username, my password, my email, and my ID number.                 
+RAT: In order for a RU to edit their profile.                   
+DEP: US6       
 
 ###### User story 3.5
 
-**ID:** US9
-TITLE: Edit my interest categories
-DESC: As a RU, I want to subscribe to new categories, or to unsuscribe to categories I had previously subbed to.
-RAT: In order for a RU to edit their interest categories.
-DEP: US6
+**ID:** US9                  
+TITLE: Edit my interest categories                  
+DESC: As a RU, I want to subscribe to new categories, or to unsuscribe to categories I had previously subbed to.                
+RAT: In order for a RU to edit their interest categories.             
+DEP: US6                        
 
 ###### User story 3.6
 
-**ID:** US10
-TITLE: Receive notifications from my interest categories
-DESC: As a RU, I want to receive notifications whenever a new document is uploaded to one of my interest categories.
-RAT: In order for a RU to receive notifications from their ICs.
-DEP: US9
+**ID:** US10                    
+TITLE: Receive notifications from my interest categories                
+DESC: As a RU, I want to receive notifications whenever a new document is uploaded to one of my interest categories.                      
+RAT: In order for a RU to receive notifications from their ICs.            
+DEP: US9            
 
 ##### 3.2.2.4 User Class 4 - The Admin Class
 
 ###### User story 4.1 
 
-**ID:** US11
-TITLE: Upload new document
-DESC: As an admin, I want to upload a new document as need be. For this I will need the PDF file, the title of the document, the tagged users, the date, and the document's category.
-RAT: In order for an admin to upload a new document.
+**ID:** US11                
+TITLE: Upload new document                 
+DESC: As an admin, I want to upload a new document as need be. For this I will need the PDF file, the title of the document, the tagged users, the date, and the document's category.                   
+RAT: In order for an admin to upload a new document.              
 DEP: US4
 
 ###### User story 4.2
 
-**ID:** US12
-TITLE: Edit docs
-DESC: As an admin, I want to edit any document that has already been uploaded. This means chaging its title, date, PDF file, users tagged to the doc, and the doc's category.
-RAT: In order for an admin to edit uploaded documents.
-DEP: US11
+**ID:** US12                 
+TITLE: Edit docs                 
+DESC: As an admin, I want to edit any document that has already been uploaded. This means chaging its title, date, PDF file, users tagged to the doc, and the doc's category.                    
+RAT: In order for an admin to edit uploaded documents.                 
+DEP: US11                       
 
 ###### User story 4.3
 
-**ID:** US13
-TITLE: Delete documents
-DESC: As an admin, I want to be able to delete documents that may have been wrongfully uploaded, or that for some reason are no longer relevant.
-RAT: In order for an admin to delete documents, no questions asked.
+**ID:** US13                 
+TITLE: Delete documents                
+DESC: As an admin, I want to be able to delete documents that may have been wrongfully uploaded, or that for some reason are no longer relevant.      
+RAT: In order for an admin to delete documents, no questions asked.           
 DEP: US11
 
 ###### User story 4.4
 
-**ID:** US14
-TITLE: Invite admin
-DESC: As an admin, I want to invite another RU in order for them to become an admin. For this I only need their username.
-RAT: In order for an admin to invite some other RU to become an admin.
+**ID:** US14                  
+TITLE: Invite admin                     
+DESC: As an admin, I want to invite another RU in order for them to become an admin. For this I only need their username.                
+RAT: In order for an admin to invite some other RU to become an admin.            
 DEP: US4
 
 ### 3.3 Design Requirements 
 
-**ID:** DR1
-TITLE: Simple search feature
+**ID:** DR1                 
+TITLE: Simple search feature                   
 DESC: The search feature should be simple and easy for the user to use.
-RAT: In order for the user to easily find the search feature and have no issues using it.
+RAT: In order for the user to easily find the search feature and have no issues using it.                   
 DEP: None.
 
-**ID:** DR2
-TITLE: Simple document visualization
-DESC: All documents should be easily identifiable, and ready to be read by clicking on them.  
-RAT: In order for the user to easily indetify and read the documents.
+**ID:** DR2               
+TITLE: Simple document visualization                 
+DESC: All documents should be easily identifiable, and ready to be read by clicking on them.                 
+RAT: In order for the user to easily indetify and read the documents.     
+DEP: None.          
+
+**ID:** DR3               
+TITLE: Simple download feature             
+DESC: All documents should be easily downloaded by clicking on a download icon.       
+RAT: In order for the user to easily download any document.             
 DEP: None.
 
-**ID:** DR3
-TITLE: Simple download feature
-DESC: All documents should be easily downloaded by clicking on a download icon.
-RAT: In order for the user to easily download any document.
-DEP: None.
-
-**ID:** DR4
-TITLE: Ease of subscribing/unsuscribing to an IC
-DESC: All ICs should be listed on the user's profile so that they can easily subscribe to any of them by checking a small box next to the ICs name, or unsubscribe by doing the exact opposite.
-RAT: In order for the user to easily subscribe/unsubscribe to an IC.
-
-**ID:** DR5
-TITLE: Usage of 'Add new doc' feature
-DESC: This feature should be intuitive and very easy to use for all administrators, who may not be technical people.
+**ID:** DR4             
+TITLE: Ease of subscribing/unsuscribing to an IC         
+DESC: All ICs should be listed on the user's profile so that they can easily subscribe to any of them by checking a small box next to the ICs name, or unsubscribe by doing the exact opposite.                                
+RAT: In order for the user to easily subscribe/unsubscribe to an IC.          
+ 
+**ID:** DR5             
+TITLE: Usage of 'Add new doc' feature               
+DESC: This feature should be intuitive and very easy to use for all administrators, who may not be technical people.                
 RAT: In order for admins to easily upload new docs.
 
 ### 3.4 Design Constraints
 
-**ID:** DC1
-TITLE: Having the docs in your computer
+**ID:** DC1              
+TITLE: Having the docs in your computer              
 DESC: The admin must have the document's PDF file stored in his computer in order to be able to upload it, any other kinds of storage will not work (URLs, etc).
 
-**ID:** DC2
-TITLE: Having an email account
+**ID:** DC2                           
+TITLE: Having an email account                     
 DESC: The system is designed so that all users must have an email account.
 
-**ID:** DC3
-TITLE: Having an ID number
-DESC: Only people with ID numbers will be aeble to sign up for an account.
+**ID:** DC3           
+TITLE: Having an ID number               
+DESC: Only people with ID numbers will be able to sign up for an account.
+
+
 
 
