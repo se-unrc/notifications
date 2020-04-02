@@ -68,19 +68,17 @@ The notification system called "Notifications" is an application that will allow
 |User         |person who can view documents and receive notifications if included |
 |             |in said document, Identifies with your personal data                |
 |Admin        |is a user who in turn has the power to upload documents and tag     |
-|             |the users involved                                                  |
-|Guest        |is the person who enters without registering                        |
 |Document     |pdf file with scanned document                                      |
 |Notification |is an alert indicating that the user has been named in a document   |
+|Category     |Topic to which the document refers.                                 |
+
 
 ### 1.4 References
->List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
+[1] Arsaute, A., Brusatti, F., Solivellas, D., Uva, M. "srs". Unpublished
 
-### 1.5 Document Overview
-Describe what the rest of the document contains and how it is organized.
 
 ## 2. Product Overview
-> This section should describe the general factors that affect the product and its requirements. This section does not state specific requirements. Instead, it provides a background for those requirements, which are defined in detail in Section 3, and makes them easier to understand.
+
 
 ### 2.1 Product Perspective
 The notification system is a new and autonomous product.
