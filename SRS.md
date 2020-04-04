@@ -1,10 +1,10 @@
 # Software Requirements Specification
 ## For Document Upload & Notification System
 
-Version 0.1              
-Prepared by Juan Ignacio Alanis, Jeremias Parladorio                    
-Universidad Nacional de Rio Cuarto                     
-2nd April 2020                     
+Version 0.1                            
+Prepared by Juan Ignacio Alanis, Jeremias Parladorio                 
+Universidad Nacional de Rio Cuarto                          
+2nd April 2020
 
 Table of Contents
 =================
@@ -36,7 +36,8 @@ Table of Contents
 
 | Name | Date    | Reason For Changes    | Version   |
 | ---- | ------- | ----------------------| --------- |
-| DUNS     | 04/02/2020 | None. First version| 0.1        | 
+| DUNS     | 04/02/2020 | None. First version| 0.1   |
+ 
 
 ## 1. Introduction
 This document provides specifications of the characteristics and general requirements of the project's software.
@@ -46,8 +47,8 @@ The purpose of this document is to provide a detailed description of the softwar
 
 
 ### 1.2 Product Scope
-The "Document Upload & Notification System" is a web-based software intended to be utilized to upload official Universidad Nacional de Rio Cuarto's documents. In this software users will be able to log in, either as administrators (those who permission to do so) or common users. 
-Administrators are going to use this software to upload official univeristy documents, tagging those registered users appearing in said documents. They are also going to be able to edit these documents, meaning: chaging tags, deleting, and overseeing these changes in general. Furthermore, they are going to tag the category to which the document belongs to. The registered users are going to use this software to read the uploaded documents and will also be notified of the documents they are either tagged in or that belong to the user's interest category. Invited users on the other hand are only going to be able to use this software to read the documents that have been uploaded.
+The "Document Upload & Notification System" is a web-based software intended to be utilized to upload official Universidad Nacional de Rio Cuarto's Facultad de Ciencias Exactas, Físico-Químicas y Naturales' documents. In this software users will be able to log in, either as administrators (those who permission to do so) or common users. 
+Administrators are going to use this software to upload official factulty documents, tagging those registered users appearing in said documents. They are also going to be able to edit these documents, meaning: changing tags, deleting, and overseeing these changes in general. Furthermore, they are going to tag the category to which the document belongs to. The registered users are going to use this software to read the uploaded documents and will also be notified of the documents they are either tagged in or that belong to the user's interest category. Invited users on the other hand are only going to be able to use this software to read the documents that have been uploaded.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 
@@ -57,7 +58,7 @@ Administrators are going to use this software to upload official univeristy docu
 | Registered users/RU (acronym) | Users who are registered in the system and don't have    an administration permit |
 | Invited users | Users who have not registered but can access the system | 
 | Notification  | A email to the person who has been tagged in in a document or if that uploaded document belongs to their interest category.       |
-| Document      | Universidad Nacional de Rio Cuarto's official record documents.  |
+| Document      | Official faculty's record documents.  |
 | Tagged user   | Registered user who has been tagged in a document.               |
 | Category      | Topic to which the document refers.                           |
 | Interest category | Specific(s) category(ies) that the user has chosen to        receive notifications from. |
@@ -91,7 +92,7 @@ digital, web-based document uploading, processing and notification-sending syste
 The system will consist of a web application in which documents will be uploaded, notifying its users accordingly (see item 4 of subsection 2.2 for the meaning of 'accordingly').
 
 ### 2.2 Product Functions
-This software must perform 6 major fuctions:
+This software must perform 7 major functions:
 1. Allow its administrators to upload official university documents.
 2. Allow its administrators to classify the uploaded documents into their respective categories.
 3. Allow its administrators to tag every registered user appearing in any of the uploaded documents.
@@ -100,7 +101,8 @@ This software must perform 6 major fuctions:
     1. they have been tagged in a document,
     2. a document of their interest category has been uploaded,
     3. both of the above.
-6. Publicly list all uploaded documents and allow searching based on any of the following criteria:
+6. Allow its registered users to see all their notifications in the website.
+7. Publicly list all uploaded documents and allow searching based on any of the following criteria:
     1. Date
     2. User involved
     3. Category
@@ -120,11 +122,12 @@ There are three types of users that interact with this software:
 
 Each of these user types has a different system usage. 
 
-* **Invited users**: can only make use of DUNS to list and search for documents according to the available criteria (see item 5 in subsection 2.2), and open whichever document they want. Does NOT requiere a sign up.
+* **Invited users**: can only make use of DUNS to list and search for documents according to the available criteria (see item 5 in subsection 2.2), and open whichever document they want. Does NOT require a sign up.
 
 * **Registered users**: shares all the characteristics of the invited users, plus:
     * Subscribe to an interest category
     * Be notified accordingly 
+    * Be able to look through all their notifications
 
 * **Administrators**: shares all the characteristics of the registered users, plus:
     * Upload documents
@@ -169,14 +172,14 @@ An unregistered or unlogged user has two choices if they wish to 'unlock' the re
 
   ![Imgur](https://i.imgur.com/LGdb77p.png)
 
-##### Registed users' pages
+##### Registered users' pages
 
 An user who has already logged into the system, will interact with two different home pages, depending on whether he is a regular user or an administrator.
 
 ###### **Regular user's pages**
 
   * **Home page**
-    A regular user's home page will have the same features as that of the unregistered user's, except they will have a menu in the upper right portion on the screen to access their profile, and to log out of the system. It should look similar to the picture below:
+    A regular user's home page will have the same features as that of the unregistered user's, except they will have a menu in the upper right portion on the screen to access their profile, to look through their notifications list (not pictured) and to log out of the system. It should look similar to the picture below:
 
     ![Imgur](https://i.imgur.com/KfrYr1f.jpg)
 
@@ -188,7 +191,7 @@ An user who has already logged into the system, will interact with two different
 ###### **Admins' pages**
 
   * **Administrator home page**
-    An administrator will look at a home page similar to that of the regular user, except they will have two extra features availabe: they'll be able to edit and delete any of the uploaded documents shown in the home page. It should like the picture below:
+    An administrator will look at a home page similar to that of the regular user, except they will have two extra features available: they'll be able to edit and delete any of the uploaded documents shown in the home page. It should like the picture below:
 
     ![Imgur](https://i.imgur.com/Ke8Bo3o.jpg)
 
@@ -199,17 +202,17 @@ An user who has already logged into the system, will interact with two different
     ![Imgur](https://i.imgur.com/WK0Eg7y.png)
 
 #### 3.1.2 Hardware interfaces
-Given that this software is a websute it has no designated hardware. The hardware connection to the database server is administrated by the operating system.
+Given that this software is a website it has no designated hardware. The hardware connection to the database server is administrated by the operating system.
 
 #### 3.1.3 Software interfaces
 The communication between the database and the website consists in operations related to both reading (users and admins) and data modification (admins). 
 
 ### 3.2 Functional
-This section includes all fundamental requierements that specify all the system's actions.
+This section includes all fundamental requirements that specify all the system's actions.
 
 #### 3.2.1 Class Diagram
 
-![Imgur](https://i.imgur.com/u6RcPzR.jpg)
+![Imgur](https://i.imgur.com/lyOpfdx.jpg)
 
 #### 3.2.2 User Stories 
 
@@ -246,7 +249,7 @@ DEP: None.
 
 **ID:** US4         
 TITLE: Sign up                   
-DESC: Given that the user has now accesed the website, they should be a allowed to register into the site. They will have to provide their full name, ID number, username, email, and password.              
+DESC: Given that the user has now accessed the website, they should be a allowed to register into the site. They will have to provide their full name, ID number, username, email, and password.              
 RAT: In order for an unregistered user to sign up.                 
 DEP: None.
 
@@ -280,7 +283,7 @@ DEP: US4
 
 **ID:** US8                   
 TITLE: Edit my profile                    
-DESC: As a RU, I wanto be able to edit my profile: change my full name, my username, my password, my email, and my ID number.                 
+DESC: As a RU, I want to be able to edit my profile: change my full name, my username, my password, my email, and my ID number.                 
 RAT: In order for a RU to edit their profile.                   
 DEP: US6       
 
@@ -288,7 +291,7 @@ DEP: US6
 
 **ID:** US9                  
 TITLE: Edit my interest categories                  
-DESC: As a RU, I want to subscribe to new categories, or to unsuscribe to categories I had previously subbed to.                
+DESC: As a RU, I want to subscribe to new categories, or to unsusbcribe to categories I had previously subbed to.                
 RAT: In order for a RU to edit their interest categories.             
 DEP: US6                        
 
@@ -298,13 +301,19 @@ DEP: US6
 TITLE: Receive notifications from my interest categories                
 DESC: As a RU, I want to receive notifications whenever a new document is uploaded to one of my interest categories.                      
 RAT: In order for a RU to receive notifications from their ICs.            
-DEP: US9            
+DEP: US9           
+
+**ID:** US11 
+TITLE: Look through all my notifications
+DESC: As a RU, I want to be able to look through all the notifications I've received, from the website, with no need to check my emails.
+RAT: In order for a RU to look through all their notifications from within the system.
+DEP: US10
 
 ##### 3.2.2.4 User Class 4 - The Admin Class
 
 ###### User story 4.1 
 
-**ID:** US11                
+**ID:** US12                
 TITLE: Upload new document                 
 DESC: As an admin, I want to upload a new document as need be. For this I will need the PDF file, the title of the document, the tagged users, the date, and the document's category.                   
 RAT: In order for an admin to upload a new document.              
@@ -312,15 +321,15 @@ DEP: US4
 
 ###### User story 4.2
 
-**ID:** US12                 
+**ID:** US13                 
 TITLE: Edit docs                 
-DESC: As an admin, I want to edit any document that has already been uploaded. This means chaging its title, date, PDF file, users tagged to the doc, and the doc's category.                    
+DESC: As an admin, I want to edit any document that has already been uploaded. This means changing its title, date, PDF file, users tagged to the doc, and the doc's category.                    
 RAT: In order for an admin to edit uploaded documents.                 
 DEP: US11                       
 
 ###### User story 4.3
 
-**ID:** US13                 
+**ID:** US14                 
 TITLE: Delete documents                
 DESC: As an admin, I want to be able to delete documents that may have been wrongfully uploaded, or that for some reason are no longer relevant.      
 RAT: In order for an admin to delete documents, no questions asked.           
@@ -328,7 +337,7 @@ DEP: US11
 
 ###### User story 4.4
 
-**ID:** US14                  
+**ID:** US15                  
 TITLE: Invite admin                     
 DESC: As an admin, I want to invite another RU in order for them to become an admin. For this I only need their username.                
 RAT: In order for an admin to invite some other RU to become an admin.            
@@ -345,7 +354,7 @@ DEP: None.
 **ID:** DR2               
 TITLE: Simple document visualization                 
 DESC: All documents should be easily identifiable, and ready to be read by clicking on them.                 
-RAT: In order for the user to easily indetify and read the documents.     
+RAT: In order for the user to easily identify and read the documents.     
 DEP: None.          
 
 **ID:** DR3               
@@ -354,12 +363,17 @@ DESC: All documents should be easily downloaded by clicking on a download icon.
 RAT: In order for the user to easily download any document.             
 DEP: None.
 
-**ID:** DR4             
-TITLE: Ease of subscribing/unsuscribing to an IC         
+**ID:** DR4
+TITLE: Simple notification listing
+DESC: All notifications should be easily accessible from within the home page of all registered users. 
+RAT: In order for the RU to easily look through their notifications.
+
+**ID:** DR5             
+TITLE: Ease of subscribing/unsubscribing to an IC         
 DESC: All ICs should be listed on the user's profile so that they can easily subscribe to any of them by checking a small box next to the ICs name, or unsubscribe by doing the exact opposite.                                
 RAT: In order for the user to easily subscribe/unsubscribe to an IC.          
  
-**ID:** DR5             
+**ID:** DR6             
 TITLE: Usage of 'Add new doc' feature               
 DESC: This feature should be intuitive and very easy to use for all administrators, who may not be technical people.                
 RAT: In order for admins to easily upload new docs.
