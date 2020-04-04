@@ -1,9 +1,6 @@
 class App < Sinatra::Base
-  get "/" do
-	erb :index
-  end
-
-  get "/docs" do 
+ 
+  get "/" do 
   	erb :docs
   end
 
