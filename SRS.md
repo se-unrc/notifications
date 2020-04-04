@@ -36,7 +36,8 @@ Table of Contents
 
 | Name | Date    | Reason For Changes    | Version   |
 | ---- | ------- | ----------------------| --------- |
-| DUNS     | 04/02/2020 | None. First version| 0.1        | 
+| DUNS     | 04/02/2020 | None. First version| 0.1   |
+ 
 
 ## 1. Introduction
 This document provides specifications of the characteristics and general requirements of the project's software.
