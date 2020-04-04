@@ -3,20 +3,20 @@
 ### 1) Introduction
 
 #### 1.1) Prupose
-```bash
+```
 The purpose of this document is to build a users system to manage notifications for the personnel of the computing department. It sends a notification every time a person is mentioned in a resolution or act.
 ```
 
 #### 1.2) Terminology and conventions
-```bash
-DB = Database
-Admin = Administrator
-```
+
+- DB = Database
+- Admin = Administrator
+
 
 ### 2)Global description
 
 #### 2.1) Product perspective
-```bash
+```
 This product will be designed and developed for the computing department in the National University of Rio Cuarto (U.N.R.C). It will be destinated to manage notifications to the persons who have been named or referenced in a resolution or act.
 ```
 
@@ -32,7 +32,7 @@ This product will be designed and developed for the computing department in the 
 - Delete mentions.
 
 #### 2.3) Users caracteristics
-```bash
+```
 Is destinated to proffesors in the computing department. All the proffesors in tis department have a excellent knowledge about computing.
 ```
 #### 2.4) Restrictions
@@ -43,7 +43,7 @@ Is destinated to proffesors in the computing department. All the proffesors in t
 
 #### 3.1) Functional requirements
 ##### 3.1.1) Admin Functional requirements
-```bash
+```
 This type of account can access all the functionalities of an user account, and, also some extra features like:
 ```
 - Login As Admin: Identify yourself in the system (replaces user login)
@@ -80,7 +80,7 @@ This type of account can access all the functionalities of an user account, and,
 - Extensible and maintainable: generate a well modularized quality code as easy as possible to maintain and extend.
 
 
-
+![](images/diagrama?raw=true)
 
 
 
