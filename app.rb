@@ -42,6 +42,7 @@ class App < Sinatra::Base
     logger.info "/users"
     logger.info params
     logger.info "----"
+    DB[:users]
   end
 
   # Create an user
