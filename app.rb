@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require "sinatra/config_file"
+require './models/user.rb'
 
 class App < Sinatra::Base
   register Sinatra::ConfigFile
@@ -42,16 +43,23 @@ class App < Sinatra::Base
     logger.info "/users"
     logger.info params
     logger.info "----"
-    DB[:users]
+
+    # DB[:users]
+    User.all.to_json
   end
 
   # Create an user
   post "/users" do
-    logger.info "--------"
-    logger.info params
-    logger.info JSON.parse(request.body.read)
-    logger.info "--------"
+    request.body.rewind
 
-    "USER CREATED"
+    params = JSON.parse request.body.read
+
+    # User.create(name: name)
+    user = User.new(name: params['name'])
+    if user.save
+      "USER CREATED"
+    else
+      [500, {}, "Internal Server Error"]
+    end
   end
 end
