@@ -90,7 +90,7 @@ Admins will have the possibility to upload documents and notify users,
 All documents can be accessed by visitors and users
 
 ### 2.3 Product Constraints
-![Diagrama](Diagramade clases proyecto.jpeg)
+![Diagrama](Diagram_clases.jpeg)
 
 
 ### 2.4 User Characteristics
