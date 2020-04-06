@@ -81,8 +81,7 @@ The notification system called "Notifications" is an application that will allow
 >This section should describe the general factors that affect the product and its requirements. This section does not state specific requirements. Instead, it provides a background for those requirements, which are defined in detail in Section 3, and makes them easier to understand.
 
 ### 2.1 Product Perspective
-The notification system is a new and autonomous product.
-It is created with the need of informed people when they are mentioned in any document and access it.
+The notification system will allow people to know if an uploaded document makes reference to them, also an user subscribed in any of the document's categories will receive a notification as well.
 
 ### 2.2 Product Functions
 Users can register, log in or exit the system
@@ -91,7 +90,7 @@ Admins will have the possibility to upload documents and notify users,
 All documents can be accessed by visitors and users
 
 ### 2.3 Product Constraints
-![![Texto Alternativo](/Diagram.png)
+![Diagrama](Diagramade clases proyecto.jpeg)
 
 
 ### 2.4 User Characteristics
