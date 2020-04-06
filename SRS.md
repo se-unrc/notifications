@@ -90,7 +90,7 @@ Admins will have the possibility to upload documents and notify users,
 All documents can be accessed by visitors and users
 
 ### 2.3 Product Constraints
-![Diagrama](/Diagram_clases.jpeg)
+![Diagrama](/Diagram_clases.png)
 
 ### 2.4 User Characteristics
 >Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.
