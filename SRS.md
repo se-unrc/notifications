@@ -93,7 +93,7 @@ All documents can be accessed by visitors and users
 ![Diagrama](/Diagrama_clases.png)
 
 ### 2.4 User Characteristics
->Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.
+>An User is whom will be mentioned in an act or document and who will recieve the app's notification. Some users will be admins and these will be able to upload acts and documents.
 
 ### 2.5 Assumptions and Dependencies
 >List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
