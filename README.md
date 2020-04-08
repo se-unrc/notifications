@@ -1,7 +1,7 @@
 # ProyectoAyDS 2020 :
 # 
 # 
-# TODO: para el jueves: agregar stories a la tab project en github
+# TODO: ~~para el jueves: agregar stories a la tab project en github~~
 =======
 # Description
 
