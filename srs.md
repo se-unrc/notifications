@@ -58,22 +58,27 @@ Table of Contents
 > This section should provide an overview of the entire document
 
 ### 1.1 Document Purpose
-El proposito del presente documento es dejar en claro lo que va a hacer nuestra app y esta destinado a los profesores y alumnos de  Analisis y Diseño de Sistemas 2020.   esta en progreso y lo iremos completando .
+This document's purpose is to specify what will our app be able to do and what not. it's destined to our teachers and colleagues.
+it's a Work in progress and we will continue updating it for the next few months.
 
 ### 1.2 Product Scope
-La applicacion de Notificaciones de actas de la UNRC servira para notificar a los usuarios sobre nuevas actas publicadas por el consejo directivo donde dicho usuario sea nombrado.
-En la aplicacion habra usuarios administradores (encargados de cargar las actas y 'tagear' a las personas) y usuarios (Tagged) que recibiran una notificacion sobre la publicacion de dicha acta.
-Existira la posibilidad de que los usuarios se suscriban a tags o topicos , para ser notificados cuando una acta contiene un tema de interes relacionado con dicho tag.
-La app esta destinada a usuarios de la UNRC , ya sean administrativos, alumnos docentes y no-docentes.
+This product aims to deliver a way to inform their users about new documents published by the UNRC's authorities,
+whenever said users are affected by said documents. 
+Initially, the product is destined to students, teachers, non-teacher employees and adminstrative staff, 
+of the Faculty of Exact Sciences. 
+This application will have admin users, whose role is to upload documents with its tags and topic,  
+Registered users, who will be able to read documents and get notifications when they are tagged or when they suscribe to certain topics,
+Invited users who will be able to read documents only.
+
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 Definition | Description
 ------------ | -------------
-Admin | Usuario con permiso de subir actas y tagear personas.
-Tagged | Usuario registrado, puede ver actas y subscribirse a tags.
-Notificacion | Aviso via email o app al usuario tageado con el documento.
-Actas | Documentos oficiales publicados por el consejo directivo de la UNRC
-Tags/topicos | temas de interes que puede tener una acta, por ejemplo: concurso docente
+Admin | User who can upload documents, set its tags and topics.
+Tagged | A registered user, they can be tagged on documents and topic to be notified about.
+Notification | Email or in-app notice to certain users.
+Documents | Oficial documents published by the UNRC's authorities
+Tags/topics | Registered users can suscribe to tags and topics that they want to get notified about. i.e: teaching contest results.
 
 ### 1.4 References
 List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
