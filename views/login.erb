@@ -6,19 +6,29 @@
 
 
 	<body style="background-color:RGB(240, 248, 255);">
-		<header>
-                        <nav>
-                                <ul>
-                                <li><a href="http://localhost:9292/"> Docs</a></li>                     
-                                <li><a href="http://localhost:9292/signup"> Sign up</a></li> 
-                                <li><a href="http://localhost:9292/login"> Log in</a></li>
-                                <li><a href="http://localhost:9292/aboutus"> About us</a></li>
-                                </ul>
-		</header>
+		 <header>
+                <nav>
+                        <ul>
+                        <li><a href="/"> Docs</a></li>                     
+                        <li><a href="/signup"> Sign up</a></li> 
+                        <li><a href="/login"> Log in</a></li>
+                        <li><a href="/aboutus"> About us</a></li>
+                        </ul>
+        </header>
 		<center><h1 style="font-family:courier;">DOCUMENT UPLOAD AND NOTIFICATION SYSTEM</h1></center>
-		<form action="/login" method="POST">
-			<input type="text" name"username">
-			<input type="submit" />
+		<center><table border=1 cellspacing=0 width="300" >	
+			<tr>
+				<th><h3 style="font-family:courier;"> Log In to DUNS</h3></th>
+			</tr>
+			<tr>	
+				<td><form method="POST" action="/login">
+						<center><p>Your userame: <input type="text" name="username"></p></center>
+						<center><p>Your password: <input type="password" name="password"></p></center>
+						<center><input type="submit" /></center>
+					</form>
+				</td>
+			</tr>
+		</table></center>
 
 
 	</body>
