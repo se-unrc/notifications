@@ -1,8 +1,12 @@
 # ProyectoAyDS 2020 :
 # 
 # 
-# TODO: ~~para el jueves: agregar stories a la tab project en github~~
-=======
+# TODO: para el miercoles 15/04: 
+ * pagina para cargar documentos
+ * pagina para listar documentos
+ * login page
+ 
+
 # Description
 
 This is a sample readme file 
