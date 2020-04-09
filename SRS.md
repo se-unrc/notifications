@@ -89,18 +89,11 @@ Users can access documents where they are involved
 Admins will have the possibility to upload documents and notify users,
 All documents can be accessed by visitors and users
 
-### 2.3 Product Constraints
-![Diagrama](/Diagram_clases.jpeg)
 
 ### 2.4 User Characteristics
->Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.
+>An User is whom will be mentioned in an act or document and who will recieve the app's notification. Some users will be admins and these will be able to upload acts and documents.
 
-### 2.5 Assumptions and Dependencies
->List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
 
-### 2.6 Apportioning of Requirements
->Apportion the software requirements to software elements. For requirements that will require implementation over multiple software elements, or when allocation to a software element is initially undefined, this should be so stated. A cross reference table by function and software element should be used to summarize the apportioning.
-Identify requirements that may be delayed until future versions of the system (e.g., blocks and/or increments).
 
 ## 3. Requirements
 > This section specifies the software product's requirements. Specify all of the software requirements to a level of detail sufficient to enable designers to design a software system to satisfy those requirements, and to enable testers to test that the software system satisfies those requirements.
@@ -138,57 +131,9 @@ Could be further divided into Usability and Convenience requirements.
 >Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
 
 ### 3.2 Functional
-> This section specifies the requirements of functional effects that the software-to-be is to have on its environment.
+![Diagrama](/Diagrama_clases.png)
 
-### 3.3 Quality of Service
-> This section states additional, quality-related property requirements that the functional effects of the software should present.
 
-#### 3.3.1 Performance
->If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
-
-#### 3.3.2 Security
->Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
-
-#### 3.3.3 Reliability
->Specify the factors required to establish the required reliability of the software system at time of delivery.
-
-#### 3.3.4 Availability
->Specify the factors required to guarantee a defined availability level for the entire system such as checkpoint, recovery, and restart.
-
-### 3.4 Compliance
->Specify the requirements derived from existing standards or regulations, including:  
-* Report format
-* Data naming
-* Accounting procedures
-* Audit tracing
-
->For example, this could specify the requirement for software to trace processing activity. Such traces are needed for some applications to meet minimum regulatory or financial standards. An audit trace requirement may, for example, state that all changes to a payroll database shall be recorded in a trace file with before and after values.
-
-### 3.5 Design and Implementation
-
-#### 3.5.1 Installation
->Constraints to ensure that the software-to-be will run smoothly on the target implementation platform.
-
-#### 3.5.2 Distribution
->Constraints on software components to fit the geographically distributed structure of the host organization, the distribution of data to be processed, or the distribution of devices to be controlled.
-
-#### 3.5.3 Maintainability
->Specify attributes of software that relate to the ease of maintenance of the software itself. These may include requirements for certain modularity, interfaces, or complexity limitation. Requirements should not be placed here just because they are thought to be good design practices.
-
-#### 3.5.4 Reusability
-<!-- TODO: come up with a description -->
-
-#### 3.5.5 Portability
->Specify attributes of software that relate to the ease of porting the software to other host machines and/or operating systems.
-
-#### 3.5.6 Cost
->Specify monetary cost of the software product.
-
-#### 3.5.7 Deadline
->Specify schedule for delivery of the software product.
-
-#### 3.5.8 Proof of Concept
-<!-- TODO: come up with a description -->
 
 ## 4. Verification
 > This section provides the verification approaches and methods planned to qualify the software. The information items for verification are recommended to be given in a parallel manner with the requirement items in Section 3. The purpose of the verification process is to provide objective evidence that a system or system element fulfills its specified requirements and characteristics.
