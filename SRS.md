@@ -14,37 +14,13 @@ Table of Contents
   * 1.2 [Product Scope](#12-product-scope)
   * 1.3 [Definitions, Acronyms and Abbreviations](#13-definitions-acronyms-and-abbreviations)
   * 1.4 [References](#14-references)
-  * 1.5 [Document Overview](#15-document-overview)
 * 2 [Product Overview](#2-product-overview)
   * 2.1 [Product Perspective](#21-product-perspective)
   * 2.2 [Product Functions](#22-product-functions)
   * 2.3 [Product Constraints](#23-product-constraints)
   * 2.4 [User Characteristics](#24-user-characteristics)
-  * 2.5 [Assumptions and Dependencies](#25-assumptions-and-dependencies)
-  * 2.6 [Apportioning of Requirements](#26-apportioning-of-requirements)
 * 3 [Requirements](#3-requirements)
-  * 3.1 [External Interfaces](#31-external-interfaces)
-    * 3.1.1 [User Interfaces](#311-user-interfaces)
-    * 3.1.2 [Hardware Interfaces](#312-hardware-interfaces)
-    * 3.1.3 [Software Interfaces](#313-software-interfaces)
   * 3.2 [Functional](#32-functional)
-  * 3.3 [Quality of Service](#33-quality-of-service)
-    * 3.3.1 [Performance](#331-performance)
-    * 3.3.2 [Security](#332-security)
-    * 3.3.3 [Reliability](#333-reliability)
-    * 3.3.4 [Availability](#334-availability)
-  * 3.4 [Compliance](#34-compliance)
-  * 3.5 [Design and Implementation](#35-design-and-implementation)
-    * 3.5.1 [Installation](#351-installation)
-    * 3.5.2 [Distribution](#352-distribution)
-    * 3.5.3 [Maintainability](#353-maintainability)
-    * 3.5.4 [Reusability](#354-reusability)
-    * 3.5.5 [Portability](#355-portability)
-    * 3.5.6 [Cost](#356-cost)
-    * 3.5.7 [Deadline](#357-deadline)
-    * 3.5.8 [Proof of Concept](#358-proof-of-concept)
-* 4 [Verification](#4-verification)
-* 5 [Appendixes](#5-appendixes)
 
 ## Revision History
 | Name  | Date     | Reason For Changes  | Version   |
@@ -53,7 +29,6 @@ Table of Contents
 |       |          |                     |           |
 
 ## 1. Introduction
-> This section should provide an overview of the entire document
 
 ### 1.1 Document Purpose
  This Project's purpose is to build a system capable of reporting whenever a member of the UNRC's (Universidad Nacional de Rio Cuarto) Computer Department is named or referenced in either a resolution or record.
@@ -78,67 +53,23 @@ The notification system called "Notifications" is an application that will allow
 
 
 ## 2. Product Overview
->This section should describe the general factors that affect the product and its requirements. This section does not state specific requirements. Instead, it provides a background for those requirements, which are defined in detail in Section 3, and makes them easier to understand.
 
 ### 2.1 Product Perspective
 The notification system will allow people to know if an uploaded document makes reference to them, also an user subscribed in any of the document's categories will receive a notification as well.
 
 ### 2.2 Product Functions
-Users can register, log in or exit the system
-Users can access documents where they are involved
-Admins will have the possibility to upload documents and notify users,
-All documents can be accessed by visitors and users
+Any type of user is able to see documents, subscribe to any category,and save documents for later revisiting. But only admins are able to upload documents
 
 
 ### 2.4 User Characteristics
->An User is whom will be mentioned in an act or document and who will recieve the app's notification. Some users will be admins and these will be able to upload acts and documents.
-
-
+An User is whom will be mentioned in an act or document and who will recieve the app's notification. Some users will be admins and these will be able to upload acts and documents.
 
 ## 3. Requirements
-> This section specifies the software product's requirements. Specify all of the software requirements to a level of detail sufficient to enable designers to design a software system to satisfy those requirements, and to enable testers to test that the software system satisfies those requirements.
-
-> The specific requirements should:
-* Be uniquely identifiable.
-* State the subject of the requirement (e.g., system, software, etc.) and what shall be done.
-* Optionally state the conditions and constraints, if any.
-* Describe every input (stimulus) into the software system, every output (response) from the software system, and all functions performed by the software system in response to an input or in support of an output.
-* Be verifiable (e.g., the requirement realization can be proven to the customer's satisfaction)
-* Conform to agreed upon syntax, keywords, and terms.
-
-### 3.1 External Interfaces
-> This subsection defines all the inputs into and outputs requirements of the software system. Each interface defined may include the following content:
-* Name of item
-* Source of input or destination of output
-* Valid range, accuracy, and/or tolerance
-* Units of measure
-* Timing
-* Relationships to other inputs/outputs
-* Screen formats/organization
-* Window formats/organization
-* Data formats
-* Command formats
-* End messages
-
-#### 3.1.1 User interfaces
->Define the software components for which a user interface is needed. Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Details of the user interface design should be documented in a separate user interface specification.
-Could be further divided into Usability and Convenience requirements.
-
-#### 3.1.2 Hardware interfaces
->Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.
-
-#### 3.1.3 Software interfaces
->Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
 
 ### 3.2 Functional
 ![Diagrama](/Diagrama_clases.png)
 
-
-
-## 4. Verification
-> This section provides the verification approaches and methods planned to qualify the software. The information items for verification are recommended to be given in a parallel manner with the requirement items in Section 3. The purpose of the verification process is to provide objective evidence that a system or system element fulfills its specified requirements and characteristics.
-
 <!-- TODO: give more guidance, similar to section 3 -->
 <!-- ieee 15288:2015 -->
 
-## 5. Appendixes
+
