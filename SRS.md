@@ -21,6 +21,9 @@ Table of Contents
   * 2.4 [User Characteristics](#24-user-characteristics)
 * 3 [Requirements](#3-requirements)
   * 3.2 [Functional](#32-functional)
+  * 3.3 [Quality of Service](#33-Quality-of-Service) 
+  * 3.4 [Compliance](#34-Compliance)
+  * 3.5 [Design and Implementation](#35-Design-and-Implementation)
 
 ## Revision History
 | Name  | Date     | Reason For Changes  | Version   |
@@ -69,6 +72,11 @@ An User is whom will be mentioned in an act or document and who will recieve the
 ### 3.2 Functional
 ![Diagrama](/Diagrama_clases.png)
 
+## 3.3 Quality of Service
+
+## 3.4 Compliance
+
+## 3.5 Design and Implementation
 <!-- TODO: give more guidance, similar to section 3 -->
 <!-- ieee 15288:2015 -->
 
