@@ -14,6 +14,12 @@ class App < Sinatra::Base
   get "/login" do
     erb :login
   end
+  get "/upload" do
+  	erb :upload
+  end
+  post '/upload' do
+    erb :tag
+  end
   get "/tos" do
   	erb :ToS
   end
