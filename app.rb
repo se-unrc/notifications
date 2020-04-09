@@ -5,10 +5,10 @@ class App < Sinatra::Base
   get "/register" do
     erb :register
   end
-  get '/action_page.php' do
+  get '/registersuccess' do
     erb :registerlandingpage
   end
-  post '/action_page.php' do
+  post '/loginsuccess' do
     erb :loginlandingpage
   end
   get "/login" do
