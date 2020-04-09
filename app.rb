@@ -16,12 +16,16 @@ class App < Sinatra::Base
 	 erb :signup
   end	
 
+  get "/forgotpass" do
+    erb :forgotpass
+  end
+
 
   post '/login' do
     if  params[:username] == "juanalanis" #funcion que busque si password corresponde a ese username
       "My name is #{params[:username]}, and my password is #{params[:password]}"
     else 
-      erb :login
+        erb :login
     end
     
   
