@@ -1,0 +1,104 @@
+body {
+	font-family: sans-serif;
+	line-height: 1.4em;
+	margin: 0 auto;
+
+}
+
+h1{
+	text-align: center;
+}
+
+p{
+	margin-bottom: 1.6em;	
+	max-width: 80%;
+	text-align: justify; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container {
+	width: 95%;
+	max-width: 850px;
+	margin: 0 auto;
+}
+
+
+
+
+.header {
+	font-weight: bold;	
+	background: #009688;
+	color: white;
+	padding: 1rem 0;
+}
+
+.header a{
+	color: white;
+	text-decoration: none;
+}
+
+.logo-nav-container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.navigation ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.navigation ul li{
+	display: inline-block;
+}
+
+.title{
+	letter-spacing: 2px;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 1.3em;
+}
+
+.navigation ul li a{
+	display: block;
+	padding: 0.5em 0.3rem;
+	transition: all 0.2s linear;
+	border-radius: 10px;
+}
+
+.navigation ul li a:hover{
+	background: #065449;
+}
+
+@media only screen and (max-width: 767px){
+
+.navigation{
+	width: 100%;
+	margin: 1rem;
+}
+
+.navigation ul li{
+	display: block;
+}
+
+.title{
+	letter-spacing: 2px;
+	font-size: 1.3rem;
+	font-weight: bold;	
+	line-height: 1.3em;
+}
+
+.navigation ul li a{
+	display: block;
+	padding: 0.5em 0.3rem;
+	transition: all 0.4s linear;
+	border-radius: 10px;
+}
+
+.navigation ul li a:hover{
+	background: #065449;
+}
+}

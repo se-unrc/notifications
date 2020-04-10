@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+		<title>DUNS</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="widht=device-width, initial-sacale=1">
+		<link rel="stylesheet" type="text/css" href="est.css">
+	</head>
+	<body>
+		<header class="header">
+			<div class="container logo-nav-container">
+				<a href="/" class="title">DOCUMENT UPLOAD & NOTIFIACTION SYSTEM</a>
+				<nav class="navigation">
+					<ul>
+                        <li><a href="/"> Docs</a></li>                     
+                        <li><a href="/signup"> Sign up</a></li> 
+                        <li><a href="/login"> Log in</a></li>
+                        <li><a href="/aboutus"> About us</a></li>
+                    </ul>
+				</nav>
+			</div>
+		</header>
+			
+
+			<table>	
+				<tr> <th><h3>Suscribe to new categories</h3></th>
+	            	 <th><h3>Submit new documents</h3></th>
+	            	 <th><h3>Invite admin</h3></th>
+	            	 <th><h3>Edit your profile</h3></th>
+				</tr>
+				<tr>
+				<td><form method="POST" action="/profile">
+	                    <p>Categories: <select id="categorie" name="categorie">
+										  <option value="presupuesto">Presupuesto</option>
+										  <option value="presupuesto">Presupuesto</option>
+										  <option value="deportes">Deportes</option>
+										</select></p>
+	                    <% if @error %>
+	                    <p class="error"><%= @error %></p>
+	                    <% end %>
+	                    <% if @success %>
+	                    <p class="success"><%= @success %></p>
+	                    <% end %>
+
+	                    <input type="submit" />
+	          	  </form></td>
+				<td><form method="POST" action="/profile">
+	                    <p>Date: <input type="date" name="fullname"></p>
+	                    <p>Title: <input type="text" name="email"></p>
+	                    <p>Users involved: <input type="" name="username"></p>
+	                    <p>Categories: <select id="categories" name="categories"	>
+										  <option value="presupuesto">Presupuesto</option>
+										  <option value="presupuesto">Presupuesto</option>
+										  <option value="deportes">Presupuesto</option>
+									</select></p>
+	                    <p>Document: <input type="file" name="document" accept=".pdf"></p>
+	                    <% if @error2 %>
+	                    <p class="error"><%= @error %></p>
+	                    <% end %>
+	                    <input type="submit" />
+	           	 </form></td>
+	           	 <td>
+	           	 	<form>
+	           	 		<p>Invite user <input type="" name="username"> to admin</p>
+	           	 	</form>
+	           	 </td>
+	           	 <td>
+	           	 	<ul>
+	           	 		<li><a href="/">Change your username</a></li>
+	           	 		<li><a href="#">Change your fullname</a></li>
+	           	 		<li><a href="#">Change your email</a></li>
+	           	 		<li><a href="#">Change your password</a></li>
+	           	 	</ul>
+	           	 </td>
+
+	          </tr>
+	        </table>
+	</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		<title>DUNS</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="widht=device-width, initial-sacale=1">
@@ -24,19 +24,14 @@
 
 		<center><table border=1 cellspacing=0 width="300" >	
 			<tr>
-				<th><h3 style="font-family:courier;"> LOG IN to DUNS</h3></th>
+				<th><h3 style="font-family:courier;"> RETRIEVE YOUR PASSWORD </h3></th>
 			</tr>
 			<tr>	
-				<td><form method="POST" action="/login">
-						<center><p>Your username:<input type="text" name="username" placeholder="Input your username"></p></center>
-						<center><p>Your password: <input type="password" name="password" placeholder="Input you password"></p></center>
-						<center><p><a href="/forgotpass"> Forgot your password?</a>
-						<a href="/signup"> Sign up</a>
+				<td><form method="POST" action="/forgotpass">
+						<center><p>Te va a llegar un codigo de confirmacion a tu correo electronico</p></center>
+						<center><p>Email: <input type="text" name="username" placeholder="Input your email"></p></center>
 						</p></center> 
-						<% if @error %>
-    						<p class="error"><%= @error %></p>
-  						<% end %>
-						</br><center><input type="submit" name="Log In" value="LOG IN" /></center>
+						</br><center><input type="submit" name="" value="SEND" /></center>
 					</form>
 				</td>
 			</tr>
