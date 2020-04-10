@@ -80,7 +80,7 @@ This type of account can access all the functionalities of an user account, and,
 - Extensible and maintainable: generate a well modularized quality code as easy as possible to maintain and extend.
 
 
-![](https://github.com/Nahuel95/notifications/tree/master/images/diagrama.png?raw=true)
+![Class Diagram](/images/diagrama.png)
 
 
 
