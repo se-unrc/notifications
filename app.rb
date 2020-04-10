@@ -1,4 +1,6 @@
 class App < Sinatra::Base
+
+  redirectedSignup = 0
  
   get "/" do 
   	erb :docs
@@ -9,11 +11,12 @@ class App < Sinatra::Base
   end
 
   get "/login" do
-	 erb :login
+    erb :login
+
   end	
 	 
   get "/signup" do
-	 erb :signup
+    erb :signup 
   end	
 
   get "/forgotpass" do
@@ -23,20 +26,22 @@ class App < Sinatra::Base
 
   post '/login' do
     if  params[:username] == "juanalanis" #funcion que busque si password corresponde a ese username
-      "My name is #{params[:username]}, and my password is #{params[:password]}"
+      "Succesful log in" #TODO: direct to docs homepage as registered user
     else 
-        erb :login
+        erb :failedLogin
     end
-    
-  
   end
 
 
   post '/signup' do
-    if params[:username] == "juanalanis" || params[:username] == "jereparla" #funcion que busque si el nombre usuario o email ya fueron usados
-      erb :signup 
+    if params[:username] == "juanalanis"  #funcion que busque si el nombre usuario o email ya fueron usados
+      erb :failedSignupUser
+    elsif params[:email] == "juan@hola.com"
+      erb :failedSignupEmail
+    elsif params[:password] != params[:confPassword]
+      erb :failedSignupPass
     else
-      "My name is Juan"
+      "Succesful sign up"
     end
   end
 
