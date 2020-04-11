@@ -2,6 +2,27 @@ class App < Sinatra::Base
   get "/" do
     erb :index
   end
+  get "/register" do
+    erb :register
+  end
+  get '/registersuccess' do
+    erb :registerlandingpage
+  end
+  post '/loginsuccess' do
+    erb :loginlandingpage
+  end
+  get "/login" do
+    erb :login
+  end
+  get "/upload" do
+  	erb :upload
+  end
+  post '/upload' do
+    erb :tag
+  end
+  get "/tos" do
+  	erb :ToS
+  end
   get "/users" do
   	logger.info '/users'
   	logger.info params
