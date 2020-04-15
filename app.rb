@@ -3,3 +3,9 @@ class App < Sinatra::Base
     "hello cruel world!!!"
   end
 end
+
+class App
+  get '/index' do
+    "Hello world"
+  end
+end
