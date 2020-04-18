@@ -1,3 +1,5 @@
+require 'json'
+require './models/user.rb'
 class App < Sinatra::Base
  
   get "/" do 
@@ -36,18 +38,17 @@ class App < Sinatra::Base
 
 
   post '/signup' do
-    if params[:username] == "juanalanis"  #funcion que busque si el nombre usuario o email ya fueron usados
-        @error = 'The username is invalid'
-        erb :signup
-    elsif params[:email] == "juan@hola.com"
-        @error = 'The email is invalid'
-        erb :signup
-    elsif params[:password] != params[:confPassword]
-        @error = 'Passwords do not match'
-        erb :signup
-    else
-      "Succesful sign up"
-    end
+    request.body.rewind
+
+    hash = Rack::Utils.parse_nested_query(request.body.read)
+    params = JSON.parse hash.to_json 
+
+    user = User.new(name: params["fullname"])
+    if user.save
+      "USER  CREATED"
+    else 
+      [500, {}, "Internal server Error"]
+    end 
   end
 
   post '/profile' do
