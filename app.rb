@@ -31,10 +31,7 @@ class App < Sinatra::Base
     #end
     
   end
-
-
-
-  get '/users' do
+get '/users' do
     erb :users
   end
 
@@ -47,4 +44,10 @@ class App < Sinatra::Base
     user.password = "magic1" 
     user.save
   end
+
+  get '/login' do
+    erb :login
+  end
+
 end
+
