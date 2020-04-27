@@ -2,9 +2,13 @@
 <html>
 
 	<body>
-
-
-		
+		<center><table border=1 cellspacing=0 width="300"> 
+		<% @documents.each do |doc| %>
+		<tr>
+ 		<td><%= doc.date %></td><td><%= doc.name %></td><td><%= doc.users %></td><td><%= doc.categories %></td><td><%= doc.document %></td>		
+		<% end %></center>
+		</tr>
+		<table>
 	</body>
 	
 

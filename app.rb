@@ -3,28 +3,30 @@ require './models/init.rb'
 class App < Sinatra::Base
  
   get "/" do 
-  	erb :docs
+    #docs = Doc.all
+    @documents = Doc.all
+  	erb :docs, :layout => :layout
   end
 
   get "/aboutus" do
-	 erb :aboutus
+	 erb :aboutus, :layout => :layout
   end
 
   get "/login" do
-    erb :login
+    erb :login, :layout => :layout
 
   end	
 	 
   get "/signup" do
-    erb :signup 
+    erb :signup, :layout => :layout
   end	
 
   get "/forgotpass" do
-    erb :forgotpass
+    erb :forgotpass, :layout => :layout
   end
 
   get "/profile" do
-    erb :profile
+    erb :profile, :layout => :layout
   end 
 
   post '/login' do
