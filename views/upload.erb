@@ -1,12 +1,12 @@
-<!DOCTYPE html>
 <html>
-<body>
-
-<form action="/upload" method="post" enctype="multipart/form-data">
-    Seleccione documento para cargar:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="CARGAR" name="cargar">
-</form>
-
-</body>
+    <head>
+        <title>CARGA DE DOCUMENTO</title>
+    </head>
+    <body>
+        <h1>Cargar documento</h1>
+        <form action="/tag" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload Document">
+        </form>
+    </body>
 </html>

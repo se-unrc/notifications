@@ -69,14 +69,19 @@ a {
 </head>
 <body>
 
-<form action="/registersuccess">
+<form method="POST" action="/register">
   <div class="container">
     <h1>Registrarse</h1>
     <p>Por favor complete los siguientes datos para registrarse.</p>
     <hr>
-
+    <label for="name"><b>Nombre</b></label>
+    <input type="text" placeholder="Ingrese su nombre" name="name" required>
+    
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Ingrese Email" name="email" required>
+    
+    <label for="username"><b>Nombre de Usuario</b></label>
+    <input type="text" placeholder="Ingrese Nombre de usuario" name="username" required>
 
     <label for="psw"><b>Contraseña</b></label>
     <input type="password" placeholder="Ingrese Contraseña" name="psw" required>
