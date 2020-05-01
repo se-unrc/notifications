@@ -11,7 +11,7 @@ class App < Sinatra::Base
   end
   
   get "/" do
-    erb :index
+    erb :index, :layout => :layout
   end
   get "/register" do
     erb :register
@@ -42,6 +42,9 @@ class App < Sinatra::Base
   end
   get "/upload" do
   	erb :upload
+  end
+  get "/aboutus" do
+    erb :aboutus, :layout => :layout
   end
   #post '/upload' do
    #  @filename = params[:file][:filename]
