@@ -1,9 +1,35 @@
+require 'sinatra/base'
+require "sinatra/config_file"
+require './models/user.rb'
 class App < Sinatra::Base
+  register Sinatra::ConfigFile
+
+  config_file 'config/config.yml'
+
+  configure :development, :production do
+    enable :logging
+  end
+  
   get "/" do
     erb :index
   end
   get "/register" do
     erb :register
+  end
+  post '/register' do
+   request.body.rewind
+    hash = Rack::Utils.parse_nested_query(request.body.read)
+    params = JSON.parse hash.to_json 
+    user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+    if user.save
+      "Se ha registrado con exito!"
+      redirect "/login"
+    else
+      [500, {}, "Internal Server Error"]
+    end
+  end
+  post '/tag' do
+    erb :tag
   end
   get '/registersuccess' do
     erb :registerlandingpage
@@ -14,16 +40,17 @@ class App < Sinatra::Base
   get "/login" do
     erb :login
   end
-
-  post '/login' do
-    "hello word"
-  end
   get "/upload" do
   	erb :upload
   end
-  post '/upload' do
-    erb :tag
-  end
+  #post '/upload' do
+   #  @filename = params[:file][:filename]
+    # file = params[:file][:tempfile]
+     #File.open("./public/#{@filename}", 'wb') do |f|
+      #f.write(file.read)
+     #end
+     #erb :tag
+  #end
   get "/tos" do
   	erb :ToS
   end
