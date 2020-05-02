@@ -14,7 +14,17 @@ class App < Sinatra::Base
   end
 
   post '/index' do
-    name = params[:name]
+    request.body.rewind 
+    hash = Rack::Utils.parse_nested_query(request.body.read)
+    params = JSON.parse hash.to_json 
+    user = User.new(name: params['name'], lastname: params['lastname'],email: params['email'],password: params['pwd'] )
+    user = User.new('name', 'lastname','email','pwd' )
+    #user = User.new(name:'Mati' , lastname: 'lopez' ,email:'email', password: 'pwd')
+    if user.save
+      #user.last
+    else
+      [401,{},"no esta guardado papuu"]
+    end 
   end
 
   get '/save_document' do
@@ -47,6 +57,10 @@ get '/users' do
 
   get '/login' do
     erb :login
+  end
+
+  get '/signUp' do
+    erb :signUp
   end
 
 end
