@@ -5,10 +5,12 @@ Sequel.migration do
       String          :title,         null: false 
       String          :type,          null: false 
       String          :format,        null: false 
+      foreign_key     :creator_dni,   :users
       DateTime        :created_at 
       DateTime        :updated_at
-    end                                                                                                       
-  end                                                                                                         
+    end 
+  end                                                                                                          
+  
   down do                                                                                                     
     drop_table(:documents)                                                                                        
   end                                                                                                         
