@@ -22,7 +22,6 @@ class App < Sinatra::Base
     params = JSON.parse hash.to_json 
     user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
     if user.save
-      "Se ha registrado con exito!"
       redirect "/login"
     else
       [500, {}, "Internal Server Error"]
@@ -45,6 +44,9 @@ class App < Sinatra::Base
   end
   get "/aboutus" do
     erb :aboutus
+  end
+  get "/contactus" do
+    erb :contactus
   end
   post '/save_documents' do
     @filename = params[:file][:filename]
