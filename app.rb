@@ -44,16 +44,16 @@ class App < Sinatra::Base
   	erb :upload
   end
   get "/aboutus" do
-    erb :aboutus, :layout => :layout
+    erb :aboutus
   end
-  #post '/upload' do
-   #  @filename = params[:file][:filename]
-    # file = params[:file][:tempfile]
-     #File.open("./public/#{@filename}", 'wb') do |f|
-      #f.write(file.read)
-     #end
-     #erb :tag
-  #end
+  post '/save_documents' do
+    @filename = params[:file][:filename]
+    file = params[:file][:tempfile]
+    File.open("./public/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+    end
+    erb :tag
+  end
   get "/tos" do
   	erb :ToS
   end
