@@ -1,10 +1,7 @@
 # ProyectoAyDS 2020 :
 # 
 # 
-# TODO: para el miercoles 15/04: 
- * pagina para cargar documentos
- * pagina para listar documentos
- * login page
+# TODO: 
  
 
 # Description
