@@ -34,9 +34,12 @@ class App < Sinatra::Base
     erb :registerlandingpage
   end
   post '/loginsuccess' do
-    erb :loginlandingpage
+    erb :loginlandingpage, :layout => :layoutlogin
   end
   get "/login" do
+    erb :login
+  end
+  get '/login' do
     erb :login
   end
   get "/upload" do
@@ -47,6 +50,12 @@ class App < Sinatra::Base
   end
   get "/contactus" do
     erb :contactus
+  end
+  get "/perfil" do
+    erb :perfil, :layout => :layoutlogin
+  end
+  post '/perfil' do
+    erb :perfil, :layout => :layoutlogin
   end
   post '/save_documents' do
     @filename = params[:file][:filename]
