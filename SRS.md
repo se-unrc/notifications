@@ -1,5 +1,5 @@
 # Software Requirements Specification
-## For <project name>
+## For Notifications System
 
 Version 0.1  
 Prepared by <author>  
@@ -21,7 +21,7 @@ Table of Contents
   * 2.4 [User Characteristics](#24-user-characteristics)
 * 3 [Requirements](#3-requirements)
   * 3.2 [Functional](#32-functional)
-  * 3.3 [Quality of Service](#33-Quality-of-Service) 
+  * 3.3 [Quality of Service](#33-Quality-of-Service)
   * 3.4 [Compliance](#34-Compliance)
   * 3.5 [Design and Implementation](#35-Design-and-Implementation)
 
@@ -31,24 +31,24 @@ Table of Contents
 |       |          |                     |           |
 |       |          |                     |           |
 
-## 1. Introduction
+## 1. Introduccion
 
-### 1.1 Document Purpose
- This Project's purpose is to build a system capable of reporting whenever a member of the UNRC's (Universidad Nacional de Rio Cuarto) Computer Department is named or referenced in either a resolution or record.
+### 1.1 Proposito del Documento
+ El proposito de este proyecto es crear un sistema capaz de notificar cuando un miembro del departamento de computacion de la U.N.R.C. (Universidad Nacional de Rio Cuarto) ha sido nombrado o se le ha hecho referencia en algun acta o resolucioon
 
 
 ### 1.2 Product Scope
-The notification system called "Notifications" is an application that will allow the loading of documents and the notification to the mentioned persons, a person is mentioned with the use of the DNI
+El sistema de notificaciones llamado "Notifications" es una aplicacion que permitira la carga de documentos y notificar a personas mencionadas en el mismo (una persona es mencionada con el uso del DNI).
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 | Termino     | Descripción                                                        |
 | ------------|--------------------------------------------------------------------|
-|User         |person who can view documents and receive notifications if included |
-|             |in said document, Identifies with your personal data                |
-|Admin        |is a user who in turn has the power to upload documents and tag     |
-|Document     |pdf file with scanned document                                      |
-|Notification |is an alert indicating that the user has been named in a document   |
-|Category     |Topic to which the document refers.                                 |
+|Usuario      |persona que puede ver documentos y recibir notificaciones si está   |
+|             |incluido en dicho documento, Se registra con sus datos personales   |
+|Admin        |Es un usuario que tiene permitido cargar documentos y etiquetar     |
+|Document     |Documento escaneado a pdf.                                          |
+|Notification |Alerta indicando que el usuario ha sido nombrado en un documento    |
+|Category     |Tema al cual el documento refiere                                   |
 
 
 ### 1.4 References
@@ -57,19 +57,18 @@ The notification system called "Notifications" is an application that will allow
 
 ## 2. Product Overview
 
-### 2.1 Product Perspective
-The notification system will allow people to know if an uploaded document makes reference to them, also an user subscribed in any of the document's categories will receive a notification as well.
+### 2.1 Perspectiva del Producto.
+El sistema de notificaciones permitirá a las personas saber si un documento cargado hace referencia a ellos, cualquier usuario recibirá notificaciones si está suscrito a la categoría que corresponde al documento.
 
-### 2.2 Product Functions
-Any type of user is able to see documents, subscribe to any category,and save documents for later revisiting. But only admins are able to upload documents
+### 2.2 Funcionalidades del Producto.
+Cualquier tipo de usuario tiene permitido ver documentos, suscribirse a cualquier categoria,y guardar documentos para ver luego.Unicamente los Admins tienen permitido cargar documentos.
 
-
-### 2.4 User Characteristics
-An User is whom will be mentioned in an act or document and who will recieve the app's notification. Some users will be admins and these will be able to upload acts and documents.
+### 2.4 Caracteristicas de Usuario
+Un user es aquel que sera  nombrado en un acta o documento y quien recibira la notificacion de la aplicacion de ser el caso. Alguno usuarios seran admins y estos tendran permitido cargar actas y documentos.
 
 ## 3. Requirements
 
-### 3.2 Functional
+### 3.2 Funcional
 ![Diagrama](/Diagrama_clases.png)
 
 ## 3.3 Quality of Service
@@ -77,7 +76,13 @@ An User is whom will be mentioned in an act or document and who will recieve the
 ## 3.4 Compliance
 
 ## 3.5 Design and Implementation
+![Plantilla](/images/admin.svg)
+![Plantilla](/images/newadmin.svg)
+![Plantilla](/images/Pagina1.svg)
+![Plantilla](/images/Pagina2.svg)
+![Plantilla](/images/Pagina3.svg)
+![Plantilla](/images/subir_documentos.svg)
+![Plantilla](/images/Subs.svg)
+![Plantilla](/images/ vista_previa_documentos.svg) 
 <!-- TODO: give more guidance, similar to section 3 -->
 <!-- ieee 15288:2015 -->
-
-
