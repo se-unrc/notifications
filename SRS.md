@@ -83,6 +83,6 @@ Un user es aquel que sera  nombrado en un acta o documento y quien recibira la n
 ![Plantilla](/images/Pagina3.svg)
 ![Plantilla](/images/subir_documentos.svg)
 ![Plantilla](/images/Subs.svg)
-![Plantilla](/images/ vista_previa_documentos.svg) 
+![Plantilla](/images/vista_previa_documentos.svg) 
 <!-- TODO: give more guidance, similar to section 3 -->
 <!-- ieee 15288:2015 -->
