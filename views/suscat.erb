@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<body>
+        <div class="centraTabla">
+        <table class="tabla">     
+                <tr class="fila">
+                        <th><h3> SIGN UP TO DUNS</h3></th>
+                </tr>
+        <tr>
+		<td><form method="POST" action="/suscribe">
+                <p>Categories: <select id="categorie" name="categorie">
+               					<% @categories.each do |categorie| %>
+								  <option value=<%= categorie.name %>> <%= categorie.name %> </option>
+								  <% end %>
+								</select></p>
+                <% if @error %>
+                <p class="error"><%= @error %></p>
+                <% end %>
+                <% if @success %>
+                <p class="success"><%= @success %></p>
+                <% end %>
+                <input class="button2" type="submit" value="SUSCRIBE" />
+        </form></td>
+        </tr>
+        </table>
+        </div>
+	</body>
+
+</html>

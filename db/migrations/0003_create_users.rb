@@ -1,8 +1,8 @@
 Sequel.migration do 
 	up do
-		add_column :users, :email, String
-		add_column :users, :username, String
-		add_column :users, :password, String
+		add_column :users, :email, String, null: false
+		add_column :users, :username, String, null: false
+		add_column :users, :password, String, null: false
 	end
 
 	down do 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<body>
+        <div class="centraTabla">
+       <table class="tabla">     
+                <tr class="fila">
+                        <th><h3> SIGN UP TO DUNS</h3></th>
+                </tr>
+                <tr>  
+            		<td><form action="/upload" method="POST"> <!enctype="multipart/form-data">
+                        <p class="cuadrito">Date: <br><input type="date" name="date"></p>
+                        <p class="cuadrito">Title: <br><input type="text" name="title"></p>
+                        <p class="cuadrito">Users involved: <br><input type="" name="users"></p>
+                        <p class="cuadrito">Categories: <select id="categories" name="categories">
+                       					<% @categories.each do |categorie| %>
+            			  				<option value= <%= categorie.name %> > <%= categorie.name %> </option>
+            			  				<% end %>
+            						</select></p>
+                        <p class="cuadrito">Document: <input type="file" name="document" accept=".pdf"></p>
+                        <input class="button2" type="submit" value="UPLOAD" />
+                	</form></td>
+                </tr>    
+	</body>
+</html>

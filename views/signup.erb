@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <center><table border=1 cellspacing=0 width="400" >     
-                <tr>
-                        <th><h3 style="font-family:courier;"> SIGN UP to DUNS</h3></th>
+       <div class="centraTabla">
+       <table class="tabla">     
+                <tr class="fila">
+                        <th><h3> SIGN UP TO DUNS</h3></th>
                 </tr>
                 <tr>    
                         <td><form method="POST" action="/signup">
-                                <center><p> Do you have an account?<a href="/login">Log in</a></p></center>
-                                <center><p>Your fullname: <input type="text" name="fullname"></p></center>
-                                <center><p>Your email: <input type="text" name="email"></p></center>
-                                <center><p>Your username: <input type="text" name="username"></p></center>
-                                <center><p>Your password: <input type="password" name="password"></p></center>
-                                <center><p>Confirm password:<input type="password" name="confPassword"></p></center>
-                                <% if @error %>
-                                <p class="error"><%= @error %></p>
-                                <% end %>
-                                <center><input type="submit" /></center>
+                                <p> Do you have an account? <a href="/login">Log in</a></p>
+                                <p class="cuadrito">Your fullname: <br> <input  type="text" name="fullname"></p>
+                                <p class="cuadrito">Your email: <br> <input  type="text" name="email"></p>
+                                <p class="cuadrito">Your username: <br> <input   type="text" name="username"></p>
+                                <p class="cuadrito">Your password: <br> <input   type="password" name="password"></p>
+                                <p class="cuadrito">Confirm password: <br> <input type="password" name="confPassword"></p>
+                                <input class="button2" type="submit" value="SIGN UP" />
                         </form> </td>
                 </tr>
-        </table></center>
-	</body>
-
+        </table></div>
+    </body>
 </html>
  

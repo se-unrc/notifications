@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<body>	
+       <div class="centraTabla">
+       <table class="tabla">     
+            <tr class="fila">
+                        <th><h3> UNSUBSCRIBE TO A CATEGORY</h3></th>
+            </tr>
+            <tr>
+			<td><form action="/deletecat" method="POST">
+		        <% if @error %>
+                <p class="error"><%= @error %></p>
+                <% end %>
+                <% if @success %>
+                <p class="success"><%= @success %></p>
+                <% end %>
+		       	<p class="cuadrito">Categories: 
+		       		<select id="categorie" name="categorie">
+		       		<% @categories.each do |categorie| %>
+				  	<option value= <%= categorie.name %> > <%= categorie.name %> </option>
+				  	<% end %>
+					</select>
+					<input class="button2" type="submit" value="UNSUBSCRIBE">
+				</p>
+			</form><td>
+			<tr>
+			</table>
+	</body>
+</html>

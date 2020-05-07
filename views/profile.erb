@@ -1,59 +1,38 @@
 <!DOCTYPE html>
 <html>
-
 	<body>
-			<table>	
-				<tr> <th><h3>Suscribe to new categories</h3></th>
-	            	 <th><h3>Submit new documents</h3></th>
-	            	 <th><h3>Invite admin</h3></th>
-	            	 <th><h3>Edit your profile</h3></th>
-				</tr>
-				<tr>
-				<td><form method="POST" action="/profile">
-	                    <p>Categories: <select id="categorie" name="categorie">
-										  <option value="presupuesto">Presupuesto</option>
-										  <option value="presupuesto">Presupuesto</option>
-										  <option value="deportes">Deportes</option>
-										</select></p>
-	                    <% if @error %>
-	                    <p class="error"><%= @error %></p>
-	                    <% end %>
-	                    <% if @success %>
-	                    <p class="success"><%= @success %></p>
-	                    <% end %>
-
-	                    <input type="submit" />
-	          	  </form></td>
-				<td><form action="/save_document" method="POST" enctype="multipart/form-data">
-	                    <p>Date: <input type="date" name="date"></p>
-	                    <p>Title: <input type="text" name="title"></p>
-	                    <p>Users involved: <input type="" name="users"></p>
-	                    <p>Categories: <select id="categories" name="categories"	>
-										  <option value="presupuesto">Presupuesto</option>
-										  <option value="presupuesto">Presupuesto</option>
-										  <option value="deportes">Deportes</option>
-									</select></p>
-	                    <p>Document: <input type="file" name="document" accept=".pdf"></p>
-	                    <% if @error2 %>
-	                    <p class="error"><%= @error %></p>
-	                    <% end %>
-	                    <input type="submit" />
-	           	 </form></td>
-	           	 <td>
-	           	 	<form>
-	           	 		<p>Invite user <input type="" name="username"> to admin</p>
-	           	 	</form>
-	           	 </td>
-	           	 <td>
-	           	 	<ul>
-	           	 		<li><a href="/">Change your username</a></li>
-	           	 		<li><a href="#">Change your fullname</a></li>
-	           	 		<li><a href="#">Change your email</a></li>
-	           	 		<li><a href="#">Change your password</a></li>
-	           	 	</ul>
-	           	 </td>
-
-	          </tr>
-	        </table>
+		<div class="centrarTodo">
+		<div class="centraTabla">
+			<table ><tr>
+				<td class="columna"><form action="/suscribe" method="get">
+					<input class="button" type="submit" value="Suscribe to new categories">
+				</form></td>
+				<td class="columna"><form action="/categories" method="get" >
+					<input class="button" type="submit" value="View your categories">
+				</form></td>
+			</tr></table>
+		</div>
+		<div class="centraTabla">
+			<table ><tr>
+				<td class="columna"><form action="/deletecat" method="get">
+					<input class="button" type="submit" value="Delete a categorie suscription">
+				</form></td>
+				<td class="columna"><form action="/editprofile" method="get">
+					<input class="button" type="submit" value="Edit your profile">
+				</form></td>
+			</tr></table>
+		</div>
+		<div class="centraTabla">
+			<div style="display:<%= @visibility %>;">
+			<table><tr>
+				<td class="columna"><form action="/upload" method="get">
+					<input class="button" type="submit" value="Upload new documents">
+				</form></td>
+				<td class="columna"><form action="/newadmin" method="get">
+					<input class="button" type="submit" value="Invite user to admin">
+				</form></td>
+			</tr></table>
+		</div>
+		</div>
 	</body>
 </html>

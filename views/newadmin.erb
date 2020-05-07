@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<body>
+	<div class="centraTabla">
+       <table class="tabla">     
+            <tr class="fila">
+                    <th><h3> GRANT A NEW ADMIN PERMISSION </h3></th>
+            </tr>
+			<tr>
+				<td><form action="/newadmin" method="POST">
+					<% if @error %>
+		            <p class="error"><%= @error %></p>
+		            <% end %>
+		            <% if @success %>
+		            <p class="success"><%= @success %></p>
+		            <% end %>
+			 		<p>Select user to upgrade to admin: <br> <input type="" name="username"></p>
+			 		<input class="button2" type="submit" value="SEND" />
+				</form></td>
+	</body>
+</html>

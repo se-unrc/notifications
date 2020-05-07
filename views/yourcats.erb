@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+
+	<body>
+		<ul>
+		    <% @categories.each do |categorie| %>
+			  	<li><%= categorie.name %></li> 
+			<% end %>
+		</ul>
+	</body>
+</html>
