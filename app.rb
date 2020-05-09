@@ -6,36 +6,49 @@ class App < Sinatra::Base
   configure :development, :production do
     enable :logging
     enable :session
-    set :session_secret, "secret"
+    set :session_secret, "otro secret pero dificil y abstracto"
     set :sessions, true
   end
 
+  before do
+    request.path_info
+    @logged2 = session[:user_id] ? "none" : "inline"
+    @logged = session[:user_id] ? "inline" : "none"
+    if !session[:user_id] && request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus'
+      redirect 'login'
+    elsif session[:user_id] 
+      user = User.find(id: session[:user_id])
+      @visibility = user.type == "user" ? "none" : "inline"
+      if request.path_info == '/login' || request.path_info == '/signup'
+        session.clear
+        redirect request.path_info
+      elsif request.path_info == '/newadmin' || request.path_info == '/upload'
+        user = User.find(id: session[:user_id])
+        redirect '/'     
+      end
+    end
+  end
+
   get "/" do 
-    @documents = Doc.all
+    @documents = Document.all
     logger.info ""
     logger.info session["session_id"]
     logger.info session.inspect
     logger.info "-------------"
     logger.info ""
-
-  if session[:user_id] 
-      erb :docs, :layout => :layoutIn
-    else
-  	 erb :docs, :layout => :layout
-    end
+  	
+    erb :docs, :layout => :layout
   end
 
   get "/aboutus" do
-	 erb :aboutus, :layout => :layout
+   erb :aboutus, :layout => :layout
   end
 
   get "/login" do
-    session.clear
     erb :login, :layout => :layout
   end	
 	 
   get "/signup" do
-    session.clear
     erb :signup, :layout => :layout
   end	
 
@@ -44,49 +57,29 @@ class App < Sinatra::Base
   end
 
   get "/suscribe" do
-    if session[:user_id] 
-      @categories = Categorie.all
-      erb :suscat, :layout => :layoutIn
-    else
-      redirect '/login'
-    end
+      @categories = Category.all
+      erb :suscat, :layout => :layout
   end
 
   get "/upload" do
-    if session[:usertype] == 'superadmin' || session[:usertype] == 'admin'
-      @categories = Categorie.all
-      erb :upload, :layout => :layoutIn
-    else
-      redirect '/'
-    end
+    @categories = Category.all
+    erb :upload, :layout => :layout
   end
 
   get "/newadmin" do
-    if session[:usertype] == 'superadmin'  || session[:usertype] == 'admin'  
-      erb :newadmin, :layout=> :layoutIn
-    else
-      redirect '/'
-    end
+    erb :newadmin, :layout=> :layout
   end
 
   get "/categories" do
-    if session[:user_id] 
-      my_suscriptions = Subscription.select(:cat_id).where(user_id: session[:user_id])
-      @categories = Categorie.where(id: my_suscriptions)
-      erb :yourcats, :layout=> :layoutIn
-    else
-      redirect '/login'
-    end
+    user = User.find(id: session[:user_id])
+    @categories =  user.categories_dataset
+    erb :yourcats, :layout=> :layout
   end
 
   get "/deletecat" do
-    if session[:user_id] 
-      my_suscriptions = Subscription.select(:cat_id).where(user_id: session[:user_id])
-      @categories = Categorie.where(id: my_suscriptions)
-      erb :deletecats, :layout=> :layoutIn
-    else
-      redirect '/login'
-    end
+    user = User.find(id: session[:user_id])
+    @categories =  user.categories_dataset
+    erb :deletecats, :layout=> :layout
 
   end
 
@@ -97,22 +90,14 @@ class App < Sinatra::Base
   end
 
   get "/profile" do
-    set_user
-    @categories = Categorie.all
-    if session[:user_id] 
-      erb :profile, :layout => :layoutIn
-    else
-      redirect '/login'
-    end
+    @categories = Category.all
+    erb :profile, :layout => :layout
   end
 
   post '/login' do
       usuario = User.find(username: params[:username])
       if usuario && usuario.password == params[:password]
         session[:user_id] = usuario.id
-        session[:usertype]=usuario.type
-        session[:user_name]=usuario.name
-        set_user
         redirect "/"
       else
         @error ="Your username o password is incorrect"
@@ -140,9 +125,6 @@ class App < Sinatra::Base
       user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
       if user.save
           session[:user_id] = user.id
-          session[:usertype]=user.type
-          session[:user_name]=user.name
-          set_user
           redirect "/"
       else 
         [500, {}, "Internal server Error"]
@@ -156,8 +138,8 @@ class App < Sinatra::Base
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
 
-    doc = Doc.new(date: params["date"], name: params["title"], users: params["users"], categories: params["categories"], document: params["document"])
-    if doc.save
+    doc = Document.new(date: params["date"], name: params["title"], users: params["users"], categories: params["categories"], document: params["document"])
+    if Document.save
       redirect "/profile"
     else 
       [500, {}, "Internal server Error"]
@@ -167,55 +149,45 @@ class App < Sinatra::Base
 
 
   post '/suscribe' do
-      categorie = Categorie.select(:id).where(name: params[:categorie])
-      if  Subscription.find(user_id: session[:user_id],cat_id: categorie)
-          @success ="You are already subscribed to #{params[:categorie]}!"
-          @categories = Categorie.all
-          erb :suscat, :layout => :layoutIn
-      else
-        suscription = Subscription.new(user_id: session[:user_id],cat_id: categorie)  
-        if suscription.save
-          @success ="Now you are subscribed to #{params[:categorie]}!"
-          @categories = Categorie.all
-          erb :suscat, :layout => :layoutIn
-        else
-          [500, {}, "Internal server Error"]
-        end
-      end
+    user = User.first(id: session[:user_id])
+    category = Category.first(name: params["categories"])
+    if user && category# && ver que no exista
+          category.add_user(user)
+          category.save
+          @success ="Now you are subscribed to #{params[:categories]}!"
+          @categories = Category.all
+          erb :suscat, :layout => :layout
+    else
+          @error ="You are already subscribed to #{params[:categories]}!"
+          @categories = Category.all
+          erb :suscat, :layout => :layout
+    end
   end
 
   post '/newadmin' do
     if User.find(username: params[:username])
       User.where(username: params[:username]).update(type: 'admin')
        @success = "The user has been promoted to admin"
-       erb  :newadmin, :layout => :layoutIn
+       erb  :newadmin, :layout => :layout
     else 
       @error = "An error has ocurred when trying to promote the user to admin"
-      erb  :newadmin, :layout => :layoutIn
+      erb  :newadmin, :layout => :layout
     end
   end
 
   post '/deletecat' do
-    idcat = Categorie.select(:id).where(name: params[:categorie])
-    susc = Subscription.where(user_id: session[:user_id],cat_id: idcat)
-    if susc.delete
+    user = User.first(id: session[:user_id])
+    category = Category.first(name: params["category"])
+    if user && category && user.remove_category(category)
       @success = "The category has been removed"
-      my_suscriptions = Subscription.select(:cat_id).where(user_id: session[:user_id])
-      @categories = Categorie.where(id: my_suscriptions)
-      erb  :deletecats, :layout => :layoutIn
+      user = User.find(id: session[:user_id])
+      @categories =  user.categories_dataset
+      erb  :deletecats, :layout => :layout
     else
-      @error = "An error has ocurred when trying remove the category"
-      my_suscriptions = Subscription.select(:cat_id).where(user_id: session[:user_id])
-      @categories = Categorie.where(id: my_suscriptions)
-      erb  :deletecats, :layout => :layoutIn
+      @success = "An error has ocurred when trying remove the category"
+      user = User.find(id: session[:user_id])
+      @categories =  user.categories_dataset
+      erb  :deletecats, :layout => :layout
     end
   end
-
-  def set_user
-    @visibility = "inline"
-    if session[:usertype] == 'user'
-        @visibility = "none"
-    end
-  end
-
 end 

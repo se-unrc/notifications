@@ -13,8 +13,8 @@
                         <p class="cuadrito">Title: <br><input type="text" name="title"></p>
                         <p class="cuadrito">Users involved: <br><input type="" name="users"></p>
                         <p class="cuadrito">Categories: <select id="categories" name="categories">
-                       					<% @categories.each do |categorie| %>
-            			  				<option value= <%= categorie.name %> > <%= categorie.name %> </option>
+                       					<% @categories.each do |category| %>
+            			  				<option value= <%= category.name %> > <%= category.name %> </option>
             			  				<% end %>
             						</select></p>
                         <p class="cuadrito">Document: <input type="file" name="document" accept=".pdf"></p>

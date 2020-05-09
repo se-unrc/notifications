@@ -1,12 +1,15 @@
 Sequel.migration do                                                                                           
         up do                                                                                                       
-          create_table(:suscriptions) do                                                                                   
+          create_table(:documents) do                                                                                   
             primary_key :id                                                                                         
-            foreign_key :idUser, null: false
-            foreign_key :idCat, null: false                                                                       
+            String :name, null: false
+            Date :date, null: false
+            String :users, null: false
+            String :categories, null: false
+            String :document, null: false                                                                              
           end                                                                                                       
         end                                                                                                         
         down do                                                                                                     
-          drop_table(:suscriptions)                                                                                        
+          drop_table(:documents)                                                                                        
         end                                                                                                         
       end

@@ -8,9 +8,9 @@
                 </tr>
         <tr>
 		<td><form method="POST" action="/suscribe">
-                <p>Categories: <select id="categorie" name="categorie">
-               					<% @categories.each do |categorie| %>
-								  <option value=<%= categorie.name %>> <%= categorie.name %> </option>
+                Categories: <select id="categories" name="categories">
+               					<% @categories.each do |category| %>
+								  <option value=<%= category.name %>> <%= category.name %> </option>
 								  <% end %>
 								</select></p>
                 <% if @error %>

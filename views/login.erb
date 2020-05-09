@@ -9,7 +9,11 @@
 				<th><h3> LOG IN TO DUNS</h3></th>
 			</tr>
 			<tr>	
-				<td><form method="POST" action="/login">
+				<td></p> 
+						<% if @errorIngreso %>
+    						<p class="error"><%= @errorIngreso %></p>
+  						<% end %>
+					<form method="POST" action="/login">
 						<p class="cuadrito">Your username: <br><input type="text" name="username" placeholder="Input your username"></p>
 						<p class="cuadrito">Your password: <br><input type="password" name="password" placeholder="Input you password"></p>
 						<p ><a href="/forgotpass"> Forgot your password?</a>      

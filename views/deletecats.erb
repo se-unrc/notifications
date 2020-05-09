@@ -15,9 +15,9 @@
                 <p class="success"><%= @success %></p>
                 <% end %>
 		       	<p class="cuadrito">Categories: 
-		       		<select id="categorie" name="categorie">
-		       		<% @categories.each do |categorie| %>
-				  	<option value= <%= categorie.name %> > <%= categorie.name %> </option>
+		       		<select id="category" name="category">
+		       		<% @categories.each do |category| %>
+				  	<option value= <%= category.name %> > <%= category.name %> </option>
 				  	<% end %>
 					</select>
 					<input class="button2" type="submit" value="UNSUBSCRIBE">

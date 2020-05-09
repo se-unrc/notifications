@@ -13,9 +13,12 @@
 				<nav class="navigation">
 					<ul>
                         <li><a href="/"> Docs</a></li>                     
-                        <li><a href="/signup"> Sign up</a></li> 
-                        <li><a href="/login"> Log in</a></li>
-                        <li><a href="/aboutus"> About us</a></li>
+                        <li style="display:<%= @logged2 %>;"><a href="/signup"> Sign up</a></li> 
+                        <li style="display:<%= @logged2 %>;"><a href="/login"> Log in</a></li>
+                        <li style="display:<%= @logged2 %>;"><a href="/aboutus"> About us</a></li>
+                        <li style="display:<%= @logged %>;"><a href="/profile"> Profile </a></li> 
+                        <li style="display:<%= @logged %>;"><a href="/notification"> Notification </a></li>
+                        <li style="display:<%= @logged %>;"><a href="/logout"> Log out </a></li>
                     </ul>
 				</nav>
 			</div>
