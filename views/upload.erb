@@ -8,7 +8,14 @@
                         <th><h3> SIGN UP TO DUNS</h3></th>
                 </tr>
                 <tr>  
-            		<td><form action="/upload" method="POST"> <!enctype="multipart/form-data">
+            		<td>
+                        <% if @error %>
+                        <p class="error"><%= @error %></p>
+                        <% end %>
+                        <% if @success %>
+                        <p class="success"><%= @success %></p>
+                        <% end %>
+                        <form action="/upload" method="POST"> <!enctype="multipart/form-data">
                         <p class="cuadrito">Date: <br><input type="date" name="date"></p>
                         <p class="cuadrito">Title: <br><input type="text" name="title"></p>
                         <p class="cuadrito">Users involved: <br><input type="" name="users"></p>

@@ -1,5 +1,6 @@
 require 'json'
 require './models/init.rb'
+require 'date'
 include FileUtils::Verbose
 class App < Sinatra::Base
   
@@ -22,7 +23,7 @@ class App < Sinatra::Base
       if request.path_info == '/login' || request.path_info == '/signup'
         session.clear
         redirect request.path_info
-      elsif request.path_info == '/newadmin' || request.path_info == '/upload'
+      elsif user.type == "user" && (request.path_info == '/newadmin' || request.path_info == '/upload')
         user = User.find(id: session[:user_id])
         redirect '/'     
       end
@@ -30,13 +31,14 @@ class App < Sinatra::Base
   end
 
   get "/" do 
-    @documents = Document.all
     logger.info ""
     logger.info session["session_id"]
     logger.info session.inspect
     logger.info "-------------"
     logger.info ""
   	
+    @categories = Category.all
+    @documents = Document.all
     erb :docs, :layout => :layout
   end
 
@@ -76,6 +78,12 @@ class App < Sinatra::Base
     erb :yourcats, :layout=> :layout
   end
 
+  get '/documents' do
+    user = User.find(id: session[:user_id])
+    @documents = user.documents_dataset
+    erb :yourdocs, :layout=> :layout
+  end
+
   get "/deletecat" do
     user = User.find(id: session[:user_id])
     @categories =  user.categories_dataset
@@ -107,28 +115,32 @@ class App < Sinatra::Base
 
 
   post '/signup' do
-    
-    if User.find(username: params[:username])
-      @error = "The username is already in use"
-      erb :signup, :layout => :layout
-    elsif   User.find(email: params[:email])                                                                                               
-      @error = "The email is already in use"
-      erb :signup, :layout => :layout
-    elsif params[:password] != params[:confPassword]
-      @error = "Passwords are not equal"
-      erb :signup, :layout => :layout
-    else
-      request.body.rewind
+    if params["fullname"] != "" && params["username"] != "" &&  params["password"] != "" && params["confPassword"] != "" &&  params["email"] != ""    
+      if User.find(username: params[:username]) || /\A\w{3,15}\z/ =~ params[:username]
+        @error = "The username is already in use or its invalid"
+        erb :signup, :layout => :layout
+      elsif   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+        @error = "The email is invalid"
+        erb :signup, :layout => :layout
+      elsif params[:password] != params[:confPassword]
+        @error = "Passwords are not equal"
+        erb :signup, :layout => :layout
+      else
+        request.body.rewind
 
-      hash = Rack::Utils.parse_nested_query(request.body.read)
-      params = JSON.parse hash.to_json 
-      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
-      if user.save
-          session[:user_id] = user.id
-          redirect "/"
-      else 
-        [500, {}, "Internal server Error"]
-      end 
+        hash = Rack::Utils.parse_nested_query(request.body.read)
+        params = JSON.parse hash.to_json 
+        user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+        if user.save
+            session[:user_id] = user.id
+            redirect "/"
+        else 
+          [500, {}, "Internal server Error"]
+        end 
+      end
+    else 
+      @error = "All fields are necessary"
+      erb :signup, :layout => :layout
     end
   end
 
@@ -137,14 +149,28 @@ class App < Sinatra::Base
 
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
+    category = Category.first(name: params["categories"])
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: params["document"],category_id: category.id)
+    if doc.save
+      doc = Document.first(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: params["document"])
+      
+      usuario = params["users"].split(',')
+      usuario.each do |userr|
+      user = User.first(username: userr)
+        if user 
+          user.add_document(doc)
+          user.save
+        end
+      end
 
-    doc = Document.new(date: params["date"], name: params["title"], users: params["users"], categories: params["categories"], document: params["document"])
-    if Document.save
-      redirect "/profile"
+      @success = "The document has been uploaded"
+      @categories = Category.all
+      erb :upload, :layout => :layout
     else 
-      [500, {}, "Internal server Error"]
+      @error = "An error has ocurred when trying to uload the document"
+      @categories = Category.all
+      erb :upload, :layout => :layout
     end 
-
   end 
 
 
@@ -190,4 +216,17 @@ class App < Sinatra::Base
       erb  :deletecats, :layout => :layout
     end
   end
+
+  post '/' do
+    user = User.first(username: params[:users])
+    prueba = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
+    prueba = params[:date] == "" ? prueba : prueba.select {|d| d.date == params[:date] }
+    category = Category.first(name: params[:category])
+    prueba = params[:category] == "" ? prueba : prueba.select {|d| d.category_id == category.id }
+    @documents = prueba
+    @categories = Category.all
+    erb :docs, :layout => :layout
+
+  end
+
 end 

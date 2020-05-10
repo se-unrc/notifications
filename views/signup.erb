@@ -15,6 +15,9 @@
                                 <p class="cuadrito">Your password: <br> <input   type="password" name="password"></p>
                                 <p class="cuadrito">Confirm password: <br> <input type="password" name="confPassword"></p>
                                 <input class="button2" type="submit" value="SIGN UP" />
+                                <% if @error %>
+                                <p class="error"><%= @error %></p>
+                                <% end %>
                         </form> </td>
                 </tr>
         </table></div>

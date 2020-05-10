@@ -2,10 +2,22 @@
 <html>
 
 	<body>
+		<form action="/" method="POST">
+					<p>Date: <br><input type="date" name="date"></p>
+					<p>Users involved: <br><input type="" name="users"></p>
+					<p class="cuadrito">Categories: <select id="category" name="category">
+                        <option value=""> None </option>
+                       	<% @categories.each do |category| %>
+            			<option value= <%= category.name %> > <%= category.name %> </option>
+            			<% end %>
+            			</select></p>
+					<input type="submit" value="FILTER">
+				</p>
+			</form>
 		<table border=1 cellspacing=0 width="300"> 
 		<% @documents.each do |doc| %>
 		<tr>
- 		<td><%= doc.date %></td><td><%= doc.name %></td><td><%= doc.users %></td><td><%= doc.categories %></td><td><%= doc.document %></td>		
+ 		<td><%= doc.date %></td><td><%= doc.name %></td><td><%= doc.userstaged %></td><td><%= doc.categorytaged %></td><td><%= doc.document %></td>		
 		<% end %>
 		</tr>
 		<table>

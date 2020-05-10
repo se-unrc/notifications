@@ -6,5 +6,6 @@ class Category < Sequel::Model
 		validates_unique [:name]
   	end
 	many_to_many  :users
+	one_to_many :documents
 	set_primary_key :id
 end

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+
+	<body>
+		<ul>
+		    <% @documents.each do |doc| %>
+			  	<li><%= doc.date %></td><td><%= doc.name %></td><td><%= doc.userstaged %></td><td><%= doc.categorytaged %></td><td><%= doc.document %></li> 
+			<% end %>
+		</ul>
+	</body>
+</html>
