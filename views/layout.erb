@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,35 +15,22 @@ body {
 }
 
 /* Style the header */
-header {
+header{
   background-color: #1b89de;
   padding: 30px;
   text-align: center;
-  font-size: 35px;
+  font-size: 30px;
   color: white;
-}
 
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 1000px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 article {
   float: left;
   padding: 20px;
-  width: 70%;
+  width: 100%;
+  text-align: center;
   background-color: #f1f1f1;
-  height: 1000px; /* only for demonstration, should be removed */
+  height: 500px; /* only for demonstration, should be removed */
 }
 
 /* Clear floats after the columns */
@@ -103,31 +91,22 @@ footer {
 </header>
 <div class="topnav">
   <a class="active" href="/">Pagina Principal</a>
-  <a href="/documents">Documentos</a>
   <a href="/tags">Tags</a>
   <a href="/aboutus">Sobre este sitio</a>
   <a href="/contactus">Contactanos</a>
   <a href="/register">Registrarse</a>
-  <a href="/login">Iniciar Secion</a>
+  <a href="/login">Iniciar Sesion</a>
 </div>
+
 <section>
-  <nav>
-    <ul>
-      <li><a href="/documents">Documentos</a></li>
-      <li><a href="/tags">Tags</a></li>
-      <li><a href="/aboutus">Sobre este sitio</a></li>
-    </ul>
-  </nav>
-  
   <article>
     <%= yield %>
   </article>
 </section>
 
 <footer>
-  <p> 2020</p>
+  <p> AyDS 2020</p>
 </footer>
 
 </body>
 </html>
-

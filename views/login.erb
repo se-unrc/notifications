@@ -104,12 +104,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -126,50 +126,28 @@ span.psw {
 </style>
 </head>
 <body>
-
-<h2>Click en Iniciar para ingresar</h2>
-
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Iniciar</button>
-
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="/loginsuccess" method="post">
+  <form class="modal-content animate" action="/login" method="post">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="https://i.ytimg.com/vi/EGMyOQ713Ls/hqdefault.jpg" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-      <label for="uname"><b>Usuario</b></label>
-      <input type="text" placeholder="ingrese nombre de usuario" name="uname" required>
+      <label for="username"><b>Usuario</b></label>
+      <input type="text" placeholder="ingrese nombre de usuario" name="username" required>
 
       <label for="psw"><b>Contraseña</b></label>
-      <input type="password" placeholder="Ingrese contraseña" name="psw" required>
-        
+      <input type="password" placeholder="Ingrese contraseña" name="password" required>
+
       <button type="submit">Ingresar</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Recordarme
       </label>
-    </div>
 
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
       <span class="psw">Olvide mi <a href="#/recoverpw">contraseña</a></span>
     </div>
   </form>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
 </body>
 </html>
