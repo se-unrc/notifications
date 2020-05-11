@@ -1,8 +1,8 @@
 class App < Sinatra::Base
   get "/" do
-    "hello cruel world"
+    erb:Login
   end
-  get "/pagina1" do
-    erb:pagina1
+  get "/Admin" do
+    erb:Admin
   end
 end
