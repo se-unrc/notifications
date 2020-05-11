@@ -25,6 +25,15 @@ p{
 	text-align: left;
 }
 
+.tabladocs td{
+	padding: 6px;
+}
+
+.tabladocs{
+	text-align: left;
+	border: 1px	solid;
+}
+
 .fila {
 	background: #009688;
 	color: white;

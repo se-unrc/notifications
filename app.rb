@@ -13,9 +13,9 @@ class App < Sinatra::Base
 
   before do
     request.path_info
-    @logged2 = session[:user_id] ? "none" : "inline"
-    @logged = session[:user_id] ? "inline" : "none"
-    if !session[:user_id] && request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus'
+    @logged2 = session[:user_id] ? "none" : "inline-block"
+    @logged = session[:user_id] ? "inline-block" : "none"
+    if !session[:user_id] && request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus' &&  request.path_info != '/preview'
       redirect 'login'
     elsif session[:user_id] 
       user = User.find(id: session[:user_id])
@@ -88,9 +88,11 @@ class App < Sinatra::Base
     user = User.find(id: session[:user_id])
     @categories =  user.categories_dataset
     erb :deletecats, :layout=> :layout
-
   end
 
+  get '/preview' do
+
+  end
 
   get '/logout' do 
     session.clear
@@ -103,6 +105,7 @@ class App < Sinatra::Base
   end
 
   post '/login' do
+    if params["password"] != "" && params["username"] != ""
       usuario = User.find(username: params[:username])
       if usuario && usuario.password == params[:password]
         session[:user_id] = usuario.id
@@ -111,6 +114,10 @@ class App < Sinatra::Base
         @error ="Your username o password is incorrect"
         erb :login, :layout => :layout
       end
+    else 
+        @error ="All fields are necessary"
+        erb :login, :layout => :layout
+    end
   end
 
 
@@ -144,54 +151,65 @@ class App < Sinatra::Base
     end
   end
 
+# app.rb 
   post '/upload' do
-    request.body.rewind
-
-    hash = Rack::Utils.parse_nested_query(request.body.read)
-    params = JSON.parse hash.to_json 
-    category = Category.first(name: params["categories"])
-    doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: params["document"],category_id: category.id)
-    if doc.save
-      doc = Document.first(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: params["document"])
+    
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+     
+      @filename = params[:document][:filename]
+      file = params[:document][:tempfile]
+      cp(file.path, "public/file/#{@filename}")
+      @src =  "/file/#{@filename}"
       
-      usuario = params["users"].split(',')
-      usuario.each do |userr|
-      user = User.first(username: userr)
-        if user 
-          user.add_document(doc)
-          user.save
+      category = Category.first(name: params["categories"])
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: @src,category_id: category.id)
+      if doc.save
+        doc = Document.first(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: @src)
+        
+        usuario = params["users"].split(',')
+        usuario.each do |userr|
+        user = User.first(username: userr)
+          if user 
+            user.add_document(doc)
+            user.save
+          end
         end
-      end
-
-      @success = "The document has been uploaded"
-      @categories = Category.all
-      erb :upload, :layout => :layout
-    else 
-      @error = "An error has ocurred when trying to uload the document"
-      @categories = Category.all
-      erb :upload, :layout => :layout
+        @success = "The document has been uploaded"
+        @categories = Category.all
+        erb :upload, :layout => :layout
+      else 
+        @error = "An error has ocurred when trying to uload the document"
+        @categories = Category.all
+        erb :upload, :layout => :layout
+      end 
+    else
+        @error = "All fields are necessary"
+        @categories = Category.all
+        erb :upload, :layout => :layout
     end 
-  end 
 
+
+  end
 
   post '/suscribe' do
     user = User.first(id: session[:user_id])
     category = Category.first(name: params["categories"])
-    if user && category# && ver que no exista
+    if user && category 
           category.add_user(user)
-          category.save
-          @success ="Now you are subscribed to #{params[:categories]}!"
-          @categories = Category.all
-          erb :suscat, :layout => :layout
-    else
-          @error ="You are already subscribed to #{params[:categories]}!"
-          @categories = Category.all
-          erb :suscat, :layout => :layout
-    end
+          if category.save
+            @success ="Now you are subscribed to #{params[:categories]}!"
+            @categories = Category.all
+            erb :suscat, :layout => :layout
+          else
+            @error ="You are already subscribed to #{params[:categories]}!"
+            @categories = Category.all
+            erb :suscat, :layout => :layout
+          end
+    end      
   end
 
   post '/newadmin' do
-    if User.find(username: params[:username])
+    if User.find(username: params[:username]) 
       User.where(username: params[:username]).update(type: 'admin')
        @success = "The user has been promoted to admin"
        erb  :newadmin, :layout => :layout
@@ -227,6 +245,11 @@ class App < Sinatra::Base
     @categories = Category.all
     erb :docs, :layout => :layout
 
+  end
+
+  post '/preview' do
+    @src = params["route"]
+    erb :preview, :layout=> false
   end
 
 end 
