@@ -120,10 +120,10 @@ class App < Sinatra::Base
     end
   end
 
-
+      
   post '/signup' do
     if params["fullname"] != "" && params["username"] != "" &&  params["password"] != "" && params["confPassword"] != "" &&  params["email"] != ""    
-      if User.find(username: params[:username]) || /\A\w{3,15}\z/ =~ params[:username]
+      if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
         @error = "The username is already in use or its invalid"
         erb :signup, :layout => :layout
       elsif   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
