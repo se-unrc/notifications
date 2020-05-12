@@ -7,31 +7,47 @@ class App < Sinatra::Base
   configure :development, :production do
     enable :logging
   end
-  # Shows how to access to settings configurations
-  get "/" do
+  get "/" do # Shows how to access to settings configurations
     logger.info "params"
     logger.info params
     logger.info "--------------"
     logger.info "Configurations"
     logger.info settings.db_adapter
     logger.info "--------------"
-    @prueba = "CHAU"
-    erb :index
+  end
+
+  get "/login" do
+    erb :login
+  end
+  post "/login" do
+    usuario = User.find(userName: params["userName"])
+    if usuario.password == params["password"]
+      redirect "/profile"
+    else
+      @error ="Your username o password is incorrect"
+      redirect "login"
+    end
   end
 
   get "/create_user" do
     erb:create_user
   end
   post "/create_user" do
-     user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'])
-     if user.save
-       "USER CREATED"
-       redirect "/profile"
-     else
-       [500, {}, "Internal Server Error"]
-     end
+    if user2 = User.find(userName: params["userName"])
+      [500, {}, "ya existe el usuario"]
+    else
+      user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'])
+      if user.save
+           redirect "/profile"
+       else
+           [500, {}, "Internal Server Error"]
+           redirect "/create_user"
+      end
+    end
   end
+
   get "/profile" do
     erb:profile
   end
+
 end
