@@ -50,4 +50,7 @@ class App < Sinatra::Base
     erb:profile
   end
 
+  get "/create_category" do
+    erb:create_category
+  end
 end
