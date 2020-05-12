@@ -1,0 +1,65 @@
+/*0D0D0D->FONDO
+66C8C8->boton
+#454545*/
+*{ /*elimina los margenes*/
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: #0D0D0D;
+}
+.encabezado{
+  background-color: #454545;
+  height: 65px;
+}
+.buttonLogin{
+  background-color:  #66C8C8;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  border:  0px;s
+  text-align: center;
+  color:black;
+  font-size: 20px;
+}
+.encabezado izqSup{
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+}
+form{
+  width: 250px;
+  border: 0px;
+  margin: 10% auto;
+}
+form h1{
+  text-align: center;
+  color: inherit;
+  font-weight: normal;
+  font-size: 30pt;
+}
+form input{
+  width: 250px;
+	height: 50px;
+  margin: 20px 0px;
+  border-radius: 5px;
+  background-color: #454545;
+  text-align: center;
+  color: #FFFFFF;
+  border:  0px;
+}
+form button{
+  background-color:  #66C8C8;
+  width: 150px;
+  height: 45px;
+  border-radius: 20px;
+  border:  0px;
+  text-align: center;
+  color:black;
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
+}
+form button:hover{
+  background-color: #81EEEE;
+}

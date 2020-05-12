@@ -16,7 +16,9 @@ services:
     # use latest official postgres version
     image: postgres
     # configure postgres
-
+    # environment:
+    #   POSTGRES_PASSWORD: docker
+    #   POSTGRES_USER: docker
     env_file:
       - config/database.env
     # persist data even if container shuts down
