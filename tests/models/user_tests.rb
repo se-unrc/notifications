@@ -2,22 +2,149 @@ require File.expand_path '../../test_helper.rb', __FILE__
 
 class UserTest < MiniTest::Unit::TestCase
 
-  MiniTest::Unit::TestCase		
-  def test_name_existence
+  MiniTest::Unit::TestCase    
+  def test_name_presence
 
     @user = User.new
 
     @user.name = nil
     @user.username = "john"
     @user.email = "johndo@email.com"
+    @user.password = "12345"
+
+    assert_equal @user.valid?, false
+
+    @user.name = "John Doe"
+
+    assert_equal @user.valid?, true
+
+  end
+
+  def test_username_presence
+
+    @user = User.new
+
+    @user.name = "John Doe"
+    @user.username = nil
+    @user.email = "johndo@email.com"
+    @user.password = "12345"
+
+    assert_equal @user.valid?, false
+
+    @user.username = "john"
+
+    assert_equal @user.valid?, true
+
+  end
+
+
+
+  def test_email_presence
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john"
+    @user.email = nil
+    @user.password = "12345"
+
+    assert_equal @user.valid?, false
+
+    @user.email = "johndoe@mail.com"
+
+    assert_equal @user.valid?, true
+
+  end
+
+  def test_password_presence
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john"
+    @user.email = "johndoe@mail.com"
+    @user.password = nil
+
+    assert_equal @user.valid?, false
+
+    @user.password = "12345"
+
+    assert_equal @user.valid?, true
+
+  end
+
+
+  def test_email_format
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john"
+    @user.email = "johndoemailcom"
+    @user.password = "12345"
+
+    assert_equal @user.valid?, false
+
+    @user.email = "johndoe@email.com"
+
+    assert_equal @user.valid?, true
+
+  end 
+
+  def test_username_format
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john,doe"
+    @user.email = "johndo@email.com"
+    @user.password = "12345"
+
+    assert_equal @user.valid?, false
+
+    @user.username = "john doe"
+
+    assert_equal @user.valid?, false
+
+    @user.username = "jo"
+
+    assert_equal @user.valid?, false
+
+    @user.username = "johndoe"
+
+    assert_equal @user.valid?, true
+
+  end
+
+  def test_password_presence
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john"
+    @user.email = "johndo@email.com"
+    @user.password = nil
+
+    assert_equal @user.valid?, false
+
+    @user.password = "12345"
+
+    assert_equal @user.valid?, true
+
+  end
+
+  def test_password_length
+
+    @user = User.new
+    @user.name = "John Doe"
+    @user.username = "john"
+    @user.email = "johndo@email.com"
     @user.password = "123"
 
     assert_equal @user.valid?, false
 
-    @user.name = "john doe"
+    @user.password = "012345678901234567890"
+
+    assert_equal @user.valid?, false
+
+    @user.password = "0123456789"
 
     assert_equal @user.valid?, true
-
   end
 
   ##TODO: Add uniqueness constraint in database in order to test for that property
@@ -53,65 +180,5 @@ class UserTest < MiniTest::Unit::TestCase
 
   # end
 
-  def test_email_format
-
-    @user = User.new
-    @user.name = "john doe"
-    @user.username = "john"
-    @user.email = "johndoemailcom"
-    @user.password = "123"
-
-    assert_equal @user.valid?, false
-
-    @user.email = "johndoe@email.com"
-
-    assert_equal @user.valid?, true
-
-  end 
-
-  def test_password_existence
-
-    @user = User.new
-    @user.name = "john doe"
-    @user.username = "jay"
-    @user.email = "johndoe@mail.com"
-    @user.password = nil
-
-    assert_equal @user.valid?, false
-
-    @user.password = "123456"
-
-    assert_equal @user.valid?, true
-
-  end
-
-  def test_username_format
-
-    @user = User.new
-    @user.name = "john doe"
-    @user.username = "john,doe"
-    @user.email = "johndo@email.com"
-    @user.password = "123"
-
-    assert_equal @user.valid?, false
-
-    @user.username = "john doe"
-
-    assert_equal @user.valid?, false
-
-    @user.username = "jo"
-
-    assert_equal @user.valid?, false
-
-    @user.username = "johndoe"
-
-    assert_equal @user.valid?, true
-
-  end
 
 end
-
-
-
-    
-
