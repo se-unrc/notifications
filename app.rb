@@ -98,9 +98,12 @@ class App < Sinatra::Base
 
   # Endpoints for upload a document
   get '/documents' do
-    erb :upload
+    if !session[:user_id]
+      erb :login
+    else
+      erb :upload, :layout => :layoutlogin
+    end
   end
-
   get '/showdocument' do
     erb :show_file
   end
