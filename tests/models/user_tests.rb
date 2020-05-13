@@ -112,21 +112,6 @@ class UserTest < MiniTest::Unit::TestCase
 
   end
 
-  def test_password_presence
-
-    @user = User.new
-    @user.name = "John Doe"
-    @user.username = "john"
-    @user.email = "johndo@email.com"
-    @user.password = nil
-
-    assert_equal @user.valid?, false
-
-    @user.password = "12345"
-
-    assert_equal @user.valid?, true
-
-  end
 
   def test_password_length
 
