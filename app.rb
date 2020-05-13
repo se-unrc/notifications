@@ -30,6 +30,7 @@ class App < Sinatra::Base
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
     user = User.new(name: params['name'], lastname: params['lastname'],email: params['email'],password: params['pwd'] )
+    
     if user.save
       redirect '/login'
       #user.last
@@ -43,12 +44,12 @@ class App < Sinatra::Base
   end
 
   post '/save_document' do
-    #if request.body.size > 0
     request.body.rewind
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
-    document = Document.new(title: params["title"], type: params["type"], format: "pdf")#format: params["format"])
-    if document.title && document.type && document.format 
+    document = Document.new(title: params["title"], type: params["type"], format: ["format"])#format: params["format"])
+    
+    if document.title && document.title != "" && document.type && document.format 
       document.save
       redirect '/'
     else

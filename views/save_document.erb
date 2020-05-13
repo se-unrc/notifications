@@ -3,6 +3,7 @@
     <head>
         <meta charset = "utf-8">
         <title>save_document</title>
+        <script type="text/javascript" src="fileManager.js"></script>
     </head>
     <body>
         <div class="save_document">
@@ -14,11 +15,9 @@
                     <option value="Act">Acta</option>
                     <option value="Resolution">Resolucion</option>
                 </select>
-
-                <button onclick="document.getElementById('file-input').click();">Examinar...</button>
-                <input id="file-input" type="file" style="display: none;" />
-
-
+                <button type="button" onclick="document.getElementById('fileInput').click();">Examinar...</button> 
+                <input id="fileInput" type="file" accept= ".pdf, .jpg, .jpeg, .png" onChange='getFileExtension()' style="display: none;" /> <br>
+                <input name="format" id="format" type="hidden" />
                 <input type="submit" value="Subir Documento"> 
             </form>
         </div>
