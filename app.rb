@@ -30,8 +30,6 @@ class App < Sinatra::Base
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
     user = User.new(name: params['name'], lastname: params['lastname'],email: params['email'],password: params['pwd'] )
-    #user = User.new('name', 'lastname','email','pwd' )
-    #user = User.new(name:'Mati' , lastname: 'lopez' ,email:'email', password: 'pwd')
     if user.save
       redirect '/login'
       #user.last
@@ -41,32 +39,26 @@ class App < Sinatra::Base
   end
 
   get '/save_document' do
-    erb :index, :locals => {:title => params[:title], :type => params[:type]}
+    erb :save_document
   end
+
   post '/save_document' do
     #if request.body.size > 0
     request.body.rewind
     hash = Rack::Utils.parse_nested_query(request.body.read)
     params = JSON.parse hash.to_json 
-    document = Document.new(title: params["title"], type: params["type"], format: params["format"])
-    document.save
-    redirect '/'
-    #end
-    
-  end
-get '/users' do
-    erb :users
+    document = Document.new(title: params["title"], type: params["type"], format: "pdf")#format: params["format"])
+    if document.title && document.type && document.format 
+      document.save
+      redirect '/'
+    else
+      redirect '/save_document'
+    end 
   end
 
-  #post '/create_user' do
-  #  @name = params[name]
-  #  user = User.new
-  #  user.name = @name
-  #  user.lastname = "aaa"
-  #  user.email = "123@gmail.com"
-  #  user.password = "magic1" 
-  #  user.save
-  #end
+  get '/users' do
+    erb :users
+  end
 
   get '/login' do
     erb :login
