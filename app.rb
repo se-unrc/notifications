@@ -14,6 +14,7 @@ class App < Sinatra::Base
     logger.info "Configurations"
     logger.info settings.db_adapter
     logger.info "--------------"
+    erb:index
   end
 
 
