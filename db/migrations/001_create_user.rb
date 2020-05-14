@@ -7,7 +7,7 @@ Sequel.migration do
     Integer :dni, null: false
     String :userName, null: false
     String :password, null: false
-    #rol de tipo troles
+    Integer :rol, null: false
   end
 end
   down do
