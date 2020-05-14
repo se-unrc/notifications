@@ -1,3 +1,7 @@
+require 'sinatra/base'
+require "sinatra/config_file"
+require './models/user.rb'
+
 class App < Sinatra::Base
   require 'net/http'
   require 'json'
