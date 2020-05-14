@@ -72,21 +72,6 @@ class App < Sinatra::Base
     redirect '/'
   end
 
-  #############################
-  get '/registersuccess' do
-    erb :registerlandingpage
-  end
-
-  post '/sign_in' do
-    if User.last.id
-      session[:user_id] = User.last.id
-      [200, {"Content-Type" => "text/plain"}, ["You're logged in"]]
-    else
-      # halt 401, 'go away!'
-      [400, {"Content-Type" => "text/plain"}, ["Unautorized"]]
-    end
-  end
-
   # Endpoints for handles profile
   get "/profile" do
     erb :perfil , :layout => :layoutlogin
