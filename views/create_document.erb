@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>create document</title>
+  </head>
+  <body>
+    <table>
+      <td>
+        <form class="pdf" method="POST" action="/createdocument">
+        </form>
+      </td>
+      <td>
+        <form class="backgroundList" method="POST" action="/createdocument">
+            <% @userCreate.each do |element| %>
+            <input type="checkbox" name="tagged" name="1"> <%= element.name %>
+            <% end %>
+            <br>
+        </form>
+      </td>
+      <td>
+        <form class="backgroundList" method="POST" action="/createdocument">
+          <% category.each do |element| %>
+            <input type="radio" name="category" name="1"> <%= element.name %>
+          <% end %>
+          <br>
+        </form>
+      </td>
+    </table>
+    <form method="POST" action="/createdocument">
+      <div style="text-align: right">
+        <button type="submit" name="Upload">Upload</button>
+      </div>
+    </form>
+    <p class="cuadrito">Date: <br><input type="text" name="date"></p>
+    <form action="index.html" method="post" enctype="multipart/form-data">
+      <input type="file" name="PDF" accept=".pdf">
+    </form>
+  </body>
+</html>

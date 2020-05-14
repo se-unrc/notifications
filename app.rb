@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require "sinatra/config_file"
-require './models/init.rb'
+require './models/user.rb'
 class App < Sinatra::Base
   register Sinatra::ConfigFile
   config_file 'config/config.yml'
@@ -16,34 +16,18 @@ class App < Sinatra::Base
     logger.info "--------------"
   end
 
-  get "/index" do
-    erb:index
-  end
-  post "/log in" do
-    redirect "/login"
-  end
-  post "/create user" do
-    redirect "/create_user"
-  end
-
-
   get "/login" do
     erb :login
   end
   post "/login" do
-    @usuario = User.find(userName: params["userName"])
-    if @usuario.password == params["password"]
-      if @usuario.admin == 0
-        redirect "/profileAdmin"
-      else
-        redirect "/profile"
-      end
+    usuario = User.find(userName: params["userName"])
+    if usuario.password == params["password"]
+      redirect "/profile"
     else
       @error ="Your username o password is incorrect"
-      redirect "/login"
+      redirect "login"
     end
   end
-
 
   get "/create_user" do
     erb:create_user
@@ -52,48 +36,45 @@ class App < Sinatra::Base
     if user2 = User.find(userName: params["userName"])
       [500, {}, "ya existe el usuario"]
     else
-      @user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'])
-      if @user.save
-          redirect "/profile"
+      user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'])
+      if user.save
+           redirect "/profile"
        else
            [500, {}, "Internal Server Error"]
            redirect "/create_user"
       end
     end
   end
-
-
-  get "/create_users" do
-    erb:create_users
-  end
-  post "/create_users" do
-    if user2 = User.find(userName: params["userName"])
-      [500, {}, "ya existe el usuario"]
-    else
-      @user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'], admin: [admin])
-      if @user.save
-          redirect "/profile"
-       else
-           [500, {}, "Internal Server Error"]
-           redirect "/create_user"
-      end
-    end
-  end
-
 
   get "/profile" do
     erb:profile
   end
 
-
-  get "/profileAdmin" do
-    erb:profileAdmin
-  end
-  post "/create users"do
-    redirect "/create_users"
-  end
-  post "/create category" do
-    redirect "/create_category"
+  get "/create_document" do
+    @userCreate = User.all
+    @categories = Category.all
+    erb:create_document
   end
 
+  post "create document" do
+    @filename = params[:PDF][:filename]
+    file = params[:PDF][:tempfile]
+    File.open("./PDF/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+    end
+    @filename
+      #chosenTagged = params[:tagged]
+      #chosenCategory = Category.find(name: params[:category])
+      #document = Document.new(name: params[name], file: params[file], description: params[description], category_id: chosenCategory.id)
+      #document.save
+      #chosenTagged.each do |element|
+      #  doc_us = Document_user.new(document_id: document.id, user_id: element.id)
+      #  doc_us.save
+      #end
+      redirect "/create_document"
+  end
+
+  get "/create_category" do
+    erb:create_category
+  end
 end
