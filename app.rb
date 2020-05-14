@@ -77,10 +77,6 @@ class App < Sinatra::Base
     erb :perfil , :layout => :layoutlogin
   end
 
-  post '/profile' do
-    erb :perfil, :layout => :layoutlogin
-  end
-
   # Endpoints for upload a document
   get '/documents' do
     if !session[:user_id]
