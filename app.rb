@@ -54,7 +54,7 @@ class App < Sinatra::Base
     logger.info session.inspect
     logger.info "-------------"
     logger.info ""
-  	
+    
     @categories = Category.all
     @documents = Document.order(:date).reverse.all
     erb :docs, :layout => :layout
@@ -66,19 +66,25 @@ class App < Sinatra::Base
 
   get "/login" do
     erb :login, :layout => :layout
-  end	
-	 
+  end 
+   
   get "/signup" do
     erb :signup, :layout => :layout
-  end	
+  end 
 
   get "/forgotpass" do
     erb :forgotpass, :layout => :layout
   end
 
+<<<<<<< HEAD
   get "/suscribe" do
     @categories = Category.all
     erb :suscat, :layout => :layout
+=======
+  get "/subscribe" do
+      @categories = Category.all
+      erb :suscat, :layout => :layout
+>>>>>>> 75424c2e1664d36af5faf22c766804c78e1728a6
   end
 
   get "/upload" do
@@ -135,16 +141,19 @@ class App < Sinatra::Base
     end
   end
 
-
+      
   post '/signup' do
     if params["fullname"] != "" && params["username"] != "" &&  params["password"] != "" && params["confPassword"] != "" &&  params["email"] != ""    
-      if User.find(username: params[:username]) || /\A\w{3,15}\z/ =~ params[:username]
+      if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
         @error = "The username is already in use or its invalid"
         erb :signup, :layout => :layout
       elsif   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
         @error = "The email is invalid"
         erb :signup, :layout => :layout
-      elsif params[:password] != params[:confPassword]
+      elsif params[:password].length < 5 || params[:password].length > 20
+        @error = "Password must be between 5 and 20 characters long"
+        erb :signup, :layour => :layout
+      elsif params[:password] != params[:confPassword] 
         @error = "Passwords are not equal"
         erb :signup, :layout => :layout
       else
@@ -207,7 +216,7 @@ class App < Sinatra::Base
 
   end
 
-  post '/suscribe' do
+  post '/subscribe' do
     user = User.first(id: session[:user_id])
     category = Category.first(name: params["categories"])
     if user && category 

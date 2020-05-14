@@ -2,7 +2,7 @@ class Document < Sequel::Model
 	plugin :validation_helpers
     def validate
     super
-        validates_presence [:date, :name, :userstaged, :categorytaged, :document]
+        validates_presence [:date, :name, :categorytaged, :document]
   	end
 	many_to_one  :categories
 	many_to_many  :users

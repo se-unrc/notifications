@@ -11,3 +11,8 @@ group :development do
   gem 'rerun'
 end
 
+group :test do
+  gem 'minitest'
+  gem 'rack-test'
+  gem 'sqlite3'
+end
