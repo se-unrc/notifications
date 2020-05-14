@@ -3,39 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>create document</title>
-    <link rel="stylesheet" type="text/css" href="document.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <table>
-      <td>
-        <form class="pdf" method="POST" action="/createdocument">
-        </form>
-      </td>
-      <td>
-        <form class="backgroundList" method="POST" action="/createdocument">
-            <% @userCreate.each do |element| %>
-            <input type="checkbox" name="tagged" name="1"> <%= element.name %>
-            <% end %>
-            <br>
-        </form>
-      </td>
-      <td>
-        <form class="backgroundList" method="POST" action="/createdocument">
-          <% @category.each do |element| %>
-            <input type="radio" name="category" name="1"> <%= element.name %>
-          <% end %>
-          <br>
-        </form>
-      </td>
-    </table>
-    <form method="POST" action="/createdocument">
-      <div style="text-align: right">
-        <button type="submit" name="Upload">Upload</button>
-      </div>
-    </form>
-    <p class="cuadrito">Date: <br><input type="text" name="date"></p>
-    <form action="index.html" method="post" enctype="multipart/form-data">
+    <form method="POST" action="create-doc" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Input your name">
+      <input type="text" name="description" placeholder="Input your description">
+      <input type="text" name="date" placeholder="Input your date">
       <input type="file" name="PDF" accept=".pdf">
+      <button type="submit">Subir</button>
     </form>
   </body>
 </html>

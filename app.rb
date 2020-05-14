@@ -7,6 +7,7 @@ class App < Sinatra::Base
   configure :development, :production do
     enable :logging
   end
+
   get "/" do # Shows how to access to settings configurations
     logger.info "params"
     logger.info params
@@ -18,21 +19,22 @@ class App < Sinatra::Base
   end
 
 
-
   get "/index" do
     erb:index
   end
-  post "/log in" do
+  post "/newLogin" do
     redirect "/login"
   end
-  post "/create user" do
+  post "/newUser" do
     redirect "/create_user"
   end
+
+
+
   get "/login" do
     erb :login
   end
-
-  post "/login" do
+  post "/userLogin" do
     @usuario = User.find(userName: params["userName"])
     if @usuario.password == params["password"]
       if @usuario.admin == 0
@@ -46,56 +48,66 @@ class App < Sinatra::Base
     end
   end
 
+
+
   get "/create_user" do
     erb:create_user
   end
-  post "/create_user" do
-    if user2 = User.find(userName: params["userName"])
+  post "/newCreateUser" do
+    if user1 = User.find(userName: params["userName"])
       [500, {}, "ya existe el usuario"]
     else
-      user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'])
-      if user.save
-           redirect "/profile"
-       else
-           [500, {}, "Internal Server Error"]
-           redirect "/create_user"
-      end
-    end
-  end
-  get "/create_users" do
-    erb:create_users
-  end
-  post "/create_users" do
-    if user2 = User.find(userName: params["userName"])
-      [500, {}, "ya existe el usuario"]
-    else
-      @user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'], admin: [admin])
+      @user = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'])
+      @user.admin=5
       if @user.save
-          redirect "/profile"
-       else
-           [500, {}, "Internal Server Error"]
-           redirect "/create_user"
+        redirect "/profile"
+      else
+        [500, {}, "Internal Server Error"]
+        redirect "/create_user"
       end
     end
   end
+
+
+
+  get "/create__users" do
+    erb:create__users
+  end
+  post "/newCreatesUsers" do
+    if user2 = User.find(userName: params["userName"])
+      [500, {}, "ya existe el usuario"]
+    else
+      @users = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'], admin: params['admin'])
+      if @users.save
+        redirect "/profile"
+      else
+        @error ="Ydsgfdsghgf"
+        redirect "/create__users"
+      end
+    end
+  end
+
+
 
   get "/profile" do
     erb:profile
   end
-  #post....
+
+
 
   get "/profileAdmin" do
     erb:profileAdmin
   end
-  post "/create users"do
-    redirect "/create_users"
-  end
-  post "/create category" do
-    redirect "/category"
+  post "/create users" do
+    redirect "/create__users"
   end
   post "/create document" do
-   redirect "/create_document"
- end
+    redirect "/create_document"
+  end
+  post "/create category" do
+    redirect "/create_category"
+  end
+
 
 
   get "/create_document" do
@@ -103,27 +115,24 @@ class App < Sinatra::Base
     @categories = Category.all
     erb:create_document
   end
-  post "createdocument" do
+  post "create-doc" do
     @filename = params[:PDF][:filename]
     file = params[:PDF][:tempfile]
-    File.open("./PDF/#{@filename}", 'wb') do |f|
-      f.write(file.read)
+    cp(file.path, "PDF/#{@filename}")
+    chosenCategory = Category.find(id: 2)
+    document = Document.new(name: params[:name], description: params[:description], date: params[:date], category_id: chosenCategory.id, fileDocument: params[":/PDF/#{@filename}"])
+    if document.save
+      redirect "/category"
+    else
+      [500, {}, "Internal Server Error"]
+      redirect "/category"
     end
-    @filename
-      #chosenTagged = params[:tagged]
-      #chosenCategory = Category.find(name: params[:category])
-      #document = Document.new(name: params[name], file: params[file], description: params[description], category_id: chosenCategory.id)
-      #document.save
-      #chosenTagged.each do |element|
-      #  doc_us = Document_user.new(document_id: document.id, user_id: element.id)
-      #  doc_us.save
-      #end
-      redirect "/create_document"
   end
 
 
-  get "/category" do
-    erb:category
+
+  get "/create_category" do
+    erb:create_category
   end
   post "/category" do
     if cat = Category.find(name: params["name"])
@@ -132,17 +141,17 @@ class App < Sinatra::Base
     else
       cat = Category.new(name: params['name'],description: params['description'] )
       if cat.save
-           redirect "/category"
-       else
-           [500, {}, "Internal Server Error"]
-           redirect "/category"
+        redirect "/category"
+      else
+        [500, {}, "Internal Server Error"]
+        redirect "/category"
       end
     end
   end
   post "/delete_category" do
     if cat = Category.find(name:params["name"])
-       cat.delete
-       redirect "/category"
+      cat.delete
+      redirect "/category"
     else
       @error ="No existe la Categoria"
       [500, {}, "No existe la Categoria"]
@@ -157,18 +166,18 @@ class App < Sinatra::Base
     end
   end
   get "/modify_category" do
-      erb:modify_category
+    erb:modify_category
   end
   post "/modify_category" do
-      cat = Category.find(name:params["oldName"])
-      cat.update(name: params["name"],description: params["description"])
-      if cat.save
-        redirect "/category"
-      else
-        @error ="No existe la Categoria"
-        [500, {}, "Internal Server Error"]
-        redirect "/profile"
-      end
+    @cat = Category.find(name:params["oldName"])
+    @cat.update(name: params["name"],description: params["description"])
+    if @cat.save
+      redirect "/category"
+    else
+      @error ="No existe la Categoria"
+      [500, {}, "Internal Server Error"]
+      redirect "/profile"
     end
+  end
 
 end
