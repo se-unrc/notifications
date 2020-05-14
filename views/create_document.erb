@@ -20,7 +20,7 @@
       </td>
       <td>
         <form class="backgroundList" method="POST" action="/createdocument">
-          <% category.each do |element| %>
+          <% @category.each do |element| %>
             <input type="radio" name="category" name="1"> <%= element.name %>
           <% end %>
           <br>
