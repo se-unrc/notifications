@@ -4,33 +4,33 @@
 		<div class="centrarTodo">
 		<div class="centraTabla">
 			<table ><tr>
-				<td class="columna"><form action="/suscribe" method="get">
-					<input class="button" type="submit" value="Suscribe to new categories">
-				</form></td>
-				<td class="columna"><form action="/categories" method="get" >
-					<input class="button" type="submit" value="View your categories">
-				</form></td>
+				<td class="columna">
+					<a href="/suscribe" class="button"> Suscribe to new categories</a>
+				</td>
+				<td class="columna">
+					<a href="/mycategories" class="button"> View your categories</a>
+				</td>
 			</tr></table>
 		</div>
 		<div class="centraTabla">
 			<table ><tr>
-				<td class="columna"><form action="/deletecat" method="get">
-					<input class="button" type="submit" value="Delete a categorie suscription">
-				</form></td>
-				<td class="columna"><form action="/editprofile" method="get">
-					<input class="button" type="submit" value="Edit your profile">
-				</form></td>
+				<td class="columna">
+					<a href="/deletecat" class="button"> Delete a category suscription</a>
+				</td>
+				<td class="columna">
+					<a href="/editprofile" class="button"> Edit your profile</a>
+				</td>
 			</tr></table>
 		</div>
 		<div class="centraTabla">
 			<div style="display:<%= @visibility %>;">
 			<table><tr>
-				<td class="columna"><form action="/upload" method="get">
-					<input class="button" type="submit" value="Upload new documents">
-				</form></td>
-				<td class="columna"><form action="/newadmin" method="get">
-					<input class="button" type="submit" value="Invite user to admin">
-				</form></td>
+				<td class="columna">
+					<a href="/upload" class="button"> Upload new documents</a>
+				</td>
+				<td class="columna">
+					<a href="/newadmin" class="button"> Create a new admin</a>
+				</td>
 			</tr></table>
 		</div>
 		</div>

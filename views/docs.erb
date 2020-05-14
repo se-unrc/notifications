@@ -29,10 +29,7 @@
  		<td><%= doc.userstaged %></td>
  		<td><%= doc.categorytaged %></td>
  		<td>
- 			<form action="/preview" method="post" target="_blank">
- 				<input type="hidden" value="<%= doc.document %>" name="route">
-				<input  type="submit" value="View">
-			</form>		
+			<a href="/preview/<%= doc.id %>" target="_blank"> VIEW</a>	
  		</td>		
 		<% end %>
 		</tr>

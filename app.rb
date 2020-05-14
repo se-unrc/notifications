@@ -15,20 +15,38 @@ class App < Sinatra::Base
     request.path_info
     @logged2 = session[:user_id] ? "none" : "inline-block"
     @logged = session[:user_id] ? "inline-block" : "none"
-    if !session[:user_id] && request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus' &&  request.path_info != '/preview'
+    if user_not_logger_in? && restricted_path? 
       redirect 'login'
     elsif session[:user_id] 
-      user = User.find(id: session[:user_id])
-      @visibility = user.type == "user" ? "none" : "inline"
-      if request.path_info == '/login' || request.path_info == '/signup'
-        session.clear
-        redirect request.path_info
-      elsif user.type == "user" && (request.path_info == '/newadmin' || request.path_info == '/upload')
-        user = User.find(id: session[:user_id])
+      @current_user = User.find(id: session[:user_id])
+      @visibility = @current_user.role == "user" ? "none" : "inline"
+      if session_path?
+        redirect '/'
+      elsif not_authorized_user? && admin_path?
         redirect '/'     
       end
     end
   end
+
+  def user_not_logger_in?
+    !session[:user_id]
+  end
+
+  def restricted_path?
+    request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus' &&  request.path_info != '/preview'
+  end
+
+  def session_path?
+    request.path_info == '/login' || request.path_info == '/signup'
+  end
+
+  def admin_path?
+    request.path_info == '/newadmin' || request.path_info == '/upload'
+  end
+
+  def not_authorized_user?
+    @current_user.role == "user"
+  end 
 
   get "/" do 
     logger.info ""
@@ -38,7 +56,7 @@ class App < Sinatra::Base
     logger.info ""
   	
     @categories = Category.all
-    @documents = Document.all
+    @documents = Document.order(:date).reverse.all
     erb :docs, :layout => :layout
   end
 
@@ -59,8 +77,8 @@ class App < Sinatra::Base
   end
 
   get "/suscribe" do
-      @categories = Category.all
-      erb :suscat, :layout => :layout
+    @categories = Category.all
+    erb :suscat, :layout => :layout
   end
 
   get "/upload" do
@@ -72,13 +90,13 @@ class App < Sinatra::Base
     erb :newadmin, :layout=> :layout
   end
 
-  get "/categories" do
+  get "/mycategories" do
     user = User.find(id: session[:user_id])
     @categories =  user.categories_dataset
     erb :yourcats, :layout=> :layout
   end
 
-  get '/documents' do
+  get '/mydocuments' do
     user = User.find(id: session[:user_id])
     @documents = user.documents_dataset
     erb :yourdocs, :layout=> :layout
@@ -90,9 +108,6 @@ class App < Sinatra::Base
     erb :deletecats, :layout=> :layout
   end
 
-  get '/preview' do
-
-  end
 
   get '/logout' do 
     session.clear
@@ -156,16 +171,17 @@ class App < Sinatra::Base
     
     if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
      
-      @filename = params[:document][:filename]
       file = params[:document][:tempfile]
-      cp(file.path, "public/file/#{@filename}")
+      @filename = params[:document][:filename]
+   
       @src =  "/file/#{@filename}"
       
       category = Category.first(name: params["categories"])
       doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: @src,category_id: category.id)
       if doc.save
         doc = Document.first(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: @src)
-        
+        doc.update(document: doc.id)
+        cp(file.path, "public/file/#{doc.id}.pdf")
         usuario = params["users"].split(',')
         usuario.each do |userr|
         user = User.first(username: userr)
@@ -210,7 +226,7 @@ class App < Sinatra::Base
 
   post '/newadmin' do
     if User.find(username: params[:username]) 
-      User.where(username: params[:username]).update(type: 'admin')
+      User.where(username: params[:username]).update(role: 'admin')
        @success = "The user has been promoted to admin"
        erb  :newadmin, :layout => :layout
     else 
@@ -247,9 +263,9 @@ class App < Sinatra::Base
 
   end
 
-  post '/preview' do
-    @src = params["route"]
-    erb :preview, :layout=> false
+  get '/preview/:doc_id' do
+    @src = "/file/" + params[:doc_id] + ".pdf"
+    erb :preview, :layout=> :doclayout
   end
 
 end 
