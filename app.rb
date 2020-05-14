@@ -74,7 +74,57 @@ class App < Sinatra::Base
       redirect "/create_document"
   end
 
-  get "/create_category" do
-    erb:create_category
+  get "/category" do
+    erb:category
   end
+
+  post "/category" do
+    if cat = Category.find(name: params["name"])
+      [500, {}, "ya existe la categoria"]
+      redirect "/profile"
+    else
+      cat = Category.new(name: params['name'],description: params['description'] )
+      if cat.save
+           redirect "/category"
+       else
+           [500, {}, "Internal Server Error"]
+           redirect "/profile"
+      end
+    end
+  end
+
+  post "/delete_category" do
+    if cat = Category.find(name:params["name"])
+       cat.delete
+       redirect "/category"
+    else
+      [500, {}, "No existe la Categoria"]
+      redirect "/profile"
+    end
+  end
+
+  post "/search_category" do
+    if cat = Category.find(name:params["name"])
+      redirect "/modify_category"
+    else
+      [500, {}, "No existe la Categoria"]
+      redirect "/category"
+    end
+  end
+
+  get "/modify_category" do
+      erb:modify_category
+  end
+
+  post "/modify_category" do
+      cat = Category.find(name:params["oldName"])
+      cat.update(name: params["name"],description: params["description"])
+      if cat.save
+        redirect "/category"
+      else
+        [500, {}, "Internal Server Error"]
+        redirect "/profile"
+      end
+    end
+
 end
