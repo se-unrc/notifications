@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>create document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <form method="POST" action="newDocument" enctype="multipart/form-data">
-      <input type="text" name="name" placeholder="Input your name">
-      <input type="text" name="description" placeholder="Input your description">
-      <input type="text" name="date" placeholder="Input your date">
+    <form method="post" action="create_document" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Input the name">
+      <input type="text" name="description" placeholder="Input the description">
+      <input type="text" name="date" placeholder="Input the date">
       <input type="file" name="PDF" accept=".pdf">
+      <!-- <button type="button" onclick="document.getElementById('fileInput').click();">Examinar...</button> -->
       <button type="submit">Subir</button>
     </form>
   </body>

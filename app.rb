@@ -115,21 +115,20 @@ class App < Sinatra::Base
     @categories = Category.all
     erb:create_document
   end
-  post "newDocument" do
+  
+  post '/create_document' do
     @filename = params[:PDF][:filename]
+    @src =  "/PDF/#{@filename}"
     file = params[:PDF][:tempfile]
-    cp(file.path, "PDF/#{@filename}")
-    chosenCategory = Category.find(id: 2)
-    document = Document.new(name: params[:name], description: params[:description], date: params[:date], category_id: chosenCategory.id, fileDocument: params[":/PDF/#{@filename}"])
-    if document.save
-      redirect "/create_document"
-    else
-      [500, {}, "Internal Server Error"]
-      redirect "/create_document"
+    prob = "PDF/#{@filename}"
+    File.open("./PDF/#{@filename}", 'wb') do |f|
+      f.write(file.read)
     end
+    chosenCategory = Category.find(id: 1)
+    document = Document.new(name: params['name'], description: params['description'], date: params['date'], category_id: chosenCategory.id, fileDocument:  prob)
+    document.save
+    redirect "/category"
   end
-
-
 
   get "/create_category" do
     erb:create_category
