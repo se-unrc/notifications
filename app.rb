@@ -79,7 +79,7 @@ class App < Sinatra::Base
     else
       @users = User.new(name: params['name'],surnames: params['surnames'],dni: params['dni'],userName: params['userName'],password: params['password'],rol: params['rol'], admin: params['admin'])
       if @users.save
-        redirect "/profile"
+        redirect "/profileAdmin"
       else
         @error ="Ydsgfdsghgf"
         redirect "/create__users"
@@ -115,17 +115,17 @@ class App < Sinatra::Base
     @categories = Category.all
     erb:create_document
   end
-  post "create-doc" do
+  post "newDocument" do
     @filename = params[:PDF][:filename]
     file = params[:PDF][:tempfile]
     cp(file.path, "PDF/#{@filename}")
     chosenCategory = Category.find(id: 2)
     document = Document.new(name: params[:name], description: params[:description], date: params[:date], category_id: chosenCategory.id, fileDocument: params[":/PDF/#{@filename}"])
     if document.save
-      redirect "/category"
+      redirect "/create_document"
     else
       [500, {}, "Internal Server Error"]
-      redirect "/category"
+      redirect "/create_document"
     end
   end
 
@@ -134,24 +134,24 @@ class App < Sinatra::Base
   get "/create_category" do
     erb:create_category
   end
-  post "/category" do
+  post "/newCategory" do
     if cat = Category.find(name: params["name"])
       [500, {}, "ya existe la categoria"]
-      redirect "/category"
+      redirect "/create_category"
     else
       cat = Category.new(name: params['name'],description: params['description'] )
       if cat.save
-        redirect "/category"
+        redirect "/create_category"
       else
         [500, {}, "Internal Server Error"]
-        redirect "/category"
+        redirect "/create_category"
       end
     end
   end
   post "/delete_category" do
     if cat = Category.find(name:params["name"])
       cat.delete
-      redirect "/category"
+      redirect "/create_category"
     else
       @error ="No existe la Categoria"
       [500, {}, "No existe la Categoria"]
@@ -172,7 +172,7 @@ class App < Sinatra::Base
     @cat = Category.find(name:params["oldName"])
     @cat.update(name: params["name"],description: params["description"])
     if @cat.save
-      redirect "/category"
+      redirect "/create_category"
     else
       @error ="No existe la Categoria"
       [500, {}, "Internal Server Error"]
