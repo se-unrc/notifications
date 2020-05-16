@@ -5,4 +5,7 @@ class User < Sequel::Model
     validates_presence [:name, :email, :username, :password]
     validates_unique [:username]
   end
+  many_to_many :document
+  many_to_many :init
+  set_primary_key :id
 end

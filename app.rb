@@ -74,6 +74,7 @@ class App < Sinatra::Base
 
   # Endpoints for handles profile
   get "/profile" do
+    users = User.find(username: params[:username])
     erb :perfil , :layout => :layoutlogin
   end
 
@@ -90,12 +91,14 @@ class App < Sinatra::Base
   end
 
   post '/save_documents' do
-    @filename = params[:file][:filename]
-    file = params[:file][:tempfile]
-    File.open("./public/#{@filename}", 'wb') do |f|
-      f.write(file.read)
+    if session[:user_id]
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+      File.open("./public/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+      erb :tag
     end
-    erb :tag
   end
 
   ###
