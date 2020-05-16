@@ -115,8 +115,11 @@ class App < Sinatra::Base
     @categories = Category.all
     erb:create_document
   end
-  
+
   post '/create_document' do
+    logger.info "params"
+    logger.info params
+    logger.info "--------------"
     @filename = params[:PDF][:filename]
     @src =  "/PDF/#{@filename}"
     file = params[:PDF][:tempfile]
@@ -124,7 +127,7 @@ class App < Sinatra::Base
     File.open("./PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
-    chosenCategory = Category.find(id: 1)
+    chosenCategory = Category.find(id: params[:cat])
     document = Document.new(name: params['name'], description: params['description'], date: params['date'], category_id: chosenCategory.id, fileDocument:  prob)
     document.save
     redirect "/category"
