@@ -33,7 +33,7 @@ class App < Sinatra::Base
   end
 
   def restricted_path?
-    request.path_info != '/login' && request.path_info != '/' && request.path_info != '/signup' && request.path_info != '/aboutus' &&  request.path_info != '/preview'
+    request.path_info == '/suscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/deletecat'
   end
 
   def session_path?
@@ -76,7 +76,7 @@ class App < Sinatra::Base
     erb :forgotpass, :layout => :layout
   end
 
-  get "/suscribe" do
+  get "/subscribe" do
     @categories = Category.all
     erb :suscat, :layout => :layout
   end
@@ -114,10 +114,6 @@ class App < Sinatra::Base
     redirect '/login'
   end
 
-  get "/profile" do
-    @categories = Category.all
-    erb :profile, :layout => :layout
-  end
 
   post '/login' do
     if params["password"] != "" && params["username"] != ""
@@ -138,7 +134,7 @@ class App < Sinatra::Base
 
   post '/signup' do
     if params["fullname"] != "" && params["username"] != "" &&  params["password"] != "" && params["confPassword"] != "" &&  params["email"] != ""    
-      if User.find(username: params[:username]) || /\A\w{3,15}\z/ =~ params[:username]
+      if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
         @error = "The username is already in use or its invalid"
         erb :signup, :layout => :layout
       elsif   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
@@ -207,7 +203,7 @@ class App < Sinatra::Base
 
   end
 
-  post '/suscribe' do
+  post '/subscribe' do
     user = User.first(id: session[:user_id])
     category = Category.first(name: params["categories"])
     if user && category 
@@ -263,7 +259,7 @@ class App < Sinatra::Base
 
   end
 
-  get '/preview/:doc_id' do
+  get '/view/:doc_id' do
     @src = "/file/" + params[:doc_id] + ".pdf"
     erb :preview, :layout=> :doclayout
   end

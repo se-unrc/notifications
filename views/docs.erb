@@ -2,39 +2,50 @@
 <html>
 
 	<body>
-		<div class="centraTabla">
-		<table><tr>
+		<div style="float: left; margin:auto;" >
 			<form action="/" method="POST">
-					<td><p>Filter by: </p></td>
-					<td><p>Date: <br><input type="date" name="date"></p></td>
-					<td><p>Users involved: <br><input type="" name="users"></p></td>
-					<td><p>Categories: <select id="category" name="category">
-                        <option value=""> None </option>
-                       	<% @categories.each do |category| %>
-            			<option value= <%= category.name %> > <%= category.name %> </option>
-            			<% end %>
-            			</select></p></td>
-					<td><input type="submit" value="FILTER"></td>
-				</p>
-			</form>
-		</tr></table>
+					<div class="form-group">
+  					<div class="form-group">
+     					 <label style="display: inline-block;">Date</label>
+     					 <input type="date" class="form-control" name="date">
+   					</div>
+  					<label for="exampleInputEmail1">Filter by: </label>
+  					<label for="exampleInputEmail1">Date</label>
+  					<input type="date" name="date">
+  					<label for="exampleInputEmail1">Users involved</label>
+  					<input type="" name="users">
+  					<label for="exampleInputEmail1">Category</label>
+  					<select id="category" name="category" class="custom-select">
+                    	<option value=""> None </option>
+                   		<% @categories.each do |category| %>
+        				<option value= <%= category.name %> > <%= category.name %> </option>
+        				<% end %>	
+        			</select>
+        			<input class="btn btn-outline-primary btn-sm" type="submit" value="FILTER">
+    			</div>
+		    </form>
 		</div>
-
 		<div class="centraTabla">
-		<table class="tabladocs"> 
+		<table class="table table-stripped table-hover"> 
+		<thead class="bg-dark text-light">
+		    <tr>
+		        <th scope="col">Title</th>
+		    	<th scope="col">Date</th>
+		        <th scope="col">Users</th>
+		        <th scope="col">Category</th>
+		    </tr>
+		</thead>
 		<% @documents.each do |doc| %>
-		<tr>
- 		<td><%= doc.date %></td>
- 		<td><%= doc.name %></td>
- 		<td><%= doc.userstaged %></td>
- 		<td><%= doc.categorytaged %></td>
- 		<td>
-			<a href="/preview/<%= doc.id %>" target="_blank"> VIEW</a>	
- 		</td>		
-		<% end %>
-		</tr>
+		<tbody>
+		<tr style="transform: rotate(0);">
+    		<th><a  href="/view/<%= doc.id %>" target="blank" class="stretched-link text-muted" ><%= doc.name %></a></th>
+ 			<td><%= doc.date %></td>
+ 			<td><%= doc.userstaged %></td>
+ 			<td><%= doc.categorytaged %></td>	
+			<% end %>
+		</a></tr>
+		</tbody>
 		</table>
 		</div>
-	
 	</body>
 </html>
