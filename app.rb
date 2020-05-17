@@ -13,15 +13,13 @@ class App < Sinatra::Base
     set :session_secret, "So0perSeKr3t!"
     set :sessions, true
   end
+
  before do 
     @path = request.path_info
-    #logger.info(session[:user_id])
-    #logger.info(session[:user_name])
     if !session[:user_id] && @path != '/login' && @path != '/register'
       redirect '/login'
     elsif session[:user_id]
       @user = User.find(id: session[:user_id])
-      #logger.info(@user.name);
     end
   end
 
