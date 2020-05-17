@@ -76,8 +76,6 @@ class App < Sinatra::Base
 
   # Endpoints for handles profile
   get "/profile" do
-    @user = User.find(id: session[:user_id])
-    @nombre = @user.name
     erb :perfil , :layout => :layoutlogin
   end
 
@@ -87,7 +85,7 @@ class App < Sinatra::Base
   end
 
   get '/showdocument' do
-    erb :show_file
+    erb :show_file, :layout => :layoutlogin
   end
 
   post '/save_documents' do
@@ -101,23 +99,23 @@ class App < Sinatra::Base
 
   ###
   get "/tos" do
-  	erb :ToS
+  	erb :ToS, :layout => :layoutlogin
   end
 
   get "/aboutus" do
-    erb :aboutus
+    erb :aboutus, :layout => :layoutlogin
   end
 
   get "/contactus" do
-    erb :contactus
+    erb :contactus, :layout => :layoutlogin
   end
 
   post '/tag' do
-    erb :tag
+    erb :tag, :layout => :layoutlogin
   end
 
   get "/document_upload" do
-    erb :document_upload
+    erb :document_upload, :layout => :layoutlogin
   end
 
 end
