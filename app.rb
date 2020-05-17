@@ -13,6 +13,17 @@ class App < Sinatra::Base
     set :session_secret, "So0perSeKr3t!"
     set :sessions, true
   end
+ before do 
+    @path = request.path_info
+    #logger.info(session[:user_id])
+    #logger.info(session[:user_name])
+    if !session[:user_id] && @path != '/login' && @path != '/register'
+      redirect '/login'
+    elsif session[:user_id]
+      @user = User.find(id: session[:user_id])
+      #logger.info(@user.name);
+    end
+  end
 
   use Rack::Session::Pool, :expire_after => 2592000
 
@@ -23,16 +34,12 @@ class App < Sinatra::Base
     logger.info session[:user_id]
     logger.info "--------------"
     logger.info ""
-  	erb :index, :layout => :layout
+  	erb :index, :layout => :layoutlogin
   end
 
   # Add new user
   get "/register" do
-    if !session[:user_id]
-      erb :register
-    else
-      redirect "/profile"
-    end
+    erb :register
   end
 
   post '/register' do
@@ -49,19 +56,16 @@ class App < Sinatra::Base
 
   # Login Endpoints
   get "/login" do
-    if !session[:user_id]
-      erb :login
-    else
-      redirect "/profile"
-    end
+    erb :login
   end
 
   post '/login' do
     users = User.find(username: params[:username])
     if users && users.password == params[:password]
       session[:user_id] = users.id
-      redirect "/profile"
+      redirect "/"
     else
+      @error = "Usuario o contraseña incorrecta"
       erb :login
     end
   end
@@ -74,31 +78,27 @@ class App < Sinatra::Base
 
   # Endpoints for handles profile
   get "/profile" do
-    users = User.find(username: params[:username])
+    @user = User.find(id: session[:user_id])
+    @nombre = @user.name
     erb :perfil , :layout => :layoutlogin
   end
 
   # Endpoints for upload a document
   get '/documents' do
-    if !session[:user_id]
-      erb :login
-    else
-      erb :upload, :layout => :layoutlogin
-    end
+    erb :upload, :layout => :layoutlogin
   end
+
   get '/showdocument' do
     erb :show_file
   end
 
   post '/save_documents' do
-    if session[:user_id]
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
       erb :tag
-    end
   end
 
   ###
@@ -115,7 +115,11 @@ class App < Sinatra::Base
   end
 
   post '/tag' do
-      erb :tag
+    erb :tag
+  end
+
+  get "/document_upload" do
+    erb :document_upload
   end
 
 end

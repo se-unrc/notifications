@@ -148,6 +148,18 @@ span.psw {
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
       <span class="psw">Olvide mi <a href="#/recoverpw">contraseña</a></span>
     </div>
+    
+    <% if @error %>
+    <p class="error"><%= @error %> </p>
+    <% end %>
+     
   </form>
 </body>
 </html>
+
+
+
+
+
+
+
