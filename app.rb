@@ -122,12 +122,10 @@ class App < Sinatra::Base
         session[:user_id] = usuario.id
         redirect "/"
       else
-        @error ="Your username or password is incorrect"
+        @error ="Wrong username or password"
         erb :login, :layout => :layout
       end
-    else 
-        @error ="All fields are necessary"
-        erb :login, :layout => :layout
+      
     end
   end
 
@@ -193,14 +191,8 @@ class App < Sinatra::Base
         @error = "An error has ocurred when trying to upload the document"
         @categories = Category.all
         erb :upload, :layout => :layout
-      end 
-    else
-        @error = "All fields are necessary"
-        @categories = Category.all
-        erb :upload, :layout => :layout
-    end 
-
-
+      end
+    end
   end
 
   post '/subscribe' do
@@ -209,7 +201,7 @@ class App < Sinatra::Base
     if user && category 
           category.add_user(user)
           if category.save
-            @success ="Now you are subscribed to #{params[:categories]}!"
+            @success ="You are now subscribed to #{params[:categories]}!"
             @categories = Category.all
             erb :suscat, :layout => :layout
           else
@@ -223,15 +215,15 @@ class App < Sinatra::Base
   post '/newadmin' do
     if User.find(username: params[:username]) 
       if User.find(username: params[:username]).role == "admin"
-        @error = "The user is already an admin"
+        @error = "#{params[:username]} is already an admin"
         erb  :newadmin, :layout => :layout
       else
         User.where(username: params[:username]).update(role: 'admin')
-        @success = "The user has been promoted to admin"
+        @success = "#{params[:username]} has been promoted to admin"
         erb  :newadmin, :layout => :layout
       end
     else 
-      @error = "An error has ocurred when trying to promote the user to admin"
+      @error = "An error has ocurred when trying to promote #{params[:username]} to admin"
       erb  :newadmin, :layout => :layout
     end
   end
@@ -240,12 +232,12 @@ class App < Sinatra::Base
     user = User.first(id: session[:user_id])
     category = Category.first(name: params["category"])
     if user && category && user.remove_category(category)
-      @success = "The category has been removed"
+      @success = "You have been unsubscribed from #{params[:category]}"
       user = User.find(id: session[:user_id])
       @categories =  user.categories_dataset
       erb  :deletecats, :layout => :layout
     else
-      @success = "An error has ocurred when trying remove the category"
+      @success = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
       user = User.find(id: session[:user_id])
       @categories =  user.categories_dataset
       erb  :deletecats, :layout => :layout

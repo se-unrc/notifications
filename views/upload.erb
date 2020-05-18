@@ -12,10 +12,16 @@
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <h2 class="text-center">UPLOAD A NEW DOCUMENT</h2>       
                 <% if @error %>
-                <p class="error text-danger"><%= @error %></p>
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Oh snap! </strong><%= @error %>
+                    </div>
                 <% end %>
                 <% if @success %>
-                 <p class="error text-success"><%= @success %></p>
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Congrats! </strong><%= @success %>
+                    </div>
                 <% end %>
                 <div class="form-group">
                     <input type="date" name="date" class="form-control" placeholder="Date" required="required">
