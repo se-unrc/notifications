@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html>
-
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
 	<body>
-	<div class="centraTabla">
-       <table class="tabla">     
-            <tr class="fila">
-                    <th><h3> GRANT A NEW ADMIN PERMISSION </h3></th>
-            </tr>
-			<tr>
-				<td><form action="/newadmin" method="POST">
-					<% if @error %>
-		            <p class="error"><%= @error %></p>
-		            <% end %>
-		            <% if @success %>
-		            <p class="success"><%= @success %></p>
-		            <% end %>
-			 		<p>Select user to upgrade to admin: <br> <input type="" name="username"></p>
-			 		<input class="button2" type="submit" value="SEND" />
-				</form></td>
+		<br>
+		<div class="row justify-content-center align-items-center h-100">
+		  	<div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+		    <form action="/newadmin" method="post">
+		        <h2 class="text-center">GRANT A NEW ADMIN PERMISSION</h2> 
+		        <% if @error %>
+		            <p class="error text-danger"><%= @error %></p>
+		        <% end %>
+		        <% if @success %>
+		            <p class="success text-success"><%= @success %></p>
+		        <% end %>     
+		        <div class="form-group">
+		            <input type="text" name="username" class="form-control" placeholder="Username" required="required">
+		        </div>
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-primary btn-block">SEND</button>
+		        </div>    
+		    </form> 
+			</div>
+		</div>
 	</body>
 </html>

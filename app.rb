@@ -33,7 +33,7 @@ class App < Sinatra::Base
   end
 
   def restricted_path?
-    request.path_info == '/suscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/deletecat'
+    request.path_info == '/suscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe'
   end
 
   def session_path?
@@ -102,7 +102,7 @@ class App < Sinatra::Base
     erb :yourdocs, :layout=> :layout
   end
 
-  get "/deletecat" do
+  get "/unsubscribe" do
     user = User.find(id: session[:user_id])
     @categories =  user.categories_dataset
     erb :deletecats, :layout=> :layout
@@ -122,7 +122,7 @@ class App < Sinatra::Base
         session[:user_id] = usuario.id
         redirect "/"
       else
-        @error ="Your username o password is incorrect"
+        @error ="Your username or password is incorrect"
         erb :login, :layout => :layout
       end
     else 
@@ -133,31 +133,31 @@ class App < Sinatra::Base
 
 
   post '/signup' do
-    if params["fullname"] != "" && params["username"] != "" &&  params["password"] != "" && params["confPassword"] != "" &&  params["email"] != ""    
-      if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
-        @error = "The username is already in use or its invalid"
-        erb :signup, :layout => :layout
-      elsif   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
-        @error = "The email is invalid"
-        erb :signup, :layout => :layout
-      elsif params[:password] != params[:confPassword]
-        @error = "Passwords are not equal"
-        erb :signup, :layout => :layout
-      else
-        request.body.rewind
+    if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
+      @errorusername = "The username is already in use or its invalid"
+    end
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+      @erroremail = "The email is invalid"
+    end
+    if params[:password] != params[:confPassword] 
+      @errorpasswordconf = "Passwords are not equal"
+    end
+    if params[:password].length < 5 || params[:password] > 20 
+      @errorpasswordlength = "Password must be between 5 and 20 characters long"
+    end
+    if !@errorusername && !@erroremail && !@errorpasswordconf && !@errorpasswordlength
+      request.body.rewind
 
-        hash = Rack::Utils.parse_nested_query(request.body.read)
-        params = JSON.parse hash.to_json 
-        user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
-        if user.save
-            session[:user_id] = user.id
-            redirect "/"
-        else 
-          [500, {}, "Internal server Error"]
-        end 
-      end
-    else 
-      @error = "All fields are necessary"
+      hash = Rack::Utils.parse_nested_query(request.body.read)
+      params = JSON.parse hash.to_json 
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+      if user.save
+          session[:user_id] = user.id
+          redirect "/"
+      else 
+        [500, {}, "Internal server Error"]
+      end 
+    else
       erb :signup, :layout => :layout
     end
   end
@@ -190,7 +190,7 @@ class App < Sinatra::Base
         @categories = Category.all
         erb :upload, :layout => :layout
       else 
-        @error = "An error has ocurred when trying to uload the document"
+        @error = "An error has ocurred when trying to upload the document"
         @categories = Category.all
         erb :upload, :layout => :layout
       end 
@@ -222,16 +222,21 @@ class App < Sinatra::Base
 
   post '/newadmin' do
     if User.find(username: params[:username]) 
-      User.where(username: params[:username]).update(role: 'admin')
-       @success = "The user has been promoted to admin"
-       erb  :newadmin, :layout => :layout
+      if User.find(username: params[:username]).role == "admin"
+        @error = "The user is already an admin"
+        erb  :newadmin, :layout => :layout
+      else
+        User.where(username: params[:username]).update(role: 'admin')
+        @success = "The user has been promoted to admin"
+        erb  :newadmin, :layout => :layout
+      end
     else 
       @error = "An error has ocurred when trying to promote the user to admin"
       erb  :newadmin, :layout => :layout
     end
   end
 
-  post '/deletecat' do
+  post '/unsubscribe' do
     user = User.first(id: session[:user_id])
     category = Category.first(name: params["category"])
     if user && category && user.remove_category(category)

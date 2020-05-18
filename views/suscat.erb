@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html>
-	<body>
-        <div class="centraTabla">
-        <table class="tabla">     
-                <tr class="fila">
-                        <th><h3> SIGN UP TO DUNS</h3></th>
-                </tr>
-        <tr>
-		<td><form method="POST" action="/subscribe">
-                Categories: <select id="categories" name="categories">
-               					<% @categories.each do |category| %>
-								  <option value=<%= category.name %>> <%= category.name %> </option>
-								  <% end %>
-								</select></p>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <br>
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <form action="/subscribe" method="post">
+                <h2 class="text-center">SUBSCRIBE TO NEW CATEGORIES</h2>       
+                <div class="form-group">
+                    Select one: <select id="categories" name="categories" class="custom-select">
+                            <% @categories.each do |category| %>
+                            <option value=<%= category.name %>> <%= category.name %> </option>
+                            <% end %>
+                        </select></p>
                 <% if @error %>
-                <p class="error"><%= @error %></p>
+                <p class="error text-danger"><%= @error %></p>
                 <% end %>
                 <% if @success %>
-                <p class="success"><%= @success %></p>
+                <p class="error text-success"><%= @success %></p>
                 <% end %>
-                <input class="button2" type="submit" value="SUSCRIBE" />
-        </form></td>
-        </tr>
-        </table>
-        </div>
-	</body>
 
+        
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Subscribe</button>
+                </div>        
+            </form> <br><br><br>
+            </div>
+        </div>
+    </body>
 </html>
