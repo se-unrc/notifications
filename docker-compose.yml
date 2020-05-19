@@ -1,0 +1,28 @@
+version: "3"
+services:
+  web:
+    build: .
+    command: bash -c "bundle check || bundle install && bundle exec rerun --background 'rackup --host 0.0.0.0 -p 9292' 1>/dev/null"
+    ports:
+      - "9292:9292"
+    environment:
+      LANG: "C.UTF-8"
+      LC_ALL: "C.UTF-8"
+      TZ: "Europe/Madrid"
+    volumes:
+      - .:/usr/src/app
+      - ./.bundle:/usr/local/bundle
+  db:
+    # use latest official postgres version
+    image: postgres
+    # configure postgres
+    # environment:
+    #   POSTGRES_PASSWORD: docker
+    #   POSTGRES_USER: docker
+    env_file:
+      - config/database.env
+    # persist data even if container shuts down
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:
