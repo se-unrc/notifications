@@ -38,8 +38,9 @@
     <div class="row">
       <div class="container col-xl-6">
         <div class="backgroundform1 texte-center">
+          <h5 class="textABC"> ---  |  ---  Date  --- |  ---  Name  ---  |  ---  Description  ---  |  </h5>
           <% @document.each do |element| %>
-          <li class="backgroundImput textABC"> <%= element.name%> <%= element.description%> <%= element.date%> </li>
+          <li class="backgroundImput textABC"> |<%= element.date%> |   " <%= element.name%> "  | ---<%= element.description%>---  </li>
           <% end %>
         </div>
       </div>

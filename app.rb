@@ -240,13 +240,6 @@ class App < Sinatra::Base
     end
   end
 
-
-  get "/logout" do
-    session[:isLogin] = false
-    redirect "/"
-  end
-
-
   get "/home" do
     if session[:isLogin]
       if session[:int]==0
@@ -257,6 +250,10 @@ class App < Sinatra::Base
     else
       redirect "/"
     end
+  end
+  get "/logout" do
+    session[:isLogin] = false
+    redirect "/"
   end
 
 end
