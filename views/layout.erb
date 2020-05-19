@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
    		<ul class="navbar-nav mr-auto">
     		<li class="nav-item active">
-        		<a class="nav-link" href="/"> Docs <span class="sr-only">(current)</span></a>
+        		<a class="nav-link" href="/documents"> Docs <span class="sr-only">(current)</span></a>
       		</li>
       		<li class="nav-item" style="display:<%= @logged2 %>;">
         		<a class="nav-link" href="/signup">Sign up</a>
@@ -52,17 +52,21 @@
       		<li class="nav-item" style="display:<%= @logged %>;">
         		<a class="nav-link" href="/logout">Log out</a>
       		</li>
-          <% if request.path_info == '/'  %>
-            <form method="GET" action="/">
-              <% if @view == "table" %> 
-                <input value="grid" type="hidden" name="forma">
-              <% else %>
-                <input value="table" type="hidden" name="forma">
-              <% end %>
-                <input type="submit">
-            </form>
-          <% end %>
-
+          <div class="navbar-right">
+            <% if request.path_info == '/documents' && @view == "table" %>
+              <a href="/documents?forma=grid" class=""> 
+                <svg class="bi bi-grid-3x3-gap" width="3em" height="3em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"/>
+                </svg>
+              </a>
+            <% elsif request.path_info == '/documents'  %>
+              <a href="/documents?forma=table" class=""> 
+                <svg class="bi bi-list" width="3em" height="3em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+            <% end %>
+          </div>
 
     	</ul>
   	</div>

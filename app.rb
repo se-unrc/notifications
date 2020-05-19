@@ -21,9 +21,9 @@ class App < Sinatra::Base
       @current_user = User.find(id: session[:user_id])
       @visibility = @current_user.role == "user" ? "none" : "inline"
       if session_path?
-        redirect '/'
+        redirect '/documents'
       elsif not_authorized_user? && admin_path?
-        redirect '/'     
+        redirect '/documents'     
       end
     end
   end
@@ -48,19 +48,19 @@ class App < Sinatra::Base
     @current_user.role == "user"
   end 
 
-  get "/" do 
+  get '/' do
+    erb :index, :layout => :layoutIndex
+  end
+
+  get "/documents" do 
     logger.info ""
     logger.info session["session_id"]
     logger.info session.inspect
     logger.info "-------------"
     logger.info ""
-    if !params[:forma] && params[:forma] != "table"
-      @view = "grid"
-    else
-      @view = "table"
-    end
-    @categories = Category.all
+    @view = params[:forma]  
     @documents = Document.order(:date).reverse.all
+    @categories = Category.all
     erb :docs, :layout => :layout
   end
 
@@ -109,7 +109,7 @@ class App < Sinatra::Base
   get '/mydocuments' do
     user = User.find(id: session[:user_id])
     if user.documents_dataset.to_a.length > 0
-      @documents = user.documents_dataset
+      @documents = user.documents_dataset.order(:date).reverse
     end
     erb :yourdocs, :layout=> :layout
   end
@@ -134,7 +134,7 @@ class App < Sinatra::Base
       usuario = User.find(username: params[:username])
       if usuario && usuario.password == params[:password]
         session[:user_id] = usuario.id
-        redirect "/"
+        redirect "/documents"
       else
         @error ="Wrong username or password"
         erb :login, :layout => :layout
@@ -165,7 +165,7 @@ class App < Sinatra::Base
       user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
       if user.save
           session[:user_id] = user.id
-          redirect "/"
+          redirect "/documents"
       else 
         [500, {}, "Internal server Error"]
       end 
@@ -235,7 +235,7 @@ class App < Sinatra::Base
 
   post '/newadmin' do
     if User.find(username: params[:username]) 
-      if User.find(username: params[:username]).role == "admin"
+      if User.find(username: params[:username]).update(role: "admin")
         @error = "#{params[:username]} is already an admin"
         erb  :newadmin, :layout => :layout
       else
@@ -267,15 +267,19 @@ class App < Sinatra::Base
     end
   end
 
-  post '/' do
+  post '/documents' do
     user = User.first(username: params[:users])
     prueba = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
-    prueba = params[:date] == "" ? prueba : prueba.select {|d| d.date == params[:date] }
-    category = Category.first(name: params[:category])
-    prueba = params[:category] == "" ? prueba : prueba.select {|d| d.category_id == category.id }
-    @documents = prueba
-    @categories = Category.all
-    erb :docs, :layout => :layout
+    "#{prueba}"
+    #prueba = params[:date] == "" ? prueba : prueba.select {|d| d.date == params[:date] }
+
+    #category = Category.first(name: params[:category])
+    #prueba = params[:category] == "" ? prueba : prueba.select {|d| d.category_id == category.id }
+    #@documents = prueba
+    #@categories = Category.all
+    #@view = params[:forma]
+    #@filterby = [params[:users],params[:date],params[:category]]
+    #erb :docs, :layout => :layout
 
   end
 

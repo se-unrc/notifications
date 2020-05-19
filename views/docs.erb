@@ -3,7 +3,7 @@
 
 	<body>
 	<br>
-	<form action="/" method="POST">
+	<form action="/documents" method="POST">
 		<div class="row justify-content-center align-items-center h-100">
     		<div class="col-auto form-group">
 				<input type="date" class="form-control" name="date">
@@ -19,11 +19,15 @@
 					<% end %>	
 				</select>	
 			</div>
+			<% if @view && @view == "table" %>
+				<input type="hidden" name="forma" value="table">
+			<% end %>
 			<div class="col-auto form-group">	
 				<input class="btn btn-primary" type="submit" value="FILTER">	   
   			</div>
   		</div>
 	</form>
+
 	<% if @view == "table" %>
 		<table class="table table-stripped table-hover"> 
 		<thead class="bg-primary text-light">
