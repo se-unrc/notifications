@@ -69,7 +69,7 @@ Un user es aquel que sera  nombrado en un acta o documento y quien recibira la n
 ## 3. Requirements
 
 ### 3.2 Funcional
-![Diagrama](/Diagrama_clases.png)
+![Diagrama](/images/Diagrama_clases.png)
 
 ## 3.3 Quality of Service
 
