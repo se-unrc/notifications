@@ -24,7 +24,7 @@
   			</div>
   		</div>
 	</form>
-
+	<% if @view == "table" %>
 		<table class="table table-stripped table-hover"> 
 		<thead class="bg-primary text-light">
 		    <tr>
@@ -45,6 +45,28 @@
 		</a></tr>
 		</tbody>
 		</table>
-
+	<% else %>
+		<div class="container-fluid">
+			<div class="row">
+	    		<% @documents.each do |doc| %>
+					<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+	  					<div class="card h-100 bg-primary text-light">
+	    					<a href="/view/<%= doc.id %>" target="blank" class="stretched-link text-muted" ><embed class="card-img-top" src="/file/<%= doc.id %>.pdf" type="application/pdf"></>
+	    					<div class="card-body">
+	  							<h4 class="card-title">
+	    							<a href="#" class="text-light"><%= doc.name %></a>
+	  							</h4>
+	  							<h6 class="card-subtitle mb-2 text-muted"><%= doc.categorytaged %></h6>
+	  							<p class="card-text"><%= doc.userstaged%></p>
+							</div>
+							 <div class="card-footer text-muted">
+	    						<%= doc.date %>
+	  						</div>
+	  					</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
 	</body>
 </html>

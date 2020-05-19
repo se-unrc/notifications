@@ -33,7 +33,7 @@ class App < Sinatra::Base
   end
 
   def restricted_path?
-    request.path_info == '/suscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe'
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe'
   end
 
   def session_path?
@@ -54,7 +54,11 @@ class App < Sinatra::Base
     logger.info session.inspect
     logger.info "-------------"
     logger.info ""
-  	
+    if !params[:forma] && params[:forma] != "table"
+      @view = "grid"
+    else
+      @view = "table"
+    end
     @categories = Category.all
     @documents = Document.order(:date).reverse.all
     erb :docs, :layout => :layout
@@ -77,7 +81,11 @@ class App < Sinatra::Base
   end
 
   get "/subscribe" do
-    @categories = Category.all
+    user = User.find(id: session[:user_id])
+    if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
+      @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+      @categories = Category.where(id: @categories)
+    end
     erb :suscat, :layout => :layout
   end
 
@@ -92,19 +100,25 @@ class App < Sinatra::Base
 
   get "/mycategories" do
     user = User.find(id: session[:user_id])
-    @categories =  user.categories_dataset
+    if user.categories_dataset.to_a.length > 0
+      @categories =  user.categories_dataset
+    end
     erb :yourcats, :layout=> :layout
   end
 
   get '/mydocuments' do
     user = User.find(id: session[:user_id])
-    @documents = user.documents_dataset
+    if user.documents_dataset.to_a.length > 0
+      @documents = user.documents_dataset
+    end
     erb :yourdocs, :layout=> :layout
   end
 
   get "/unsubscribe" do
-    user = User.find(id: session[:user_id])
-    @categories =  user.categories_dataset
+      user = User.find(id: session[:user_id])
+    if user.categories_dataset.to_a.length > 0
+      @categories =  user.categories_dataset
+    end
     erb :deletecats, :layout=> :layout
   end
 
@@ -140,7 +154,7 @@ class App < Sinatra::Base
     if params[:password] != params[:confPassword] 
       @errorpasswordconf = "Passwords are not equal"
     end
-    if params[:password].length < 5 || params[:password] > 20 
+    if params[:password].length < 5 || params[:password].length > 20 
       @errorpasswordlength = "Password must be between 5 and 20 characters long"
     end
     if !@errorusername && !@erroremail && !@errorpasswordconf && !@errorpasswordlength
@@ -162,7 +176,6 @@ class App < Sinatra::Base
 
 # app.rb 
   post '/upload' do
-    
     if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
      
       file = params[:document][:tempfile]
@@ -202,11 +215,19 @@ class App < Sinatra::Base
           category.add_user(user)
           if category.save
             @success ="You are now subscribed to #{params[:categories]}!"
-            @categories = Category.all
+            user = User.find(id: session[:user_id])
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+              @categories = Category.where(id: @categories)
+            end
             erb :suscat, :layout => :layout
           else
             @error ="You are already subscribed to #{params[:categories]}!"
-            @categories = Category.all
+            user = User.find(id: session[:user_id])
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+              @categories = Category.where(id: @categories)
+            end
             erb :suscat, :layout => :layout
           end
     end      
@@ -234,10 +255,12 @@ class App < Sinatra::Base
     if user && category && user.remove_category(category)
       @success = "You have been unsubscribed from #{params[:category]}"
       user = User.find(id: session[:user_id])
-      @categories =  user.categories_dataset
+      if user.categories_dataset.to_a.length > 0
+        @categories =  user.categories_dataset
+      end
       erb  :deletecats, :layout => :layout
     else
-      @success = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
+      @error = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
       user = User.find(id: session[:user_id])
       @categories =  user.categories_dataset
       erb  :deletecats, :layout => :layout

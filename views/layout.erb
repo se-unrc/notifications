@@ -52,6 +52,18 @@
       		<li class="nav-item" style="display:<%= @logged %>;">
         		<a class="nav-link" href="/logout">Log out</a>
       		</li>
+          <% if request.path_info == '/'  %>
+            <form method="GET" action="/">
+              <% if @view == "table" %> 
+                <input value="grid" type="hidden" name="forma">
+              <% else %>
+                <input value="table" type="hidden" name="forma">
+              <% end %>
+                <input type="submit">
+            </form>
+          <% end %>
+
+
     	</ul>
   	</div>
 </nav>

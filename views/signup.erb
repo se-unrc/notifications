@@ -33,12 +33,12 @@
                 <% if @errorpasswordlength %>
                     <p class="error text-danger"><%= @errorpasswordlength %></p>
                 <% end %>
-                <% if @errorpasswordconf %>
-                    <p class="error text-danger"><%= @errorpasswordconf %></p>
-                <% end %>
                 <div class="form-group">
                     <input type="password" name="confPassword" class="form-control" placeholder="Confirm password" required="required">
                 </div>
+                <% if @errorpasswordconf %>
+                    <p class="error text-danger"><%= @errorpasswordconf %></p>
+                <% end %>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Sign up</button>
                 </div>       
