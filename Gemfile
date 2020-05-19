@@ -11,3 +11,4 @@ group :development do
   gem 'dotenv', '2.7.5'
   gem 'rerun'
 end
+

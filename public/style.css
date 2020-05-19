@@ -1,58 +1,72 @@
-*{ /*elimina los margenes*/
-  margin: 0px;
-  padding: 0px;
-}
-body {
+body{
+  font-family: 'Ubuntu Condensed', sans-serif;
   background-color: #0D0D0D;
 }
-.encabezado{
+.navcolor{
   background-color: #454545;
-  height: 65px;
 }
-.buttonLogin{
-  background-color:  #66C8C8;
-  width: 100px;
-  height: 40px;
-  border-radius: 20px;
+.button1{
+  margin: 5px;
+  padding: 10px 30px;
+  border-radius: 15px;
+  border:  4px;
+  background-color: #66C8C8;
+}
+.button1:hover{
+  background-color: #66C8C8;
+}
+.button2{
+  margin: 5px;
+  padding: 10px 56px;
+  border-radius: 15px;
+  border:  4px;
+  background-color: #66C8C8;
+}
+.button2:hover{
+  background-color: #66C8C8;
+}
+#buttonMag{
+    margin: 5px;
+    padding: 10px 56px;
+    color: black;
+}
+#buttonMag1{
+    margin: 20px;
+    padding: 10px 75px;
+    color: black;
+}
+#buttontop{
+  margin-top: 25px;
+}
+.backgroundImput{
+  border-radius:20px;
+}
+.backgroundform1{
+  margin-top: 50px;
+  padding: 25px 40px;
+  background-color:#454545;;
+  border-radius:10px;
   border:  0px;
-  text-align: center;
-  color:black;
-  font-size: 20px;
-  margin:
-}
-form{
-  width: 250px;
-  border: 0px;
-  margin: 10% auto;
-}
-form h1{
-  text-align: center;
-  color: inherit;
-  font-weight: normal;
-  font-size: 30pt;
-}
-form input{
-  width: 250px;
-	height: 50px;
-  margin: 20px 0px;
-  border-radius: 5px;
-  background-color: #454545;
-  text-align: center;
   color: #FFFFFF;
-  border:  0px;
 }
-form button{
-  background-color:  #66C8C8;
-  width: 150px;
-  height: 45px;
-  border-radius: 20px;
+.backgroundform2{
+  margin-top: 100px;
+  padding: 25px 40px;
+  background-color:#454545;;
+  border-radius:10px;
   border:  0px;
-  text-align: center;
-  color:black;
-  font-size: 20px;
-  display: block;
-  margin: 0 auto;
+  color: #FFFFFF;
 }
-form button:hover{
-  background-color: #81EEEE;
+.imagen1{
+    margin: 40px ;
+    height: 150px;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+}
+.textABC{
+  color: #FFFFFF;
+  font-family: 'Ubuntu Condensed', sans-serif;
 }

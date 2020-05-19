@@ -1,19 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Create_users</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <title>Create users</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
   <body>
-    <form method="POST" action="/newCreateUser">
-      <input type="text" name="name" placeholder="Input your name">
-      <input type="text" name="surnames" placeholder="Input your surnames">
-      <input type="number" name="dni" placeholder="Input your dni">
-      <input type="text" name="userName" placeholder="Input your username">
-      <input type="text" name="password" placeholder="Input your password">
-      <input type="number" name="rol" placeholder="Input your rol">
-      <button type="submit">log in</button>
+    <head>
+      <nav class="navbar navbar-expand-lg navbar-light navcolor">
+          <div class="container">
+            <a class="navbar-brand" href="/">Nombres del sistema</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/login">Login</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </head>
+    <form for="validation01" method="POST" action="/newUser">
+      <div class="row">
+        <div class="container col-xl-6">
+          <div class="row">
+            <nav class="container col-xl-8 backgroundform2 ">
+              <div class=" text-center">
+                <img class="imagen1" src="/index.png">
+              </div>
+              <div class=" text-center">
+                <button class=" btn-lg button2 " type="submit">Create user</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="container col-xl-6">
+          <div class="row">
+            <nav class="container col-xl-8 backgroundform1">
+              <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control backgroundImput" name="name"placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <label>surname</label>
+                <input type="text" class="form-control backgroundImput" name="surnames" placeholder="surname" required>
+              </div>
+              <div class="form-group">
+                  <label>DNI</label>
+                  <input type="number" class="form-control backgroundImput"  name="dni"placeholder="DNI" required>
+              </div>
+              <div class="form-group">
+                <label>UserName</label>
+                <input type="text" class="form-control backgroundImput" name="username"placeholder="UserName" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="text" class="form-control backgroundImput" name="password" placeholder="*********" required>
+              </div>
+              <div class="form-group">
+                <label>Rol</label>
+                <input type="number" class="form-control backgroundImput" name="rol"placeholder="Rol" required>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>
