@@ -1,5 +1,5 @@
 # Software Requirements Specification
-## For <project name>
+## For Notification App
 
 Version 0.1   
 Prepared by Leonardo Gaitan, Juan Yachino and Emiliano Baez
@@ -46,46 +46,51 @@ Table of Contents
 * 5 [Appendixes](#5-appendixes)
 
 ## Revision History
-| Name | Date    | Reason For Changes  | Version   |
-| ---- | ------- | ------------------- | --------- |
-|      |         |                     |           |
-|      |         |                     |           |
-|      |         |                     |           |
+| Name |  Date    | Reason For Changes  | Version   |
+|NotApp| 26/03/20 | First Version       |   0.1     |
+|      |          |                     |           |
+|      |          |                     |           |
+|      |          |                     |           |
 
 ## 1. Introduction
 
 ### 1.1 Document Purpose
-
-
+The purpose of this document is to present a detailed description of the free-software Notification Apps software. It will explain the purpose and features of the software, the interfaces of the software, what the software will do and the constraints under which it must operate. This document is intended for users of the software and also potential developers.
 ### 1.2 Product Scope
-
-
+Notifications Notifications is a tool that people can use to upload pdf files, from the official website of the Nacional of Rio Cuarto University. Users / administrators can use it tag other people who participate in a contest published by the same university.
+This is a software for academic use only.
 ### 1.3 Definitions, Acronyms and Abbreviations
 
 
 ### 1.4 References
-> ![MIT Licence](https://github.com/juanyachino/notifications/blob/master/LICENSE.txt)  
+> ![IEEE srs template](https://ieeexplore.ieee.org/document/278253)  
 
 ### 1.5 Document Overview
-
+The following sections of the document talk about the description of the software and how it will be implemented.
 
 ## 2. Product Overview
 
 
 ### 2.1 Product Perspective
-
+The development of the Notifications software is based on the knowledge acquired in the subject "Analysis and design of Systems", to comply with the digital loading of documents, treatment and sending of notifications, which consists of a web application. Documents are uploaded and users appearing in it are notified.
 
 ### 2.2 Product Functions
-
+Login : Allow a user to start a session.
+        Allow a user to register.
+Upload: Allow an administrator user to upload files from the UNRC official website.
+Tags : Allow an administrator user to tag other users in the different documents where it appears.
 
 ### 2.3 Product Constraints
-
+Have internet connection
+File storage space
+Restrictions by different platforms, such as browsers (Chrome, Firefox, etc.)
 
 ### 2.4 User Characteristics
 
-
 ### 2.5 Assumptions and Dependencies
-
+You do not have an internet connection.
+It does not have a mail synchronized with the UNRC.
+UNRC database.
 
 ### 2.6 Apportioning of Requirements
 
