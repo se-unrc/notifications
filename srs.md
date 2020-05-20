@@ -63,7 +63,8 @@ This is a software for academic use only.
 
 
 ### 1.4 References
-> ![IEEE srs template](https://ieeexplore.ieee.org/document/278253)  
+> ![IEEE srs template](https://ieeexplore.ieee.org/document/278253)
+> ![MIT Licence](https://opensource.org/licenses/MIT)  
 
 ### 1.5 Document Overview
 The following sections of the document talk about the description of the software and how it will be implemented.
@@ -75,22 +76,25 @@ The following sections of the document talk about the description of the softwar
 The development of the Notifications software is based on the knowledge acquired in the subject "Analysis and design of Systems", to comply with the digital loading of documents, treatment and sending of notifications, which consists of a web application. Documents are uploaded and users appearing in it are notified.
 
 ### 2.2 Product Functions
-Login : Allow a user to start a session.
-        Allow a user to register.
-Upload: Allow an administrator user to upload files from the UNRC official website.
-Tags : Allow an administrator user to tag other users in the different documents where it appears.
+* Login
+        * Allow a user to start a session.
+        * Allow a user to register.
+* Upload
+        * Allow an administrator user to upload files from the UNRC official website.
+* Tags
+        * Allow an administrator user to tag other users in the different documents where it appears.
 
 ### 2.3 Product Constraints
-Have internet connection
-File storage space
-Restrictions by different platforms, such as browsers (Chrome, Firefox, etc.)
+* Have internet connection
+* File storage space
+* Restrictions by different platforms, such as browsers (Chrome, Firefox, etc.)
 
 ### 2.4 User Characteristics
 
 ### 2.5 Assumptions and Dependencies
-You do not have an internet connection.
-It does not have a mail synchronized with the UNRC.
-UNRC database.
+* You do not have an internet connection.
+* It does not have a mail synchronized with the UNRC.
+* UNRC database.
 
 ### 2.6 Apportioning of Requirements
 
