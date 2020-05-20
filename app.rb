@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require "sinatra/config_file"
 require './models/user.rb'
+require './models/document.rb'
 
 class App < Sinatra::Base
   register Sinatra::ConfigFile
@@ -81,6 +82,7 @@ class App < Sinatra::Base
 
   # Endpoints for upload a document
   get '/documents' do
+    @documents = Document.all
     erb :upload, :layout => :layoutlogin
   end
 
@@ -94,9 +96,26 @@ class App < Sinatra::Base
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-      erb :tag
+      doc = Document.new(name: @filename, date: params["date"] , uploader: session[:user_id], subject: params["subject"])
+      if doc.save
+        redirect "/documents"
+      else
+        [500, {}, "Internal Server Error"]
+      end
   end
-
+  get '/view/:doc_name' do 
+      @this_doc = "/" +params[:doc_name]
+      erb :view_doc, :layout => :layoutlogin
+  end
+  get '/remove/:doc_name' do 
+      docu = Document.where(name: params[:doc_name]) 
+      docu.delete.all
+      if docu.delete
+        redirect "/documents"
+      else
+        [500, {}, "Internal Server Error"]
+      end
+  end
   ###
   get "/tos" do
   	erb :ToS, :layout => :layoutlogin
