@@ -269,17 +269,16 @@ class App < Sinatra::Base
 
   post '/documents' do
     user = User.first(username: params[:users])
-    prueba = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
-    "#{prueba}"
-    #prueba = params[:date] == "" ? prueba : prueba.select {|d| d.date == params[:date] }
-
-    #category = Category.first(name: params[:category])
-    #prueba = params[:category] == "" ? prueba : prueba.select {|d| d.category_id == category.id }
-    #@documents = prueba
-    #@categories = Category.all
-    #@view = params[:forma]
-    #@filterby = [params[:users],params[:date],params[:category]]
-    #erb :docs, :layout => :layout
+    fiter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
+    doc_date = params[:date] == "" ? fiter_docs : Document.first(date: params[:date])
+    fiter_docs = params[:date] == "" ? fiter_docs : fiter_docs.select {|d| d.date == doc_date.date }
+    category = Category.first(name: params[:category])
+    fiter_docs = params[:category] == "" ? fiter_docs : fiter_docs.select {|d| d.category_id == category.id }
+    @documents = prueba
+    @categories = Category.all
+    @view = params[:forma]
+    @filterby = [params[:users],params[:date],params[:category]]
+    erb :docs, :layout => :layout
 
   end
 
