@@ -109,7 +109,7 @@ class App < Sinatra::Base
   end
   get '/remove/:doc_name' do 
       docu = Document.where(name: params[:doc_name]) 
-      docu.delete.all
+      docu.delete
       if docu.delete
         redirect "/documents"
       else
