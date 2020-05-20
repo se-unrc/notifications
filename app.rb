@@ -133,7 +133,6 @@ class App < Sinatra::Base
     redirect "/create_category"
   end
 
-
   get "/tag_document" do
     if session[:isLogin]
       @document=Document.all#modificar por documetnos taggeados
@@ -143,17 +142,18 @@ class App < Sinatra::Base
     end
   end
 
-
   get "/category" do
     if session[:isLogin] && session[:int]==0
+      @user = User.find(id: session[:user_id])
+      @cat  = Category.all
       erb :category
     else
       redirect "/"
     end
   end
+
   get "/create_category" do
     if session[:isLogin] && session[:int]==0
-      @userCreate = User.all
       @categories = Category.all
       erb :create_category
     else
@@ -164,17 +164,18 @@ class App < Sinatra::Base
       end
     end
   end
+
   post "/create_category" do
     if cat = Category.find(name: params["name"])
       [500, {}, "ya existe la categoria"]
-      redirect "/profileAdmin"
+      redirect "/category"
     else
       cat = Category.new(name: params['name'],description: params['description'] )
       if cat.save
         redirect "/category"
       else
         [500, {}, "Internal Server Error"]
-        redirect "/profile"
+        redirect "/home"
       end
     end
   end
@@ -182,63 +183,111 @@ class App < Sinatra::Base
 
   get "/delete_category" do
     if session[:isLogin] && session[:int]==0
+      @cat  = Category.all
       erb:delete_category
     else
       if session[:isLogin]
-        redirect "/profile"
+        redirect "/home"
       else
         redirect "/"
       end
     end
   end
   post "/delete_category" do
-    if cat = Category.find(name:params["name"])
-      cat.delete
+    if @categor = Category.find(name: params["name"])
+       @categor.remove_all_users
+       @categor.delete
       redirect "/category"
     else
       [500, {}, "No existe la Categoria"]
-      redirect "/profile"
+      redirect "/category"
     end
   end
 
-
   get "/search_category" do
-    if session[:isLogin]
+    if session[:isLogin] && session[:int]==0
       erb:search_category
     else
       redirect "/"
     end
   end
   post "/search_category" do
-    if cat = Category.find(name:params["name"])
-      [500, {}, "existe la Categoria"]
+    if @aux = Category.find(name:params["name"])
+      @cat = Category.all
+      erb:category
     else
       [500, {}, "No existe la Categoria"]
-    end
-  end
-
-
-  get "/modify_category" do
-    if session[:isLogin] && session[:int]==0
-      erb:modify_category
-    else
-      if session[:isLogin]
-        redirect "/profileAdmin"
-      else
-        redirect "/"
-      end
-    end
-  end
-  post "/modify_category" do
-    cat = Category.find(name:params["oldName"])
-    cat.update(name: params["name"],description: params["description"])
-    if cat.save
       redirect "/category"
-    else
+    end
+  end
+
+  post "/modify_category" do
+    if  @cat = Category.find(name:params["oldName"])
+      @cat.update(name: params["name"],description: params["description"])
+      if @cat.save
+      redirect "/category"
+      else
       [500, {}, "Internal Server Error"]
       redirect "/profileAdmin"
+      end
+    else
+      [500, {}, "Internal Server Error"]
     end
   end
+post "/selected_category" do
+    @cat = Category.all
+    @aux = params[:name]
+    erb :category
+  end
+
+  get "/subscriptions" do
+     if session[:isLogin]
+       @user = User.find(id: session[:user_id])
+       @collection = @user.categories
+       erb:subscriptions
+     end
+   end
+
+     post "/subscriptions" do
+        @user = User.find(id: session[:user_id])
+        @cat = Category.find(name: params['name'])
+        if params['option'] == "delete"
+          @user.remove_category(@cat)
+          redirect "/subscriptions"
+        else
+          if @cat = Category.find(name: params['name'])
+          @doc = @cat.documents
+          redirect"/show_documents"
+          else
+          redirect "/subscriptions"
+          end
+        end
+      end
+
+      get "/show_documents"do
+      if session[:isLogin]
+        @user = User.find(id: session[:user_id])
+        erb :show_documents
+        end
+      end
+
+     get "/add_subscriptions" do
+     if  session[:isLogin]
+       @user = User.find(id: session[:user_id])
+       @collection = Category.exclude(users: @user).all
+       erb:add_subscriptions
+     end
+   end
+
+     post "/add_subscriptions" do
+       if @cat = Category.find(name: params['name'])
+       @user = User.find(id: session[:user_id])
+       @user.add_category(@cat)
+       redirect"/add_subscriptions"
+     else
+       redirect "/subscriptions"
+     end
+   end
 
   get "/home" do
     if session[:isLogin]

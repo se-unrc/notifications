@@ -2,20 +2,82 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Categories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <form  action="/create_category" method="GET">
-        <button type="submit" name="Search & Modify">Create</button>
-    </form>
-    <form  action="/delete_category" method="GET">
-        <button type="submit" name="Search & Modify">Delete</button>
-    </form>
-    <form  action="/search_category" method="GET">
-        <button type="submit" name="Search & Modify">Search</button>
-    </form>
-    <form  action="/modify_category" method="GET">
-        <button type="submit" name="Search & Modify">Search & Modify</button>
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-light navcolor">
+        <div class="container">
+          <a class="navbar-brand">Category</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+                <a id="buttonMag" class="nav-link dropdown-toggle button1" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Menu
+                </a>
+                <div class="dropdown-menu button1" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item text-center " href="/home">Home</a>
+                  <a class="dropdown-item text-center " href="/edit_user">Profile</a>
+                  <a class="dropdown-item text-center " href="tag_document">tag</a>
+                  <a class="dropdown-item text-center " href="/subscriptions">Subscriptions</a>
+                  <a class="dropdown-item text-center " href="/create_document">documents</a>
+                  <a class="dropdown-item text-center " href="/category">category</a>
+                  <a class="dropdown-item text-center " href="/logout">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <form method="POST" action="/selected_category">
+      <div class="container col-xl-6">
+        <div class="row">
+          <nav class="container col-xl-8 backgroundform1">
+            <div class="form-group text-center">
+              <% @cat && @cat.each do |element| %>
+              <input type="radio" name="name" value="<%=element.name%>">
+              <label for="name">Name: <%=element.name%></label>
+              <label for="description">- Description: <%=element.description%></label>   <br>
+              <% end %>
+            </div>
+            <div class="form-group text-center">
+              <%if @cat%>
+                <input type="submit" name="select" value="select">
+              <%end%>
+            </div>
+        </div>
+      </form>
+      <% if @aux%>
+      <form method="POST" action="/modify_category">
+        <div class="container col-xl-6">
+          <div class="row">
+            <nav class="container col-xl-8 backgroundform1">
+              <div class="form-group text-center">
+                  <%@categor = Category.find(name: params[:name])%>
+                  <input type="hidden" name="oldName" value="<%=@categor.name%>">
+                  <p>Name: <%=@categor.name%></p>
+                  <input type="text" name="name" placeholder="Input the new name">
+                  <p>Description: <%=@categor.description%></p>
+                  <input type="text" name="description" placeholder="Input the new description">
+                  <br>
+              </div>
+              <div class="form-group text-center">
+                <input type="submit" name="modify" value="modify">
+              </div>
+          </div>
+        </form>
+        <%end%>
+    <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/create_category">Create category</a>
+    <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/delete_category">Delete category</a>
+    <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/search_category">Search category</a>
+    <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/home">Home</a>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>

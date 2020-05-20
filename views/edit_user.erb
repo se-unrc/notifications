@@ -25,7 +25,12 @@
                   <div class="dropdown-menu button1" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item text-center " href="/home">Home</a>
                     <a class="dropdown-item text-center " href="/edit_user">Profile</a>
-                    <a class="dropdown-item text-center " href="tag_document">tag</a>
+                    <a class="dropdown-item text-center " href="tag_document">Tag</a>
+                    <a class="dropdown-item text-center " href="/subscriptions">Subscriptions</a>
+                    <% if @userEdit.admin == 0%>
+                    <a class="dropdown-item text-center " href="/create_document">Documents</a>
+                    <a class="dropdown-item text-center " href="/category">Category</a>
+                    <% end %>
                     <a class="dropdown-item text-center " href="/logout">Logout</a>
                   </div>
                 </li>

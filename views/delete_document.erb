@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>create document</title>
+  </head>
+  <body>
+    <form method="post" action="delete_document">
+      <% @allPdf.each do |element| %>
+        <input type="radio" name="pdf" value="<%= element.id%>"><%= element.fileDocument%>
+        <br>
+      <% end %>
+      <button type="submit">Borrar documento</button>
+    </form>
+  </body>
+</html>

@@ -24,7 +24,8 @@
                   <div class="dropdown-menu button1" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item text-center " href="/home">Home</a>
                     <a class="dropdown-item text-center " href="/edit_user">Profile</a>
-                    <a class="dropdown-item text-center " href="tag_document">tag</a>
+                    <a class="dropdown-item text-center " href="tag_document">Tag</a>
+                    <a class="dropdown-item text-center " href="/subscriptions">Subscriptions</a>
                     <a class="dropdown-item text-center " href="create_document">Document</a>
                     <a class="dropdown-item text-center " href="category">Category</a>
                     <a class="dropdown-item text-center " href="/logout">Logout</a>
@@ -38,10 +39,10 @@
     <div class="row">
       <div class="container col-xl-6">
         <div class="backgroundform1 texte-center">
-          <h5 class="textABC"> ---  |  ---  Date  --- |  ---  Name  ---  |  ---  Description  ---  |  </h5>
-          <% @document.each do |element| %>
-          <li class="backgroundImput textABC"> |<%= element.date%> |   " <%= element.name%> "  | ---<%= element.description%>---  </li>
-          <% end %>
+            <h5 class="textABC"> ---  |  ---  Date  --- |  ---  Name  ---  |  ---  Description  ---  |  </h5>
+            <% @document.each do |element| %>
+            <li class="backgroundImput textABC"> |<%= element.date%> |   " <%= element.name%> "  | ---<%= element.description%>---  </li>
+            <% end %>
         </div>
       </div>
     </div>

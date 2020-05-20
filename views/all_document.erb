@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Modify document</title>
+  </head>
+  <body>
+      <object data="Dec.pdf" type="application/pdf" width="100%" height="600px">
+    <form method="post" action="selected_document">
+      <% @allPdf && @allPdf.each do |element| %>
+        <input type="radio" name="pdf" value="<%=element.id%>"><%= element.fileDocument%>
+        <br>
+      <% end %>
+      <%if @allPdf%>
+        <button type="submit">Modificar documento</button>
+      <%end%>
+    </form>
+    <form method="post" action="modify_document">
+      <% if @axu%>
+        <%@pdfD = Document.find(id: params[:pdf])%>
+        <input type="hidden" name="theId" value="<%=@pdfD.id%>">
+        <p><%=@pdfD.name%></p>
+        <input type="text" name="name" placeholder="Input the new name">
+        <p><%=@pdfD.description%></p>
+        <input type="text" name="description" placeholder="Input the new description">
+        <% @allCat.each do |element| %>
+          <br>
+          <input type="radio" name="cate" value="<%= element.id%>"><%= element.name%>
+        <% end %>
+        <br>
+        <button type="submit">Modificar</button>
+      <%end%>
+    </form>
+  </body>
+</html>
