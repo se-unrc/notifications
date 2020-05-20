@@ -268,18 +268,22 @@ class App < Sinatra::Base
   end
 
   post '/documents' do
-    user = User.first(username: params[:users])
-    fiter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
-    doc_date = params[:date] == "" ? fiter_docs : Document.first(date: params[:date])
-    fiter_docs = params[:date] == "" ? fiter_docs : fiter_docs.select {|d| d.date == doc_date.date }
-    category = Category.first(name: params[:category])
-    fiter_docs = params[:category] == "" ? fiter_docs : fiter_docs.select {|d| d.category_id == category.id }
-    @documents = prueba
-    @categories = Category.all
-    @view = params[:forma]
-    @filterby = [params[:users],params[:date],params[:category]]
-    erb :docs, :layout => :layout
-
+    user = User.first(username: params[:users]) 
+    if user && params[:users] != ""
+      filter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
+    elsif params[:users] == ""
+      filter_docs = Document.all
+    else  
+      filter_docs = []
+    end
+      doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
+      filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+      category = Category.first(name: params[:category])
+      filter_docs = params[:category] == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+      @documents = filter_docs
+      @view = params[:forma]
+      @categories = Category.all
+      erb :docs, :layout => :layout
   end
 
   get '/view/:doc_id' do
