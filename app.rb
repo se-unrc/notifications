@@ -309,7 +309,7 @@ post "/selected_category" do
     @aux.each do |element|
       @doc.add_user(element)
     end
-    redirect "/create_document"
+    redirect "/all_document"
   end
 
   get "/delete_document" do
@@ -326,10 +326,10 @@ post "/selected_category" do
   end
 
   post "/delete_document" do
-    @pdfDelete = Document.find(id: params[:pdf])
+    @pdfDelete = Document.find(id: params[:theId])
     @pdfDelete.remove_all_users
     @pdfDelete.delete
-    redirect "/delete_document"
+    redirect "/all_document"
   end
 
   get "/all_document" do
