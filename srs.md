@@ -104,13 +104,13 @@ The development of the Notifications software is based on the knowledge acquired
 
 
 #### 3.1.1 User interfaces
-![](notifications/resources/login.png)
-![](notifications/resources/register.png)
-![](notifications/resources/home.png)
-![](notifications/resources/documents.png)
-![](notifications/resources/upload.png)
-![](notifications/resources/show.png)
-![](notifications/resources/contact.png)
+![Login page](resources/login.png)
+![Register page](resources/register.png)
+![Home page](resources/home.png)
+![Upload Documents](resources/documents.png)
+![Uploads](resources/upload.png)
+![Show in table](resources/show.png)
+![Contact](resources/contact.png)
 
 #### 3.1.2 Hardware interfaces
 
