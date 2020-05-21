@@ -64,6 +64,7 @@ This is a software for academic use only.
 
 ### 1.4 References
 > ![IEEE srs template](https://ieeexplore.ieee.org/document/278253)
+
 > ![MIT Licence](https://opensource.org/licenses/MIT)  
 
 ### 1.5 Document Overview
@@ -77,12 +78,12 @@ The development of the Notifications software is based on the knowledge acquired
 
 ### 2.2 Product Functions
 * Login
-        * Allow a user to start a session.
-        * Allow a user to register.
+  - Allow a user to start a session.
+  - Allow a user to register.
 * Upload
-        * Allow an administrator user to upload files from the UNRC official website.
+  - Allow an administrator user to upload files from the UNRC official website.
 * Tags
-        * Allow an administrator user to tag other users in the different documents where it appears.
+  - Allow an administrator user to tag other users in the different documents where it appears.
 
 ### 2.3 Product Constraints
 * Have internet connection
@@ -96,9 +97,6 @@ The development of the Notifications software is based on the knowledge acquired
 * It does not have a mail synchronized with the UNRC.
 * UNRC database.
 
-### 2.6 Apportioning of Requirements
-
-
 ## 3. Requirements
 
 
@@ -106,7 +104,13 @@ The development of the Notifications software is based on the knowledge acquired
 
 
 #### 3.1.1 User interfaces
-
+![](notifications/resources/login.png)
+![](notifications/resources/register.png)
+![](notifications/resources/home.png)
+![](notifications/resources/documents.png)
+![](notifications/resources/upload.png)
+![](notifications/resources/show.png)
+![](notifications/resources/contact.png)
 
 #### 3.1.2 Hardware interfaces
 
