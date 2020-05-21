@@ -96,14 +96,13 @@ The development of the Notifications software is based on the knowledge acquired
 * UNRC database.
 
 ## 3. Requirements
-
+This section contains all of the system's functional and quality requirements, it gives describes the system as a whole, with its features.
 
 ### 3.1 External Interfaces
-
+In the next section, views, inputs, and outputs of the system are shown.
 
 #### 3.1.1 User interfaces
-
-Here we will show what the interface structure of the system should be like from the viewpoint of all kind of users. For this purpose, we will show pictures of the different pages the system is required to have in order to ensure an intuitive, logical user interface.
+The following images including the different screens or sections where the user or users can navigate. It shows the partial structure of the system, thus missing several sections to be developed.
 
 ##### Registered/Login page
 It only allows registering new users with all the permissions to upload and follow documents.
@@ -119,7 +118,7 @@ Siempre uno solo a la vez, solo puede cambiar si no hay otra sesión activa
 
 #### Upload and Show files
 
-##### Upload
+###### Upload
 ![Upload Documents](resources/documents.png)
 ![Uploads](resources/upload.png)
 
