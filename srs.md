@@ -47,10 +47,8 @@ Table of Contents
 
 ## Revision History
 | Name |  Date    | Reason For Changes  | Version   |
+|------|----------|---------------------|-----------|
 |NotApp| 26/03/20 | First Version       |   0.1     |
-|      |          |                     |           |
-|      |          |                     |           |
-|      |          |                     |           |
 
 ## 1. Introduction
 
@@ -104,12 +102,31 @@ The development of the Notifications software is based on the knowledge acquired
 
 
 #### 3.1.1 User interfaces
-![Login page](resources/login.png)
+
+Here we will show what the interface structure of the system should be like from the viewpoint of all kind of users. For this purpose, we will show pictures of the different pages the system is required to have in order to ensure an intuitive, logical user interface.
+
+##### Registered/Login page
+It only allows registering new users with all the permissions to upload and follow documents.
+Siempre uno solo a la vez, solo puede cambiar si no hay otra sesión activa
+
+###### Registered
 ![Register page](resources/register.png)
+###### Login session
+![Login page](resources/login.png)
+
+#### Home Page
 ![Home page](resources/home.png)
+
+#### Upload and Show files
+
+##### Upload
 ![Upload Documents](resources/documents.png)
 ![Uploads](resources/upload.png)
+
+##### Show
 ![Show in table](resources/show.png)
+
+#### Contact
 ![Contact](resources/contact.png)
 
 #### 3.1.2 Hardware interfaces
