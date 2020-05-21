@@ -235,8 +235,8 @@ class App < Sinatra::Base
 
   post '/newadmin' do
     if User.find(username: params[:username]) 
-      if User.find(username: params[:username]).update(role: "admin")
-        @error = "#{params[:username]} is already an admin"
+      if User.find(username: params[:username]) && User.find(username: params[:username]).role == 'admin'
+        @error = "#{params[:username]} is already an admin or does not exist"
         erb  :newadmin, :layout => :layout
       else
         User.where(username: params[:username]).update(role: 'admin')
