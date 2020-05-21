@@ -7,7 +7,7 @@
   <body>
     <form method="post" action="delete_document">
       <% @allPdf.each do |element| %>
-        <input type="radio" name="pdf" value="<%= element.id%>"><%= element.fileDocument%>
+        <input type="radio" name="pdf" value="<%= element.id%>"><%= element.name%>
         <br>
       <% end %>
       <button type="submit">Borrar documento</button>

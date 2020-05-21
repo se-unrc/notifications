@@ -119,19 +119,6 @@ class App < Sinatra::Base
       end
     end
   end
-  post '/create_document' do
-    @filename = params[:PDF][:filename]
-    @src =  "/PDF/#{@filename}"
-    file = params[:PDF][:tempfile]
-    prob = "PDF/#{@filename}"
-    File.open("./PDF/#{@filename}", 'wb') do |f|
-      f.write(file.read)
-    end
-    chosenCategory = Category.find(id: params[:cat])
-    document = Document.new(name: params['name'], description: params['description'], date: params['date'], category_id: chosenCategory.id, fileDocument:  prob)
-    document.save
-    redirect "/create_category"
-  end
 
   get "/tag_document" do
     if session[:isLogin]
@@ -248,46 +235,46 @@ post "/selected_category" do
      end
    end
 
-     post "/subscriptions" do
-        @user = User.find(id: session[:user_id])
-        @cat = Category.find(name: params['name'])
-        if params['option'] == "delete"
-          @user.remove_category(@cat)
-          redirect "/subscriptions"
+   post "/subscriptions" do
+      @user = User.find(id: session[:user_id])
+      @cat = Category.find(name: params['name'])
+      if params['option'] == "delete"
+        @user.remove_category(@cat)
+        redirect "/subscriptions"
+      else
+        if @cat = Category.find(name: params['name'])
+        @doc = @cat.documents
+        redirect"/show_documents"
         else
-          if @cat = Category.find(name: params['name'])
-          @doc = @cat.documents
-          redirect"/show_documents"
-          else
-          redirect "/subscriptions"
-          end
+        redirect "/subscriptions"
         end
       end
+    end
 
-      get "/show_documents"do
-      if session[:isLogin]
-        @user = User.find(id: session[:user_id])
-        erb :show_documents
-        end
+    get "/show_documents"do
+    if session[:isLogin]
+      @user = User.find(id: session[:user_id])
+      erb :show_documents
       end
+    end
 
-     get "/add_subscriptions" do
+   get "/add_subscriptions" do
      if  session[:isLogin]
        @user = User.find(id: session[:user_id])
        @collection = Category.exclude(users: @user).all
        erb:add_subscriptions
      end
-   end
+  end
 
-     post "/add_subscriptions" do
-       if @cat = Category.find(name: params['name'])
-       @user = User.find(id: session[:user_id])
-       @user.add_category(@cat)
-       redirect"/add_subscriptions"
-     else
-       redirect "/subscriptions"
-     end
+   post "/add_subscriptions" do
+     if @cat = Category.find(name: params['name'])
+     @user = User.find(id: session[:user_id])
+     @user.add_category(@cat)
+     redirect"/add_subscriptions"
+   else
+     redirect "/subscriptions"
    end
+ end
 
   get "/home" do
     if session[:isLogin]
@@ -305,4 +292,79 @@ post "/selected_category" do
     redirect "/"
   end
 
+  post '/create_document' do
+    @filename = params[:PDF][:filename]
+    @src =  "/PDF/#{@filename}"
+    file = params[:PDF][:tempfile]
+    direction = "PDF/#{@filename}"
+    File.open("./PDF/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+    end
+    date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
+    chosenCategory = Category.find(id: params[:cat])
+    @prob = User.all
+    @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, dateDoc: date)
+    @doc.save
+    @aux = params[:mult]
+    @aux.each do |element|
+      @doc.add_user(element)
+    end
+    redirect "/create_document"
+  end
+
+  get "/delete_document" do
+    if session[:isLogin] && session[:int]==0
+      @allPdf = Document.all
+      erb:delete_document
+    else
+      if session[:isLogin]
+        redirect "/profile"
+      else
+        redirect "/"
+      end
+    end
+  end
+
+  post "/delete_document" do
+    @pdfDelete = Document.find(id: params[:pdf])
+    @pdfDelete.remove_all_users
+    @pdfDelete.delete
+    redirect "/delete_document"
+  end
+
+  get "/all_document" do
+    @allPdf = Document.all
+    erb:all_document
+  end
+
+  post "/selected_document" do
+    @allCat = Category.all
+    @userCreate = User.all
+    @axu= params[:pdf]
+    erb :all_document
+  end
+
+  post "/modify_document" do
+    if (params[:name])
+      @new = Document.find(id: params[:theId])
+      @new.update(name: params[:name])
+    end
+    if (params[:description])
+      @new = Document.find(id: params[:theId])
+      @new.update(description: params[:description])
+    end
+    if (params[:cate])
+      @new = Document.find(id: params[:theId])
+      @new.update(category_id: params[:cate])
+    end
+    if (params[:mult])
+      @new = Document.find(id: params[:theId])
+      @new.remove_all_users
+      @aux = params[:mult]
+      @aux.each do |element|
+        @new.add_user(element)
+      end
+    end
+    redirect "/all_document"
+  end
 end

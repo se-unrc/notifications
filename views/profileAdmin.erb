@@ -41,7 +41,7 @@
         <div class="backgroundform1 texte-center">
             <h5 class="textABC"> ---  |  ---  Date  --- |  ---  Name  ---  |  ---  Description  ---  |  </h5>
             <% @document.each do |element| %>
-            <li class="backgroundImput textABC"> |<%= element.date%> |   " <%= element.name%> "  | ---<%= element.description%>---  </li>
+            <li class="backgroundImput textABC"> |<%= element.dateDoc%> |   " <%= element.name%> "  | ---<%= element.description%>---  </li>
             <% end %>
         </div>
       </div>
