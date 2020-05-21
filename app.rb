@@ -318,7 +318,7 @@ post "/selected_category" do
       erb:delete_document
     else
       if session[:isLogin]
-        redirect "/profile"
+        redirect "/profileAdmin"
       else
         redirect "/"
       end
