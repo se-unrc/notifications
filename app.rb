@@ -1,6 +1,10 @@
 require 'json'
 require './models/init.rb'
 require 'date'
+require 'action_view'
+require 'action_view/helpers'
+require 'sinatra-websocket'
+include ActionView::Helpers::DateHelper
 include FileUtils::Verbose
 class App < Sinatra::Base
   
@@ -19,6 +23,7 @@ class App < Sinatra::Base
       redirect 'login'
     elsif session[:user_id] 
       @current_user = User.find(id: session[:user_id])
+      @unread = Notification.where(user_id: @current_user.id,read: false).to_a.length
       @visibility = @current_user.role == "user" ? "none" : "inline"
       if session_path?
         redirect '/documents'
@@ -26,6 +31,7 @@ class App < Sinatra::Base
         redirect '/documents'     
       end
     end
+
   end
 
   def user_not_logger_in?
@@ -98,6 +104,14 @@ class App < Sinatra::Base
     erb :newadmin, :layout=> :layout
   end
 
+  get '/notifications' do
+    @notifications = Notification.where(user_id: session[:user_id]).order(:datetime).reverse
+    if params[:id] &&  Notification.first(document_id: params[:id],user_id: session[:user_id])
+      Notification.first(document_id: params[:id],user_id: session[:user_id]).update(read: true)  
+    end
+    erb :notifications
+  end
+
   get "/mycategories" do
     user = User.find(id: session[:user_id])
     if user.categories_dataset.to_a.length > 0
@@ -108,8 +122,9 @@ class App < Sinatra::Base
 
   get '/mydocuments' do
     user = User.find(id: session[:user_id])
-    if user.documents_dataset.to_a.length > 0
-      @documents = user.documents_dataset.order(:date).reverse
+    if user.documents_dataset.where(motive: 'subscribed').to_a.length > 0
+      mydocs = user.documents_dataset.select(:document_id).where(motive: 'subscribed').invert
+      @documents = Document.where(id: mydocs)
     end
     erb :yourdocs, :layout=> :layout
   end
@@ -191,12 +206,28 @@ class App < Sinatra::Base
         cp(file.path, "public/file/#{doc.id}.pdf")
         usuario = params["users"].split(',')
         usuario.each do |userr|
-        user = User.first(username: userr)
+       
+          user = User.first(username: userr)
           if user 
             user.add_document(doc)
             user.save
+            Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
           end
         end
+
+        suscribeds = Subscription.where(category_id: doc.category_id)
+        suscribeds.each do |suscribed|
+          suscr = User.first(id: suscribed.user_id)
+          if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
+            Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+          elsif suscr 
+            suscr.add_document(doc)
+            suscr.save
+            Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+          end 
+
+        end
+
         @success = "The document has been uploaded"
         @categories = Category.all
         erb :upload, :layout => :layout
@@ -270,24 +301,27 @@ class App < Sinatra::Base
   post '/documents' do
     user = User.first(username: params[:users]) 
     if user && params[:users] != ""
-      filter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.to_a
+      filter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.where(motive: 'subscribed').invert.to_a
     elsif params[:users] == ""
       filter_docs = Document.all
     else  
       filter_docs = []
     end
-      doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
-      filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
-      category = Category.first(name: params[:category])
-      filter_docs = params[:category] == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
-      @documents = filter_docs
-      @view = params[:forma]
-      @categories = Category.all
-      erb :docs, :layout => :layout
+    doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
+    filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+    category = Category.first(name: params[:category])
+    filter_docs = params[:category] == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+    @documents = filter_docs
+    @view = params[:forma]
+    @categories = Category.all
+    erb :docs, :layout => :layout
   end
 
   get '/view/:doc_id' do
     @src = "/file/" + params[:doc_id] + ".pdf"
+    if params[:read] == "true" && session[:user_id]
+      Notification.first(document_id: params[:doc_id],user_id: session[:user_id]).update(read: true)
+    end
     erb :preview, :layout=> :doclayout
   end
 

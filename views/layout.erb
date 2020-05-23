@@ -46,8 +46,13 @@
 						</div>   				
     			</div>
   			</li> 
-      		<li class="nav-item" style="display:<%= @logged %>;">
-        		<a class="nav-link" href="/notification">Notifications</a>
+      		<div style="display:<%= @visibility %>;">
+            <a class="nav-link" href="/notifications">Notifications
+              <% if @unread != 0 %> 
+              <span class="badge badge-pill badge-danger"><%= @unread %></span>
+              <% end %>
+            </a>
+          </div>
       		</li>
       		<li class="nav-item" style="display:<%= @logged %>;">
         		<a class="nav-link" href="/logout">Log out</a>
