@@ -294,10 +294,10 @@ post "/selected_category" do
 
   post '/create_document' do
     @filename = params[:PDF][:filename]
-    @src =  "/PDF/#{@filename}"
+    @src =  "/public/PDF/#{@filename}"
     file = params[:PDF][:tempfile]
     direction = "PDF/#{@filename}"
-    File.open("./PDF/#{@filename}", 'wb') do |f|
+    File.open("./public/PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
     date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
