@@ -58,7 +58,7 @@ class App < Sinatra::Base
       [400, {}, "ya existe el usuario"]
     else
       @user = User.new(name: params["name"],surnames: params["surnames"],dni: params["dni"],username: params["username"],password: params["password"],rol: params["rol"])
-      @user.admin=5
+      @user.admin=0
       if @user.save
         redirect "/login"
       else
@@ -183,6 +183,7 @@ class App < Sinatra::Base
   post "/delete_category" do
     if @categor = Category.find(name: params["name"])
        @categor.remove_all_users
+       @doc = Doc.find(category_id: @categor.id)
        @categor.delete
       redirect "/category"
     else
