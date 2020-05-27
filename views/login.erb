@@ -2,164 +2,94 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #1b89de;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)}
-  to {-webkit-transform: scale(1)}
-}
-
-@keyframes animatezoom {
-  from {transform: scale(0)}
-  to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
+  .login-clean {
+    background: #f1f7fc;
+    padding: 80px 0;
   }
-  .cancelbtn {
-     width: 100%;
+
+  .login-clean form {
+    max-width: 320px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 4px;
+    color: #505e6c;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
   }
-}
+
+  .login-clean .illustration {
+    text-align: center;
+    padding: 0 0 20px;
+    font-size: 100px;
+    color: rgb(244,71,107);
+  }
+
+  .login-clean form .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+  }
+
+  .login-clean form .btn-primary {
+    background: #f4476b;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: none !important;
+  }
+
+  .login-clean form .btn-primary:hover, .login-clean form .btn-primary:active {
+    background: #eb3b60;
+  }
+
+  .login-clean form .btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  .login-clean form .forgot {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
+  .login-clean form .forgot:hover, .login-clean form .forgot:active {
+    opacity: 1;
+    text-decoration: none;
+  }
+
 </style>
 </head>
 <body>
-  <form class="modal-content animate" action="/login" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="https://i.ytimg.com/vi/EGMyOQ713Ls/hqdefault.jpg" alt="Avatar" class="avatar">
+  <body>
+    <div class="login-clean">
+        <form method="post">
+            <h2 class="sr-only">Inicio de Sesíon</h2>
+            <div class="illustration"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+            <div class="form-group"><input class="form-control" type="text" placeholder="Usuario" name="username" required></div>
+            <div class="form-group"><input class="form-control" type="password"  placeholder="Contraseña" name="password" required></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Iniciar Sesion</button></div><a class="forgot" href="#/recoverpw">Forgot your email or password?</a>
+          </form>
     </div>
-
-    <div class="container">
-      <label for="username"><b>Usuario</b></label>
-      <input type="text" placeholder="ingrese nombre de usuario" name="username" required>
-
-      <label for="psw"><b>Contraseña</b></label>
-      <input type="password" placeholder="Ingrese contraseña" name="password" required>
-
-      <button type="submit">Ingresar</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Recordarme
-      </label>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
-      <span class="psw">Olvide mi <a href="#/recoverpw">contraseña</a></span>
-    </div>
-    
     <% if @error %>
     <p class="error"><%= @error %> </p>
     <% end %>
-     
-  </form>
 </body>
 </html>
-
-
-
-
-
-
-

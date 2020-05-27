@@ -3,102 +3,112 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
-}
 
-* {
-  box-sizing: border-box;
-}
+  .register-photo {
+    background: #f1f7fc;
+    padding: 80px 0;
+  }
 
-/* Add padding to containers */
-.container {
-  padding: 16px;
-  background-color: white;
-  height: 500px;
-}
+  .register-photo .image-holder {
+    display: table-cell;
+    width: auto;
+    background: url(notificacion.png);
+    background-size: cover;
+  }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+  .register-photo .form-container {
+    display: table;
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+  .register-photo form {
+    display: table-cell;
+    width: 400px;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    color: #505e6c;
+  }
 
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
+  @media (max-width:991px) {
+    .register-photo form {
+      padding: 40px;
+    }
+  }
 
-/* Set a style for the submit button */
-.registerbtn {
-  background-color: #1b89de;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+  .register-photo form h2 {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
 
-.registerbtn:hover {
-  opacity: 1;
-}
+  .register-photo form .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 6px;
+    height: 40px;
+  }
 
-/* Add a blue text color to links */
-a {
-  color: dodgerblue;
-}
+  .register-photo form .form-check {
+    font-size: 13px;
+    line-height: 20px;
+  }
 
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
-}
+  .register-photo form .btn-primary {
+    background: #f4476b;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 35px;
+    text-shadow: none;
+    outline: none !important;
+  }
+
+  .register-photo form .btn-primary:hover, .register-photo form .btn-primary:active {
+    background: #eb3b60;
+  }
+
+  .register-photo form .btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  .register-photo form .already {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
 </style>
 </head>
 <body>
 
-<form method="POST" action="/register">
-  <div class="container">
-    <h1>Registrarse</h1>
-    <p>Por favor complete los siguientes datos para registrarse.</p>
-    <hr>
-    <label for="name"><b>Nombre</b></label>
-    <input type="text" placeholder="Ingrese su nombre" name="name" required>
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder"></div>
+        <form method="post">
+            <h2 class="text-center"><strong>Crear usuario</strong> en Notificaciones App</h2>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Ingrese Email" name="email" required>
-
-    <label for="username"><b>Nombre de Usuario</b></label>
-    <input type="text" placeholder="Ingrese Nombre de usuario" name="username" required>
-
-    <label for="psw"><b>Contraseña</b></label>
-    <input type="password" placeholder="Ingrese Contraseña" name="psw" required>
-
-    <label for="psw-repeat"><b>Repita Contraseña</b></label>
-    <input type="password" placeholder="re-ingrese la contraseña" name="psw-repeat" required>
-    <hr>
-
-    <p>Al crear una cuenta esta aceptando nuestros ToS <a href="/tos">Terminos de servicio</a>.</p>
-    <button type="submit" class="registerbtn">Registrarse</button>
+            <div class="form-group"><input class="form-control" type="email" placeholder="Nombre" name="name" required></div>
+            <div class="form-group"><input class="form-control" type="email" placeholder="Email" name="email" required></div>
+            <div class="form-group"><input class="form-control" type="text" placeholder="Nombre de Usuario" name="username" required></div>
+            <div class="form-group"><input class="form-control" type="password" placeholder="Contraseña" name="psw" required></div>
+            <div class="form-group"><input class="form-control" type="password" placeholder="Contraseña (repetir)" name="psw-repeat" required></div>
+            <div class="form-group">
+                <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">Acepto los terminos y condiciones.</label></div>
+            </div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Registrarme</button></div><a class="already" href="/login">Tenes una cuenta ya? Inicia sesion.</a></form>
+    </div>
   </div>
-
-  <div class="container signin">
-    <p>Ya tiene una cuenta? <a href="/login">Ingrese aqui</a>.</p>
-  </div>
-</form>
-
 </body>
 </html>

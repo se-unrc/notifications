@@ -15,7 +15,7 @@ class App < Sinatra::Base
     set :sessions, true
   end
 
- before do 
+ before do
     @path = request.path_info
     if !session[:user_id] && @path != '/login' && @path != '/register'
       redirect '/login'
@@ -86,15 +86,15 @@ class App < Sinatra::Base
     erb :upload, :layout => :layoutlogin
   end
 
-  
+
   post '/documents' do
-    user = User.first(username: params[:users]) 
+    user = User.first(username: params[:users])
     filter_docs = Document.all
 
     doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
     filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
     @documents = filter_docs
-    erb :upload, :layout => :layoutlogin 
+    erb :upload, :layout => :layoutlogin
   end
 
   get '/showdocument' do
@@ -116,13 +116,13 @@ class App < Sinatra::Base
       end
   end
 
-  get '/view/:doc_name' do 
+  get '/view/:doc_name' do
       @this_doc = "/" +params[:doc_name]
       erb :view_doc, :layout => :layoutlogin
   end
 
-  get '/remove/:doc_name' do 
-      docu = Document.where(name: params[:doc_name]) 
+  get '/remove/:doc_name' do
+      docu = Document.where(name: params[:doc_name])
       docu.delete
       if docu.delete
         redirect "/documents"
@@ -145,7 +145,12 @@ class App < Sinatra::Base
     erb :contactus, :layout => :layoutlogin
   end
 
-  post '/tag' do
+  # Terminar de implementar
+  post "/contactus" do
+    "GRACIAS"
+  end
+
+  get '/tag' do
     erb :tag, :layout => :layoutlogin
   end
 

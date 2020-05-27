@@ -1,132 +1,160 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<title>Notifications APP</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
+
+  <title>notification</title>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+
+    .footer-basic {
+  padding: 40px 0;
+  background-color: #ffffff;
+  color: #4b4c4d;
 }
 
-body {
-  font-family: Roboto, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #1b89de;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 1000px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
+.footer-basic ul {
   padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 1000px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #1b89de;
-  padding: 10px;
+  list-style: none;
   text-align: center;
-  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 0;
 }
 
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-/* Add a black background color to the top navigation */
-.topnav {
-  background-color: #003180;
-  overflow: hidden;
+.footer-basic li {
+  padding: 0 10px;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+.footer-basic ul a {
+  color: inherit;
   text-decoration: none;
-  font-size: 17px;
+  opacity: 0.8;
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.footer-basic ul a:hover {
+  opacity: 1;
 }
 
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #000000;
-  color: white;
+.footer-basic .social {
+  text-align: center;
+  padding-bottom: 25px;
 }
-</style>
-</head>
+
+.footer-basic .social > a {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin: 0 8px;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity: 0.9;
+}
+
+.footer-basic .copyright {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+  </style>
+  </head>
 <body>
-
-<header>
-  <h2>NOTIFICATIONS APP</h2>
-</header>
-<div class="topnav">
-  <a class="active" href="/">Pagina Principal</a>
-  <a href="/documents">Mis Documentos</a>
-  <a href="/tags">Mis Tags</a>
-  <a href="/aboutus">Sobre este sitio</a>
-  <a href="/contactus">Contactanos</a>
-  <a href="/profile">Mi Perfil</a>
-  <a href="/logout">Salir</a>
-</div>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Notification App</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/tag">Tags</a></li>
+        <li><a href="/documents">Documentos</a></li>
+        <li><a href="/profile">Perfil</a></li>
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <section>
-  <nav>
-    <ul>
-      <li><a href="/documents">Mis Documentos</a></li>
-      <li><a href="/tags">Mis Tags</a></li>
-      <li><a href="/aboutus">Sobre este sitio</a></li>
-    </ul>
-  </nav>
-
   <article>
     <%= yield %>
   </article>
 </section>
 
-<footer>
-  <p> 2020</p>
-</footer>
-
+<div class="footer-basic">
+        <footer>
+            <div class="social"><a href="https://github.com/juanyachino/notifications"><i class="fa fa-github" aria-hidden="true"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="/aboutus">Sobre Nosotros</a></li>
+                <li class="list-inline-item"><a href="/tos">Terms</a></li>
+                <li class="list-inline-item"><a href="/contactus">Contactanos</a></li>
+            </ul>
+            <p class="copyright">AyDS 2020</p>
+        </footer>
+    </div>
 </body>
 </html>
