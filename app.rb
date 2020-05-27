@@ -86,6 +86,17 @@ class App < Sinatra::Base
     erb :upload, :layout => :layoutlogin
   end
 
+  
+  post '/documents' do
+    user = User.first(username: params[:users]) 
+    filter_docs = Document.all
+
+    doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
+    filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+    @documents = filter_docs
+    erb :upload, :layout => :layoutlogin 
+  end
+
   get '/showdocument' do
     erb :show_file, :layout => :layoutlogin
   end
@@ -96,17 +107,20 @@ class App < Sinatra::Base
       File.open("./public/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-      doc = Document.new(name: @filename, date: params["date"] , uploader: session[:user_id], subject: params["subject"])
+      user = User.find(id: session[:user_id]).username
+      doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
       if doc.save
         redirect "/documents"
       else
         [500, {}, "Internal Server Error"]
       end
   end
+
   get '/view/:doc_name' do 
       @this_doc = "/" +params[:doc_name]
       erb :view_doc, :layout => :layoutlogin
   end
+
   get '/remove/:doc_name' do 
       docu = Document.where(name: params[:doc_name]) 
       docu.delete
@@ -116,6 +130,8 @@ class App < Sinatra::Base
         [500, {}, "Internal Server Error"]
       end
   end
+
+
   ###
   get "/tos" do
   	erb :ToS, :layout => :layoutlogin

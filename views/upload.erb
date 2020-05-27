@@ -24,13 +24,20 @@
             <input type="text" placeholder="Cual es el asunto del documento?" name="subject" required>
 
             <label for="date"><b>Fecha</b></label>
-            <input type="text" placeholder="Cual es la fecha de hoy? (yo no se)" name="date" required>
+            <input type="date" placeholder="Cual es la fecha de hoy? (yo no se)" name="date" required>
 
             <input type="file" name="file" required>
             <input type="submit" value="Upload Document">
         </form>
-        <h2>Documentos cargados</h2>
+        
 
+        <h2>Documentos cargados</h2>
+        <form action="/documents" method="POST">
+          <label for="date"><b>Filtrar</b></label>
+          <input type="date" placeholder="Ingrese fecha" name="date" required>
+          <input type="submit" value="Buscar">
+        </form>
+     
         <table> 
 		    <tr>
 		        <th scope="col">Nombre</th>
