@@ -315,54 +315,54 @@ class App < Sinatra::Base
 
   post '/create_document' do
     @filename = params[:PDF][:filename]
-    @src =  "/PDF/#{@filename}"
+    @src =  "/public/PDF/#{@filename}"
     file = params[:PDF][:tempfile]
     direction = "PDF/#{@filename}"
-    File.open("./PDF/#{@filename}", 'wb') do |f|
+    File.open("./public/PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
-    dateDoc = Time.now.strftime("%d/%m/%Y %H:%M:%S")
+    date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
     chosenCategory = Category.find(id: params[:cat])
     @prob = User.all
-    @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: dateDoc)
+    @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
     @doc.save
     @aux = params[:mult]
     @aux.each do |element|
       @doc.add_user(element)
     end
-    redirect "/edit_document"
+    redirect "/all_document"
   end
 
-  get "/delete_document" do
-    if session[:isLogin] && session[:type]==true
-      @allPdf = Document.all
-      erb:delete_document
-    else
-      if session[:isLogin]
-        redirect "/profileAdmin"
-      else
-        redirect "/"
-      end
-    end
-  end
+  # get "/delete_document" do
+  #   if session[:isLogin] && session[:type]==true
+  #     @allPdf = Document.all
+  #     erb:delete_document
+  #   else
+  #     if session[:isLogin]
+  #       redirect "/profileAdmin"
+  #     else
+  #       redirect "/"
+  #     end
+  #   end
+  # end
 
   post "/delete_document" do
-    @pdfDelete = Document.find(id: params[:theId])
+    @pdfDelete = Document.find(id: param[:theId])
     @pdfDelete.remove_all_users
     @pdfDelete.delete
-    redirect "/edit_document"
+    redirect "/all_document"
   end
 
-  get "/edit_document" do
-    @allPdf = Document.all
-    erb:edit_document, :layout => :layout_admin
+  get "/all_document" do
+    @allPdf = Document.order(:name)
+    erb:all_document, :layout => :layout_admin
   end
 
   post "/selected_document" do
     @allCat = Category.all
     @userCreate = User.all
-    @axu= params[:pdf]
-    erb :edit_document
+    @axu= paras[:pdf]
+    erb :selected_document, :layout => :layout_admin
   end
 
   post "/modify_document" do
@@ -386,6 +386,6 @@ class App < Sinatra::Base
         @new.add_user(element)
       end
     end
-    redirect "/edit_document"
+    redirect "/all_document"
   end
 end
