@@ -1,30 +1,32 @@
-<form class="" action="/selected_document" method="post">
-  <section class="row backgroundform1 text-center">
-    <a id="buttonMag" class="col-xl-2 button1 textABC" href="/create_document">Nuevo</a>
-    <button type="submit" class="button2">Modificar o borrar</button>
-    <!-- <form class="col-xl-6" action="/search_category" method="post">
-      <div class="row">
-        <div class="form-group col-xl-8 ">
-          <input type="text" class="form-control backgroundImput" name="name" placeholder="Input the category name">
-        </div>
-        <div class="form-group col-xl-4">
-          <button type="submit" class="button2" type="submit">Search</button>
-        </div>
+<section class="row backgroundform1 text-center">
+  <a id="buttonMag" class="col-xl-2 button1 textABC" href="/create_document">Nuevo</a>
+  <form class="col-xl-6" action="/all_document" method="get">
+    <div class="row">
+      <div class="form-group col-xl-8 ">
+        <input type="text" class="form-control backgroundImput" name="filter" placeholder="Input the name">
       </div>
-    </form> -->
-  </section>
-  <nav class="row">
-      <% @allPdf.each do |element| %>
-        <div class="container col-4">
-          <nav class="container col-xl-10 backgroundform1">
-            <div class="text-center">
-              <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="250px" height="350px" />
-              <input type="radio" name="pdf" value="<%=element.id%>">Nombre: <%= element.name%>
-              <p>
-              Descripción: <%= element.description%></p>
-            </div>
-          </nav>
-        </div>
-      <% end %>
-  </nav>
-</form>
+      <div class="form-group col-xl-4">
+        <button type="submit" class="button2" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+</section>
+<nav class="row">
+  <%@allPdf && @allPdf.each do |element| %>
+    <form class="" action="/selected_document" method="post">
+      <div class="container col-3">
+        <nav class="container col-xl-10 backgroundform1">
+          <div class="text-center">
+            <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="250px" height="350px" />
+          </div>
+          <div class="text-center">
+            <input type="hidden" name="pdf" value="<%=element.id%>">
+            Nombre: <%= element.name%>
+            <p> Descripción: <%= element.description%></p>
+            <button type="submit" class="button2">Modificar o borrar</button>
+          </div>
+        </nav>
+      </div>
+    </form>
+  <% end %>
+</nav>

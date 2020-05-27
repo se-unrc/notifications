@@ -1,43 +1,46 @@
-  <form method="post" action="create_document" enctype="multipart/form-data">
-    <div class="row">
-      <div class="col-sm-1">
-      </div>
-      <div class="col-3">
-        <div class="backgroundform1" style="text-align: center;">
-          <input type="text" name="name" placeholder="Input the name">
-          <p></p>
-          <input type="text" name="description" placeholder="Input the description">
-          <p></p>
-          <input type="file" name="PDF" accept=".pdf" >
-          <p></p>
-        </div>
-      </div>
-      <div class="col-1">
-      </div>
-      <div class="col-3">
-        <div class="backgroundform1 texte-center">
-          <% @categories.each do |element| %>
-            <input type="radio" name="cat" value="<%= element.id%>"><%= element.name%>
-            <br>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="backgroundform1 texte-center">
-          <% @userCreate.each do |element| %>
-            <input type="checkbox" name="mult[]" value="<%= element.id%>"><%= element.name%>
-            <br>
-          <% end %>
-        </div>
+<form method="post" action="create_document" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-3">
+      <div class="backgroundform1" style="text-align: center;">
+        <input type="text" name="name" placeholder="Input the name" required>
+        <p></p>
+        <input type="text" name="description" placeholder="Input the description" required>
+        <p></p>
+        <input type="file" name="PDF" accept=".pdf" required>
+        <p></p>
       </div>
     </div>
-    <p></p>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a></a>
-          <div>
-            <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Subir</button>
-          </div>
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+      <%if @message%>
+        <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Subir</button>
+      <%end%>
+      <div class="backgroundform1 texte-center">
+        <% @categories.each do |element| %>
+          <input type="radio" name="cat" value="<%= element.id%>" required><%= element.name%>
+          <br>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="backgroundform1 texte-center">
+        <% @userCreate.each do |element| %>
+          <input type="checkbox" name="mult[]" value="<%= element.id%>"><%= element.name%>
+          <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <p></p>
+  <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a></a>
+        <div>
+          <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Subir</button>
         </div>
-      </nav>
-  </form>
+      </div>
+    </nav>
+</form>

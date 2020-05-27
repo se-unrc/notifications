@@ -325,6 +325,12 @@ class App < Sinatra::Base
     File.open("./public/PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
+    if (Document.find(name: params['name']))
+      redirect "/create_document"
+    end
+    if (Document.find(description: params['description']))
+      redirect "/create_document"
+    end
     date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
     chosenCategory = Category.find(id: params[:cat])
     @prob = User.all
@@ -338,21 +344,30 @@ class App < Sinatra::Base
   end
 
   post "/delete_document" do
-    @pdfDelete = Document.find(id: param[:theId])
+    @pdfDelete = Document.find(id: params[:theId])
     @pdfDelete.remove_all_users
     @pdfDelete.delete
     redirect "/all_document"
   end
 
   get "/all_document" do
-    @allPdf = Document.order(:name)
-    erb:all_document, :layout => :layout_admin
+    if params[:filter]
+      if Document.find(name: params[:filter])
+        @allPdf = [Document.find(name: params[:filter])]
+        erb:all_document, :layout => :layout_admin
+      else
+        erb:all_document, :layout => :layout_admin
+      end
+    else
+      @allPdf = Document.order(:name)
+      erb:all_document, :layout => :layout_admin
+    end
   end
 
   post "/selected_document" do
     @allCat = Category.all
     @userCreate = User.all
-    @axu= paras[:pdf]
+    @axu= params[:pdf]
     erb :selected_document, :layout => :layout_admin
   end
 
