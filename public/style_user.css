@@ -1,0 +1,39 @@
+.elementColor{
+  background-color: #96D6A7;
+  margin: 25px 25px;
+  padding: 1px 1px;
+  border-radius: 10px;
+}
+.backgroundH1{
+  background-color: #DFEEE3;
+  margin-top: 25px ;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+.backgroundDoc{
+  background-color: #DFEEE3;
+}
+#buttonLogin{
+  margin: 0px;
+  text-align: center;
+  padding: 10px 66px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+}
+.buttonLoginIndex{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  text-align: center;
+  border: 0px;
+  padding: 10px 66px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+}
+#buttonIndex{
+  text-align: center;
+  margin: 15px 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+  color: black;
+}

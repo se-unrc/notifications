@@ -1,35 +1,46 @@
 <div class="row ">
-  <div class="container col-xl-4">
-    <nav class="container col-xl-11 backgroundform1 text-center">
-      <div class="form-group">
-        <a id="buttonMag"  class="button2 text-center " href="/create_category">Create category</a>
-      </div>
-      <div class="form-group text-center">
-        <a id="buttonMag"  class="button2 text-center " href="/delete_category">Delete category</a>
-      </div>
-      <div class="form-group text-center">
-        <a id="buttonMag"  class="button2 text-center " href="/search_category">Search category</a>
-      </div>
+  <div class=" col-xl-4">
+    <div class="row container">
+      <form class="container col-xl-11 backgroundFroms text-center" action="/create_category" method="Post">
+        <div class="form-group">
+            <input type="text" class="form-control backgroundImput" name="name"placeholder="Input category name" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control backgroundImput" name="name"placeholder="Input description" required>
+        </div>
+        <div class="form-group text-center">
+          <button id="buttonLogin" type="submit" class="text-center" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+    <div class="row container">
+      <form class="container col-xl-11 backgroundFroms text-center" action="/search_category" method="Post">
+        <div class="form-group">
+            <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the category name" required>
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" class=" text-center" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <nav class="container col-xl-11 backgroundFroms">
+      <% @cat && @cat.each do |element| %>
+      <input type="radio" name="name" value="<%=element.name%>">
+      <label for="name">Name: <%=element.name%></label>
+      <label for="description">- Description: <%=element.description%></label>   <br>
+      <% end %>
+      <section class="row">
+        <%if @cat%>
+        <a class="nav-link slideButtonsNavBarB" href="/delete_category">Delete</a>
+        <a class="nav-link slideButtonsNavBarB" href="/modify_category">Edit</a>
+        <%end%>
+      </section>
     </nav>
   </div>
-  <div class="container col-xl-4">
-    <form class="container col-xl-11 backgroundform1 col-xl-10"method="POST" action="/selected_category">
-      <nav class="form-group text-center">
-        <% @cat && @cat.each do |element| %>
-        <input type="radio" name="name" value="<%=element.name%>">
-        <label for="name">Name: <%=element.name%></label>
-        <label for="description">- Description: <%=element.description%></label>   <br>
-        <% end %>
-      </nav>
-      <%if @cat%>
-        <div class="form-group text-center">
-          <button type="submit" class="button2 text-center" type="submit">Select</button>
-        </div>
-      <%end%>
-    </form>
-  </div>
-  <div class="container col-xl-4">
-    <form class="container col-xl-11 backgroundform1" method="POST" action="/modify_category">
+  <div class="col-xl-4">
+    <form class="container col-xl-11 backgroundFroms" method="POST" action="/modify_category">
         <%if @categor%>
           <div class="form-group">
               <label class="text-center">Name: <%=@categor.name%></label>
@@ -40,7 +51,7 @@
             <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the new description" required>
           </div>
           <div class="form-group text-center">
-            <button type="submit" class="button2 text-center" type="submit">Modify</button>
+            <button type="submit" class=" text-center" type="submit">Modify</button>
           </div>
         <%end%>
     </form>

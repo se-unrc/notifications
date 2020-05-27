@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <meta charset="utf-8">
-  <title>Create users</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style_forms.css">
+    <link rel="stylesheet" href="/style_layout.css">
+    <link rel="stylesheet" href="/style_user.css">
+  </head>
   <body>
-    <head>
-      <nav class="navbar navbar-expand-lg navbar-light navcolor">
-          <div class="container">
-            <a class="navbar-brand" href="/">Nombres del sistema</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a id="buttonMag"class="button2 nav-link btn bnt-lg button2" href="/login">Login</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-    </head>
+    <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
+      <div class="container">
+        <a class="navbar-brand" href="/home">Notification system</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a id="buttonLogin" class="nav-link" href="/login" role="button">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <form for="validation01" method="POST" action="/newUser">
       <div class="row">
         <div class="container col-xl-6">
           <div class="row">
-            <nav class="container col-xl-8 backgroundform2 ">
+            <nav class="container col-xl-10 backgroundImag">
               <div class=" text-center">
                 <img class="imagen1" src="/index.png">
               </div>
               <div class=" text-center">
-                <button class=" btn-lg button2 " type="submit">Create user</button>
+                <button class="buttonForm" type="submit">Create user</button>
               </div>
             </nav>
           </div>
         </div>
         <div class="container col-xl-6">
           <div class="row">
-            <nav class="container col-xl-8 backgroundform1">
+            <nav class="container col-xl-10 backgroundFroms">
               <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control backgroundImput" name="name"placeholder="Name" required>

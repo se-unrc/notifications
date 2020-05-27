@@ -73,25 +73,26 @@ class App < Sinatra::Base
 
   get "/profile" do
     if session[:isLogin]
+      @userName= User.find(name: session[:id])
       @document = Document.all
-      erb :profile
+      erb :profile, :layout => :layout_users
     else
       redirect "/"
     end
   end
+
   get "/profileAdmin" do
     if session[:isLogin] && session[:type]==true
+      @userName = User.find(id: session[:user_id])
       @document = Document.all
-      erb :profileAdmin , :layout => :layout_admin
+      erb :profileAdmin, :layout => :layout_admin
     else
       redirect "/"
     end
   end
-
-
   get "/edit_user" do
     if session[:isLogin]
-      @userEdit= User.find(id: session[:user_id])
+      @userName = User.find(id: session[:user_id])
       if  session[:type]==true
         erb :edit_user, :layout => :layout_admin
       else
@@ -102,6 +103,7 @@ class App < Sinatra::Base
     end
   end
   post "/editNewUser" do
+    @userName = User.find(id: session[:user_id])
     userEdit= User.find(id: session[:user_id])
     userEdit.update(name: params["name"],surnames: params["surnames"],dni: params["dni"],password: params["password"],rol: params["rol"])
     if userEdit.save
@@ -114,6 +116,7 @@ class App < Sinatra::Base
 
   get "/create_document" do
     if session[:isLogin] && session[:type]==true
+      @userName = User.find(id: session[:user_id])
       @userCreate = User.all
       @categories = Category.all
       erb:create_document, :layout => :layout_admin
@@ -128,6 +131,7 @@ class App < Sinatra::Base
 
   get "/tag_document" do
     if session[:isLogin] && session[:type]==true
+      @userName = User.find(id: session[:user_id])
       @document=Document.all#modificar por documetnos taggeados
       erb :profile, :layout => :layout_admin
     else
@@ -137,7 +141,7 @@ class App < Sinatra::Base
 
   get "/category" do
     if session[:isLogin] && session[:type]==true
-      @user = User.find(id: session[:user_id])
+      @userName = User.find(id: session[:user_id])
       @cat  = Category.all
       erb :category, :layout => :layout_admin
     else
@@ -148,7 +152,7 @@ class App < Sinatra::Base
   get "/create_category" do
     if session[:isLogin] && session[:type]==true
       @categories = Category.all
-      erb :create_category, :layout => :layout_admin
+      erb :create_category
     else
       if session[:isLogin]
         redirect "/profile"
@@ -236,12 +240,12 @@ class App < Sinatra::Base
 
   get "/subscriptions" do
     if session[:isLogin]
-      @user = User.find(id: session[:user_id])
+      @userName = User.find(id: session[:user_id])
       @collection = @user.categories
       if session[:type] == 0
-        erb:subscriptions,:layout => :layout_admin
+        erb :subscriptions,:layout => :layout_admin
       else
-        erb:subscriptions,:layout =>:layout_user
+        erb :subscriptions,:layout =>:layout_user
       end
     end
   end
@@ -300,7 +304,7 @@ class App < Sinatra::Base
   get "/home" do
     if session[:isLogin]
       if session[:type]==true
-        redirect "/profileAdmin", :layout => :layout_admin
+        redirect "/profileAdmin"
       else
         redirect "/profile"
       end
@@ -332,19 +336,6 @@ class App < Sinatra::Base
     end
     redirect "/all_document"
   end
-
-  # get "/delete_document" do
-  #   if session[:isLogin] && session[:type]==true
-  #     @allPdf = Document.all
-  #     erb:delete_document
-  #   else
-  #     if session[:isLogin]
-  #       redirect "/profileAdmin"
-  #     else
-  #       redirect "/"
-  #     end
-  #   end
-  # end
 
   post "/delete_document" do
     @pdfDelete = Document.find(id: param[:theId])

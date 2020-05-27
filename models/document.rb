@@ -9,6 +9,6 @@ class Document < Sequel::Model
       validates_length_range 10..1000, :description
       validates_type String, [:name, :description,:fileDocument]
       validates_type String, :date
-      validates_unique(:name, :description, :fileDocument)
+      validates_unique(:name, :description)
     end
   end
