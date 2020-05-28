@@ -34,11 +34,11 @@ class App < Sinatra::Base
   end
 
   post "/userLogin" do
-    if @usuario = User.find(email: params["email"])
-      if @usuario.password == params["password"]
+    if @userName = User.find(email: params["email"])
+      if @userName.password == params["password"]
         session[:isLogin] = true
-        session[:user_id] = @usuario.id
-        session[:type] = @usuario.admin
+        session[:user_id] = @userName.id
+        session[:type] = @userName.admin
         if session[:type] == true
           redirect "/profileAdmin"
         else
@@ -59,9 +59,9 @@ class App < Sinatra::Base
     if user = User.find(email: params["email"])
       [400, {}, "ya existe el usuario"]
     else
-      @user = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      @user.admin=false
-      if @user.save
+      @userName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
+      @userName.admin=false
+      if @userName.save
         redirect "/login"
       else
         [500, {}, "Internal Server Error"]
@@ -73,7 +73,7 @@ class App < Sinatra::Base
 
   get "/profile" do
     if session[:isLogin]
-      @userName= User.find(name: session[:id])
+      @userName= User.find(id: session[:user_id])
       @document = Document.all
       erb :profile, :layout => :layout_users
     else
@@ -96,7 +96,7 @@ class App < Sinatra::Base
       if  session[:type]==true
         erb :edit_user, :layout => :layout_admin
       else
-        erb :edit_user, :layout => :layout_user
+        erb :edit_user, :layout => :layout_users
       end
     else
       redirect "/"
@@ -104,8 +104,7 @@ class App < Sinatra::Base
   end
   post "/editNewUser" do
     @userName = User.find(id: session[:user_id])
-    userEdit= User.find(id: session[:user_id])
-    userEdit.update(name: params["name"],surnames: params["surnames"],dni: params["dni"],password: params["password"],rol: params["rol"])
+    @userName.update(name: params["name"],surname: params["surname"],dni: params["dni"],password: params["password"],rol: params["rol"])
     if userEdit.save
       redirect "/profile"
     else
@@ -241,20 +240,20 @@ class App < Sinatra::Base
   get "/subscriptions" do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
-      @collection = @user.categories
-      if session[:type] == 0
+      @collection = @userName.categories
+      if session[:type] == true
         erb :subscriptions,:layout => :layout_admin
       else
-        erb :subscriptions,:layout =>:layout_user
+        erb :subscriptions,:layout =>:layout_users
       end
     end
   end
 
   post "/subscriptions" do
-    @user = User.find(id: session[:user_id])
+    @userName = User.find(id: session[:user_id])
     @cat = Category.find(name: params['name'])
     if params['option'] == "delete"
-      @user.remove_category(@cat)
+      @userName.remove_category(@cat)
       redirect "/subscriptions"
     else
       if @cat = Category.find(name: params['name'])
@@ -268,11 +267,11 @@ class App < Sinatra::Base
 
   get "/show_documents"do
     if session[:isLogin]
-    @user = User.find(id: session[:user_id])
-      if session[:type] == 0
+    @userName = User.find(id: session[:user_id])
+      if session[:type] == true
         erb:show_documents,:layout => :layout_admin
       else
-        erb:show_documents,:layout =>:layout_user
+        erb:show_documents,:layout =>:layout_users
       end
     else
       redirect"/"
@@ -281,20 +280,20 @@ class App < Sinatra::Base
 
   get "/add_subscriptions" do
     if  session[:isLogin]
-      @user = User.find(id: session[:user_id])
+      @userName = User.find(id: session[:user_id])
       @collection = Category.exclude(users: @user).all
-      if session[:type] == 0
+      if session[:type] == true
         erb:add_subscriptions,:layout => :layout_admin
       else
-        erb:add_subscriptions,:layout =>:layout_user
+        erb:add_subscriptions,:layout =>:layout_users
       end
     end
   end
 
   post "/add_subscriptions" do
     if @cat = Category.find(name: params['name'])
-      @user = User.find(id: session[:user_id])
-      @user.add_category(@cat)
+      @userName = User.find(id: session[:user_id])
+      @userName.add_category(@cat)
       redirect"/add_subscriptions"
     else
       redirect "/subscriptions"
@@ -303,7 +302,7 @@ class App < Sinatra::Base
 
   get "/home" do
     if session[:isLogin]
-      if session[:type]==true
+      if session[:type] == true
         redirect "/profileAdmin"
       else
         redirect "/profile"

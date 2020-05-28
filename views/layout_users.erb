@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/style_forms.css">
     <link rel="stylesheet" href="/style_layout.css">
     <link rel="stylesheet" href="/style_user.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
       <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
@@ -16,17 +17,17 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="container tetx-center ml-auto">
-            <h3 class="backgroundH1">"<%= @userEdit.name %>" <h3>
-          </div>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/home"><%= @userName.name %></a>
+              </li>
               <li class="nav-item dropdown">
                 <a  id="centerSlideButtonsNavBar" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Menu
                 </a>
                 <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
-                  <a id=""class="dropdown-item text-center slideButtonsNavBarHover" href="/home">Home</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/home">Home</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Profile</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="show_documents">All documents</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Subscriptions</a>
