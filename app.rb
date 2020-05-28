@@ -2,6 +2,7 @@ require 'sinatra/base'
 require "sinatra/config_file"
 require './models/user.rb'
 require './models/document.rb'
+require 'sinatra-websocket'
 
 class App < Sinatra::Base
   register Sinatra::ConfigFile
@@ -13,6 +14,9 @@ class App < Sinatra::Base
     enable :sessions
     set :session_secret, "So0perSeKr3t!"
     set :sessions, true
+    set :server, :thin
+    set :sockets, []
+    
   end
 
  before do
@@ -35,24 +39,46 @@ class App < Sinatra::Base
     logger.info ""
   	erb :index, :layout => :layoutlogin
   end
-
+  get "/test" do
+    if !request.websocket?
+      erb:testing
+    else
+      request.websocket do |ws|
+        ws.onopen do
+          ws.send("connected!");
+          settings.sockets << ws
+        end
+        ws.onmessage do |msg|
+          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+        end
+        ws.onclose do
+          warn{"Disconnected"}
+          settings.sockets.delete(ws)
+        end
+      end
+    end
+  end 
   # Add new user
   get "/register" do
     erb :register
   end
 
   post '/register' do
-   request.body.rewind
-   hash = Rack::Utils.parse_nested_query(request.body.read)
-   params = JSON.parse hash.to_json
-   user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
-   if user.save
-    redirect "/login"
-   else
-    [500, {}, "Internal Server Error"]
-   end
+   if User.find(username: params[:username])
+    @error = "El Usuario ya existe"
+    erb :register
+    else
+      request.body.rewind
+      hash = Rack::Utils.parse_nested_query(request.body.read)
+      params = JSON.parse hash.to_json
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+      if user.save
+        redirect "/login"
+        else
+          [500, {}, "Internal Server Error"]
+      end
+    end
   end
-
   # Login Endpoints
   get "/login" do
     erb :login
