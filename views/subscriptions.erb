@@ -1,20 +1,35 @@
-<form method="POST" action="/subscriptions">
-  <div class="container col-xl-6">
-    <div class="row">
-      <nav class="container col-xl-8 backgroundform1">
+<div class="row ">
+  <div class="container col-xl-4">
+    <form  class="container col-xl-11 backgroundFroms" method="POST" action="/add_subscriptions">
+      <div class="form-group text-center">
+        <% @cat.each do |element| %>
+          <input type="radio"  value="<%= element.name%>"  name="name" required>
+          <label>Name: <%= element.name%></label>
+          <label>- Description: <%= element.description%> </label> <br>
+        <% end %>
+        <label>This is the end of the list</label>
+      </div>
+      <div class="form-group text-center">
+        <button id="buttonLogin" type="submit" class="text-center">Subscribe</button>
+      </div>
+    </form>
+  </div>
+  <div class="container col-xl-5 text-center">
+    <form class="container col-xl-11 backgroundFroms" method="POST" action="/subscriptions">
+      <div class="row">
         <div class="form-group text-center">
           <% @collection.each do |element| %>
             <input type="radio" value="<%= element.name%>"  name="name" required>
             <label>Name: <%= element.name%></label>
-            <label>- Description: <%=element.description%> </label>
-            <br>
+            <label>- Description: <%=element.description%> </label> <br>
           <% end %>
         </div>
         <div class="form-group text-center">
-          <input type="radio" name="option" value="delete"><label for="delete">Delete Subscription</label>
-          <input type="radio" name="option" value="show"><label for="Show Documents">Show Documents</label>
-          <input type="submit" name="select" value="select">
+          <input type="radio" name="option" value="delete"required><label for="delete">Delete Subscription</label>
+          <input type="radio" name="option" value="show"required><label for="Show Documents">Show Documents</label>
+          <button id="buttonLogin" type="submit" class="text-center">Select</button>
         </div>
-    </div>
+      </div>
+    </form>
   </div>
-</form>
+</div>

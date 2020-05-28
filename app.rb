@@ -30,7 +30,6 @@ class App < Sinatra::Base
 
 
 
-
   get "/create_user" do
     erb :create_user
   end
@@ -59,11 +58,7 @@ class App < Sinatra::Base
         session[:isLogin] = true
         session[:user_id] = @userName.id
         session[:type] = @userName.admin
-        if session[:type] == true
-          redirect "/profileAdmin"
-        else
-          redirect "/profile"
-        end
+        redirect "/profile"
       else
         @error ="Your password is incorrect"
       end
@@ -72,28 +67,20 @@ class App < Sinatra::Base
     end
   end
 
-
-
-
   get "/profile" do
     if session[:isLogin]
       @userName= User.find(id: session[:user_id])
       @document = Document.all
-      erb :profile, :layout => :layout_users
+      if  session[:type]==true
+        erb :profile, :layout => :layout_admin
+      else
+        erb :profile, :layout => :layout_users
+      end
     else
       redirect "/"
     end
   end
 
-  get "/profileAdmin" do
-    if session[:isLogin] && session[:type]==true
-      @userName = User.find(id: session[:user_id])
-      @document = Document.all
-      erb :profileAdmin, :layout => :layout_admin
-    else
-      redirect "/"
-    end
-  end
   get "/edit_user" do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
@@ -106,6 +93,7 @@ class App < Sinatra::Base
       redirect "/"
     end
   end
+
   post "/editNewUser" do
     @userName.update(name: params["name"],surname: params["surname"],dni: params["dni"],password: params["password"],rol: params["rol"])
     if @userName.save
@@ -151,16 +139,21 @@ class App < Sinatra::Base
     end
   end
 
-  get "/create_category" do
-    if session[:isLogin] && session[:type]==true
-      @categories = Category.all
-      erb :create_category
+  post "/category" do
+    @categor = Category.find(name: params['name'])
+    @cat = Category.all
+    if params['option'] == "edit"
+      @userName = User.find(id: session[:user_id])
+      erb :category, :layout => :layout_admin
     else
-      if session[:isLogin]
-        redirect "/profile"
-      else
-        redirect "/"
+      @categor.remove_all_users
+      @doc = Document.where(category_id: @categor.id).all
+      @doc.each do |element|
+        element.remove_all_users
+        element.delete
       end
+      @categor.delete
+      redirect"/category"
     end
   end
 
@@ -179,45 +172,14 @@ class App < Sinatra::Base
     end
   end
 
-
-  get "/delete_category" do
-    if session[:isLogin] && session[:type]==true
-      @cat  = Category.all
-      erb:delete_category, :layout => :layout_admin
-    else
-      if session[:isLogin]
-        redirect "/home"
-      else
-        redirect "/"
-      end
-    end
-  end
-  post "/delete_category" do
-    if @categor = Category.find(name: params["name"])
-      @categor.remove_all_users
-      @doc = Doc.find(category_id: @categor.id)
-      @categor.delete
-      redirect "/category"
-    else
-      [500, {}, "No existe la Categoria"]
-      redirect "/category"
-    end
-  end
-
-  get "/search_category" do
-    if session[:isLogin] && session[:type]==true
-      erb:search_category, :layout => :layout_admin
-    else
-      redirect "/"
-    end
-  end
   post "/search_category" do
-    if @aux = Category.find(name:params["name"])
+    if @categor = Category.find(name:params["name"])
+      @userName = User.find(id: session[:user_id])
       @cat = Category.all
-      erb:category
+      erb :category, :layout => :layout_admin
     else
       [500, {}, "No existe la Categoria"]
-      redirect "/category"
+      redirect "/home"
     end
   end
 
@@ -228,27 +190,25 @@ class App < Sinatra::Base
         redirect "/category"
       else
         [500, {}, "Internal Server Error"]
-        redirect "/profileAdmin"
+        redirect "/home"
       end
     else
       [500, {}, "Internal Server Error"]
     end
-  end
-  post "/selected_category" do
-    @cat = Category.all
-    @categor = Category.find(name: params[:name])
-    erb :category, :layout => :layout_admin
   end
 
   get "/subscriptions" do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
       @collection = @userName.categories
+      @cat = Category.exclude(users: @userName).all
       if session[:type] == true
         erb :subscriptions,:layout => :layout_admin
       else
         erb :subscriptions,:layout =>:layout_users
       end
+    else
+      redirect "/"
     end
   end
 
@@ -259,36 +219,14 @@ class App < Sinatra::Base
       @userName.remove_category(@cat)
       redirect "/subscriptions"
     else
-      if @cat = Category.find(name: params['name'])
-        @doc = @cat.documents
-        redirect"/show_documents"
+      if @document = Document.where(category_id: @cat.id).all
+        if session[:type] == true
+          erb :category_documents,:layout =>:layout_admin
+        else
+          erb :category_documents,:layout =>:layout_users
+        end
       else
-        redirect "/subscriptions"
-      end
-    end
-  end
-
-  get "/show_documents"do
-    if session[:isLogin]
-    @userName = User.find(id: session[:user_id])
-      if session[:type] == true
-        erb:show_documents,:layout => :layout_admin
-      else
-        erb:show_documents,:layout =>:layout_users
-      end
-    else
-      redirect"/"
-    end
-  end
-
-  get "/add_subscriptions" do
-    if  session[:isLogin]
-      @userName = User.find(id: session[:user_id])
-      @collection = Category.exclude(users: @user).all
-      if session[:type] == true
-        erb:add_subscriptions,:layout => :layout_admin
-      else
-        erb:add_subscriptions,:layout =>:layout_users
+        [500, {}, "Internal Server Error"]
       end
     end
   end
@@ -297,7 +235,7 @@ class App < Sinatra::Base
     if @cat = Category.find(name: params['name'])
       @userName = User.find(id: session[:user_id])
       @userName.add_category(@cat)
-      redirect"/add_subscriptions"
+      redirect"/subscriptions"
     else
       redirect "/subscriptions"
     end
@@ -305,15 +243,12 @@ class App < Sinatra::Base
 
   get "/home" do
     if session[:isLogin]
-      if session[:type] == true
-        redirect "/profileAdmin"
-      else
-        redirect "/profile"
-      end
+      redirect "/profile"
     else
       redirect "/"
     end
   end
+
   get "/logout" do
     session[:isLogin] = false
     redirect "/"
