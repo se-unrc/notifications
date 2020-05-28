@@ -2,30 +2,28 @@
   <%@pdfD = Document.find(id: params[:pdf])%>
   <input type="hidden" name="theId" value="<%=@pdfD.id%>">
   <div class="row">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-3">
-      <div class="backgroundform1" style="text-align: center;">
-        <p>Actual nombre: <%=@pdfD.name%>
-          <input type="text" name="name" placeholder="Input the new name">
-        </p>
-        <p>Actual descripción: <%=@pdfD.description%>
-          <input type="text" name="description" placeholder="Input the new description">
-        </p>
+    <div class="container col-xl-4">
+      <div class="backgroundFroms col-xl-10">
+        <div class="form-group">
+          <label>Nombre actual:<%=@pdfD.name%></label>
+          <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the new name">
+        </div>
+        <div class="form-group">
+          <label>Descripción actual: <%=@pdfD.description%></label>
+          <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the new description">
+        </div>
       </div>
     </div>
-    <div class="col-1">
-    </div>
-    <div class="col-3">
-      <div class="backgroundform1 texte-center">
+    <div class="container col-xl-4">
+      <div class="backgroundFroms col-xl-10">
         <% @allCat.each do |element| %>
           <input type="radio" name="cat" value="<%= element.id%>"><%= element.name%>
           <br>
         <% end %>
       </div>
     </div>
-    <div class="col-3">
-      <div class="backgroundform1 texte-center">
+    <div class="container col-xl-4">
+      <div class="backgroundFroms col-xl-10">
         <% @userCreate.each do |element| %>
           <input type="checkbox" name="mult[]"" value="<%= element.id%>"><%= element.name%>
           <br>
@@ -38,7 +36,7 @@
       <div class="container">
         <a></a>
         <div>
-          <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Modificar</button>
+          <button type="submit" id="buttonIndex" class="nav-link">Modificar</button>
         </div>
       </div>
     </nav>
@@ -50,7 +48,7 @@
       <div class="container">
         <a></a>
         <div>
-          <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Eliminar</button>
+          <button type="submit"  id="buttonIndex" class="nav-link">Eliminar</button>
         </div>
       </div>
     </nav>

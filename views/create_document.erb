@@ -1,32 +1,36 @@
 <form method="post" action="create_document" enctype="multipart/form-data">
   <div class="row">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-3">
-      <div class="backgroundform1" style="text-align: center;">
-        <input type="text" name="name" placeholder="Input the name" required>
-        <p></p>
-        <input type="text" name="description" placeholder="Input the description" required>
-        <p></p>
-        <input type="file" name="PDF" accept=".pdf" required>
-        <p></p>
+    <div class="col-xl-4">
+      <div class="backgroundFroms col-xl-10">
+        <div class="form-group">
+          <label>Name document:</label>
+          <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the name document">
+        </div>
+        <div class="form-group">
+          <label>Description document:</label>
+          <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the description">
+        </div>
+        <div class="form-group">
+          <input type="file" name="PDF" accept=".pdf" required>
+        </div>
+        <div>
+          <button type="submit" class="nav-link buttonIndex">Subir</button>
+        </div>
       </div>
     </div>
-    <div class="col-1">
-    </div>
-    <div class="col-3">
+    <div class="col-xl-4">
       <%if @message%>
-        <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Subir</button>
+        <button type="submit" class="nav-link buttonIndex">Subir</button>
       <%end%>
-      <div class="backgroundform1 texte-center">
+      <div class="backgroundFroms col-xl-10">
         <% @categories.each do |element| %>
           <input type="radio" name="cat" value="<%= element.id%>" required><%= element.name%>
           <br>
         <% end %>
       </div>
     </div>
-    <div class="col-3">
-      <div class="backgroundform1 texte-center">
+    <div class="col-xl-4">
+      <div class="backgroundFroms col-xl-10"">
         <% @userCreate.each do |element| %>
           <input type="checkbox" name="mult[]" value="<%= element.id%>"><%= element.name%>
           <br>
@@ -34,7 +38,6 @@
       </div>
     </div>
   </div>
-  <p></p>
   <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <a></a>

@@ -8,13 +8,14 @@
     background-size: 100% auto;
 }
 .backgroundFroms{
-  margin-top: 25px;
+  margin:25px 10px 10px 10px;
   padding: 25px 40px;
   background-color: #B8B8B2;
   border-radius: 10px;
   box-shadow: 20px 20px 50px #B8B8BB;
 }
 .backgroundImput{
+  margin: 12px;
   border-radius:15px;
 }
 .marginLavel{
@@ -30,6 +31,13 @@
 .buttonForm{
   margin-bottom: 50px;
   padding: 8px 50px;
+  border-radius: 15px;
+  border: 0px;
+  background-color: #ADEDBD;
+}
+#buttonNewDoc{
+  margin: auto;
+  padding: 8px 8px;
   border-radius: 15px;
   border: 0px;
   background-color: #ADEDBD;

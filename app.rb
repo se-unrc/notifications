@@ -29,10 +29,30 @@ class App < Sinatra::Base
   end
 
 
+
+
+  get "/create_user" do
+    erb :create_user
+  end
+  post "/newUser" do
+    if user = User.find(email: params["email"])
+      [400, {}, "ya existe el usuario"]
+    else
+      @userName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
+      @userName.admin=false
+      if @userName.save
+        redirect "/login"
+      else
+        [500, {}, "Internal Server Error"]
+        redirect "/create_user"
+      end
+    end
+  end
+
+
   get "/login" do
     erb :login
   end
-
   post "/userLogin" do
     if @userName = User.find(email: params["email"])
       if @userName.password == params["password"]
@@ -52,23 +72,7 @@ class App < Sinatra::Base
     end
   end
 
-  get "/create_user" do
-    erb :create_user
-  end
-  post "/newUser" do
-    if user = User.find(email: params["email"])
-      [400, {}, "ya existe el usuario"]
-    else
-      @userName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      @userName.admin=false
-      if @userName.save
-        redirect "/login"
-      else
-        [500, {}, "Internal Server Error"]
-        redirect "/create_user"
-      end
-    end
-  end
+
 
 
   get "/profile" do
@@ -103,9 +107,8 @@ class App < Sinatra::Base
     end
   end
   post "/editNewUser" do
-    @userName = User.find(id: session[:user_id])
     @userName.update(name: params["name"],surname: params["surname"],dni: params["dni"],password: params["password"],rol: params["rol"])
-    if userEdit.save
+    if @userName.save
       redirect "/profile"
     else
       redirect "/edit_user"
@@ -350,6 +353,7 @@ class App < Sinatra::Base
   end
 
   get "/all_document" do
+    @userName = User.find(id: session[:user_id])
     if params[:filter]
       if Document.find(name: params[:filter])
         @allPdf = [Document.find(name: params[:filter])]
@@ -364,6 +368,7 @@ class App < Sinatra::Base
   end
 
   post "/selected_document" do
+    @userName = User.find(id: session[:user_id])
     @allCat = Category.all
     @userCreate = User.all
     @axu= params[:pdf]
@@ -371,6 +376,7 @@ class App < Sinatra::Base
   end
 
   post "/modify_document" do
+    @userName = User.find(id: session[:user_id])
     if (params[:name])
       @new = Document.find(id: params[:theId])
       @new.update(name: params[:name])

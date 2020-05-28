@@ -4,11 +4,11 @@
   padding: 1px 1px;
   border-radius: 10px;
 }
-.backgroundH1{
+.backgroundHs{
   background-color: #DFEEE3;
-  margin-top: 25px ;
+  margin-top: 0px ;
+  margin-bottom: 0px ;
   padding: 0px 10px;
-  border-radius: 5px;
 }
 .backgroundDoc{
   background-color: #DFEEE3;
@@ -31,8 +31,29 @@
 }
 #buttonIndex{
   text-align: center;
-  margin: 15px 20px;
+  margin: 20px;
+  margin-bottom: 0px;
   padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+  color: black;
+  border: 0px;
+}
+#buttonIndexDocA{
+  text-align: center;
+  height: 40px;
+  width:  170px;
+  background-repeat: no-repeat;
+  margin: 10px  0px 10px 150px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+  color: black;
+}
+#buttonIndexDocB{
+  text-align: center;
+  height: 40px;
+  width:  170px;
+  margin: 10px  150px 10px 0px;
   border-radius: 10px;
   background-color: #ADEDBD;
   color: black;

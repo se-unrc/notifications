@@ -9,7 +9,7 @@
             <input type="text" class="form-control backgroundImput" name="description"placeholder="Input description" required>
         </div>
         <div class="form-group text-center">
-          <button id="buttonLogin" type="submit" class="text-center" type="submit">Create</button>
+          <button id="buttonIndex" type="submit" class="text-center" type="submit">Create</button>
         </div>
       </form>
     </div>
@@ -19,7 +19,7 @@
             <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the category name" required>
         </div>
         <div class="form-group text-center">
-          <button type="submit" class=" text-center" type="submit">Search</button>
+          <button type="submit" id="buttonIndex" class=" text-center" type="submit">Search</button>
         </div>
       </form>
     </div>
@@ -33,8 +33,8 @@
       <% end %>
       <section class="row">
         <%if @cat%>
-        <a class="nav-link slideButtonsNavBarB" href="/delete_category">Delete</a>
-        <a class="nav-link slideButtonsNavBarB" href="/modify_category">Edit</a>
+        <a id="buttonIndex" class="nav-link slideButtonsNavBarB" href="/delete_category">Delete</a>
+        <a id="buttonIndex" class="nav-link slideButtonsNavBarB" href="/modify_category">Edit</a>
         <%end%>
       </section>
     </nav>
@@ -51,7 +51,7 @@
             <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the new description" required>
           </div>
           <div class="form-group text-center">
-            <button type="submit" class=" text-center" type="submit">Modify</button>
+            <button type="submit" id="buttonIndex" class=" text-center" type="submit">Modify</button>
           </div>
         <%end%>
     </form>
