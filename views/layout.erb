@@ -14,34 +14,33 @@
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
 
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
+      background-color:#303f9f;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    .row.content {
+      height: 450px;
+      background-color:#283593;
+    }
 
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      background-color: #283593;
       height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: #303f9f;
       color: white;
-      padding: 15px;
+      padding: 5px;
     }
 
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -49,14 +48,18 @@
       .sidenav {
         height: auto;
         padding: 15px;
+        background-color:#283593;
       }
-      .row.content {height:auto;}
+      .row.content {
+        height:auto;
+        background-color:#283593;
+      }
     }
 
     .footer-basic {
-  padding: 40px 0;
-  background-color: #ffffff;
-  color: #4b4c4d;
+      padding: 5px 0;
+      background-color: #303f9f;
+      color: #303f9f;
 }
 
 .footer-basic ul {
@@ -128,9 +131,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/register">Registarse</a></li>
-        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li ><a href="/register">Registarse</a></li>
+        <li class="active"><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
