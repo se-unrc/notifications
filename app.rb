@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require "sinatra/config_file"
+require 'sinatra-websocket'
 require './models/init.rb'
 
 class App < Sinatra::Base
@@ -13,6 +14,8 @@ class App < Sinatra::Base
     enable :session
     set :session_secret, "5fdh4h8f4jghne27w84ew4r882&(asd/&h$gfj&hdkjfjew48y49t4hgrd56g8u84gfmjhdmhh,xg544ncd"
     set :sessions, true
+    set :server, 'thin'
+    set :sockets, []
   end
 
 
@@ -28,7 +31,25 @@ class App < Sinatra::Base
     erb :index
   end
 
-
+  get "/test" do
+     if !request.websocket?
+       erb:testing
+     else
+       request.websocket do |ws|
+         ws.onopen do
+           ws.send("connected!");
+           settings.sockets << ws
+         end
+         ws.onmessage do |msg|
+           EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+         end
+         ws.onclose do
+           warn{"Disconnected"}
+           settings.sockets.delete(ws)
+         end
+       end
+     end
+   end
 
   get "/create_user" do
     erb :create_user
@@ -128,6 +149,7 @@ class App < Sinatra::Base
       redirect "/"
     end
   end
+
 
   get "/category" do
     if session[:isLogin] && session[:type]==true
