@@ -164,19 +164,35 @@ class App < Sinatra::Base
   post "/category" do
     @categor = Category.find(name: params['name'])
     @cat = Category.all
+    @userName = User.find(id: session[:user_id])
     if params['option'] == "edit"
-      @userName = User.find(id: session[:user_id])
       erb :category, :layout => :layout_admin
     else
-      @categor.remove_all_users
-      @doc = Document.where(category_id: @categor.id).all
-      @doc.each do |element|
-        element.remove_all_users
-        element.delete
+      if params['option'] == 'delete'
+        @categor.remove_all_users
+        @doc = Document.where(category_id: @categor.id).all
+        @doc.each do |element|
+          element.remove_all_users
+          element.delete
+        end
+        @categor.delete
+        redirect"/category"
+      else
+          @allpdf = Document.where(category_id: @categor.id).all
+          @cat = Category.exclude(id: @categor.id).all
+          erb :migrate_document_category,:layout => :layout_admin
       end
-      @categor.delete
-      redirect"/category"
     end
+  end
+
+  post "/migrate_document" do
+    @cat = Category.find(id: params['cat'])
+    @aux = params[:name]
+    @aux.each do |element|
+        @doc = Document.find(name: element)
+        @doc.update(category_id: @cat.id)
+    end
+    redirect "/category"
   end
 
   post "/create_category" do
@@ -216,6 +232,14 @@ class App < Sinatra::Base
       end
     else
       [500, {}, "Internal Server Error"]
+    end
+  end
+
+  get "/migrate_documents" do
+    if session[:type] == true
+      erb :migrate_document_category,:layout => :layout_admin
+    else
+      redirect "/home"
     end
   end
 
