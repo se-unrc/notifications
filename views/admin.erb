@@ -1,0 +1,28 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title> Administrador </title>
+  </head>
+  
+  <body>
+    
+    <% if @error %>
+      <div class="alert alert-danger" role="alert">
+        <%= @error%>
+      </div>
+    <% end %>
+  
+    <form action="/probando" method="POST">
+      <label for="username"><a>Usuario</a></label>
+      <input type="username" placeholder="Ingrese nombre usuario" name="username"><br></br>
+
+      <label for="type"><a>Código</a></label>
+      <input type="text" placeholder="Ingrese el codigo" name="text">
+
+      <input type="submit" value="Enviar">
+    </form>
+    <% if @success %>
+      <p class="success"><%= @success %> </p>
+    <% end %>
+  </body>
+</html>

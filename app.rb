@@ -39,6 +39,7 @@ class App < Sinatra::Base
     logger.info ""
   	erb :index, :layout => :layoutlogin
   end
+
   get "/test" do
     if !request.websocket?
       erb:testing
@@ -57,7 +58,8 @@ class App < Sinatra::Base
         end
       end
     end
-  end 
+  end
+ 
   # Add new user
   get "/register" do
     erb :register
@@ -108,10 +110,15 @@ class App < Sinatra::Base
 
   # Endpoints for upload a document
   get '/documents' do
-    @documents = Document.all
-    erb :upload, :layout => :layoutlogin
+    user = User.find(id: session[:user_id]).type
+    if user == 'admin'
+      @documents = Document.all
+      erb :upload, :layout => :layoutlogin
+    else
+      @error = "Para acceder a documentos debe ser administrador, si desea serlo complete los campos"
+      erb :admin , :layout => :layoutlogin
+    end
   end
-
 
   post '/documents' do
     user = User.first(username: params[:users])
@@ -157,6 +164,24 @@ class App < Sinatra::Base
       end
   end
 
+  get "/admin" do
+    erb :admin, :layout => :layoutlogin
+  end
+
+  post '/admin' do
+    if User.find(username: params[:username])
+      codigo = params[:text]
+        if codigo == 'admin'
+          User.where(username: params[:username]).update(type: 'admin')
+          erb :perfil, :layout => :layoutlogin
+        else
+          @error = "código incorrecto"
+          erb :admin , :layout => :layoutlogin
+        end
+    else
+      @error = "Hay algo mal que no está bien"
+    end
+  end
 
   ###
   get "/tos" do
