@@ -17,10 +17,10 @@
           <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
             <div class="d-flex w-100 justify-content-between">
               <input type="hidden" name="pdf" value="<%=element.id%>"></input>
-              <h5 class="mb-1">Nombre: <%= element.name%></h5>
-              <small class="text-muted"><%= element.date%></small>
+              <h4 class="mb-1">Nombre: <%= element.name%></h4>
+              <h5 class="text-muted"><%= element.date%></h5>
             </div>
-            <p class="mb-1"><%= element.description%></p>
+            <h6 class="mb-1"><%= element.description%></h6>
             <div class=" text-center">
               <button id="buttonIndex" type="submit">Edit</button>
             </div>

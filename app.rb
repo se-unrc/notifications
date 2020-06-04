@@ -18,7 +18,6 @@ class App < Sinatra::Base
     set :sockets, []
   end
 
-
   get "/" do
     logger.info "params"
     logger.info params
@@ -54,6 +53,7 @@ class App < Sinatra::Base
   get "/create_user" do
     erb :create_user
   end
+
   post "/newUser" do
     if user = User.find(email: params["email"])
       [400, {}, "ya existe el usuario"]
@@ -69,10 +69,10 @@ class App < Sinatra::Base
     end
   end
 
-
   get "/login" do
     erb :login
   end
+
   post "/userLogin" do
     if @userName = User.find(email: params["email"])
       if @userName.password == params["password"]
@@ -297,6 +297,8 @@ class App < Sinatra::Base
 
   get "/logout" do
     session[:isLogin] = false
+    session[:user_id] = 0
+    session[:type] = false
     redirect "/"
   end
 
