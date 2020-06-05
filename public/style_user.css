@@ -19,6 +19,7 @@
   padding: 10px 66px;
   border-radius: 10px;
   background-color: #ADEDBD;
+  border: 0px;
 }
 .buttonLoginIndex{
   margin-top: 10px;
@@ -30,6 +31,15 @@
   background-color: #ADEDBD;
 }
 #buttonIndex{
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 0px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+  border: 0px;
+}
+#buttonIndexA{
   text-align: center;
   margin: 20px;
   margin-bottom: 0px;

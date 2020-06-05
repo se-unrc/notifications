@@ -18,6 +18,32 @@ class App < Sinatra::Base
     set :sockets, []
   end
 
+  before do
+   if session[:isLogin]
+     @userName = User.find(id: session[:user_id])
+     if session[:type]
+       @layoutEnUso = :layout_admin
+     else
+       @layoutEnUso = :layout_users
+     end
+   end
+  end
+
+  before do
+    @urlUser = ["/profile","/subscriptions","/tag_document", "/edit_user","/all_document"]
+    if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+      redirect "/login"
+   end
+  end
+
+  before do
+    @urlAdmin = ["/category","/selected_document","/create_admin", "/migrate_documents", "create_document"]
+    if !session[:type]  &&  @urlAdmin.include?(request.path_info)
+       redirect "/profile"
+    end
+  end
+
+
   get "/" do
     logger.info "params"
     logger.info params
@@ -89,30 +115,31 @@ class App < Sinatra::Base
   end
 
   get "/profile" do
-    if session[:isLogin]
-      @userName= User.find(id: session[:user_id])
-      @document = Document.all
-      if  session[:type]==true
-        erb :profile, :layout => :layout_admin
-      else
-        erb :profile, :layout => :layout_users
-      end
+    @document = Document.all
+    erb :profile, :layout =>@layoutEnUso
+  end
+
+  get "/create_admin" do
+    erb :create_admin, :layout =>@layoutEnUso
+  end
+
+  post "/newUserAdmin" do
+    if user = User.find(email: params["email"])
+      [400, {}, "ya existe el usuario"]
     else
-      redirect "/"
+      @userName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
+      @userName.admin=false
+      if @userName.save
+        redirect "/login"
+      else
+        [500, {}, "Internal Server Error"]
+        redirect "/create_user"
+      end
     end
   end
 
   get "/edit_user" do
-    if session[:isLogin]
-      @userName = User.find(id: session[:user_id])
-      if  session[:type]==true
-        erb :edit_user, :layout => :layout_admin
-      else
-        erb :edit_user, :layout => :layout_users
-      end
-    else
-      redirect "/"
-    end
+    erb :edit_user, :layout =>@layoutEnUso
   end
 
   post "/editNewUser" do
@@ -126,25 +153,15 @@ class App < Sinatra::Base
 
 
   get "/create_document" do
-    if session[:isLogin] && session[:type]==true
-      @userName = User.find(id: session[:user_id])
       @userCreate = User.all
       @categories = Category.all
-      erb:create_document, :layout => :layout_admin
-    else
-      if session[:isLogin]
-        redirect "/profile"
-      else
-        redirect "/"
-      end
-    end
+      erb:create_document, :layout =>@layoutEnUso
   end
 
   get "/tag_document" do
-    if session[:isLogin] && session[:type]==true
-      @userName = User.find(id: session[:user_id])
+    if session[:type]==true
       @document=Document.all#modificar por documetnos taggeados
-      erb :profile, :layout => :layout_admin
+      erb :profile, :layout =>@layoutEnUso
     else
       redirect "/"
     end
@@ -152,37 +169,15 @@ class App < Sinatra::Base
 
 
   get "/category" do
-    if session[:isLogin] && session[:type]==true
-      @userName = User.find(id: session[:user_id])
       @cat  = Category.all
-      erb :category, :layout => :layout_admin
-    else
-      redirect "/"
-    end
+      erb :category, :layout =>@layoutEnUso
   end
 
-  post "/category" do
+  post "/select_category" do
     @categor = Category.find(name: params['name'])
     @cat = Category.all
     @userName = User.find(id: session[:user_id])
-    if params['option'] == "edit"
-      erb :category, :layout => :layout_admin
-    else
-      if params['option'] == 'delete'
-        @categor.remove_all_users
-        @doc = Document.where(category_id: @categor.id).all
-        @doc.each do |element|
-          element.remove_all_users
-          element.delete
-        end
-        @categor.delete
-        redirect"/category"
-      else
-          @allpdf = Document.where(category_id: @categor.id).all
-          @cat = Category.exclude(id: @categor.id).all
-          erb :migrate_document_category,:layout => :layout_admin
-      end
-    end
+    erb :category, :layout =>@layoutEnUso
   end
 
   post "/migrate_document" do
@@ -236,26 +231,13 @@ class App < Sinatra::Base
   end
 
   get "/migrate_documents" do
-    if session[:type] == true
-      erb :migrate_document_category,:layout => :layout_admin
-    else
-      redirect "/home"
-    end
+      erb :migrate_document_category, :layout =>@layoutEnUso
   end
 
   get "/subscriptions" do
-    if session[:isLogin]
-      @userName = User.find(id: session[:user_id])
-      @collection = @userName.categories
-      @cat = Category.exclude(users: @userName).all
-      if session[:type] == true
-        erb :subscriptions,:layout => :layout_admin
-      else
-        erb :subscriptions,:layout =>:layout_users
-      end
-    else
-      redirect "/"
-    end
+    @collection = @userName.categories
+    @cat = Category.exclude(users: @userName).all
+    erb :subscriptions, :layout =>@layoutEnUso
   end
 
   post "/subscriptions" do
@@ -287,13 +269,7 @@ class App < Sinatra::Base
     end
   end
 
-  get "/home" do
-    if session[:isLogin]
-      redirect "/profile"
-    else
-      redirect "/"
-    end
-  end
+
 
   get "/logout" do
     session[:isLogin] = false
@@ -336,17 +312,14 @@ class App < Sinatra::Base
   end
 
   get "/all_document" do
-    @userName = User.find(id: session[:user_id])
     if params[:filter]
       if Document.find(name: params[:filter])
         @allPdf = [Document.find(name: params[:filter])]
-        erb:all_document, :layout => :layout_admin
-      else
-        erb:all_document, :layout => :layout_admin
+        erb:all_document, :layout =>@layoutEnUso
       end
     else
       @allPdf = Document.order(:name)
-      erb:all_document, :layout => :layout_admin
+      erb:all_document, :layout =>@layoutEnUso
     end
   end
 

@@ -19,21 +19,19 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/home"><%= @userName.name %></a>
-              </li>
               <li class="nav-item dropdown">
-                <a  id="centerSlideButtonsNavBar" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Menu
+                <a  id="centerSlideButtonsNavBar" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <%= @userName.name %>
                 </a>
                 <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/home">Home</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Profile</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/tag_document">Tag documents</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="all_document">All documents</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Subscriptions</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="create_document">Document</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="category">Category</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Pefil</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/tag_document">Menciones</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/all_document">Documentos</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Categorias</a>
+                    <a class="dropdown-item text-center slideButtonsNavBarHover" href="/selected_document">Modifiaion De Documentos</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/category">Modifiaion De  Categorias</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/create_admin">Crear Usuario</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Logout</a>
                 </div>
               </li>

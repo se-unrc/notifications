@@ -1,7 +1,7 @@
 <div class="row">
-  <div class=" col-xl-4">
-    <div class="row container">
-      <form class="container col-xl-11 backgroundFroms text-center" action="/create_category" method="Post">
+  <div class=" container col-xl-4">
+    <div class="row">
+      <form class="col-xl-10 backgroundFroms" action="/create_category" method="Post">
         <div class="form-group">
             <input type="text" class="form-control backgroundImput" name="name"placeholder="Input category name" required>
         </div>
@@ -9,13 +9,13 @@
             <input type="text" class="form-control backgroundImput" name="description"placeholder="Input description" required>
         </div>
         <div class="form-group text-center">
-          <button id="buttonLogin" type="submit" class="text-center">Create</button>
+          <button id="buttonLogin" type="submit">Create</button>
         </div>
       </form>
     </div>
   </div>
-  <div class="col-xl-4">
-    <form class="container col-xl-11 backgroundFroms text-center" action="/search_category" method="Post">
+  <div class="container col-xl-4">
+    <form class="col-xl-10 backgroundFroms" action="/search_category" method="Post">
       <div class="form-group">
           <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the category name" required>
       </div>
@@ -23,13 +23,13 @@
         <button id="buttonLogin" type="submit" class=" text-center">Search</button>
       </div>
     </form>
-    <form class="container col-xl-11 backgroundFroms " method="POST" action="/category">
-      <div class="row form-group">
+    <form class="col-xl-10 backgroundFroms" method="POST" action="/select_category">
+      <div class="row">
         <div class="col-xl-6 text-center" >
-          <h1 class="text-left" >olita</h1>
+          <h2 class="text-left fuenteUbuntu" >Categories</h2>
         </div>
-        <div class="col-xl-6 text-center" >
-          <button id="buttonLogin" type="submit"  type="submit">select</button>
+        <div class="col-xl-6" >
+          <button  type="submit" class="buttonForm">select</button>
         </div>
       </div>
       <% @cat && @cat.each do |element| %>
@@ -39,10 +39,8 @@
       <% end %>
     </form>
   </div>
-
-<div class="col-xl-4">
-
-    <div class="col-xl-12">
+<div class="container col-xl-4">
+    <div class="col-xl-10">
       <% if @categor %>
       <form class="container col-xl-11 backgroundFroms" method="POST" action="/option_category">
             <div class="form-group">
@@ -51,11 +49,11 @@
             <div class="row">
               <div class="form-group col-xl-6">
                 <input type="hidden" name = "opcion" value="modificar">
-                <button id="buttonLogin" type="submit" class="text-center" type="submit">Modify</button>
+                <button id="buttonIndex" type="submit" class="text-center" type="submit">Modify</button>
               </div>
               <div class="form-group col-xl-5">
                 <input type="hidden" name = "opcion" value="eliminar">
-                <button id="buttonLogin" type="submit" class="text-center" type="submit">Eliminar</button>
+                <button id="buttonIndex" type="submit" class="text-center" type="submit">Eliminar</button>
               </div>
             </div>
       </form>
