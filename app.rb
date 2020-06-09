@@ -65,7 +65,26 @@ class App < Sinatra::Base
     logger.info "-------------"
     logger.info ""
     @view = params[:forma]  
-    @documents = Document.order(:date).reverse.all
+    
+    if params[:userfilter] || params[:datefilter] || params[:categoryfilter] 
+      @userfilter = params[:userfilter]
+      @datefilter = params[:datefilter]
+      @categoryfilter = params[:categoryfilter]
+      user = User.first(username: params[:userfilter]) 
+      filter_docs = []
+      if user
+        filter_docs = user.documents_dataset.order(:date).reverse.where(motive: 'subscribed').invert.to_a
+      else
+        filter_docs = Document.order(:date).reverse.all
+      end
+      doc_date = params[:datefilter] == "" ? filter_docs : Document.first(date: params[:datefilter])
+      filter_docs = params[:datefilter] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+      category = Category.first(name: params[:categoryfilter])
+      filter_docs = params[:categoryfilter] == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+      @documents = filter_docs
+    else
+      @documents = Document.order(:date).reverse.all
+    end
     @categories = Category.all
     erb :docs, :layout => :layout
   end
@@ -87,9 +106,8 @@ class App < Sinatra::Base
   end
 
   get "/subscribe" do
-    user = User.find(id: session[:user_id])
-    if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
-      @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+    if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+      @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
       @categories = Category.where(id: @categories)
     end
     erb :suscat, :layout => :layout
@@ -97,6 +115,7 @@ class App < Sinatra::Base
 
   get "/upload" do
     @categories = Category.all
+    @users = User.all
     erb :upload, :layout => :layout
   end
 
@@ -105,34 +124,31 @@ class App < Sinatra::Base
   end
 
   get '/notifications' do
-    @notifications = Notification.where(user_id: session[:user_id]).order(:datetime).reverse
-    if params[:id] &&  Notification.first(document_id: params[:id],user_id: session[:user_id])
-      Notification.first(document_id: params[:id],user_id: session[:user_id]).update(read: true)  
+    @notifications = Notification.where(user_id: @current_user.id).order(:datetime).reverse
+    if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
+      Notification.first(document_id: params[:id],user_id: @current_user.id).update(read: true)  
     end
     erb :notifications
   end
 
   get "/mycategories" do
-    user = User.find(id: session[:user_id])
-    if user.categories_dataset.to_a.length > 0
-      @categories =  user.categories_dataset
+    if @current_user.categories_dataset.to_a.length > 0
+      @categories =  @current_user.categories_dataset
     end
     erb :yourcats, :layout=> :layout
   end
 
   get '/mydocuments' do
-    user = User.find(id: session[:user_id])
-    if user.documents_dataset.where(motive: 'subscribed').to_a.length > 0
-      mydocs = user.documents_dataset.select(:document_id).where(motive: 'subscribed').invert
+    if @current_user.documents_dataset.where(motive: 'subscribed').to_a.length > 0
+      mydocs = @current_user.documents_dataset.select(:document_id).where(motive: 'subscribed').invert
       @documents = Document.where(id: mydocs)
     end
     erb :yourdocs, :layout=> :layout
   end
 
   get "/unsubscribe" do
-      user = User.find(id: session[:user_id])
-    if user.categories_dataset.to_a.length > 0
-      @categories =  user.categories_dataset
+    if @current_user.categories_dataset.to_a.length > 0
+      @categories =  @current_user.categories_dataset
     end
     erb :deletecats, :layout=> :layout
   end
@@ -240,23 +256,20 @@ class App < Sinatra::Base
   end
 
   post '/subscribe' do
-    user = User.first(id: session[:user_id])
     category = Category.first(name: params["categories"])
-    if user && category 
-          category.add_user(user)
+    if @current_user && category 
+          category.add_user(@current_user)
           if category.save
             @success ="You are now subscribed to #{params[:categories]}!"
-            user = User.find(id: session[:user_id])
-            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
-              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
               @categories = Category.where(id: @categories)
             end
             erb :suscat, :layout => :layout
           else
             @error ="You are already subscribed to #{params[:categories]}!"
-            user = User.find(id: session[:user_id])
-            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id)).to_a.length > 0
-              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: user.id))
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
               @categories = Category.where(id: @categories)
             end
             erb :suscat, :layout => :layout
@@ -281,31 +294,27 @@ class App < Sinatra::Base
   end
 
   post '/unsubscribe' do
-    user = User.first(id: session[:user_id])
     category = Category.first(name: params["category"])
-    if user && category && user.remove_category(category)
+    if @current_user && category && @current_user.remove_category(category)
       @success = "You have been unsubscribed from #{params[:category]}"
-      user = User.find(id: session[:user_id])
-      if user.categories_dataset.to_a.length > 0
-        @categories =  user.categories_dataset
+      if @current_user.categories_dataset.to_a.length > 0
+        @categories =  @current_user.categories_dataset
       end
       erb  :deletecats, :layout => :layout
     else
       @error = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
-      user = User.find(id: session[:user_id])
-      @categories =  user.categories_dataset
+      @categories =  @current_user.categories_dataset
       erb  :deletecats, :layout => :layout
     end
   end
 
   post '/documents' do
     user = User.first(username: params[:users]) 
-    if user && params[:users] != ""
-      filter_docs = params[:users] == "" ? Document.all  : user.documents_dataset.where(motive: 'subscribed').invert.to_a
-    elsif params[:users] == ""
-      filter_docs = Document.all
-    else  
-      filter_docs = []
+    filter_docs = []
+    if user
+      filter_docs = user.documents_dataset.order(:date).reverse.where(motive: 'subscribed').invert.to_a
+    else
+      filter_docs = Document.order(:date).reverse.all
     end
     doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
     filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
@@ -313,6 +322,9 @@ class App < Sinatra::Base
     filter_docs = params[:category] == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
     @documents = filter_docs
     @view = params[:forma]
+
+    @filtros = [params[:users],params[:date],params[:category]]
+
     @categories = Category.all
     erb :docs, :layout => :layout
   end
