@@ -4,8 +4,10 @@ require 'date'
 require 'action_view'
 require 'action_view/helpers'
 require 'sinatra-websocket'
+
 include ActionView::Helpers::DateHelper
 include FileUtils::Verbose
+
 class App < Sinatra::Base
   
   configure :development, :production do
@@ -13,6 +15,8 @@ class App < Sinatra::Base
     enable :session
     set :session_secret, "otro secret pero dificil y abstracto"
     set :sessions, true
+    set :server, 'thin'
+    set :sockets, []
   end
 
   before do
@@ -20,7 +24,7 @@ class App < Sinatra::Base
     @logged2 = session[:user_id] ? "none" : "inline-block"
     @logged = session[:user_id] ? "inline-block" : "none"
     if user_not_logger_in? && restricted_path? 
-      redirect 'login'
+      redirect '/login'
     elsif session[:user_id] 
       @current_user = User.find(id: session[:user_id])
       @unread = Notification.where(user_id: @current_user.id,read: false).to_a.length
@@ -57,6 +61,26 @@ class App < Sinatra::Base
   get '/' do
     erb :index, :layout => :layoutIndex
   end
+
+  get '/wso' do
+    if !request.websocket?
+      erb :wso
+    else
+      request.websocket do |ws|
+        ws.onopen do
+          settings.sockets << ws
+        end
+        ws.onmessage do |msg|
+          EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
+        end
+        ws.onclose do
+          warn("websocket closed")
+          settings.sockets.delete(ws)
+        end
+      end
+    end
+  end
+
 
   get "/documents" do 
     logger.info ""
@@ -253,6 +277,8 @@ class App < Sinatra::Base
         erb :upload, :layout => :layout
       end
     end
+
+      settings.sockets.each{ |s| s.send("Document #{@filename} uploaded")}
   end
 
   post '/subscribe' do
