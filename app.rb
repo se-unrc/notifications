@@ -27,7 +27,10 @@ class App < Sinatra::Base
       redirect '/login'
     elsif session[:user_id] 
       @current_user = User.find(id: session[:user_id])
-      @unread = Notification.where(user_id: @current_user.id,read: false).to_a.length
+        settings.sockets.each{|s| 
+        @unread = Notification.where(user_id: s[:user],read: false).to_a.length
+        s[:socket].send(@unread.to_s)
+        }
       @visibility = @current_user.role == "user" ? "none" : "inline"
       if session_path?
         redirect '/documents'
@@ -59,16 +62,15 @@ class App < Sinatra::Base
   end 
 
   get '/' do
-    erb :index, :layout => :layoutIndex
-  end
-
-  get '/wso' do
     if !request.websocket?
-      erb :wso
+      erb :index, :layout => :layoutIndex
     else
       request.websocket do |ws|
+        user = session[:user_id]
+        logger.info(user)
+        @connection = {user: user, socket: ws}
         ws.onopen do
-          settings.sockets << ws
+          settings.sockets << @connection
         end
         ws.onmessage do |msg|
           EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
@@ -270,6 +272,7 @@ class App < Sinatra::Base
 
         @success = "The document has been uploaded"
         @categories = Category.all
+        #settings.sockets.each{ |s| s.send("Document #{@filename} uploaded")}
         erb :upload, :layout => :layout
       else 
         @error = "An error has ocurred when trying to upload the document"
@@ -278,7 +281,6 @@ class App < Sinatra::Base
       end
     end
 
-      settings.sockets.each{ |s| s.send("Document #{@filename} uploaded")}
   end
 
   post '/subscribe' do
