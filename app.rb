@@ -21,6 +21,7 @@ class App < Sinatra::Base
 
  before do
     @path = request.path_info
+    
     if !session[:user_id] && @path != '/login' && @path != '/register'
       redirect '/login'
     elsif session[:user_id]
@@ -42,7 +43,7 @@ class App < Sinatra::Base
 
   get "/test" do
     if !request.websocket?
-      erb:testing
+      erb:testing, :layout => :layoutlogin
     else
       request.websocket do |ws|
         ws.onopen do
@@ -58,6 +59,10 @@ class App < Sinatra::Base
         end
       end
     end
+  end
+
+  post '/test' do
+    erb :testing, :layout => :layoutlogin
   end
  
   # Add new user
@@ -105,6 +110,8 @@ class App < Sinatra::Base
 
   # Endpoints for handles profile
   get "/profile" do
+    @documents = Document.all
+    @user = session[:user_id]
     erb :perfil , :layout => :layoutlogin
   end
 
