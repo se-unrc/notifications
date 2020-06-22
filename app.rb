@@ -37,7 +37,7 @@ class App < Sinatra::Base
   end
 
   before do
-    @urlAdmin = ["/category","/create_admin","all_document" ,"/selected_document","create_document","/migrate_documents"]
+    @urlAdmin = ["/category","/create_admin","/all_document" ,"/selected_document","/create_document","/migrate_documents"]
     if !session[:type]  &&  @urlAdmin.include?(request.path_info)
        redirect "/profile"
     end
@@ -106,7 +106,6 @@ class App < Sinatra::Base
   get "/profile" do
     @aux = User.find(id: session[:user_id])
     @document = Document.where(users: @aux)
-
     erb :profile, :layout =>@layoutEnUso
   end
 
@@ -132,13 +131,6 @@ class App < Sinatra::Base
     end
     redirect "/profile"
   end
-
-
-
-
-
-
-
 
   get "/create_user" do
     erb :create_user
@@ -182,16 +174,12 @@ class App < Sinatra::Base
     end
   end
 
-
-
-
-
-
-
   get "/category" do
       @cat  = Category.all
       erb :category, :layout =>@layoutEnUso
   end
+
+
 
   post "/create_category" do
     if cat = Category.find(name: params["name"])
@@ -215,32 +203,58 @@ class App < Sinatra::Base
       erb :category, :layout => :layout_admin
     else
       [500, {}, "No existe la Categoria"]
-      redirect "/home"
+      redirect "/profile"
     end
   end
 
   post "/select_category" do
     @categor = Category.find(name: params['name'])
     @cat = Category.all
-    @userName = User.find(id: session[:user_id])
     erb :category, :layout =>@layoutEnUso
   end
 
-  post "/modify_category" do
-    if  @cat = Category.find(name:params["oldName"])
-      @cat.update(name: params["name"],description: params["description"])
-      if @cat.save
-        redirect "/category"
-      else
-        [500, {}, "Internal Server Error"]
-        redirect "/home"
-      end
+  post "/option_category" do
+    @cat_sel = Category.find(id: params['id'])
+    if params['opcion'] == "modificar"
+      @cats = Category.all
+      @modificar = true
+      erb :category, :layout => @layoutEnUso
     else
-      [500, {}, "Internal Server Error"]
+      @eliminar = true
+      @cats = Category.exclude(id: @cat_sel.id).all
+      @allDocs = Document.where(category_id: @cat_sel.id).all
+      if @allDocs.empty?
+          @cat_sel.remove_all_users
+          @cat_sel.delete
+          redirect "/category"
+       else
+        erb :category, :layout => @layoutEnUso
+      end
     end
   end
 
+  post "/modify_category" do
+    if params['opcion'] == "cancelar"
+      redirect"/category"
+    else
+     if  @catUp = Category.find(id:  params['id'])
+       @catUp.update(name: params["name"],description: params["description"])
+       if @catUp.save
+         redirect "/category"
+       else
+         [500, {}, "Internal Server Error"]
+         redirect "/profile"
+       end
+     else
+       [500, {}, "Internal Server Error"]
+     end
+   end
+  end
+
   post "/migrate_document" do
+    if params['opcion'] == "cancelar"
+      redirect"/category"
+    else
     @cat = Category.find(id: params['cat'])
     @aux = params[:name]
     @aux.each do |element|
@@ -249,21 +263,13 @@ class App < Sinatra::Base
     end
     redirect "/category"
   end
+end
 
-  # get "/migrate_documents" do
-  #     erb :migrate_document_category, :layout =>@layoutEnUso
-  # end
-  #
-  # get "/subscriptions" do
-  #   @collection = @userName.categories
-  #   @cat = Category.exclude(users: @userName).all
-  #   erb :subscriptions, :layout =>@layoutEnUso
-  #end
-
-
-
-
-
+get "/subscriptions" do
+  @collection = @userName.categories
+  @cat = Category.exclude(users: @userName).all
+  erb :subscriptions, :layout =>@layoutEnUso
+end
 
   post "/subscriptions" do
     @userName = User.find(id: session[:user_id])
@@ -294,17 +300,6 @@ class App < Sinatra::Base
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-
   get "/create_document" do
       @userCreate = User.all
       @categories = Category.all
@@ -333,13 +328,13 @@ class App < Sinatra::Base
   end
 
   get "/all_document" do
-    if params[:filter]
-      if Document.find(name: params[:filter])
-        @allPdf = [Document.find(name: params[:filter])]
+    if params[:filterName]
+      if Document.find(name: params[:filterName])
+        @allPdf = [Document.find(name: params[:filterName])]
         erb:all_document, :layout =>@layoutEnUso
       end
     else
-      @allPdf = Document.order(:name)
+      @allPdf = Document.order(:date)
       erb:all_document, :layout =>@layoutEnUso
     end
   end
@@ -364,7 +359,7 @@ class App < Sinatra::Base
     @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
     @doc.save
     @aux = params[:mult]
-    @aux.each do |element|
+    @aux && @aux.each do |element|
       @doc.add_user(element)
     end
     redirect "/all_document"

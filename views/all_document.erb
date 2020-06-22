@@ -1,23 +1,26 @@
 <form  class="row backgroundHs" action="/all_document" method="get">
-  <div class="col-xs-6 m-auto">
-    <input type="text" class="form-control backgroundImput" name="filter" placeholder="Input the name document">
-  </div>
-  <div class="col-xs-3 m-auto">
-    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Buscar</button>
-  </div>
-  <div class="col-xs-3 m-auto">
+  <div class="col-xl-3 m-auto">
     <a id="buttonIndexDocA" class="buttonForm nav-link" href="/create_document" role="button">Nuevo</a>
   </div>
+  <div class="col-xl-6 m-auto">
+    <input type="text" class="form-control backgroundImput" name="filterName" placeholder="Input the name document">
+  </div>
+  <div class="col-xl-6 m-auto">
+    <input id="date" type="date">
+  </div>
+  <div class="col-xl-3 m-auto">
+    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Buscar</button>
+  </div>
 </form>
-<div class="row">
-    <div class="col-xl-4">
-      <div class="col-11 elementColor">
-        <a class="list-group-item list-group-item-action flex-column align-items-start backgroundDoc">
-          <%@allPdf && @allPdf.each do |element| %>
-            <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+  <div class="row">
+    <%@allPdf && @allPdf.each do |element| %>
+      <div class="col-xl-4">
+        <div class="col-11 elementColor">
+          <a class="list-group-item list-group-item-action flex-column align-items-start backgroundDoc" href="<%=element.fileDocument%>" download="<%= element.name%>">
+            <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%"/>
             <div class="d-flex w-100 justify-content-between">
-              <h4 class="mb-1">Nombre: <%= element.name%></h4>
-              <h5 class="text-muted"><%= element.date%></h5>
+              <h4 class="mb-1"> <%= element.name%></h4>
+              <h5 class="text-muted"><%= element.date[0..9]%></h5>
             </div>
             <h6 class="mb-1"><%= element.description%></h6>
             <div class="row d-flex w-100 justify-content-between">
@@ -30,8 +33,8 @@
                 <button id="buttonLogin"  type="submit">Eliminar</button>
               </form>
             </div>
-          <% end %>
-        </a>
+          </a>
+        </div>
       </div>
-    </div>
+    <% end %>
 </div>
