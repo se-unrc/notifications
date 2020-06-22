@@ -21,15 +21,15 @@
 			  </div>
 				<% if notification.motive == 'subscribed' %>
 				  <div class="toast-body">
-				    <a  href="/view/<%= notification.document_id %>?read=true" target="blank" class="stretched-link text-muted" >Se ha subido un nuevo documento de la categoria <%= doc.categorytaged %> </a>
+				    <a  href="/view?id=<%= notification.document_id %>&read=true" target="blank" class="stretched-link text-muted" >Se ha subido un nuevo documento de la categoria <%= doc.categorytaged %> </a>
 				  </div>
 				<% elsif notification.motive == 'taged' %>
 				  <div class="toast-body">
-				    <a  href="/view/<%= notification.document_id %>?read=true" target="blank" class="stretched-link text-muted" >Has sido etiquetado en un nuevo documento de la categoria <%= doc.categorytaged %> </a>
+				    <a  href="/view?id=<%= notification.document_id %>&read=true"  target="blank" class="stretched-link text-muted" >Has sido etiquetado en un nuevo documento de la categoria <%= doc.categorytaged %> </a>
 				  </div>
 				<% else %>
 				   <div class="toast-body">
-				    <a  href="/view/<%= notification.document_id %>?read=true" target="blank" class="stretched-link text-muted" >Se te ha etiquetado en un nuevo documento de la categoria <%= doc.categorytaged %> a la cual estas suscripto	</a>
+				    <a  href="/view?id=<%= notification.document_id %>&read=true" target="blank" class="stretched-link text-muted" >Se te ha etiquetado en un nuevo documento de la categoria <%= doc.categorytaged %> a la cual estas suscripto	</a>
 				  </div>
 				<% end %>
 			</div>

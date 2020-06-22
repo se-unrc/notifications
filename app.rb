@@ -383,7 +383,7 @@ class App < Sinatra::Base
       doc = document.document
       @src = "/file/" + doc + ".pdf"
       if params[:read] == "true" && session[:user_id]
-        Notification.first(document_id: params[:doc_id],user_id: session[:user_id]).update(read: true)
+        Notification.first(document_id: params[:id],user_id: session[:user_id]).update(read: true)
       end
       erb :preview, :layout=> :doclayout
     else 

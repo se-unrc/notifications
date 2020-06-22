@@ -15,7 +15,7 @@
 				<% @documents.each do |doc| %>
 				<tbody>
 				<tr style="transform: rotate(0);">
-		    		<th><a  href="/view/<%= doc.id %>" target="blank" class="stretched-link text-muted" ><%= doc.name %></a></th>
+		    		<th><a  href="/view?id=<%= doc.id %>" target="blank" class="stretched-link text-muted" ><%= doc.name %></a></th>
 		 			<td><%= doc.date %></td>
 		 			<td><%= doc.userstaged %></td>
 		 			<td><%= doc.categorytaged %></td>	
