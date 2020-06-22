@@ -1,27 +1,25 @@
 <form method="post" action="create_document" enctype="multipart/form-data">
   <div class="row">
-    <div class="col-xl-4">
-      <div class="backgroundFroms col-xl-10">
+    <div class="container col-xl-4">
+      <div class="backgroundFroms col-xl-10  text-center">
         <div class="form-group">
-          <label>Name document:</label>
-          <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the name document">
+          <label>Nombre del  documento:</label>
+          <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the name document" required>
         </div>
         <div class="form-group">
-          <label>Description document:</label>
-          <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the description">
+          <label>Decripcion del document:</label>
+          <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the description" required>
         </div>
-        <div class="form-group">
-          <input type="file" name="PDF" accept=".pdf" required>
-        </div>
-        <div>
-          <button type="submit" class="nav-link buttonIndex">Subir</button>
+        <div class="row">
+          <div class="container col-12 form-group m-auto">
+            <input type="button"  value="Seleccione un archivo" id="buttonIndex" class="buttonIndex" onclick="document.getElementById('file').click();" />
+            <input type="file" style="display:none;" id="file" name="PDF" accept=".pdf" required />
+            <button id="buttonIndex" type="submit">Subir</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-xl-4">
-      <%if @message%>
-        <button type="submit" class="nav-link buttonIndex">Subir</button>
-      <%end%>
+    <div class="container col-xl-4">
       <div class="backgroundFroms col-xl-10">
         <% @categories.each do |element| %>
           <input type="radio" name="cat" value="<%= element.id%>" required><%= element.name%>
@@ -29,7 +27,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-xl-4">
+    <div class="container col-xl-4">
       <div class="backgroundFroms col-xl-10"">
         <% @userCreate.each do |element| %>
           <input type="checkbox" name="mult[]" value="<%= element.id%>"><%= element.name%>
@@ -38,12 +36,4 @@
       </div>
     </div>
   </div>
-  <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <a></a>
-        <div>
-          <button type="submit" id="buttonMag" class="btn bnt-lg nav-link button2">Subir</button>
-        </div>
-      </div>
-    </nav>
 </form>

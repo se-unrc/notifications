@@ -2,38 +2,47 @@
   <div class="row">
     <div class="container col-xl-6">
       <div class="row">
-        <nav class="container col-xl-8 backgroundImag">
-          <div class=" text-center">
+        <nav class="container col-xl-8 text-center backgroundFromsB">
+          <div class="text-center">
             <img class="imagen1" src="/index.png">
           </div>
-          <div class=" text-center">
-            <button class="buttonForm" type="submit">Save</button>
+          <div class="text-center">
+            <button class="buttonForm" type="submit">Gurdar</button>
           </div>
         </nav>
       </div>
     </div>
     <div class="container col-xl-6">
       <div class="row">
-        <nav class="container col-xl-8 backgroundFroms">
+        <nav class="container col-xl-8 backgroundFromsB">
           <div class="form-group">
-            <label class="marginLavel">Name</label>
-            <input type="text" class="form-control backgroundImput" name="name"placeholder="<%= @userName.name %>" required>
+            <label class="marginLavel">Nombre</label>
+            <input type="text" class="form-control backgroundImput" name="name"placeholder="<%= @userName.name %>">
           </div>
           <div class="form-group">
-            <label class="marginLavel">Surname</label>
-            <input type="text" class="form-control backgroundImput" name="surname" placeholder="<%= @userName.surname %>" required>
+            <label class="marginLavel">Apellido</label>
+            <input type="text" class="form-control backgroundImput" name="surname" placeholder="<%= @userName.surname %>">
           </div>
           <div class="form-group">
             <label class="marginLavel">DNI</label>
-            <input type="number" class="form-control backgroundImput"  name="dni"placeholder="<%= @userName.dni %>" required>
+            <input type="number" class="form-control backgroundImput"  name="dni"placeholder="<%= @userName.dni %>">
           </div>
           <div class="form-group">
-            <label class="marginLavel">Password</label>
-            <input type="password" class="form-control backgroundImput" name="password" placeholder="**********" required>
+            <label class="marginLavel">Email</label>
+            <input type="email" class="form-control backgroundImput"  name="email"placeholder="<%= @userName.email %>">
           </div>
           <div class="form-group">
-            <label class="marginLavel">Rol</label>
-            <input type="text" class="form-control backgroundImput" name="rol"placeholder="<%= @userName.rol %>" required>
+            <label class="marginLavel">Contraseña</label>
+            <input type="password" class="form-control backgroundImput" name="password" placeholder="**********">
+          </div>
+          <div class="form-group">
+            <label>Rol</label>
+            <select class="form-control backgroundImput" name="rol">
+              <option value="Estudiante">Estudiante</option>
+              <option value="Profesor">Docente</option>
+              <option value="Profesor">No Docente</option>
+              <option value="Administrativo">Administrativo</option>
+            </select>
           </div>
         </nav>
       </div>

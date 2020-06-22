@@ -8,7 +8,14 @@
     background-size: 100% auto;
 }
 .backgroundFroms{
-  margin:25px 10px 10px 10px;
+  margin:25px 10px 10px 10px ;
+  padding: 25px 40px;
+  background-color: #B8B8B2;
+  border-radius: 10px;
+  box-shadow: 20px 20px 50px #B8B8BB;
+}
+.backgroundFromsB{
+  margin-top: 25px;
   padding: 25px 40px;
   background-color: #B8B8B2;
   border-radius: 10px;
@@ -20,13 +27,6 @@
 }
 .marginLavel{
   margin: 0px 10px;
-}
-.backgroundImag{
-    margin-top: 75px;
-    width: 150px;
-    background-color: #B8B8B2;
-    border-radius:10px;
-    box-shadow: 20px 20px 50px #B8B8BB;
 }
 .buttonForm{
   margin-bottom: 50px;

@@ -1,10 +1,10 @@
-<h3 class="container backgroundHs col-12">Documentos en los que estoy taggeado</h3>
+<h3 class="container backgroundHs col-12">Documentos en los que estoy etiquetado:</h3>
 <div class="row">
-  <% @document.each do |element| %>
+  <% @document && @document.each do |element| %>
     <div class="col-xl-4">
-      <div class="col-xl-10 elementColor">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
-          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+      <div class="col-11 elementColor">
+        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="75%" />
             <div class="d-flex w-100 justify-content-between">
               <input type="hidden" name="pdf" value="<%=element.id%>"></input>
               <h4 class="mb-1">Nombre: <%= element.name%></h4>

@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style_forms.css">
@@ -13,7 +12,7 @@
   <body>
       <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
         <div class="container">
-          <a class="navbar-brand" href="/home">Notification system</a>
+          <a class="navbar-brand" href="/profile">Sitema De Notificacione UNRC</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -24,15 +23,12 @@
                  <%= @userName.name %>
                 </a>
                 <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/home">Home</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Pefil</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/tag_document">Menciones</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Editar Perfil</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/all_document">Documentos</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Categorias</a>
-                    <a class="dropdown-item text-center slideButtonsNavBarHover" href="/selected_document">Modifiaion De Documentos</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/category">Modifiaion De  Categorias</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Cartegorias</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/category">Modificar Categorias</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/create_admin">Crear Usuario</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Logout</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Cerrar sesión</a>
                 </div>
               </li>
             </ul>

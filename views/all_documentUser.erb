@@ -1,0 +1,25 @@
+<form  class="row backgroundHs" action="/all_document" method="get">
+  <div class="col-xs-6 m-auto">
+    <input type="text" class="form-control backgroundImput" name="filter" placeholder="Input the name document">
+  </div>
+  <div class="col-xs-3 m-auto">
+    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Buscar</button>
+  </div>
+</form>
+<div class="row">
+    <%@allPdf && @allPdf.each do |element| %>
+    <div class="col-xl-4">
+      <section class="col-11 elementColor">
+        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+            <div class="d-flex w-100 justify-content-between">
+              <input type="hidden" name="pdf" value="<%=element.id%>"></input>
+              <h4 class="mb-1">Nombre: <%= element.name%></h4>
+              <h5 class="text-muted"><%= element.date%></h5>
+            </div>
+            <h6 class="mb-1"><%= element.description%></h6>
+          </a>
+        </section>
+    </div>
+  <% end %>
+</div>

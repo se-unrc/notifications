@@ -10,7 +10,7 @@
         <label>This is the end of the list</label>
       </div>
       <div class="form-group text-center">
-        <button id="buttonLogin" type="submit" class="text-center">Subscribe</button>
+        <button id="buttonLogin" type="submit" class="text-center">Suscribirme</button>
       </div>
     </form>
   </div>
@@ -20,14 +20,14 @@
         <div class="form-group text-center">
           <% @collection.each do |element| %>
             <input type="radio" value="<%= element.name%>"  name="name" required>
-            <label>Name: <%= element.name%></label>
-            <label>- Description: <%=element.description%> </label> <br>
+            <label>Nombre: <%= element.name%></label>
+            <label>- Descripción: <%=element.description%> </label> <br>
           <% end %>
         </div>
         <div class="form-group text-center">
-          <input type="radio" name="option" value="delete"required><label for="delete">Delete Subscription</label>
-          <input type="radio" name="option" value="show"required><label for="Show Documents">Show Documents</label>
-          <button id="buttonLogin" type="submit" class="text-center">Select</button>
+          <input type="radio" name="option" value="delete"required><label for="delete">Eliminar Suscripción</label>
+          <input type="radio" name="option" value="show"required><label for="Show Documents">Motrar Documentos</label>
+          <button id="buttonLogin" type="submit" class="text-center">Seleccionar</button>
         </div>
       </div>
     </form>
