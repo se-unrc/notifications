@@ -15,8 +15,8 @@
         <script src="websocket.js" type="text/javascript"></script> 
         <div class="row justify-content-center align-items-center h-100">
             <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <h2 class="text-center">UPLOAD A NEW DOCUMENT</h2>       
+            <form action="/editdocument" method="post" enctype="multipart/form-data">
+                <h2 class="text-center">EDIT DOCUMENT INFORMATION</h2>       
                 <% if @error %>
                     <div class="alert alert-dismissible alert-danger">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -31,32 +31,33 @@
                 <% end %>
                
                 <div class="form-group">
-                    <input type="date" name="date" class="form-control" placeholder="Date" required="required">
+                    <input type="date" value="<%= @dateedit %>" name="date" class="form-control" placeholder="Date" required="required">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="users" class="form-control" placeholder="Users involved">
+                    <input type="text" value="<%= @useredit %>" name="users" class="form-control" placeholder="Users involved">
                 </div>
                 
                  <div class="form-group">
-                    <input type="text" name="title" class="form-control" placeholder="Title" required="required">
+                    <input type="text" value="<%= @nameedit %>" name="title" class="form-control" placeholder="Title" required="required">
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" value="<%= @id %>" name="id" class="form-control" placeholder="Title" required="required">
                 </div>
                 
                 <div class="form-group">
-                <select id="categories" name="categories" class="custom-select">
-                    <% @categories.each do |category| %>
+                <select value="<%= @categoryedit%>" id="categories" name="categories" class="custom-select" >
+                    <option value=<%= @categoryedit %>> <%= @categoryedit %> </option>
+                    <% @categories.reject{|u| u == @categoryedit}.each do |category| %>
                     <option value=<%= category.name %>> <%= category.name %> </option>
                     <% end %>
                 </select></p>
                 </div>
                 
-                <div class="custom-file">
-                    <input type="file" name="document" class="custom-file-input" id="inputGroupFile02" required="required">
-                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                </div>
 
                 <div class="form-group">
                 <br>
-                    <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                    <button type="submit" class="btn btn-primary btn-block">Edit</button>
                 </div>  
             </form>
             </div>
