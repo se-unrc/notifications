@@ -46,7 +46,7 @@ class App < Sinatra::Base
   end
 
   def restricted_path?
-    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe'
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
   end
 
   def session_path?
@@ -54,7 +54,7 @@ class App < Sinatra::Base
   end
 
   def admin_path?
-    request.path_info == '/newadmin' || request.path_info == '/upload'
+    request.path_info == '/newadmin' || request.path_info == '/upload' || request.path_info == '/editdocument'
   end
 
   def not_authorized_user?
@@ -172,6 +172,7 @@ class App < Sinatra::Base
     @dateedit = params[:date]
     @id = params[:id]
     @categories = Category.all
+    @users = User.all
     erb :editinfo
   end
 
