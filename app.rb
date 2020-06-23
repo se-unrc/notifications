@@ -82,7 +82,8 @@ class App < Sinatra::Base
   end
 
   def tag (users,doc)
-    usuario = users.split(',')
+
+    usuario = users
     usuario.each do |userr|
    
       user = User.first(username: userr)
@@ -134,6 +135,7 @@ class App < Sinatra::Base
     logger.info "-------------"
     logger.info ""
     @view = params[:forma]  
+
     if params[:remove] 
       Document.first(id: params[:remove]).update(delete: true)
     end
@@ -287,7 +289,23 @@ class App < Sinatra::Base
       @src =  "/file/#{@filename}"
       
       category = Category.first(name: params["categories"])
-      doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"], document: @src,category_id: category.id)
+
+      tagged_users = ""
+
+      params[:users].each do |s|
+
+        if s.equal?(params[:users].last)
+
+          tagged_users += s 
+
+        else 
+
+          tagged_users += s + ", "
+
+         end
+      end
+
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: tagged_users, categorytaged: params["categories"], document: @src,category_id: category.id)
      
       if doc.save
         
@@ -303,6 +321,7 @@ class App < Sinatra::Base
 
         @success = "The document has been uploaded"
         @categories = Category.all
+        @users = User.all
         erb :upload, :layout => :layout
        
       else 
@@ -383,7 +402,7 @@ class App < Sinatra::Base
       doc = document.document
       @src = "/file/" + doc + ".pdf"
       if params[:read] == "true" && session[:user_id]
-        Notification.first(document_id: params[:id],user_id: session[:user_id]).update(read: true)
+        Notification.first(document_id: params[:doc_id],user_id: session[:user_id]).update(read: true)
       end
       erb :preview, :layout=> :doclayout
     else 
