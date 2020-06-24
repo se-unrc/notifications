@@ -37,6 +37,7 @@
                 <div class="form-group">
 
                     <select title="Users involved"  name="users[]" class="selectpicker form-control" multiple data-live-search="true">
+                        <option selected><%= @useredit %></option>
                         <% @users.each do |u| %>
                         <option data-tokens=<%= u.username %>> <%= u.username %></option>
                         <% end %>

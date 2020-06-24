@@ -67,6 +67,7 @@ class App < Sinatra::Base
     logger.info "-------------"
     logger.info ""
     @view = params[:forma]  
+    @users = User.all
 
     if params[:remove] 
       Document.first(id: params[:remove]).update(delete: true)
@@ -126,6 +127,7 @@ class App < Sinatra::Base
   end
 
   get "/newadmin" do
+    @users = User.all
     erb :newadmin, :layout=> :layout
   end
 
@@ -220,19 +222,11 @@ class App < Sinatra::Base
     end
   end
 
-# app.rb 
-  post '/upload' do
-    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
-      file = params[:document][:tempfile]
-      @filename = params[:document][:filename]
-   
-      @src =  "/file/#{@filename}"
-      
-      category = Category.first(name: params["categories"])
+  def array_to_tag (users)
 
       tagged_users = ""
 
-      params[:users].each do |s|
+      users.each do |s|
 
         if s.equal?(params[:users].last)
 
@@ -245,7 +239,20 @@ class App < Sinatra::Base
          end
       end
 
-      doc = Document.new(date: params["date"], name: params["title"], userstaged: tagged_users, categorytaged: params["categories"], document: @src,category_id: category.id)
+      return tagged_users
+  end
+
+# app.rb 
+  post '/upload' do
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+      file = params[:document][:tempfile]
+      @filename = params[:document][:filename]
+   
+      @src =  "/file/#{@filename}"
+      
+      category = Category.first(name: params["categories"])
+
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
      
       if doc.save
         
@@ -355,6 +362,8 @@ class App < Sinatra::Base
     category = Category.first(name: params["categories"])
     Document.where(id: params[:id]).update(delete: true)
     set_notifications_number
+
+
     doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"],category_id: category.id,document: params[:id])
     if doc.save
       tag(params["users"],doc)
@@ -376,9 +385,11 @@ class App < Sinatra::Base
   end
 
    def set_unread_number
-    getdocs = Notification.select(:document_id).where(user_id: @current_user.id)
-    documents = Document.select(:id).where(id: getdocs,delete: false)
-    @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
+    if @current_user
+      getdocs = Notification.select(:document_id).where(user_id: @current_user.id)
+      documents = Document.select(:id).where(id: getdocs,delete: false)
+      @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
+    end
   end
   
   def user_not_logger_in?

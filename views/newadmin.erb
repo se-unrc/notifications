@@ -24,7 +24,12 @@
                     </div>
                 <% end %>   
 		        <div class="form-group">
-		            <input type="text" name="username" class="form-control" placeholder="Username" required="required">
+		            <input list="userlist" type="text" name="username" class="form-control" placeholder="Username" required="required" autocomplete="off">
+		                <datalist id="userlist">
+               			<% @users.each do |u| %>
+               			<option value=<%= u.username %>><%= u.username%></option>
+               			<% end %>
+               		</datalist>
 		        </div>
 		        <div class="form-group">
 		            <button type="submit" class="btn btn-primary btn-block">SEND</button>

@@ -32,6 +32,9 @@
       		<li class="nav-item dropdown" style="display:<%= @logged %>;">
    				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
    				<div class="dropdown-menu">
+              <% if @current_user %>
+                <a class="dropdown-item disabled text-center"><%= @current_user.name.upcase %></a>
+              <% end %>
       				<a class="dropdown-item" href="/subscribe"> Suscribe to new categories</a>
       				<a class="dropdown-item" href="/mycategories"> View your categories</a>
       				<a class="dropdown-item" href="/unsubscribe"> Unsubscribe from a category</a>
