@@ -17,17 +17,11 @@
           
         </style>
     </head>
-    <body>
-        <p>Usuario: <%= @user %></p>
-    
-        <p>Email:</p>
-        <form action="/test" method="POST">
-          <p>Presione "Solicitar" para recibir información en linea</p>
-          <input type="submit" value="Solicitar">
-
-        </form>
-        <h2>Documentos cargados</h2>
-
+    <% if @current_user %>
+      Usuario: <%= @current_user.name %></br>
+      Email: <%= @current_user.email %></br>
+    <% end %>    
+    <h2>Documentos cargados</h2>
       <table> 
 		    <tr>
 		        <th scope="col">Nombre</th>
@@ -38,8 +32,7 @@
 		    </thead>
 		     <% @documents.each do |doc| %>
 		    <tbody>
-		 
-    	    <tr>
+		      <tr>
            <th><a  href="/view/<%= doc.name %>"><%= doc.name %></a></th>
  			     <td><%= doc.date %></td>
  			     <td><%= doc.uploader %></td>
@@ -49,4 +42,33 @@
 		    </tbody>
 		</table>
     </body>
+    <body>
+      <h1>Simple Echo & Chat Server</h1>     
+      <form id="form">       
+      <input type="text" id="input" value="Escribe algo.."></input>
+      </form>    
+      <div id="msgs"></div> 
+    </body> 
+      <script type="text/javascript"> 
+        window.onload = function(){
+        (function(){        
+          var show = function(el){
+            return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
+          }(document.getElementById('msgs'));
+          var ws       = new WebSocket('ws://' + window.location.host + window.location.pathname);        
+          ws.onopen    = function()  { show('websocket abierto'); };        
+          ws.onclose   = function()  { show('websocket cerrado'); }        
+          ws.onmessage = function(m) { show('websocket mensaje: ' +  m.data); };
+          var sender = function(f){
+            var input     = document.getElementById('input');          
+            input.onclick = function(){ input.value = "" };          
+            f.onsubmit    = function(){
+              ws.send(input.value);            
+              input.value = "Escribe algo..";
+              return false;
+            }
+          }(document.getElementById('form'));
+        })();
+      }  
+    </script>
 </html>

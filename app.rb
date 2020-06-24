@@ -18,14 +18,13 @@ class App < Sinatra::Base
     set :sockets, []
     
   end
-
- before do
-    @path = request.path_info
-    
-    if !session[:user_id] && @path != '/login' && @path != '/register'
-      redirect '/login'
-    elsif session[:user_id]
-      @user = User.find(id: session[:user_id])
+  
+  PUBLIC_PAGES = ["/", "/register", "/login"]
+  before do
+    if session[:user_id]
+      @current_user = User.first(id: session[:user_id])
+    elsif !PUBLIC_PAGES.include?(request.path_info)
+      redirect "/login"
     end
   end
 
@@ -41,29 +40,29 @@ class App < Sinatra::Base
   	erb :index, :layout => :layoutlogin
   end
 
-  get "/test" do
-    if !request.websocket?
-      erb:testing, :layout => :layoutlogin
-    else
-      request.websocket do |ws|
-        ws.onopen do
-          ws.send("connected!");
-          settings.sockets << ws
-        end
-        ws.onmessage do |msg|
-          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
-        end
-        ws.onclose do
-          warn{"Disconnected"}
-          settings.sockets.delete(ws)
-        end
-      end
-    end
-  end
+#  get "/test" do
+ #   if !request.websocket?
+  #    erb:testing, :layout => :layoutlogin
+   # else
+    #  request.websocket do |ws|
+     #   ws.onopen do
+      #    ws.send("connectado!");
+       #   settings.sockets << ws
+        #end
+        #ws.onmessage do |msg|
+         # EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+        #end
+        #ws.onclose do
+         # warn{"Desconectado!"}
+          #settings.sockets.delete(ws)
+        #end
+      #end
+    #end
+  #end
 
-  post '/test' do
-    erb :testing, :layout => :layoutlogin
-  end
+  #post '/test' do
+   # erb :testing, :layout => :layoutlogin
+  #end
  
   # Add new user
   get "/register" do
@@ -111,9 +110,27 @@ class App < Sinatra::Base
   # Endpoints for handles profile
   get "/profile" do
     @documents = Document.all
-    @user = session[:user_id]
-    erb :perfil , :layout => :layoutlogin
+    @user = session[:user_id]    
+    if !request.websocket?
+      erb :perfil , :layout => :layoutlogin
+    else
+      request.websocket do |ws|
+        ws.onopen do
+          ws.send("connectado!");
+          settings.sockets << ws
+        end
+        ws.onmessage do |msg|
+          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+        end
+        ws.onclose do
+          warn{"Desconectado!"}
+          settings.sockets.delete(ws)
+        end
+      end
+    end
   end
+
+
 
   # Endpoints for upload a document
   get '/documents' do
@@ -149,6 +166,10 @@ class App < Sinatra::Base
       end
       user = User.find(id: session[:user_id]).username
       doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
+
+      #notifica a todos los clientes
+      settings.sockets.each{ |s| s.send("Documento <b>#{@filename}</b> cargado") }
+
       if doc.save
         redirect "/documents"
       else
@@ -162,9 +183,10 @@ class App < Sinatra::Base
   end
 
   get '/remove/:doc_name' do
-      docu = Document.where(name: params[:doc_name])
-      docu.delete
-      if docu.delete
+      @docu = Document.where(name: params[:doc_name])
+      @docu.delete
+      if @docu.delete
+        settings.sockets.each{ |s| s.send("Se borró un documento") }
         redirect "/documents"
       else
         [500, {}, "Internal Server Error"]
