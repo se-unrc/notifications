@@ -1,6 +1,7 @@
 class Document < Sequel::Model
     many_to_one :categories
     many_to_many :users
+    one_to_one :notification
     plugin :validation_helpers
     def validate
       super

@@ -456,18 +456,15 @@ end
     @prob = User.all
     @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
     @doc.save
-    @notification = Notification.new(description: params['description'], date: date, document_id: @doc)
-    @notification.save
     @aux = params[:mult]
-    @aux && @aux.each do |element|
+    @aux.each do |element|
       @doc.add_user(element)
-      @notification.add_user(element)
     end
-    settings.sockets.each do |s|
-        aux = "Notificaciones"
-        s[:socket].send(aux)
-      end
-    redirect "/all_document"
+    @notification = Notification.new(description: params['description'], date: date, document_id: @doc.id)
+    @notification.save
+    @aux.each do |element|
+      @notification.add_user(@olita)
+    end
   end
 
   #   @userTag = params[:mult]
@@ -486,6 +483,11 @@ end
   post "/delete_document" do
     @pdfDelete = Document.find(id: params[:theId])
     @pdfDelete.remove_all_users
+    @notification = Notification.where(document_id: @pdfDelete.id).all
+    @notification.each do |element|
+        element.remove_all_users
+        element.delete
+      end
     @pdfDelete.delete
     redirect "/all_document"
   end
