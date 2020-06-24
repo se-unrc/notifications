@@ -27,9 +27,6 @@ class App < Sinatra::Base
       redirect '/login'
     elsif session[:user_id] 
       @current_user = User.find(id: session[:user_id])
-      getdocs = Notification.select(:document_id).where(user_id: @current_user.id)
-      documents = Document.select(:id).where(id: getdocs,delete: false)
-      @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
 
       @visibility = @current_user.role == "user" ? "none" : "inline"
       if session_path?
@@ -41,72 +38,7 @@ class App < Sinatra::Base
 
   end
 
-  def user_not_logger_in?
-    !session[:user_id]
-  end
-
-  def restricted_path?
-    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
-  end
-
-  def session_path?
-    request.path_info == '/login' || request.path_info == '/signup'
-  end
-
-  def admin_path?
-    request.path_info == '/newadmin' || request.path_info == '/upload' || request.path_info == '/editdocument'
-  end
-
-  def not_authorized_user?
-    @current_user.role == "user"
-  end 
-
-  def filter (userfilter, datefilter, categoryfilter)
-    filter_docs = []
-      user = User.first(username: userfilter) 
-      if user
-        filter_docs = user.documents_dataset.where(motive: "taged").to_a
-        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed").to_a
-      else
-        filter_docs = Document.order(:date).reverse.all
-      end
-      doc_date = datefilter == "" ? filter_docs : Document.first(date: datefilter)
-      if doc_date
-        filter_docs = datefilter == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date } 
-      else
-        filter_docs = []
-      end  
-      category = Category.first(name: categoryfilter)
-      filter_docs = categoryfilter == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
-      return filter_docs
-  end
-
-  def tag (users,doc)
-
-    usuario = users
-    usuario.each do |userr|
-   
-      user = User.first(username: userr)
-      if user 
-        user.add_document(doc)
-        user.save
-        Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
-      end
-    end    
-
-    suscribeds = Subscription.where(category_id: doc.category_id)
-    suscribeds.each do |suscribed|
-      suscr = User.first(id: suscribed.user_id)
-      if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
-        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
-      elsif suscr 
-        suscr.add_document(doc)
-        suscr.save
-        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
-      end
-    end  
-  end
-
+ 
 
   get '/' do
     if !request.websocket?
@@ -138,6 +70,7 @@ class App < Sinatra::Base
 
     if params[:remove] 
       Document.first(id: params[:remove]).update(delete: true)
+      set_notifications_number
     end
 
     if params[:userfilter] || params[:datefilter] || params[:categoryfilter]   
@@ -146,7 +79,8 @@ class App < Sinatra::Base
       @documents = Document.order(:date).reverse.where(delete: false)
     end
     @categories = Category.all
-    erb :docs, :layout => :layout
+    set_unread_number
+    erb :docs
   end
 
   get "/aboutus" do
@@ -187,6 +121,7 @@ class App < Sinatra::Base
   get "/upload" do
     @categories = Category.all
     @users = User.all
+    set_unread_number
     erb :upload, :layout => :layout
   end
 
@@ -202,6 +137,7 @@ class App < Sinatra::Base
     if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
       Notification.first(document_id: params[:id],user_id: @current_user.id).update(read: true)
     end
+    set_unread_number
     erb :notifications
   end
 
@@ -209,6 +145,7 @@ class App < Sinatra::Base
     if @current_user.categories_dataset.to_a.length > 0
       @categories =  @current_user.categories_dataset
     end
+    set_unread_number
     erb :yourcats, :layout=> :layout
   end
 
@@ -219,6 +156,7 @@ class App < Sinatra::Base
     if mydocstagedsubs.union(mydocstaged).count > 0
       @documents = Document.where(id: mydocstagedsubs.union(mydocstaged))
     end
+    set_unread_number
     erb :yourdocs, :layout=> :layout
   end
 
@@ -226,6 +164,7 @@ class App < Sinatra::Base
     if @current_user.categories_dataset.to_a.length > 0
       @categories =  @current_user.categories_dataset
     end
+    set_unread_number
     erb :deletecats, :layout=> :layout
   end
 
@@ -314,20 +253,18 @@ class App < Sinatra::Base
         cp(file.path, "public/file/#{doc.id}.pdf")
         
         tag(params["users"],doc)
-        
-        settings.sockets.each{|s| 
-          unread = Notification.where(user_id: s[:user],read: false).to_a.length
-          s[:socket].send(unread.to_s)
-        } 
+        set_notifications_number
 
         @success = "The document has been uploaded"
         @categories = Category.all
         @users = User.all
+        set_unread_number
         erb :upload, :layout => :layout
        
       else 
         @error = "An error has ocurred when trying to upload the document"
         @categories = Category.all
+        set_unread_number
         erb :upload, :layout => :layout
       end
     end
@@ -364,6 +301,7 @@ class App < Sinatra::Base
       else
         User.where(username: params[:username]).update(role: 'admin')
         @success = "#{params[:username]} has been promoted to admin"
+        set_unread_number
         erb  :newadmin, :layout => :layout
       end
     else 
@@ -379,6 +317,7 @@ class App < Sinatra::Base
       if @current_user.categories_dataset.to_a.length > 0
         @categories =  @current_user.categories_dataset
       end
+      set_unread_number
       erb  :deletecats, :layout => :layout
     else
       @error = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
@@ -403,7 +342,8 @@ class App < Sinatra::Base
       doc = document.document
       @src = "/file/" + doc + ".pdf"
       if params[:read] == "true" && session[:user_id]
-        Notification.first(document_id: params[:doc_id],user_id: session[:user_id]).update(read: true)
+        Notification.first(document_id: params["id"],user_id: session[:user_id]).update(read: true)
+        set_notifications_number
       end
       erb :preview, :layout=> :doclayout
     else 
@@ -414,15 +354,98 @@ class App < Sinatra::Base
   post '/editdocument' do
     category = Category.first(name: params["categories"])
     Document.where(id: params[:id]).update(delete: true)
+    set_notifications_number
     doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"],category_id: category.id,document: params[:id])
     if doc.save
       tag(params["users"],doc)
       redirect '/documents'
     else
       @error = "An error has ocurred when trying edit the document"
+      set_unread_number
       erb :editinfo
     end    
   end 
+
+  def set_notifications_number 
+      settings.sockets.each{|s| 
+        getdocs = Notification.select(:document_id).where(user_id: s[:user])
+        documents = Document.select(:id).where(id: getdocs,delete: false)
+        unread = Notification.where(user_id: s[:user],document_id: documents,read: false).to_a.length
+        s[:socket].send(unread.to_s)
+      } 
+  end
+
+   def set_unread_number
+    getdocs = Notification.select(:document_id).where(user_id: @current_user.id)
+    documents = Document.select(:id).where(id: getdocs,delete: false)
+    @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
+  end
+  
+  def user_not_logger_in?
+    !session[:user_id]
+  end
+
+  def restricted_path?
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+  end
+
+  def session_path?
+    request.path_info == '/login' || request.path_info == '/signup'
+  end
+
+  def admin_path?
+    request.path_info == '/newadmin' || request.path_info == '/upload' || request.path_info == '/editdocument'
+  end
+
+  def not_authorized_user?
+    @current_user.role == "user"
+  end 
+
+  def filter (userfilter, datefilter, categoryfilter)
+    filter_docs = []
+      user = User.first(username: userfilter) 
+      if user
+        filter_docs = user.documents_dataset.where(motive: "taged").to_a
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed").to_a
+      else
+        filter_docs = Document.order(:date).reverse.all
+      end
+      doc_date = datefilter == "" ? filter_docs : Document.first(date: datefilter)
+      if doc_date
+        filter_docs = datefilter == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date } 
+      else
+        filter_docs = []
+      end  
+      category = Category.first(name: categoryfilter)
+      filter_docs = categoryfilter == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+      return filter_docs
+  end
+
+  def tag (users,doc)
+
+    usuario = users
+    usuario.each do |userr|
+   
+      user = User.first(username: userr)
+      if user 
+        user.add_document(doc)
+        user.save
+        Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+      end
+    end    
+
+    suscribeds = Subscription.where(category_id: doc.category_id)
+    suscribeds.each do |suscribed|
+      suscr = User.first(id: suscribed.user_id)
+      if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
+        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+      elsif suscr 
+        suscr.add_document(doc)
+        suscr.save
+        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+      end
+    end  
+  end
 
 end 
 

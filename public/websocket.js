@@ -8,7 +8,8 @@ ws.onerror = e => {
 };
 ws.onmessage = e => {
   const msg = JSON.parse(e.data)
-  document.getElementById("unread").innerHTML=msg
+  document.getElementById("unread").innerHTML=msg;
+  document.getElementById("unread").style= 'display: none;';
   //console.log(e.data);
 };
 ws.onclose = () => {
