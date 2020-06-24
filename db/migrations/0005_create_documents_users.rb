@@ -8,6 +8,6 @@ Sequel.migration do
     end
   end
   down do
-    drop_table :categories_users
+    drop_table :document_users
   end
 end

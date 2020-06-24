@@ -43,25 +43,49 @@ class App < Sinatra::Base
     end
   end
 
-  get "/test" do
-     if !request.websocket?
-       erb:testing
-     else
-       request.websocket do |ws|
-         ws.onopen do
-           ws.send("connected!");
-           settings.sockets << ws
-         end
-         ws.onmessage do |msg|
-           EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
-         end
-         ws.onclose do
-           warn{"Disconnected"}
-           settings.sockets.delete(ws)
-         end
-       end
-     end
-   end
+  # get "/test" do
+  #    if !request.websocket?
+  #      erb:testing
+  #    else
+  #      request.websocket do |ws|
+  #        ws.onopen do
+  #          ws.send("connected!");
+  #          settings.sockets << ws
+  #        end
+  #        ws.onmessage do |msg|
+  #          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+  #        end
+  #        ws.onclose do
+  #          warn{"Disconnected"}
+  #          settings.sockets.delete(ws)
+  #        end
+  #      end
+  #    end
+  #  end
+
+
+  get "/rutaSocket" do
+    if !request.websocket?
+      erb:index, :layout=> :layoutEnUso
+    else
+      request.websocket do |ws|
+        ws.onopen do
+          @connection = {id_user: session[:user_id], socket: ws}
+          settings.sockets.add(@connection)
+        end
+        ws.onmessage do |msg|
+        end
+        ws.onclose do
+          ws.each do |element|
+            if element[:id_user] == session[:user_id]
+              settings.sockets.remove(element)
+            end
+          end
+        end
+      end
+    end
+  end
+
 
 
   get "/" do
@@ -80,6 +104,7 @@ class App < Sinatra::Base
   get "/login" do
     erb :login
   end
+
 
   get "/logout" do
     session[:isLogin] = false
@@ -303,9 +328,6 @@ end
   get "/create_document" do
       @userCreate = User.all
       @categories = Category.all
-      if @userTagged
-        @probadita = @userTagged
-      end
       erb:create_document, :layout =>@layoutEnUso
   end
 
@@ -414,6 +436,7 @@ end
     end
   end
 
+
   post '/create_document' do
     @filename = params[:PDF][:filename]
     @src =  "/public/PDF/#{@filename}"
@@ -433,12 +456,32 @@ end
     @prob = User.all
     @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
     @doc.save
+    @notification = Notification.new(description: params['description'], date: date, document_id: @doc)
+    @notification.save
     @aux = params[:mult]
     @aux && @aux.each do |element|
       @doc.add_user(element)
+      @notification.add_user(element)
     end
+    settings.sockets.each do |s|
+        aux = "Notificaciones"
+        s[:socket].send(aux)
+      end
     redirect "/all_document"
   end
+
+  #   @userTag = params[:mult]
+  # ##  @notification = Notification.new(description: params['description'], date: date, document_id: @doc.id)
+  #   ##@userTag && @userTag.each do |element|
+  #   ##  @doc.add_user(element)
+  #   ##  @notification.add_user(element)
+  #   end
+  #   settings.sockets.each do |s|
+  #     aux = "Notificaciones"
+  #     s[:socket].send(aux)
+  #   end
+  #   redirect "/all_document"
+  # end
 
   post "/delete_document" do
     @pdfDelete = Document.find(id: params[:theId])
@@ -476,4 +519,5 @@ end
     end
     redirect "/all_document"
   end
+
 end

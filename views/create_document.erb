@@ -1,20 +1,17 @@
 <head>
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 </head>
 <form method="post" action="create_document" enctype="multipart/form-data">
   <div class="row">
     <div class="container col-xl-4">
       <div class="backgroundFroms col-xl-10  text-center">
         <div class="form-group">
-          <label>Nombre del  documento:</label>
+          <label>Nombre del documento:</label>
           <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the name document" required>
         </div>
         <div class="form-group">
-          <label>Decripcion del document:</label>
+          <label>Descripcion del document:</label>
           <input type="text" class="form-control backgroundImput" name="description" placeholder="Input the description" required>
         </div>
         <div class="row">
@@ -28,45 +25,21 @@
     </div>
     <div class="container col-xl-4">
       <div class="backgroundFroms col-xl-10">
-          <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="cat">
-            <% @categories.each do |element| %>
+        <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="cat">
+          <% @categories.each do |element| %>
             <option value='<%= element.id%>'><%= element.name%></option>
-            <% end %>
-          </select>
+          <% end %>
+        </select>
       </div>
     </div>
     <div class="container col-xl-4">
-      <div class="backgroundFroms col-xl-10"">
-        <select class="selectpicker show-menu-arrow"
-            data-style="form-control"
-            data-live-search="true"
-            title="-- Select your coffee --"
-            multiple="multiple">
-          <option value=''>Seleccionar una marca</option>
-          <option value='audi'>Audi</option>
-          <option value='bmw'>BMW</option>
-          <option value='citroen'>Citroen</option>
-          <option value='fiat'>Fiat</option>
-          <option value='ford'>Ford</option>
-          <option value='honda'>Honda</option>
-          <option value='hyundai'>Hyundai</option>
-          <option value='kia'>Kia</option>
-          <option value='mazda'>Mazda</option>
+      <div class="backgroundFroms col-xl-10">
+        <select class="selectpicker show-menu-arrow" data-style="form-control" data-live-search="true" title="-- Selecciona los usuarios --" multiple="multiple" name="mult[]">
+         <%@userCreate && @userCreate.each do |element| %>
+          <option class=""  value = "<%= element.id%>" > <%= element.name%> </option>
+         <% end %>
         </select>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<script src="multiple-select.js"></script>
-<script>
-    $(function() {
-        $('#ms').change(function() {
-            console.log($(this).val());
-        }).multipleSelect({
-            width: '100%'
-        });
-    });
-</script>
 </form>
