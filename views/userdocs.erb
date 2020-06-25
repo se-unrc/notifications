@@ -45,7 +45,7 @@
 		    	  <th scope="col">Fecha</th>
 		        <th scope="col">Subido por</th>
 		        <th scope="col">Asunto</th>
-            <th scope="col">Accion</th>
+            
 		    </tr>
 		    </thead>
 		     <% @documents.each do |doc| %>
@@ -56,7 +56,7 @@
  			     <td><%= doc.date %></td>
  			     <td><%= doc.uploader %></td>
  			     <td><%= doc.subject %></td>
-           <th><a  href="/remove/<%= doc.name %>">Eliminar</a></th>	
+           
 			     <% end %>
 		      </tr>
 		    </tbody>
