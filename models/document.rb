@@ -2,7 +2,7 @@ class Document < Sequel::Model
 	plugin :validation_helpers
   def validate
     super
-    validates_presence [:name, :date, :uploader]
+    validates_presence [:name, :date, :uploader, :subject]
   end
   def index
      @documents = Document.all
