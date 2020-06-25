@@ -2,6 +2,7 @@ require 'sinatra/base'
 require "sinatra/config_file"
 require './models/user.rb'
 require './models/document.rb'
+require './models/documents_user.rb'
 require 'sinatra-websocket'
 
 class App < Sinatra::Base
@@ -118,6 +119,7 @@ class App < Sinatra::Base
     if user == 'admin'
       @isAdmin = true
       @documents = Document.all
+      @users = User.all
       erb :upload, :layout => :layoutlogin
     else
       @error = "Para acceder a documentos debe ser administrador, si desea serlo complete los campos"
@@ -135,7 +137,7 @@ class App < Sinatra::Base
     erb :upload, :layout => :layoutlogin
   end
   get '/userdocs' do
-    @documents = Document.all ##TODO en realidad aca quiero q muestre donde estoy etiquetado
+    @documents = Document.all ##TODO en realidad aca quiero q muestre solo los docs donde estoy etiquetado
     erb :userdocs, :layout => :layoutlogin
   end
   get '/publicdocs' do
@@ -154,9 +156,12 @@ class App < Sinatra::Base
       end
       user = User.find(id: session[:user_id]).username
       doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
+      
+      params["tagged"].each { |e| Documents_user.new(document_id: doc.id , user_id: (User.first(username: e).id)) }
+      #TODO etiquetar antes de informar 
       if doc.save
        
-         settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
+        settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
         redirect "/documents"
 
       else
