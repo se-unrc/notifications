@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <style>
+          table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+
+          td, th {
+            border: 1px solid #0066ff;
+            text-align: left;
+            padding: 8px;
+          }
+
+          
+        </style>
+        <title>MIS DOCUMENTOS</title>
+    </head>
+    <body>
+        <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Que documentos mostrar?
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="/userdocs">Solo Documentos de mi interes</a>
+    <a class="dropdown-item" href="/publicdocs">Todos los documentos</a>
+    
+  </div>
+</div>
+      <div class="container mt-3">
+        
+  
+        <h2>Documentos de mi interes</h2>
+                
+                <input class="form-control" id="myInput" type="text" placeholder="Buscar por Asunto, fecha, usuarios...">
+         <br>
+        
+     
+        <table class="table table-bordered">
+                <thead>
+      
+		    <tr>
+		        <th scope="col">Nombre</th>
+		    	  <th scope="col">Fecha</th>
+		        <th scope="col">Subido por</th>
+		        <th scope="col">Asunto</th>
+            <th scope="col">Accion</th>
+		    </tr>
+		    </thead>
+		     <% @documents.each do |doc| %>
+		    <tbody id="myTable">
+		 
+    	    <tr>
+           <th><a  href="/view/<%= doc.name %>"><%= doc.name %></a></th>
+ 			     <td><%= doc.date %></td>
+ 			     <td><%= doc.uploader %></td>
+ 			     <td><%= doc.subject %></td>
+           <th><a  href="/remove/<%= doc.name %>">Eliminar</a></th>	
+			     <% end %>
+		      </tr>
+		    </tbody>
+		</table>
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+   
+    </body>
+</html>
