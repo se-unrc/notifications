@@ -27,11 +27,18 @@ class App < Sinatra::Base
       redirect '/login'
     elsif session[:user_id]
       @user = User.find(id: session[:user_id])
+      is_admin
     end
-   
+    
   end
 
   use Rack::Session::Pool, :expire_after => 2592000
+  def is_admin
+    user = User.find(id: session[:user_id]).type
+    if user == 'admin'
+      @isAdmin = true
+    end
+  end
 
   get "/" do
     if !request.websocket?
@@ -109,6 +116,7 @@ class App < Sinatra::Base
   get '/documents' do
     user = User.find(id: session[:user_id]).type
     if user == 'admin'
+      @isAdmin = true
       @documents = Document.all
       erb :upload, :layout => :layoutlogin
     else
