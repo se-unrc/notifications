@@ -19,50 +19,39 @@ class App < Sinatra::Base
     
   end
   
-  PUBLIC_PAGES = ["/", "/register", "/login"]
   before do
-    if session[:user_id]
-      @current_user = User.first(id: session[:user_id])
-    elsif !PUBLIC_PAGES.include?(request.path_info)
-      redirect "/login"
+
+   @path = request.path_info
+    
+    if !session[:user_id] && @path != '/login' && @path != '/register'
+      redirect '/login'
+    elsif session[:user_id]
+      @user = User.find(id: session[:user_id])
     end
+   
   end
 
   use Rack::Session::Pool, :expire_after => 2592000
 
   get "/" do
-    logger.info "Session inicilized"
-    logger.info session["session_id"]
-    logger.info session.inspect
-    logger.info session[:user_id]
-    logger.info "--------------"
-    logger.info ""
-  	erb :index, :layout => :layoutlogin
+    if !request.websocket?
+      erb:index, :layout => :layoutlogin
+    else
+      request.websocket do |ws|
+        user = session[:user_id]
+        @connection = {user: user, socket: ws}
+        ws.onopen do
+          settings.sockets << @connection
+        end
+        ws.onclose do
+          warn("websocket closed")
+          settings.sockets.delete(ws)
+        end
+      end
+    end
   end
 
-#  get "/test" do
- #   if !request.websocket?
-  #    erb:testing, :layout => :layoutlogin
-   # else
-    #  request.websocket do |ws|
-     #   ws.onopen do
-      #    ws.send("connectado!");
-       #   settings.sockets << ws
-        #end
-        #ws.onmessage do |msg|
-         # EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
-        #end
-        #ws.onclose do
-         # warn{"Desconectado!"}
-          #settings.sockets.delete(ws)
-        #end
-      #end
-    #end
-  #end
-
-  #post '/test' do
-   # erb :testing, :layout => :layoutlogin
-  #end
+  
  
   # Add new user
   get "/register" do
@@ -110,27 +99,11 @@ class App < Sinatra::Base
   # Endpoints for handles profile
   get "/profile" do
     @documents = Document.all
-    @user = session[:user_id]    
-    if !request.websocket?
-      erb :perfil , :layout => :layoutlogin
-    else
-      request.websocket do |ws|
-        ws.onopen do
-          ws.send("connectado!");
-          settings.sockets << ws
-        end
-        ws.onmessage do |msg|
-          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
-        end
-        ws.onclose do
-          warn{"Desconectado!"}
-          settings.sockets.delete(ws)
-        end
-      end
-    end
+    @user = User.first(id: session[:user_id]).name
+    @mail = User.first(id: session[:user_id]).email
+    #@user = session[:user_id]
+    erb :perfil , :layout => :layoutlogin
   end
-
-
 
   # Endpoints for upload a document
   get '/documents' do
@@ -153,7 +126,14 @@ class App < Sinatra::Base
     @documents = filter_docs
     erb :upload, :layout => :layoutlogin
   end
-
+  get '/userdocs' do
+    @documents = Document.all ##TODO en realidad aca quiero q muestre donde estoy etiquetado
+    erb :userdocs, :layout => :layoutlogin
+  end
+  get '/publicdocs' do
+    @documents = Document.all 
+    erb :publicdocs, :layout => :layoutlogin
+  end
   get '/showdocument' do
     erb :show_file, :layout => :layoutlogin
   end
@@ -166,12 +146,11 @@ class App < Sinatra::Base
       end
       user = User.find(id: session[:user_id]).username
       doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
-
-      #notifica a todos los clientes
-      settings.sockets.each{ |s| s.send("Documento <b>#{@filename}</b> cargado") }
-
       if doc.save
+       
+         settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
         redirect "/documents"
+
       else
         [500, {}, "Internal Server Error"]
       end
@@ -183,10 +162,9 @@ class App < Sinatra::Base
   end
 
   get '/remove/:doc_name' do
-      @docu = Document.where(name: params[:doc_name])
-      @docu.delete
-      if @docu.delete
-        settings.sockets.each{ |s| s.send("Se borró un documento") }
+      docu = Document.where(name: params[:doc_name])
+      docu.delete
+      if docu.delete
         redirect "/documents"
       else
         [500, {}, "Internal Server Error"]
