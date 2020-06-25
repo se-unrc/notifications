@@ -31,6 +31,16 @@
         </div>
     </nav>
     <section style="height: 600px;margin: 2px;">
+    <div class="container mt-3">
+      <div class="toast mt-3">
+        <div class="toast-header">
+            NUEVO DOCUMENTO!
+        </div>
+        <div class="toast-body">
+          Han cargado un nuevo documento!
+        </div>
+      </div>
+    </div>
        <article>
          <%= yield %>
       </article>
@@ -48,18 +58,7 @@
             <p class="copyright" style="color: #4b4c4d;">Analisis y Diseño de Sistemas 2020</p>
         </footer>
     </div>
-<div class="container mt-3">
-  
 
-  <div class="toast mt-3">
-    <div class="toast-header">
-      NUEVO DOCUMENTO!
-    </div>
-    <div class="toast-body">
-      Han cargado un nuevo documento!
-    </div>
-  </div>
-</div>
 <script type="text/javascript"> 
    window.onload = function(){
       (function(){        
@@ -74,6 +73,7 @@
   </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>
