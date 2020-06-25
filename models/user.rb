@@ -1,7 +1,7 @@
 class User < Sequel::Model
-      many_to_many  :categories
-      many_to_many :documents
-      many_to_many :notifications
+    many_to_many  :categories
+    many_to_many :documents
+    one_to_many :relations
       plugin :validation_helpers
       def validate
         super

@@ -65,26 +65,28 @@ class App < Sinatra::Base
 
 
   get "/rutaSocket" do
-    if !request.websocket?
-      erb:index, :layout=> :layoutEnUso
-    else
-      request.websocket do |ws|
-        ws.onopen do
-          @connection = {id_user: session[:user_id], socket: ws}
-          settings.sockets.add(@connection)
-        end
-        ws.onmessage do |msg|
-        end
-        ws.onclose do
-          ws.each do |element|
-            if element[:id_user] == session[:user_id]
-              settings.sockets.remove(element)
-            end
-          end
-        end
-      end
+    # if !request.websocket?
+    #   erb:index, :layout=> :layoutEnUso
+    # else
+    #   request.websocket do |ws|
+    #     ws.onopen do
+    #       @connection = {id_user: session[:user_id], socket: ws}
+    #       settings.sockets.add(@connection)
+    #     end
+    #     ws.onmessage do |msg|
+    #       EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
+    #     end
+    #     ws.onclose do
+    #       ws.each do |element|
+    #         if element[:id_user] == session[:user_id]
+    #           settings.sockets.remove(element)
+    #         end
+    #       end
+    #
+    #     end
+    #   end
     end
-  end
+
 
 
 
@@ -98,8 +100,14 @@ class App < Sinatra::Base
     logger.info settings.db_adapter
     logger.info "--------------"
     @document = Document.all
+
+    # @connection = {user: user, socket: ws}
+    #     ws.onopen do
+    #       settings.sockets << @connection
+    #     end
     erb :index
   end
+
 
   get "/login" do
     erb :login
@@ -166,7 +174,7 @@ class App < Sinatra::Base
       [400, {}, "ya existe el usuario"]
     else
       @newUserName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      @newUserName.admin=false
+      @newUserName.admin=true
       if @newUserName.save
         redirect "/login"
       else
@@ -333,7 +341,7 @@ end
 
   get "/tag_document" do
     if session[:type]==true
-      @document[] = documents_users#modificar por documetnos taggeados
+      @document[] = documents_users
       erb :profile, :layout =>@layoutEnUso
     else
       redirect "/"
@@ -341,15 +349,86 @@ end
   end
 
   get "/all_documentUser" do
-    if params[:filter]
-      if Document.find(name: params[:filter])
-        @allPdf = [Document.find(name: params[:filter])]
-        erb:all_documentUser, :layout =>@layoutEnUso
+    # @allDoc = Document.all
+    if params[:filterName] && params[:filterName]!=""
+      if params[:dateDoc] && params[:dateDoc] != ""
+        if params[:filter] && params[:filter] == "dateO"
+          if params[:category] && params[:category] != ""
+            @idCategory = Category.find(name: params[:category])
+            @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc], category_id: @idCategory.id).order(:date)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          else
+            @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc]).order(:date)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          end
+        else
+          if params[:category] && params[:category] != ""
+            @idCategory = Category.find(name: params[:category])
+            @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc], category_id: @idCategory.id).order(:name)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          else
+            @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc]).order(:name)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          end
+        end
+      else
+        if params[:filter] && params[:filter] == "dateO"
+          if params[:category] && params[:category] != ""
+            @idCategory = Category.find(name: params[:category])
+            @allPdf = Document.where(name: params[:filterName], category_id: @idCategory.id).order(:date)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          else
+            @allPdf = Document.where(name: params[:filterName]).order(:date)
+            erb:all_documentUser, :layout =>@layoutEnUso
+          end
+        else
+          @allPdf = Document.where(name: params[:filterName]).order(:name)
+          erb:all_documentUser, :layout =>@layoutEnUso
+        end
       end
-    else
-      @allPdf = Document.order(:name)
-      erb:all_documentUser, :layout =>@layoutEnUso
-    end
+      else
+        if params[:dateDoc] && params[:dateDoc] != ""
+          if params[:filter] && params[:filter] == "dateO"
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:date)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.where(date: params[:dateDoc]).order(:date)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            end
+          else
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:name)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.where(date: params[:dateDoc]).order(:name)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            end
+          end
+        else
+          if params[:filter] && params[:filter] == "dateO"
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(category_id: @idCategory.id).order(:date)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.order(:date)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            end
+          else
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(category_id: @idCategory.id).order(:name)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.order(:name)
+              erb:all_documentUser, :layout =>@layoutEnUso
+            end
+          end
+        end
+      end
   end
 
   get "/all_document" do
@@ -361,19 +440,19 @@ end
           if params[:category] && params[:category] != ""
             @idCategory = Category.find(name: params[:category])
             @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc], category_id: @idCategory.id).order(:date)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           else
             @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc]).order(:date)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           end
         else
           if params[:category] && params[:category] != ""
             @idCategory = Category.find(name: params[:category])
             @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc], category_id: @idCategory.id).order(:name)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           else
             @allPdf = Document.where(name: params[:filterName], date: params[:dateDoc]).order(:name)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           end
         end
       else
@@ -381,60 +460,60 @@ end
           if params[:category] && params[:category] != ""
             @idCategory = Category.find(name: params[:category])
             @allPdf = Document.where(name: params[:filterName], category_id: @idCategory.id).order(:date)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           else
             @allPdf = Document.where(name: params[:filterName]).order(:date)
-            erb:all_document, :layout => :layout_admin
+            erb:all_document, :layout =>@layoutEnUso
           end
         else
           @allPdf = Document.where(name: params[:filterName]).order(:name)
-          erb:all_document, :layout => :layout_admin
+          erb:all_document, :layout =>@layoutEnUso
         end
       end
-    else
-      if params[:dateDoc] && params[:dateDoc] != ""
-        if params[:filter] && params[:filter] == "dateO"
-          if params[:category] && params[:category] != ""
-            @idCategory = Category.find(name: params[:category])
-            @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:date)
-            erb:all_document, :layout => :layout_admin
-          else
-            @allPdf = Document.where(date: params[:dateDoc]).order(:date)
-            erb:all_document, :layout => :layout_admin
-          end
-        else
-          if params[:category] && params[:category] != ""
-            @idCategory = Category.find(name: params[:category])
-            @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:name)
-            erb:all_document, :layout => :layout_admin
-          else
-            @allPdf = Document.where(date: params[:dateDoc]).order(:name)
-            erb:all_document, :layout => :layout_admin
-          end
-        end
       else
-        if params[:filter] && params[:filter] == "dateO"
-          if params[:category] && params[:category] != ""
-            @idCategory = Category.find(name: params[:category])
-            @allPdf = Document.where(category_id: @idCategory.id).order(:date)
-            erb:all_document, :layout => :layout_admin
+        if params[:dateDoc] && params[:dateDoc] != ""
+          if params[:filter] && params[:filter] == "dateO"
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:date)
+              erb:all_document, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.where(date: params[:dateDoc]).order(:date)
+              erb:all_document, :layout =>@layoutEnUso
+            end
           else
-            @allPdf = Document.order(:date)
-            erb:all_document, :layout => :layout_admin
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(date: params[:dateDoc], category_id: @idCategory.id).order(:name)
+              erb:all_document, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.where(date: params[:dateDoc]).order(:name)
+              erb:all_document, :layout =>@layoutEnUso
+            end
           end
         else
-          if params[:category] && params[:category] != ""
-            @idCategory = Category.find(name: params[:category])
-            @allPdf = Document.where(category_id: @idCategory.id).order(:name)
-            erb:all_document, :layout => :layout_admin
+          if params[:filter] && params[:filter] == "dateO"
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(category_id: @idCategory.id).order(:date)
+              erb:all_document, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.order(:date)
+              erb:all_document, :layout =>@layoutEnUso
+            end
           else
-            @allPdf = Document.order(:name)
-            erb:all_document, :layout => :layout_admin
+            if params[:category] && params[:category] != ""
+              @idCategory = Category.find(name: params[:category])
+              @allPdf = Document.where(category_id: @idCategory.id).order(:name)
+              erb:all_document, :layout =>@layoutEnUso
+            else
+              @allPdf = Document.order(:name)
+              erb:all_document, :layout =>@layoutEnUso
+            end
           end
         end
       end
     end
-  end
 
 
   post '/create_document' do
@@ -445,40 +524,48 @@ end
     File.open("./public/PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
-    if (Document.find(name: params['name']))
-      redirect "/create_document"
-    end
-    if (Document.find(description: params['description']))
-      redirect "/create_document"
-    end
     date = Time.now.strftime("%Y-%m-%d")
+    dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     chosenCategory = Category.find(id: params[:cat])
     @prob = User.all
-    @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
-    @doc.save
-    @aux = params[:mult]
-    @aux.each do |element|
-      @doc.add_user(element)
+    if !(@docExi= Document.find(name: params['name']) || @docExi= Document.find(description: params['description']))
+      @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+      @doc.save
+      #@notDes = "Te etiquetaron en un documento"
+      @notification = Notification.new(description: params['description'], date: dateNot, document_id: @doc.id)
+      @notification.save
+      @aux = params[:mult]
+      @aux &&  @aux.each do |element|
+        @doc.add_user(element)
+        @notification.add_user(element)
+        # @notifactionUsers = NotificationUser.where(notification_id: @notification.id, user_id: element).first;
+        # @notifactionUsers.update(seen:true);
+      end
+
+      # settings.sockets.each do |s|
+      #     aux = "Notificaciones"
+      #     s[:socket].send(aux)
+      #   end
+      redirect "/all_document"
+    else
+      @userCreate = User.all
+      @categories = Category.all
+      @errormsg = "El Documento/descripción ya existen"
+      erb :create_document, :layout =>@layoutEnUso
     end
-    @notification = Notification.new(description: params['description'], date: date, document_id: @doc.id)
-    @notification.save
-    @aux.each do |element|
-      @notification.add_user(@olita)
-    end
+
   end
 
-  #   @userTag = params[:mult]
-  # ##  @notification = Notification.new(description: params['description'], date: date, document_id: @doc.id)
-  #   ##@userTag && @userTag.each do |element|
-  #   ##  @doc.add_user(element)
-  #   ##  @notification.add_user(element)
+
+  #   @userTag && @userTag.each do |element|
+  #   @doc.add_user(element)
+  #    @notification.add_user(element)
   #   end
   #   settings.sockets.each do |s|
   #     aux = "Notificaciones"
   #     s[:socket].send(aux)
   #   end
-  #   redirect "/all_document"
-  # end
+
 
   post "/delete_document" do
     @pdfDelete = Document.find(id: params[:theId])
@@ -495,7 +582,7 @@ end
   post "/selected_document" do
     @allCat = Category.all
     @userCreate = User.all
-    erb :selected_document, :layout => :layout_admin
+    erb :selected_document, :layout =>@layoutEnUso
   end
 
   post "/modify_document" do

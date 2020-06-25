@@ -13,7 +13,7 @@
           return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
         }(document.getElementById('msgs'));
         var ws = new WebSocket('ws://' + window.location.host + window.location.pathname);
-        ws.onopen = function() { show('websocket opened'); };
+        ws.onopen = function() { show('websocket opened'); alert("Conexion Abierta");};
         ws.onclose = function() { show('websocket closed'); }
         ws.onmessage = function(m) { show('websocket message: ' + m.data); };
 
@@ -30,3 +30,20 @@
     }
   </script>
 </html>
+
+<!-- <script type="text/javascript">
+  var ws;
+    function IniciarConexion(){
+      ws = new WebSocket("ws://echo.websocket.org");
+      ws.onopen = function(){
+        alert("Conexion Abierta");
+      }
+      ws.onmessage = function(Mensajes){
+        var MensajesObtenidos = "Probando";
+        alert("PROBANDDO);
+      }
+      ws.onclose = function(){
+        alert("Conexion cerrada");
+      }
+    }
+</script> -->

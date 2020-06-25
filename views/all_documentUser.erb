@@ -1,9 +1,34 @@
-<form  class="row backgroundHs" action="/all_document" method="get">
-  <div class="col-xs-6 m-auto">
-    <input type="text" class="form-control backgroundImput" name="filter" placeholder="Input the name document">
+<form  class="row backgroundHs" action="/all_documentUser" method="get">
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <input type="text" class="col-xl-10 backgroundImput form-control" name="filterName" placeholder="name document"> -->
   </div>
-  <div class="col-xs-3 m-auto">
-    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Buscar</button>
+  <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <input list="browsers" name="filterName" class="col-xl-10 backgroundImput form-control"/>
+      <datalist id="browsers">
+        <%@allDoc && @allDoc.each do |element|%>
+          <option value="<%=element.name%>">
+        <%end%>
+      </datalist>
+  </div> -->
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <input class="col-xl-10 backgroundImput form-control" id="date" type="date" name="dateDoc">
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <select name="filter" class="col-xl-10 backgroundImput form-control">
+      <option value="nameO">Nombre</option>
+      <option value="dateO">Fecha</option>
+    </select>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <input list="browsers" name="category" class="col-xl-10 backgroundImput form-control" placeholder="Ingrese categoria"/>
+      <datalist id="browsers">
+        <%@allCat && @allCat.each do |element|%>
+          <option value="<%=element.name%>">
+        <%end%>
+      </datalist>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Filtrar</button>
   </div>
 </form>
 <div class="row">
