@@ -1,15 +1,26 @@
+
 <form  class="row backgroundHs" action="/all_documentUser" method="get">
   <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <input type="text" class="col-xl-10 backgroundImput form-control" name="filterName" placeholder="name document"> -->
-  </div>
-  <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <input list="browsers" name="filterName" class="col-xl-10 backgroundImput form-control"/>
-      <datalist id="browsers">
+
+
+    <!-- <select class="mdb-select validate md-form" searchable="Search here..">
+      <option value="" disabled selected>Choose your country</option>
+      <option value="1">USA</option>
+      <option value="2">Germany</option>
+      <option value="3">France</option>
+      <option value="4">Poland</option>
+      <option value="5">Japan</option>
+    </select> -->
+
+      <select class="selectpicker col-xl-10 backgroundImput form-control" data-show-subtext="true" data-live-search="true" name="filterName">
+        <option value="" checked> Buscar por nombre
         <%@allDoc && @allDoc.each do |element|%>
-          <option value="<%=element.name%>">
+          <option value="<%=element.name%>"><%=element.name%>
         <%end%>
-      </datalist>
-  </div> -->
+      </select>
+
+
+  </div>
   <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
     <input class="col-xl-10 backgroundImput form-control" id="date" type="date" name="dateDoc">
   </div>
@@ -20,12 +31,12 @@
     </select>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <input list="browsers" name="category" class="col-xl-10 backgroundImput form-control" placeholder="Ingrese categoria"/>
-      <datalist id="browsers">
+    <select class="selectpicker" class="col-xl-10 backgroundImput form-control" data-show-subtext="true" data-live-search="true" name="category">
+        <option value="" checked> Buscar categoría
         <%@allCat && @allCat.each do |element|%>
-          <option value="<%=element.name%>">
+          <option value="<%=element.name%>"><%=element.name%>
         <%end%>
-      </datalist>
+      </select>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
     <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Filtrar</button>

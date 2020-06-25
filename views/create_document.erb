@@ -3,9 +3,11 @@
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
 </head>
 <% if  @errormsg  %>
-  <h3 class="container backgroundHs col-12"><%= @errormsg%></h3>
+<div class="alert alert-success" role="alert">
+  <%= @errormsg %>
+</div>
 <% end %>
-<form method="post" action="create_document" enctype="multipart/form-data">
+<form id="form" method="post" action="create_document" enctype="multipart/form-data">
   <div class="row">
     <div class="container col-xl-4">
       <div class="backgroundFroms col-xl-10  text-center">
@@ -21,7 +23,7 @@
           <div class="container col-12 form-group m-auto">
             <input type="button"  value="Seleccione un archivo" id="buttonIndex" class="buttonIndex" onclick="document.getElementById('file').click();"  required/>
             <input type="file" style="display:none;" id="file" name="PDF" accept=".pdf" required />
-            <button id="buttonIndex" type="submit" onclick="Validacion()">Subir</button>
+            <button id="buttonIndex" type="submit">Subir</button>
           </div>
         </div>
       </div>
@@ -45,16 +47,4 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-      function Validacion(){
-        const ws = new WebSocket('ws://' + window.location.host + window.location.pathname);
-        ws.on = ('open', function open(){
-          ws.send('asd');
-        });
-        ws.on = ('message', function incomig(data){
-          console.log(data);
-        });
-      }
-  </script>
 </form>
