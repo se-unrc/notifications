@@ -59,24 +59,23 @@ class App < Sinatra::Base
     end
   end
 
-  def send_email(useremail, doc, user)
+  def send_email(useremail, doc, user, motive)
 
     @document = doc
+
     @user = User.find(username: user).name
 
-    userid = User.find(username: user).id
+    if motive == 'taged'
 
-    if Notification.find(document_id: doc.id, user_id: userid).motive == 'taged'
+      @motive = "You have been tagged in a document from the #{doc.categorytaged} category."
 
-      @motive = "A new document from the #{doc.categorytaged} category has been uploaded!"
-
-    elsif Notification.find(document_id: doc.id, user_id: userid). motive == 'taged and subscribed'
+    elsif motive == 'taged and subscribed'
         
-      @motive = "You have been tagged in a document from the #{doc.categorytaged} category to which you are subscribed"
+      @motive = "You have been tagged in a document from the #{doc.categorytaged} category to which you are subscribed."
 
-    elsif Notification.find(document_id: doc.id, user_id: userid). motive == 'subscribed'
+    elsif motive == 'subscribed'
 
-      @motive = "A new document from the #{doc.categorytaged} category has been uploaded"
+      @motive = "A new document from the #{doc.categorytaged} category has been uploaded."
 
     end
 
@@ -335,15 +334,6 @@ class App < Sinatra::Base
         
         tag(params["users"],doc) 
 
-        if params["users"]
-
-          params["users"].each do |u|
-
-            send_email(User.find(username: u).email, doc, u)
-
-          end
-
-        end
 
 
         set_notifications_number
@@ -526,7 +516,8 @@ class App < Sinatra::Base
   end
 
   def tag (users,doc)
-    if users
+
+    if users 
       
       usuario = users
       usuario.each do |userr|
@@ -536,6 +527,7 @@ class App < Sinatra::Base
           user.add_document(doc)
           user.save
           Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+          send_email(user.email, doc, user.username, 'taged')
         end
       end    
 
@@ -544,10 +536,12 @@ class App < Sinatra::Base
         suscr = User.first(id: suscribed.user_id)
         if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
           Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+          send_email(suscr.email, doc, suscr.username, 'taged and subscribed')
         elsif suscr 
           suscr.add_document(doc)
           suscr.save
           Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+          send_email(suscr.email, doc, suscr.username, 'subscribed')
         end
       end  
     end
