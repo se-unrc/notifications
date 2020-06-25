@@ -37,9 +37,13 @@
                 <div class="form-group">
 
                     <select title="Users involved"  name="users[]" class="selectpicker form-control" multiple data-live-search="true">
-                        <option selected><%= @useredit %></option>
-                        <% @users.each do |u| %>
-                        <option data-tokens=<%= u.username %>> <%= u.username %></option>
+                        <% if @useredit && @useredit.length > 0 %>   
+                            <% @useredit.each do |op| %>
+                                <option selected><%= op %></option>
+                            <% end %>
+                        <% end %>
+                        <% @users.reject {|u| u == @useredit}.each do |user| %>
+                        <option data-tokens=<%= user.username %>> <%= user.username %></option>
                         <% end %>
                     </select>
 
@@ -66,8 +70,8 @@
                 <div class="form-group">
                 <select value="<%= @categoryedit%>" id="categories" name="categories" class="custom-select" >
                     <option value=<%= @categoryedit %>> <%= @categoryedit %> </option>
-                    <% @categories.reject{|u| u == @categoryedit}.each do |category| %>
-                    <option value=<%= category.name %>> <%= category.name %> </option>
+                    <% @categories.each do |category| %>
+                        <option value=<%= category.name %>> <%= category.name %> </option>
                     <% end %>
                 </select></p>
                 </div>

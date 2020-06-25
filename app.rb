@@ -59,6 +59,23 @@ class App < Sinatra::Base
     end
   end
 
+  def cant_pages(cantdocs)
+    @docsperpage = 12
+    if cantdocs % @docsperpage == 0
+      @pagelimit =  cantdocs / @docsperpage 
+    else
+      @pagelimit =  cantdocs / @docsperpage + 1
+    end
+  end
+
+  def set_page 
+    if params[:page] 
+      page = params[:page]
+    else
+      page = "1"
+    end
+    return page
+  end
 
   get "/documents" do 
     logger.info ""
@@ -74,10 +91,18 @@ class App < Sinatra::Base
       set_notifications_number
     end
 
+    @page = set_page
+    
+    cant_pages(Document.where(delete: false).count)
+
     if params[:userfilter] || params[:datefilter] || params[:categoryfilter]   
-      @documents = filter(params[:userfilter],params[:datefilter],params[:categoryfilter])
+      @page = set_page
+      @docsperpage = 12
+      cargdocs = filter(params[:userfilter],params[:datefilter],params[:categoryfilter])
+      @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+      cant_pages(cargdocs.length)
     else
-      @documents = Document.order(:date).reverse.where(delete: false)
+      @documents = Document.where(delete: false).limit(@docsperpage, (@page.to_i * @docsperpage) - 11).order(:date).reverse
     end
     @categories = Category.all
     set_unread_number
@@ -101,13 +126,17 @@ class App < Sinatra::Base
   end
 
   get "/editdocument" do
-    @useredit = params[:users]
-    @categoryedit = params[:category]
-    @nameedit = params[:name]
-    @dateedit = params[:date]
-    @id = params[:id]
-    @categories = Category.all
-    @users = User.all
+    docedit = Document.first(id: params[:id])
+    if docedit.userstaged
+      @useredit = docedit.userstaged.split(', ')
+    end
+    @categoryedit = docedit.categorytaged
+    @nameedit = docedit.name
+    @dateedit = docedit.date
+    @id = docedit.id
+    @categories = Category.except(Category.where(name: @categoryedit))
+    @users = User.except(User.where(username: @useredit))
+    set_unread_number
     erb :editinfo
   end
 
@@ -116,6 +145,7 @@ class App < Sinatra::Base
       @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
       @categories = Category.where(id: @categories)
     end
+    set_unread_number
     erb :suscat, :layout => :layout
   end
 
@@ -224,22 +254,24 @@ class App < Sinatra::Base
 
   def array_to_tag (users)
 
-      tagged_users = ""
+      if users && users != ""
+        tagged_users = ""
+        
+        users.each do |s|
 
-      users.each do |s|
+          if s.equal?(params[:users].last)
 
-        if s.equal?(params[:users].last)
+            tagged_users += s 
 
-          tagged_users += s 
+          else 
 
-        else 
+            tagged_users += s + ", "
 
-          tagged_users += s + ", "
+           end
+        end
 
-         end
+        return tagged_users
       end
-
-      return tagged_users
   end
 
 # app.rb 
@@ -259,7 +291,8 @@ class App < Sinatra::Base
         doc.update(document: doc.id)
         cp(file.path, "public/file/#{doc.id}.pdf")
         
-        tag(params["users"],doc)
+        
+        tag(params["users"],doc) 
         set_notifications_number
 
         @success = "The document has been uploaded"
@@ -334,11 +367,16 @@ class App < Sinatra::Base
   end
 
   post '/documents' do
-    @documents = filter(params[:users],params[:date],params[:category])
+    @page = set_page
+    @docsperpage = 12
+    cargdocs = filter(params[:users],params[:date],params[:category])
+    @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+    cant_pages(cargdocs.length)
     @view = params[:forma]
 
     @filtros = [params[:users],params[:date],params[:category]]
-
+    
+   
     @categories = Category.all
     erb :docs, :layout => :layout
   end
@@ -360,12 +398,12 @@ class App < Sinatra::Base
 
   post '/editdocument' do
     category = Category.first(name: params["categories"])
-    Document.where(id: params[:id]).update(delete: true)
-    set_notifications_number
+    editdoc = Document.first(id: params[:id])
 
-
-    doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"],category_id: category.id,document: params[:document])
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
     if doc.save
+      editdoc.update(delete: true)
+      set_notifications_number
       tag(params["users"],doc)
       redirect '/documents'
     else
@@ -374,6 +412,7 @@ class App < Sinatra::Base
       erb :editinfo
     end    
   end 
+
 
   def set_notifications_number 
       settings.sockets.each{|s| 
@@ -417,8 +456,8 @@ class App < Sinatra::Base
       user = User.first(username: userfilter) 
 
       if user
-        filter_docs = user.documents_dataset.where(motive: "taged", delete: false).to_a
-        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).to_a
+        filter_docs = user.documents_dataset.where(motive: "taged", delete: false).order(:date).to_a
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).order(:date).to_a
       else
         filter_docs = Document.where(delete: false).order(:date).reverse.all
       end
@@ -434,29 +473,31 @@ class App < Sinatra::Base
   end
 
   def tag (users,doc)
+    if users
+      
+      usuario = users
+      usuario.each do |userr|
+     
+        user = User.first(username: userr)
+        if user 
+          user.add_document(doc)
+          user.save
+          Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+        end
+      end    
 
-    usuario = users
-    usuario.each do |userr|
-   
-      user = User.first(username: userr)
-      if user 
-        user.add_document(doc)
-        user.save
-        Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
-      end
-    end    
-
-    suscribeds = Subscription.where(category_id: doc.category_id)
-    suscribeds.each do |suscribed|
-      suscr = User.first(id: suscribed.user_id)
-      if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
-        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
-      elsif suscr 
-        suscr.add_document(doc)
-        suscr.save
-        Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
-      end
-    end  
+      suscribeds = Subscription.where(category_id: doc.category_id)
+      suscribeds.each do |suscribed|
+        suscr = User.first(id: suscribed.user_id)
+        if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+        elsif suscr 
+          suscr.add_document(doc)
+          suscr.save
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+        end
+      end  
+    end
   end
 
 end 
