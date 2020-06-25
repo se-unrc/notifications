@@ -59,6 +59,46 @@ class App < Sinatra::Base
     end
   end
 
+  def send_email(useremail, doc, user)
+
+    @document = doc
+    @user = User.find(username: user).name
+
+    userid = User.find(username: user).id
+
+    if Notification.find(document_id: doc.id, user_id: userid).motive == 'taged'
+
+      @motive = "A new document from the #{doc.categorytaged} category has been uploaded!"
+
+    elsif Notification.find(document_id: doc.id, user_id: userid). motive == 'taged and subscribed'
+        
+      @motive = "You have been tagged in a document from the #{doc.categorytaged} category to which you are subscribed"
+
+    elsif Notification.find(document_id: doc.id, user_id: userid). motive == 'subscribed'
+
+      @motive = "A new document from the #{doc.categorytaged} category has been uploaded"
+
+    end
+
+    Pony.mail({
+    :to => useremail, 
+    :via => :smtp, 
+    :via_options => {
+      :address => 'smtp.gmail.com',                     
+      :port => '587',
+      :user_name => 'documentuploadsystem@gmail.com',
+      :password => 'rstmezqnvkygptjl',
+      :authentication => :plain,
+      :domain => "gmail.com",
+    },
+      :subject => 'You have a new notification', 
+      :headers => { 'Content-Type' => 'text/html' },
+      :body => erb(:email, layout: false)
+    }
+  )
+
+  end
+
   def cant_pages(cantdocs)
     @docsperpage = 12
     if cantdocs % @docsperpage == 0
@@ -85,6 +125,7 @@ class App < Sinatra::Base
     logger.info ""
     @view = params[:forma]  
     @users = User.all
+   
 
     if params[:remove] 
       Document.first(id: params[:remove]).update(delete: true)
@@ -293,6 +334,18 @@ class App < Sinatra::Base
         
         
         tag(params["users"],doc) 
+
+        if params["users"]
+
+          params["users"].each do |u|
+
+            send_email(User.find(username: u).email, doc, u)
+
+          end
+
+        end
+
+
         set_notifications_number
 
         @success = "The document has been uploaded"

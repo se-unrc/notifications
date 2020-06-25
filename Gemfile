@@ -7,6 +7,7 @@ gem 'sequel'
 gem 'pg'
 gem 'actionview', '~> 4.2', '>= 4.2.5.1'
 gem 'sinatra-websocket', '~> 0.3.1'
+gem 'pony', '~> 1.11'
 
 group :development do
   gem 'dotenv', '2.7.5'
