@@ -35,9 +35,9 @@ window.onload = function(){
     ws.onclose = function() { show('websocket closed'); }
     ws.onmessage = function(m) { show('websocket message: ' + m.data);
       var msgs = document.getElementById('msgs');
-      msgs.innerHTML = '<a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Cerrar Sesión</a>'; };
-    var sender = function(f){
-      f.onsubmit = function(){
+      msgs.innerHTML = '<button onclick=myFunction()> Click me </button>'; };
+      var sender = function(f){
+        f.onsubmit = function(){
         ws.send("documento");
         return true;
       }
