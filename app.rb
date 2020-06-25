@@ -364,7 +364,7 @@ class App < Sinatra::Base
     set_notifications_number
 
 
-    doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"],category_id: category.id,document: params[:id])
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: params["users"], categorytaged: params["categories"],category_id: category.id,document: params[:document])
     if doc.save
       tag(params["users"],doc)
       redirect '/documents'
@@ -415,11 +415,12 @@ class App < Sinatra::Base
   def filter (userfilter, datefilter, categoryfilter)
     filter_docs = []
       user = User.first(username: userfilter) 
+
       if user
-        filter_docs = user.documents_dataset.where(motive: "taged").to_a
-        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed").to_a
+        filter_docs = user.documents_dataset.where(motive: "taged", delete: false).to_a
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).to_a
       else
-        filter_docs = Document.order(:date).reverse.all
+        filter_docs = Document.where(delete: false).order(:date).reverse.all
       end
       doc_date = datefilter == "" ? filter_docs : Document.first(date: datefilter)
       if doc_date
