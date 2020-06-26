@@ -114,19 +114,18 @@ Siempre uno solo a la vez, solo puede cambiar si no hay otra sesión activa
 ![Login page](resources/login.png)
 
 #### Home Page
-![Home page](resources/home.png)
+![Home page](resources/index.png)
 
 #### Upload and Show files
 
 ###### Upload
 ![Upload Documents](resources/documents.png)
-![Uploads](resources/upload.png)
-
-##### Show
-![Show in table](resources/show.png)
 
 #### Contact
 ![Contact](resources/contact.png)
+
+#### Abouts
+![Abouts](resources/abouts.png)
 
 #### 3.1.2 Hardware interfaces
 
