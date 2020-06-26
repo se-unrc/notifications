@@ -28,7 +28,9 @@
                     <% end %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/userdocs">Documentos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">Perfil</a></li>
+                    <% if !@isAdmin %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/admin">Administrador</a></li>
+                    <% end %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/logout">Salir&nbsp;<i class="fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
