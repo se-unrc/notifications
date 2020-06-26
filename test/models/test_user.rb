@@ -1,3 +1,4 @@
+require File.expand_path '../../test_helper.rb', __FILE__
 require "minitest/autorun"
 
 class UserTest < Minitest::Unit::TestCase

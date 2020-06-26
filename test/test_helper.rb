@@ -7,7 +7,7 @@ require 'sinatra'
 
 DB = Sequel.connect(
   adapter: 'postgres',
-  database: 'notificator_test',
+  database: 'notificator-development',
   host: 'db',
   user: 'unicorn',
   password: 'magic')
