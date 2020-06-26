@@ -98,6 +98,8 @@ class App < Sinatra::Base
 
   end
 
+  
+
   def cant_pages(cantdocs)
     @docsperpage = 12
     if cantdocs % @docsperpage == 0
@@ -125,7 +127,6 @@ class App < Sinatra::Base
     @view = params[:forma]  
     @users = User.all
    
-
     if params[:remove] 
       Document.first(id: params[:remove]).update(delete: true)
       set_notifications_number
@@ -142,7 +143,7 @@ class App < Sinatra::Base
       @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
       cant_pages(cargdocs.length)
     else
-      @documents = Document.where(delete: false).limit(@docsperpage, (@page.to_i * @docsperpage) - 11).order(:date).reverse
+      @documents = Document.where(delete: false).limit(@docsperpage, ((@page.to_i-1) * @docsperpage)).order(:date).reverse
     end
     @categories = Category.all
     set_unread_number
@@ -496,6 +497,73 @@ class App < Sinatra::Base
       erb :editinfo
     end    
   end 
+
+  post '/forgotpass' do
+    if User.find(email: params[:email])
+      redirect "/insertcode?email=#{params[:email]}"
+    elsif
+      @error = "The email account does not exists"
+      erb :forgotpass
+    end
+  end
+
+  get '/insertcode' do 
+    erb :insertcode
+  end
+
+  post '/insertcode' do
+    if params[:realcode] == params[:coderec]
+      redirect "/newpass?email=#{params[:email]}"
+    else
+      @error = "The code is not a match"
+      erb :insertcode     
+    end
+
+  end
+
+  get '/newpass' do
+    erb :newpass
+  end
+
+  post '/newpass' do
+    user = User.find(email: params[:email])
+    if params[:password] != params[:confPassword] 
+      @errorpasswordconf = "Passwords are not equal"
+    end
+    if params[:password].length < 5 || params[:password].length > 20 
+      @errorpasswordlength = "Password must be between 5 and 20 characters long"
+    end
+    if user
+      user.update(password: params[:password])      
+      session[:user_id] = user.id
+    end
+    redirect '/documents'
+  end
+
+
+  def send_code_email(useremail,user)
+    @code = rand.to_s[2..6]
+    @user = user.name
+
+    Pony.mail({
+      :to => useremail, 
+      :via => :smtp, 
+      :via_options => {
+        :address => 'smtp.gmail.com',                     
+        :port => '587',
+        :user_name => 'documentuploadsystem@gmail.com',
+        :password => 'rstmezqnvkygptjl',
+        :authentication => :plain,
+        :domain => "gmail.com",
+      },
+        :subject => 'DUNS Verification code', 
+        :headers => { 'Content-Type' => 'text/html' },
+        :body => erb(:retrieve, layout: false)
+      }
+    )
+
+    return @code
+  end
 
 
   def set_notifications_number 
