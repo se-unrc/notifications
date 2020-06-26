@@ -2,7 +2,7 @@ require 'sinatra/base'
 require "sinatra/config_file"
 require './models/user.rb'
 require './models/document.rb'
-require './models/DocumentsUser.rb'
+require './models/documentsUser.rb'
 require 'sinatra-websocket'
 
 class App < Sinatra::Base
