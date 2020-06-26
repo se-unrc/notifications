@@ -2,7 +2,7 @@ require 'sinatra/base'
 require "sinatra/config_file"
 require './models/user.rb'
 require './models/document.rb'
-require './models/documents_user.rb'
+require './models/DocumentsUser.rb'
 require 'sinatra-websocket'
 
 class App < Sinatra::Base
@@ -17,6 +17,7 @@ class App < Sinatra::Base
     set :sessions, true
     set :server, :thin
     set :sockets, []
+    set :userlist,[]
     
   end
   
@@ -137,7 +138,8 @@ class App < Sinatra::Base
     erb :upload, :layout => :layoutlogin
   end
   get '/userdocs' do
-    @documents = Document.all ##TODO en realidad aca quiero q muestre solo los docs donde estoy etiquetado
+    user = User.find(id: session[:user_id])
+    @documents = user.documents ##muestro los documentos de interes del usuario
     erb :userdocs, :layout => :layoutlogin
   end
   get '/publicdocs' do
@@ -157,13 +159,33 @@ class App < Sinatra::Base
       user = User.find(id: session[:user_id]).username
       doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
       
-      params["tagged"].each { |e| Documents_user.new(document_id: doc.id , user_id: (User.first(username: e).id)) }
+      
+      
+      #params["tagged"].each { |e| DocumentsUser.new(document_id: doc.id , user_id: (User.first(username: e).id)) }
       #TODO etiquetar antes de informar 
       if doc.save
+        logger.info params["tagged"]
+        
+        params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
+        logger.info settings.userlist
+        settings.userlist.each { |u| u.add_document(doc) }
+        #params["tagged"].each { |e| u= ((User.find(:username => e)).add_document(doc)) }
+
+        #name = params["tagged"].first
+        #usertag= User.first(:username => name)
+        #usertag.add_document(doc)
+        #usertaged.add_document(doc)
+        #docuid = Document.find(name:@filename).id
        
+       # duck = DocumentsUser.new(document_id: docuid , user_id: usertaged)
+       # logger.info doc.id
+       # logger.info docuid
+       
+        #logger.info usertaged
+      
         settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
         redirect "/documents"
-
+      
       else
         [500, {}, "Internal Server Error"]
       end

@@ -2,7 +2,10 @@ Sequel.migration do
   up do
     create_table(:documents) do
       primary_key :id
-      String :name, null: false
+      String :name 
+      String :subject
+      foreign_key :user_id , :users 
+      
     end
   end
 
