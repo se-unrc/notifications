@@ -21,6 +21,7 @@ class App < Sinatra::Base
   before do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
+      @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
       if session[:type]
         @layoutEnUso = :layout_admin
       else
@@ -43,38 +44,6 @@ class App < Sinatra::Base
     end
   end
 
-  # get "/test" do
-  #    if !request.websocket?
-  #      erb:testing
-  #    else
-  #      request.websocket do |ws|
-  #        ws.onopen do
-  #          ws.send("connected!");
-  #          settings.sockets << ws
-  #        end
-  #        ws.onmessage do |msg|
-  #          EM.next_tick { settings.sockets.each {|s| s.send(msg) } }
-  #        end
-  #        ws.onclose do
-  #          warn{"Disconnected"}
-  #          settings.sockets.delete(ws)
-  #        end
-  #      end
-  #    end
-  #  end
-
-
-  get "/rutaSocket" do
-    if !request.websocket?
-      erb:index, :layout=> :layoutEnUso
-    else
-      websoquet
-    end
-  end
-
-
-
-
   get "/" do
     logger.info "params"
     logger.info params
@@ -85,11 +54,6 @@ class App < Sinatra::Base
     logger.info settings.db_adapter
     logger.info "--------------"
     @document = Document.all
-
-    # @connection = {user: user, socket: ws}
-    #     ws.onopen do
-    #       settings.sockets << @connection
-    #     end
     erb :index
   end
 
@@ -112,37 +76,48 @@ class App < Sinatra::Base
         session[:type] = @userName.admin
         redirect "/profile"
       else
-        @error ="Your password is incorrect"
+        @@errormsg ="Your password is incorrect"
+        erb :login
       end
     else
-      @error ="Your email is incorrect"
+      @errormsg ="Your email is incorrect"
+      erb :login
     end
   end
 
   get "/profile" do
     @aux = User.find(id: session[:user_id])
     @document = Document.where(users: @aux)
-    websocket(erb :profile, :layout =>@layoutEnUso)
+    erb :profile, :layout =>@layoutEnUso
   end
 
-  def websocket(dir)
+  get "/miwebsoket" do
     if !request.websocket?
-      dir
+      redirect "/"
     else
       request.websocket do |ws|
+        @connect = {id_user: session[:user_id], socket: ws}
         ws.onopen do
-          @connect = {id_user: session[:user_id], socket: ws}
           settings.sockets << @connect
         end
         ws.onmessage do |msg|
-          EM.next_tick { settings.sockets.each {|s| s.send(msg)} }
+          EM.next_tick { settings.sockets.each {|s| s[:socket].send(msg)}}
         end
         ws.onclose do
-          settings.sockets.delete(ws)
+          settings.sockets.delete(@connect)
         end
       end
     end
   end
+
+  def notifyUser(user, message)
+    settings.sockets.each do |s|
+      if s[:id_user] == user
+        s[:socket].send(message)
+      end
+    end
+  end
+
 
   get "/edit_user" do
     erb :edit_user, :layout =>@layoutEnUso
@@ -176,7 +151,7 @@ class App < Sinatra::Base
       [400, {}, "ya existe el usuario"]
     else
       @newUserName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      @newUserName.admin=fale
+      @newUserName.admin=false
       if @newUserName.save
         redirect "/login"
       else
@@ -213,8 +188,6 @@ class App < Sinatra::Base
     @cat  = Category.all
     erb :category, :layout =>@layoutEnUso
   end
-
-
 
   post "/create_category" do
     if cat = Category.find(name: params["name"])
@@ -306,39 +279,65 @@ class App < Sinatra::Base
     erb :subscriptions, :layout =>@layoutEnUso
   end
 
-  post "/subscriptions" do
-    @userName = User.find(id: session[:user_id])
-    @cat = Category.find(name: params['name'])
-    if params['option'] == "delete"
-      @userName.remove_category(@cat)
-      redirect "/subscriptions"
-    else
-      if @document = Document.where(category_id: @cat.id).all
-        if session[:type] == true
-          erb :category_documents,:layout =>:layout_admin
-        else
-          erb :category_documents,:layout =>:layout_users
+  post "/delete_subscriptions" do
+    @aux = params[:nameDeleteSub]
+    if @aux
+        @aux.each do |element|
+          @cat = Category.find(id: element)
+          @userName.remove_category(@cat)
         end
-      else
-        [500, {}, "Internal Server Error"]
-      end
     end
+    redirect "/subscriptions"
   end
 
   post "/add_subscriptions" do
-    if @cat = Category.find(name: params['name'])
-      @userName = User.find(id: session[:user_id])
-      @userName.add_category(@cat)
-      redirect"/subscriptions"
-    else
-      redirect "/subscriptions"
+    @aux = params[:nameSub]
+    if @aux
+      @aux.each do |element|
+        @cat = Category.find(id: element)
+        @userName.add_category(@cat)
+      end
     end
+      redirect "/subscriptions"
   end
 
   get "/create_document" do
     @userCreate = User.all
     @categories = Category.all
     erb:create_document, :layout =>@layoutEnUso
+  end
+
+  post '/create_document' do
+    @filename = params[:PDF][:filename]
+    @src =  "/public/PDF/#{@filename}"
+    file = params[:PDF][:tempfile]
+    direction = "PDF/#{@filename}"
+    File.open("./public/PDF/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+    end
+    date = Time.now.strftime("%Y-%m-%d")
+    dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    chosenCategory = Category.find(id: params[:cat])
+    @prob = User.all
+    if !(@docExi= Document.find(name: params['name']) || @docExi= Document.find(description: params['description']))
+      @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+      @doc.save
+      @notification = Notification.new(description: params['description'], date: dateNot, document_id: @doc.id)
+      @notification.save
+      @aux = params[:mult]
+      @aux &&  @aux.each do |element|
+        @doc.add_user(element)
+        @notification.add_user(element)
+        @message = @notification.description
+        notifyUser(element,@message)
+      end
+      redirect "/all_document"
+    else
+      @userCreate = User.all
+      @categories = Category.all
+      @errormsg = "El Documento/descripción ya existen"
+      erb :create_document, :layout =>@layoutEnUso
+    end
   end
 
   get "/tag_document" do
@@ -364,48 +363,6 @@ class App < Sinatra::Base
     filter()
     erb:all_document, :layout =>@layoutEnUso
   end
-
-
-  post '/create_document' do
-    @filename = params[:PDF][:filename]
-    @src =  "/public/PDF/#{@filename}"
-    file = params[:PDF][:tempfile]
-    direction = "PDF/#{@filename}"
-    File.open("./public/PDF/#{@filename}", 'wb') do |f|
-      f.write(file.read)
-    end
-    date = Time.now.strftime("%Y-%m-%d")
-    dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    chosenCategory = Category.find(id: params[:cat])
-    @prob = User.all
-    if !(@docExi= Document.find(name: params['name']) || @docExi= Document.find(description: params['description']))
-      @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
-      @doc.save
-      @notification = Notification.new(description: params['description'], date: dateNot, document_id: @doc.id)
-      @notification.save
-      @aux = params[:mult]
-      @aux &&  @aux.each do |element|
-        @doc.add_user(element)
-        @notification.add_user(element)
-
-        # @notifactionUsers = NotificationUser.where(notification_id: @notification.id, user_id: element).first;
-        # @notifactionUsers.update(seen:true);
-      end
-      settings.sockets.each do |s|
-        @notifactionUsers = NotificationUser.find(notification_id: @notification.id, user_id: s[:id_user])
-        if @notifactionUsers
-          s[:socket].send("Documento subido")
-        end
-      end
-      redirect "/all_document"
-    else
-      @userCreate = User.all
-      @categories = Category.all
-      @errormsg = "El Documento/descripción ya existen"
-      erb :create_document, :layout =>@layoutEnUso
-    end
-  end
-
 
   post "/delete_document" do
     @pdfDelete = Document.find(id: params[:theId])
