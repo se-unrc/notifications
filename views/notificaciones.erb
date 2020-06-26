@@ -1,47 +1,51 @@
-<div class="container">
-    <form class="form-group" action="/notificaciones" method="post">
-    <div class="m-auto text-center col-xl-4 backgroundFroms">
-        <button type="submit" id="buttonIndexA" name="leido[]">Marcar como Leido</button>
+  <form class="form-group" action="/notificaciones" method="post">
+    <div class="alert alert-success" role="alert">
+        Notificaciones por Etiqueta
     </div>
     <div class="row">
-      <%  @allPdfEt && @allPdfEt.each do |element|  %>
-      <div class="col-xl-6">
-        <section class="col-11 elementColor">
-          <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
-            <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+      <%@allPdfEt && @allPdfEt.each do |element| %>
+        <div class="col-xl-4">
+          <section class="col-11 elementColor">
+            <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+              <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
               <div class="d-flex w-100 justify-content-between">
-                <input type="hidden" name="pdf" value="<%=element.id%>"></input>
-                <input type="checkbox" name="leido" value="<%=element.id%>">Leido </input>
                 <h4 class="mb-1"><%= element.name%></h4>
                 <h5 class="text-muted"><%= element.date%></h5>
-                <div class="m-auto">
-                    <input type="checkbox" name="leido" value="<%=element.id%>"> Leido</input>
-                </div>
               </div>
               <h6 class="mb-1"><%= element.description%></h6>
-                <h6 class="text-muted">Te Etiquetaron </h6>
+              <div class="row d-flex w-100 justify-content-between">
+                  <input type="hidden" name="leidoEt[]" value="<%=element.id%>"/>
+                  <input type="checkbox" value="<%=element.id%>">Marcar como leído
+              </div>
             </a>
           </section>
-      </div>
-    <% end %>
-    <%  @allPdfCat && @allPdfCat.each do |element|  %>
-    <div class="col-xl-6">
-      <section class="col-11 elementColor">
-        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
-          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
-            <div class="d-flex w-100 justify-content-between">
-              <input type="hidden" name="pdf" value="<%=element.id%>"></input>
-              <h4 class="mb-1"><%= element.name%></h4>
-              <h5 class="text-muted"><%= element.date%></h5>
-              <div class="m-auto">
-                  <input type="checkbox" name="leido" value="<%=element.id%>"> Leido</input>
-              </div>
-            </div>
-            <h6 class="mb-1"><%= element.description%></h6>
-            <h6 class="text-muted">Documento de Categoria</h6>
-          </a>
-        </section>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <div class="alert alert-success" role="alert">
+        Notificaciones por categorias
+    </div>
+    <div class="row">
+      <%@allPdfCat && @allPdfCat.each do |element| %>
+        <div class="col-xl-4">
+          <section class="col-11 elementColor">
+            <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+              <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+              <div class="d-flex w-100 justify-content-between">
+                <h4 class="mb-1"><%= element.name%></h4>
+                <h5 class="text-muted"><%= element.date%></h5>
+              </div>
+              <h6 class="mb-1"><%= element.description%></h6>
+              <div class="row d-flex w-100 justify-content-between">
+                  <input type="hidden" name="leidoCat[]" value="<%=element.id%>"/>
+                  <input type="checkbox" value="<%=element.id%>">Marcar como leído
+              </div>
+            </a>
+          </section>
+        </div>
+      <% end %>
+    </div>
+    <div class="alert alert-success" role="alert">
+        <button id="buttonLogin"  type="submit">Eliminar</button>
+    </div>
   </form>
-</div>

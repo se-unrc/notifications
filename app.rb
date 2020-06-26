@@ -100,13 +100,14 @@ class App < Sinatra::Base
   get "/notificaciones" do
     @allPdfCat = []
     @allPdfEt = []
-    @not.each do |element|
+    @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
+    @not != [] && @not.each do |element|
       @aux = Notification.find(id: element.notification_id)
       @doc = Document.find(id: @aux.document_id)
       if @aux.description == 'etiquetaron'
-        @allPdfEt.push(@doc)
+        @allPdfEt << (@doc)
       else
-        @allPdfCat.push(@doc)
+        @allPdfCat << (@doc)
       end
     end
     erb :notificaciones, :layout =>@layoutEnUso
@@ -118,17 +119,7 @@ class App < Sinatra::Base
  #   end
  # end
 
- post "/notificaciones" do
-   @collection = params[:leido]
-   # if @collection
-   # @collection.each do |element|
-       @doc = Document.find(name: @collection)
-       @notificado = Notification.find(document_id: element.id)
-       @visto = NotificationUser.find(notification_id: @notificado.id, user_id: @userName.id)
-       @visto.update(seen: true)
- #   end
- # end
-end
+
 
 
   get "/create_document" do
@@ -391,7 +382,7 @@ end
     if !(@docExi= Document.find(name: params[:name]) || @docExi= Document.find(description: params[:description]))
       @doc = Document.new(name: params['name'], description: params[:description], fileDocument:  direction, category_id: chosenCategory.id, date: date)
       @doc.save
-      @notification = Notification.new(description: params[:description], date: dateNot, document_id: @doc.id)
+      @notification = Notification.new(description: "etiquetaron", date: dateNot, document_id: @doc.id)
       @notification.save
       @aux = params[:mult]
       @aux &&  @aux.each do |element|
@@ -461,8 +452,21 @@ end
     redirect "/all_document"
   end
 
-
-
+  post "/notificaciones" do
+     @collection = params[:leidoEt]
+     @collection2 = params[:leidoCat]
+     @collection && @collection.each do |element|
+        @notificado = Notification.find(document_id: element)
+        @visto = NotificationUser.where(notification_id: @notificado.id, user_id: @userName.id)
+        @visto.update(seen: true)
+    end
+    @collection2 && @collection2.each do |element|
+       @notificado2 = Notification.find(document_id: element)
+       @visto2 = NotificationUser.where(notification_id: @notificado2.id, user_id: @userName.id)
+       @visto2.update(seen: true)
+     end
+    redirect "/notificaciones"
+ end
 
   def notifyUser(user, message)
     settings.sockets.each do |s|
