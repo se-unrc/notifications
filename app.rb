@@ -27,7 +27,7 @@ class App < Sinatra::Base
       redirect '/login'
     elsif session[:user_id] 
       @current_user = User.find(id: session[:user_id])
-
+      set_unread_number
       @visibility = @current_user.role == "user" ? "none" : "inline"
       if session_path?
         redirect '/documents'
@@ -176,8 +176,15 @@ class App < Sinatra::Base
     @id = docedit.id
     @categories = Category.except(Category.where(name: @categoryedit))
     @users = User.except(User.where(username: @useredit))
-    set_unread_number
     erb :editinfo
+  end
+
+  get '/editprofile' do
+    erb :editprofile
+  end
+
+  get '/editpassword' do
+    erb :editpassword
   end
 
   get "/subscribe" do
@@ -185,7 +192,6 @@ class App < Sinatra::Base
       @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
       @categories = Category.where(id: @categories)
     end
-    set_unread_number
     erb :suscat, :layout => :layout
   end
 
@@ -209,7 +215,6 @@ class App < Sinatra::Base
     if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
       Notification.first(document_id: params[:id],user_id: @current_user.id).update(read: true)
     end
-    set_unread_number
     erb :notifications
   end
 
@@ -217,7 +222,6 @@ class App < Sinatra::Base
     if @current_user.categories_dataset.to_a.length > 0
       @categories =  @current_user.categories_dataset
     end
-    set_unread_number
     erb :yourcats, :layout=> :layout
   end
 
@@ -228,7 +232,6 @@ class App < Sinatra::Base
     if mydocstagedsubs.union(mydocstaged).count > 0
       @documents = Document.where(id: mydocstagedsubs.union(mydocstaged))
     end
-    set_unread_number
     erb :yourdocs, :layout=> :layout
   end
 
@@ -236,7 +239,6 @@ class App < Sinatra::Base
     if @current_user.categories_dataset.to_a.length > 0
       @categories =  @current_user.categories_dataset
     end
-    set_unread_number
     erb :deletecats, :layout=> :layout
   end
 
@@ -260,6 +262,47 @@ class App < Sinatra::Base
       
     end
   end
+
+  post '/editprofile' do 
+    if params["password"] == @current_user.password
+      if (User.find(username: params[:username]) && User.find(username: params[:username]).id != @current_user.id) || /\A\w{3,15}\z/ !~ params[:username]
+        @errorusername = "The username is already in use or its invalid"
+      end
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+        @erroremail = "The email is invalid"
+      end
+      if @errorusername || @erroremail
+        erb :editprofile
+      else
+        @current_user.update(name: params[:fullname],username: params[:username],email: params[:email])
+        redirect '/documents'
+      end
+    else
+      @errorpassword = "La contraseña es incorrecta"
+      erb :editprofile  
+    end
+  end
+
+  post '/editpassword' do
+    if params["currentpassword"] == @current_user.password
+      if params[:password] != params[:confPassword] 
+        @errorpasswordconf = "Passwords are not equal"
+      end
+      if params[:password].length < 5 || params[:password].length > 20 
+        @errorpasswordlength = "Password must be between 5 and 20 characters long"
+      end
+      if @errorpasswordconf || @errorpasswordlength
+        erb :editprofile
+      else
+        @current_user.update(password: params[:password])
+        redirect '/documents'
+      end
+    else
+      @errorpassword = "La contraseña es incorrecta"
+      erb :editprofile  
+    end
+  end
+
 
 
   post '/signup' do
@@ -384,7 +427,6 @@ class App < Sinatra::Base
       else
         User.where(username: params[:username]).update(role: 'admin')
         @success = "#{params[:username]} has been promoted to admin"
-        set_unread_number
         erb  :newadmin, :layout => :layout
       end
     else 
@@ -400,7 +442,6 @@ class App < Sinatra::Base
       if @current_user.categories_dataset.to_a.length > 0
         @categories =  @current_user.categories_dataset
       end
-      set_unread_number
       erb  :deletecats, :layout => :layout
     else
       @error = "An error has ocurred when trying unsubscribe you from #{params[:category]}"
