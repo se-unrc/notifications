@@ -7,6 +7,6 @@ class Document < Sequel::Model
   def index
      @documents = Document.all
   end
-  many_to_many :user
+  one_to_many :users
   set_primary_key :id
 end
