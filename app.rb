@@ -221,7 +221,7 @@ class App < Sinatra::Base
           erb :admin , :layout => :layoutlogin
         end
     else
-      @error = "Hay algo mal que no está bien"
+      @error = "Hay algo que no está bien"
     end
   end
 
