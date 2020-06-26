@@ -25,6 +25,11 @@
         </ul>
       </div>
     </nav>
+    <% if @errormsg %>
+      <div class="alert alert-success" role="alert">
+        <%= @errormsg %>
+      </div>
+    <% end %>
     <div class="row">
       <% @document && @document.each do |element| %>
         <div class="col-xl-4">

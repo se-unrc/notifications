@@ -25,6 +25,11 @@
         </div>
       </div>
     </nav>
+    <% if @errormsg %>
+      <div class="alert alert-success" role="alert">
+        <%= @errormsg %>
+      </div>
+    <% end %>
     <form for="validation01" method="POST" action="/newUser">
       <div class="row">
         <div class="container col-xl-6">

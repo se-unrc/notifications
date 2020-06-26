@@ -1,10 +1,18 @@
+<div class="alert alert-success" role="alert">
+  Documentos en los que estoy etiquetado:
+</div>
 
-<h3 class="container backgroundHs col-12">Documentos en los que estoy etiquetado:</h3>
+<% if @errormsg %>
+  <div class="alert alert-success" role="alert">
+    <%= @errormsg %>
+  </div>
+<% end %>
+
 <div class="row">
   <% @document && @document.each do |element| %>
     <div class="col-xl-4">
       <div class="col-11 elementColor">
-        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc" href="<%=element.fileDocument%>" download="<%= element.name%>">
           <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="75%" />
             <div class="d-flex w-100 justify-content-between">
               <input type="hidden" name="pdf" value="<%=element.id%>"></input>

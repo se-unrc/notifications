@@ -18,32 +18,6 @@ class App < Sinatra::Base
     set :sockets, []
   end
 
-  before do
-    if session[:isLogin]
-      @userName = User.find(id: session[:user_id])
-      @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
-      if session[:type]
-        @layoutEnUso = :layout_admin
-      else
-        @layoutEnUso = :layout_users
-      end
-    end
-  end
-
-  before do
-    @urlUser = ["/profile","/subscriptions", "/edit_user","/all_documentUser"]
-    if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
-      redirect "/login"
-    end
-  end
-
-  before do
-    @urlAdmin = ["/category","/create_admin","/all_document" ,"/selected_document","/create_document","/migrate_documents"]
-    if !session[:type] &&  @urlAdmin.include?(request.path_info)
-      redirect "/profile"
-    end
-  end
-
   get "/" do
     logger.info "params"
     logger.info params
@@ -57,38 +31,37 @@ class App < Sinatra::Base
     erb :index
   end
 
-
-  get "/login" do
-    erb :login
-  end
-
-
-  get "/logout" do
-    session.clear
-    redirect '/'
-  end
-
-  post "/userLogin" do
-    if @userName = User.find(email: params["email"])
-      if @userName.password == params["password"]
-        session[:isLogin] = true
-        session[:user_id] = @userName.id
-        session[:type] = @userName.admin
-        redirect "/profile"
+  before do
+    if session[:isLogin]
+      @userName = User.find(id: session[:user_id])
+      if session[:type]
+        @layoutEnUso = :layout_admin
       else
-        @@errormsg ="Your password is incorrect"
-        erb :login
+        @layoutEnUso = :layout_users
       end
-    else
-      @errormsg ="Your email is incorrect"
-      erb :login
     end
   end
 
-  get "/profile" do
-    @aux = User.find(id: session[:user_id])
-    @document = Document.where(users: @aux)
-    erb :profile, :layout =>@layoutEnUso
+  before do
+    @urlUser = ["/profile","/subscriptions", "/edit_user","/all_documentUser","/notificaciones"]
+    if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+      redirect "/login"
+    end
+  end
+
+  before do
+    @urlAdmin = ["/category","/create_admin","/all_document" ,"/selected_document","/create_document","/migrate_documents"]
+    if !session[:type] &&  @urlAdmin.include?(request.path_info)
+      redirect "/profile"
+    end
+  end
+
+  get "/create_user" do
+    erb :create_user
+  end
+
+  get "/create_admin" do
+    erb :create_admin, :layout =>@layoutEnUso
   end
 
   get "/miwebsoket" do
@@ -110,78 +83,82 @@ class App < Sinatra::Base
     end
   end
 
-  def notifyUser(user, message)
-    settings.sockets.each do |s|
-      if s[:id_user] == user
-        s[:socket].send(message)
-      end
-    end
+  get "/login" do
+    erb :login
   end
 
+  get "/profile" do
+    @aux = User.find(id: session[:user_id])
+    @document = Document.where(users: @aux)
+    erb :profile, :layout =>@layoutEnUso
+  end
 
   get "/edit_user" do
     erb :edit_user, :layout =>@layoutEnUso
   end
 
-  post "/editNewUser" do
-    if (params["name"] != "")
-      @userName.update(name: params["name"])
+  get "/notificaciones" do
+    @allPdfCat = []
+    @allPdfEt = []
+    @not.each do |element|
+      @aux = Notification.find(id: element.notification_id)
+      @doc = Document.find(id: @aux.document_id)
+      if @aux.description == 'etiquetaron'
+        @allPdfEt.push(@doc)
+      else
+        @allPdfCat.push(@doc)
+      end
     end
-    if (params["surname"] != "")
-      @userName.update(surname: params["surname"])
-    end
-    if (params["dni"] != "")
-      @userName.update(dni: params["dni"])
-    end
-    if (params["password"] != "")
-      @userName.update(password: params["password"])
-    end
-    if (params["rol"] != "")
-      @userName.update(rol: params["rol"])
-    end
-    redirect "/profile"
+    erb :notificaciones, :layout =>@layoutEnUso
   end
 
-  get "/create_user" do
-    erb :create_user
+ #  post "/notificaciones" do
+ #    @not.each do |element|
+ #        element.update(seen: true)
+ #   end
+ # end
+
+ post "/notificaciones" do
+   @collection = params[:leido]
+   # if @collection
+   # @collection.each do |element|
+       @doc = Document.find(name: @collection)
+       @notificado = Notification.find(document_id: element.id)
+       @visto = NotificationUser.find(notification_id: @notificado.id, user_id: @userName.id)
+       @visto.update(seen: true)
+ #   end
+ # end
+end
+
+
+  get "/create_document" do
+    @userCreate = User.all
+    @categories = Category.all
+    erb:create_document, :layout =>@layoutEnUso
   end
 
-  post "/newUser" do
-    if user = User.find(email: params["email"])
-      [400, {}, "ya existe el usuario"]
+  get "/tag_document" do
+    if session[:type]==true
+      @document[] = documents_users
+      erb :profile, :layout =>@layoutEnUso
     else
-      @newUserName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      @newUserName.admin=false
-      if @newUserName.save
-        redirect "/login"
-      else
-        [500, {}, "Internal Server Error"]
-        redirect "/create_user"
-      end
+      redirect "/"
     end
   end
 
-  get "/create_admin" do
-    erb :create_admin, :layout =>@layoutEnUso
+  get "/all_documentUser" do
+    @allCat = Category.all
+    @userName = User.find(id: session[:user_id])
+    @allDoc = Document.all
+    filter()
+    erb :all_documentUser, :layout =>@layoutEnUso
   end
 
-  post "/newUserAdmin" do
-    if user = User.find(email: params["email"])
-      [400, {}, "ya existe el usuario"]
-    else
-      @newUserName = User.new(name: params["name"],surname: params["surname"],dni: params["dni"],email: params["email"],password: params["password"],rol: params["rol"])
-      if (params["type"]=="Administrador")
-        @newUserName.admin=true
-      else
-        @newUserName.admin=false
-      end
-      if @newUserName.save
-        redirect "/profile"
-      else
-        [500, {}, "Internal Server Error"]
-        redirect "/create_admin"
-      end
-    end
+  get "/all_document" do
+    @allCat = Category.all
+    @userName = User.find(id: session[:user_id])
+    filter()
+    erb :all_document, :layout =>@layoutEnUso
   end
 
   get "/category" do
@@ -189,12 +166,117 @@ class App < Sinatra::Base
     erb :category, :layout =>@layoutEnUso
   end
 
+  get "/subscriptions" do
+    @collection = @userName.categories
+    @cat = Category.exclude(users: @userName).all
+    erb :subscriptions, :layout =>@layoutEnUso
+  end
+
+  get "/logout" do
+    session.clear
+    redirect '/'
+  end
+
+  post "/newUser" do
+    if user = User.find(email: params[:email])
+      [400, {}, "ya existe el usuario"]
+    else
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+      @newUserName.admin=false
+      if @newUserName.save
+        @errormsg ="La cuenta fue creada."
+        erb :login
+      else
+        @errormsg ="La cuenta no fue creada."
+        erb :create_user
+      end
+    end
+  end
+
+  post "/newUserAdmin" do
+    if user = User.find(email: params[:email])
+      [400, {}, "ya existe el usuario"]
+    else
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+      if (params["type"]=="Administrador")
+        @newUserName.admin=true
+      else
+        @newUserName.admin=false
+      end
+      if @newUserName.save
+        @errormsg ="La cuenta fue creada."
+        erb :profile, :layout =>@layoutEnUso
+      else
+        @errormsg ="La cuenta no fue creada."
+        erb :create_admin, :layout =>@layoutEnUso
+      end
+    end
+  end
+
+  post "/userLogin" do
+    if @userName = User.find(email: params[:email])
+      if @userName.password == params[:password]
+        session[:isLogin] = true
+        session[:user_id] = @userName.id
+        session[:type] = @userName.admin
+        redirect "/profile"
+      else
+        @errormsg ="La contraeña es incorrecta."
+        erb :login
+      end
+    else
+      @errormsg ="El Email es incorrecta."
+      erb :login
+    end
+  end
+
+  post "/editNewUser" do
+    if (params[:name] != "")
+      @userName.update(name: params[:name])
+    end
+    if (params[:surname] != "")
+      @userName.update(surname: params[:surname])
+    end
+    if (params[:dni] != "")
+      @userName.update(dni: params[:dni])
+    end
+    if (params[:password] != "")
+      @userName.update(password: params[:password])
+    end
+    if (params[:rol] != "")
+      @userName.update(rol: params[:rol])
+    end
+    @errormsg ="Sus datos fueron actualizados."
+    @aux = User.find(id: session[:user_id])
+    @document = Document.where(users: @aux)
+    erb :profile, :layout =>@layoutEnUso
+  end
+
+  post "/delete_user" do
+    @userDelete = User.find(id: session[:user_id])
+    @userDelete.remove_all_categories
+    @notification = Notification.where(user_id: @userDelete.id)
+    @notification.each do |element|
+      element.remove_all_notifications
+      element.delete
+    end
+    @userDelete.delete
+    @errormsg ="Su cuenta fue eliminada."
+    erb :index, :layout =>@layoutEnUso
+  end
+
+  post "/select_category" do
+    @categor = Category.find(name: params[:name])
+    @cat  = Category.all
+    erb :category, :layout =>@layoutEnUso
+  end
+
   post "/create_category" do
-    if cat = Category.find(name: params["name"])
+    if cat = Category.find(name: params[:name])
       [500, {}, "ya existe la categoria"]
       redirect "/category"
     else
-      cat = Category.new(name: params['name'],description: params['description'] )
+      cat = Category.new(name: params[:name],description: params[:description] )
       if cat.save
         redirect "/category"
       else
@@ -215,18 +297,13 @@ class App < Sinatra::Base
     end
   end
 
-  post "/select_category" do
-    @categor = Category.find(name: params['name'])
-    @cat = Category.all
-    erb :category, :layout =>@layoutEnUso
-  end
-
   post "/option_category" do
-    @cat_sel = Category.find(id: params['id'])
-    if params['opcion'] == "modificar"
+    @cat_sel = Category.find(id: params[:id])
+    if params[:opcion] == "modificar"
       @cats = Category.all
       @modificar = true
-      erb :category, :layout => @layoutEnUso
+      @cat  = Category.all
+      erb :category, :layout =>@layoutEnUso
     else
       @eliminar = true
       @cats = Category.exclude(id: @cat_sel.id).all
@@ -236,17 +313,18 @@ class App < Sinatra::Base
         @cat_sel.delete
         redirect "/category"
       else
-        erb :category, :layout => @layoutEnUso
+        @cat  = Category.all
+        erb :category, :layout =>@layoutEnUso
       end
     end
   end
 
   post "/modify_category" do
-    if params['opcion'] == "cancelar"
+    if params[:opcion] == "cancelar"
       redirect"/category"
     else
       if  @catUp = Category.find(id:  params['id'])
-        @catUp.update(name: params["name"],description: params["description"])
+        @catUp.update(name: params[:name],description: params[:description])
         if @catUp.save
           redirect "/category"
         else
@@ -260,7 +338,7 @@ class App < Sinatra::Base
   end
 
   post "/migrate_document" do
-    if params['opcion'] == "cancelar"
+    if params[:opcion] == "cancelar"
       redirect"/category"
     else
       @cat = Category.find(id: params['cat'])
@@ -273,23 +351,6 @@ class App < Sinatra::Base
     end
   end
 
-  get "/subscriptions" do
-    @collection = @userName.categories
-    @cat = Category.exclude(users: @userName).all
-    erb :subscriptions, :layout =>@layoutEnUso
-  end
-
-  post "/delete_subscriptions" do
-    @aux = params[:nameDeleteSub]
-    if @aux
-        @aux.each do |element|
-          @cat = Category.find(id: element)
-          @userName.remove_category(@cat)
-        end
-    end
-    redirect "/subscriptions"
-  end
-
   post "/add_subscriptions" do
     @aux = params[:nameSub]
     if @aux
@@ -298,13 +359,21 @@ class App < Sinatra::Base
         @userName.add_category(@cat)
       end
     end
-      redirect "/subscriptions"
+    redirect "/subscriptions"
   end
 
-  get "/create_document" do
-    @userCreate = User.all
-    @categories = Category.all
-    erb:create_document, :layout =>@layoutEnUso
+  post "/delete_subscriptions" do
+    @aux = params[:nameDeleteSub]
+    if @aux
+      @aux.each do |element|
+        @cat = Category.find(id: element)
+        @userName.remove_category(@cat)
+      end
+    end
+    @errormsg ="la suscripción fue eliminada."
+    @collection = @userName.categories
+    @cat = Category.exclude(users: @userName).all
+    erb :subscriptions, :layout =>@layoutEnUso
   end
 
   post '/create_document' do
@@ -319,49 +388,35 @@ class App < Sinatra::Base
     dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     chosenCategory = Category.find(id: params[:cat])
     @prob = User.all
-    if !(@docExi= Document.find(name: params['name']) || @docExi= Document.find(description: params['description']))
-      @doc = Document.new(name: params['name'], description: params['description'], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+    if !(@docExi= Document.find(name: params[:name]) || @docExi= Document.find(description: params[:description]))
+      @doc = Document.new(name: params['name'], description: params[:description], fileDocument:  direction, category_id: chosenCategory.id, date: date)
       @doc.save
-      @notification = Notification.new(description: params['description'], date: dateNot, document_id: @doc.id)
+      @notification = Notification.new(description: params[:description], date: dateNot, document_id: @doc.id)
       @notification.save
       @aux = params[:mult]
       @aux &&  @aux.each do |element|
         @doc.add_user(element)
         @notification.add_user(element)
-        @message = @notification.description
-        notifyUser(element,@message)
+        message = @notification.description
+        notifyUser(element,message)
       end
-      redirect "/all_document"
+      @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
+      @notification_cat.save
+      @cat_notification = Category.find(id: chosenCategory.id)
+      @cat_notification.users.each do |element|
+        @notification_cat.add_user(element)
+      end
+      @errormsg ="El documento fue cargado."
+      @allCat = Category.all
+      @userName = User.find(id: session[:user_id])
+      filter()
+      erb :all_document, :layout =>@layoutEnUso
     else
       @userCreate = User.all
       @categories = Category.all
       @errormsg = "El Documento/descripción ya existen"
       erb :create_document, :layout =>@layoutEnUso
     end
-  end
-
-  get "/tag_document" do
-    if session[:type]==true
-      @document[] = documents_users
-      erb :profile, :layout =>@layoutEnUso
-    else
-      redirect "/"
-    end
-  end
-
-  get "/all_documentUser" do
-    @allCat = Category.all
-    @userName = User.find(id: session[:user_id])
-    @allDoc = Document.all
-    filter()
-    erb:all_documentUser, :layout =>@layoutEnUso
-  end
-
-  get "/all_document" do
-    @allCat = Category.all
-    @userName = User.find(id: session[:user_id])
-    filter()
-    erb:all_document, :layout =>@layoutEnUso
   end
 
   post "/delete_document" do
@@ -404,6 +459,17 @@ class App < Sinatra::Base
       end
     end
     redirect "/all_document"
+  end
+
+
+
+
+  def notifyUser(user, message)
+    settings.sockets.each do |s|
+      if s[:id_user] == user
+        s[:socket].send(message)
+      end
+    end
   end
 
   def filter()
@@ -472,5 +538,4 @@ class App < Sinatra::Base
       end
     end
   end
-
 end

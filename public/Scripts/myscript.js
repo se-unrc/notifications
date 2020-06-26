@@ -4,21 +4,16 @@ window.onload = function(){
       return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
     }(document.getElementById('msgs'));
     var ws  = new WebSocket('ws://localhost:9292/miwebsoket');
-    ws.onopen = function() { show('websocket opened');};
-    ws.onclose = function() { show('websocket closed'); }
+    ws.onopen = () => {console.log('conectado');};
+    ws.onerror = e => {console.log('error en la conexion', e);};
+    ws.onclose = () => {console.log('desconectado');};
     ws.onmessage = function(m) {
       show('websocket message: ' + m.data);
       var msgs = document.getElementById('msgs');
       msgs.innerHTML = '\
-            <div class="spinner-grow text-success" role="status">\
-              <span class="sr-only">Loading...</span>\
-            </div>\
-            <div class="alert alert-primary" role="alert">\
-            <form class="col-6" action="/all_notifications" method="get">\
-              <input type="hidden" name="theId" value="<%@userName.id%>"/>\
-              <button id="buttonLogin" type="submit">Notificaciones</button>\
-            </form>\
-            </div>';
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2">\
+          <a id="buttonNotf" href="/notificaciones">Notificaciones</a>\
+      </div>';
      };
           var sender = function(f){
       f.onsubmit = function(){

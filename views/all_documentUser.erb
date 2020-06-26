@@ -1,61 +1,59 @@
-
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
 <form  class="row backgroundHs" action="/all_documentUser" method="get">
-  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-
-
-    <!-- <select class="mdb-select validate md-form" searchable="Search here..">
-      <option value="" disabled selected>Choose your country</option>
-      <option value="1">USA</option>
-      <option value="2">Germany</option>
-      <option value="3">France</option>
-      <option value="4">Poland</option>
-      <option value="5">Japan</option>
-    </select> -->
-
-      <select class="selectpicker col-xl-10 backgroundImput form-control" data-show-subtext="true" data-live-search="true" name="filterName">
-        <option value="" checked> Buscar por nombre
-        <%@allDoc && @allDoc.each do |element|%>
-          <option value="<%=element.name%>"><%=element.name%>
-        <%end%>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center m-auto container">
+    <select class="col-xl-10 mi-selector" name='dateDoc'>
+      <%@allPdf && @allPdf.each do |element| %>
+        <option value='<%= element.name%>'><%= element.name%></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center m-auto container">
+      <select class="col-xl-10 mi-selector mt-auto" name='category'>
+        <%@allCat && @allCat.each do |element| %>
+          <option value="<%=element.name%>"><%= element.name%></option>
+        <% end %>
       </select>
-
-
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <input class="col-xl-10 backgroundImput form-control" id="date" type="date" name="dateDoc">
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <select name="filter" class="col-xl-10 backgroundImput form-control">
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center m-auto container">
+    <select name="filter" class="col-xl-10 form-control mi-selector ">
       <option value="nameO">Nombre</option>
       <option value="dateO">Fecha</option>
     </select>
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <select class="selectpicker" class="col-xl-10 backgroundImput form-control" data-show-subtext="true" data-live-search="true" name="category">
-        <option value="" checked> Buscar categoría
-        <%@allCat && @allCat.each do |element|%>
-          <option value="<%=element.name%>"><%=element.name%>
-        <%end%>
-      </select>
+  <div class="ccol-lg-2 col-md-2 col-sm-4 col-xs-6 text-center m-auto container">
+    <input  class="form-control" id="date" type="date" name="dateDoc">
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-    <button id="buttonIndexDocA" class="buttonForm nav-link" type="submit">Filtrar</button>
+  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center m-auto container">
+    <button id="buttonIndexDocA" class="col-xl-10 buttonForm nav-link" type="submit">Filtrar</button>
   </div>
 </form>
 <div class="row">
-    <%@allPdf && @allPdf.each do |element| %>
+  <%@allPdf && @allPdf.each do |element| %>
     <div class="col-xl-4">
       <section class="col-11 elementColor">
-        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc" href="<%=element.fileDocument%>" download="<%= element.name%>">
           <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
-            <div class="d-flex w-100 justify-content-between">
-              <input type="hidden" name="pdf" value="<%=element.id%>"></input>
-              <h4 class="mb-1"><%= element.name%></h4>
-              <h5 class="text-muted"><%= element.date%></h5>
-            </div>
-            <h6 class="mb-1"><%= element.description%></h6>
-          </a>
-        </section>
+          <div class="d-flex w-100 justify-content-between">
+            <input type="hidden" name="pdf" value="<%=element.id%>"></input>
+            <h4 class="mb-1"><%= element.name%></h4>
+            <h5 class="text-muted"><%= element.date%></h5>
+          </div>
+          <h6 class="mb-1"><%= element.description%></h6>
+        </a>
+      </section>
     </div>
   <% end %>
 </div>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  $(document).ready(function() {
+      $('.mi-selector').select2();
+  });
+});
+</script>

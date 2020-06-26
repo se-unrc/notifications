@@ -57,3 +57,12 @@
   background-color: #ADEDBD;
   color: black;
 }
+#buttonNotf{
+  margin: 0px;
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: #ADEDBD;
+  border: 0px;
+  color: black;
+};

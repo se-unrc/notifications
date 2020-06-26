@@ -1,0 +1,47 @@
+<div class="container">
+    <form class="form-group" action="/notificaciones" method="post">
+    <div class="m-auto text-center col-xl-4 backgroundFroms">
+        <button type="submit" id="buttonIndexA" name="leido[]">Marcar como Leido</button>
+    </div>
+    <div class="row">
+      <%  @allPdfEt && @allPdfEt.each do |element|  %>
+      <div class="col-xl-6">
+        <section class="col-11 elementColor">
+          <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+            <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+              <div class="d-flex w-100 justify-content-between">
+                <input type="hidden" name="pdf" value="<%=element.id%>"></input>
+                <input type="checkbox" name="leido" value="<%=element.id%>">Leido </input>
+                <h4 class="mb-1"><%= element.name%></h4>
+                <h5 class="text-muted"><%= element.date%></h5>
+                <div class="m-auto">
+                    <input type="checkbox" name="leido" value="<%=element.id%>"> Leido</input>
+                </div>
+              </div>
+              <h6 class="mb-1"><%= element.description%></h6>
+                <h6 class="text-muted">Te Etiquetaron </h6>
+            </a>
+          </section>
+      </div>
+    <% end %>
+    <%  @allPdfCat && @allPdfCat.each do |element|  %>
+    <div class="col-xl-6">
+      <section class="col-11 elementColor">
+        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc">
+          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" />
+            <div class="d-flex w-100 justify-content-between">
+              <input type="hidden" name="pdf" value="<%=element.id%>"></input>
+              <h4 class="mb-1"><%= element.name%></h4>
+              <h5 class="text-muted"><%= element.date%></h5>
+              <div class="m-auto">
+                  <input type="checkbox" name="leido" value="<%=element.id%>"> Leido</input>
+              </div>
+            </div>
+            <h6 class="mb-1"><%= element.description%></h6>
+            <h6 class="text-muted">Documento de Categoria</h6>
+          </a>
+        </section>
+    </div>
+  <% end %>
+  </form>
+</div>

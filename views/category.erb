@@ -12,117 +12,114 @@
       </div>
     </form>
   </div>
-
   <% if @cat%>
-  <div class="container col-xl-4 m-auto">
-    <form class="container col-xl-11 backgroundFroms " action="/search_category" method="Post">
-      <div class="form-group">
-        <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the category name" required>
-      </div>
-      <div class="form-group text-center">
-        <button id="buttonLogin" type="submit" class="text-center">Buscar</button>
-      </div>
-    </form>
-    <form class="col-xl-11 backgroundFroms" method="POST" action="/select_category">
-      <div class="row">
-        <div class="form-group m-auto text-center">
-          <h2 class="fuenteUbuntu" >Categorias</h2>
+    <div class="container col-xl-4 m-auto">
+      <form class="container col-xl-11 backgroundFroms " action="/search_category" method="Post">
+        <div class="form-group">
+          <input type="text" class="form-control backgroundImput" name="name"placeholder="Input the category name" required>
         </div>
-        <div class="form-group m-auto">
-          <button id="buttonIndexA" type="submit">Seleccionar</button>
+        <div class="form-group text-center">
+          <button id="buttonLogin" type="submit" class="text-center">Buscar</button>
         </div>
-      </div>
-      <% @cat && @cat.each do |element| %>
-      <input  type="radio" name="name" value="<%=element.name%>">
-      <label for="name">Nombre: <%=element.name%> </label>
-      <label for="description"> Descripción: <%=element.description%></label> <br>
-      <% end %>
-    </form>
-  </div>
+      </form>
+      <form class="col-xl-11 backgroundFroms" method="POST" action="/select_category">
+        <div class="row">
+          <div class="form-group m-auto text-center">
+            <h2 class="fuenteUbuntu" >Categorias</h2>
+          </div>
+          <div class="form-group m-auto">
+            <button id="buttonIndexA" type="submit">Seleccionar</button>
+          </div>
+        </div>
+        <% @cat && @cat.each do |element| %>
+        <input  type="radio" name="name" value="<%=element.name%>">
+        <label for="name">Nombre: <%=element.name%> </label>
+        <label for="description"> Descripción: <%=element.description%></label> <br>
+        <% end %>
+      </form>
+    </div>
   <% end %>
-
   <% if @categor %>
-  <div class="container col-xl-4">
-    <div class="col-xl-12">
-      <form class="container col-xl-11 backgroundFroms" method="POST" action="/option_category">
-        <div class="row">
-          <div class="form-group col-xl-12 text-center">
-            <h4 class="fuenteUbuntu m-auto">Nombre: <%=@categor.name%></h4>
+    <div class="container col-xl-4">
+      <div class="col-xl-12">
+        <form class="container col-xl-11 backgroundFroms" method="POST" action="/option_category">
+          <div class="row">
+            <div class="form-group col-xl-12 text-center">
+              <h4 class="fuenteUbuntu m-auto">Nombre: <%=@categor.name%></h4>
+            </div>
+            <div class="form-group col-xl-12 text-center">
+              <h5 class="fuenteUbuntu m-auto">Descripción: <%=@categor.description%></h5>
+            </div>
           </div>
-          <div class="form-group col-xl-12 text-center">
-            <h5 class="fuenteUbuntu m-auto">Descripción: <%=@categor.description%></h5>
+          <div class="row">
+            <div class="form-group col-5 m-auto">
+              <input type="hidden" name = "id" value=<%=@categor.id%>>
+              <button id="buttonIndexA" type="submit" name="opcion" value = "modificar" >Modificar</button>
+            </div>
+            <div class="form-group col-5 m-auto">
+              <button id="buttonIndexA" type="submit" type="submit" name="opcion" value="eliminar">Eliminar</button>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-5 m-auto">
-            <input type="hidden" name = "id" value=<%=@categor.id%>>
-            <button id="buttonIndexA" type="submit" name="opcion" value = "modificar" >Modificar</button>
-          </div>
-          <div class="form-group col-5 m-auto">
-            <button id="buttonIndexA" type="submit" type="submit" name="opcion" value="eliminar">Eliminar</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
   <%end%>
-
   <%if @modificar %>
-  <div class="container col-xl-8">
-    <div class="col-xl-10">
-      <form class="backgroundFroms" method="POST" action="/modify_category">
-        <div class="row form-group">
-          <input type="hidden" name = "id" value = <%=@cat_sel.id%>>
-          <label class="text-center" for="oldName"> Nombre: <%=@cat_sel.name%></label>
-          <input type="text" class="form-control backgroundImput" name="name"placeholder="Ingresar el Nombre" required>
-        </div>
-        <div class="row form-group">
-          <label> Descripción: <%=@cat_sel.description%> </label>
-          <input type="text" class="form-control backgroundImput" name="description" placeholder="Ingresa la Descripción" required>
-        </div>
-        <div class="row">
-          <div class="form-group col-5 m-auto">
-            <button id="buttonLogin" type="submit" class="text-center" >Modificar</button>
+    <div class="container col-xl-8">
+      <div class="col-xl-10">
+        <form class="backgroundFroms" method="POST" action="/modify_category">
+          <div class="row form-group">
+            <input type="hidden" name = "id" value = <%=@cat_sel.id%>>
+            <label class="text-center" for="oldName"> Nombre: <%=@cat_sel.name%></label>
+            <input type="text" class="form-control backgroundImput" name="name"placeholder="Ingresar el Nombre" required>
           </div>
-          <div class="form-group col-5 m-auto">
-            <button id="buttonLogin" type="submit" class="text-center"  name = "opcion" value="cancelar">Cancelar</button>
+          <div class="row form-group">
+            <label> Descripción: <%=@cat_sel.description%> </label>
+            <input type="text" class="form-control backgroundImput" name="description" placeholder="Ingresa la Descripción" required>
           </div>
-        </div>
-      </form>
+          <div class="row">
+            <div class="form-group col-5 m-auto">
+              <button id="buttonLogin" type="submit" class="text-center" >Modificar</button>
+            </div>
+            <div class="form-group col-5 m-auto">
+              <button id="buttonLogin" type="submit" class="text-center"  name = "opcion" value="cancelar">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
   <% end %>
   <div class="container col-xl-8">
     <% if  @eliminar  %>
-    <form class="backgroundFroms col-xl-10" method="post" action="/migrate_document">
-      <div>
-        <h3 class = "text-center"> Elija los documentos a migrar </h3>
-        <%@allDocs.each do |element| %>
-        <div class="form-group">
-          <input type="checkbox" name="name[]" value="<%=element.name%>">
-          <label><%=element.name%></label>
-          <label>- Descripción:<%=element.description%></label>
-        </div>
+      <form class="backgroundFroms col-xl-10" method="post" action="/migrate_document">
+        <div>
+          <h3 class = "text-center"> Elija los documentos a migrar </h3>
+          <%@allDocs.each do |element| %>
+            <div class="form-group">
+              <input type="checkbox" name="name[]" value="<%=element.name%>">
+              <label><%=element.name%></label>
+              <label>- Descripción:<%=element.description%></label>
+            </div>
         <% end %>
       </div>
       <div >
         <h3 class = "text-center">Elija la categoria a la cual va a migrar.</h3>
         <% @cats.each do |element| %>
-        <input type="radio" name="cat" value="<%= element.id%>" required><label for="cat"><%= element.name%> - Descripción: <%= element.description%></label>
+          <input type="radio" name="cat" value="<%= element.id%>" required><label for="cat"><%= element.name%> - Descripción: <%= element.description%></label>
         <% end %>
       </div>
       <div >
         <h5>La categoria se eliminará una vez que no tenga documentos ligados a ella.</h5>
-        <div class="row">
-          <div class="form-group col-5 m-auto">
-            <button type="submit" id="buttonLogin" class="text-center">Migrar</button>
-          </div>
-          <div class="form-group col-5 m-auto">
-            <button id="buttonLogin" type="submit" class="text-center"  name = "opcion" value="cancelar">Cancelar</button>
+          <div class="row">
+            <div class="form-group col-5 m-auto">
+              <button type="submit" id="buttonLogin" class="text-center">Migrar</button>
+            </div>
+            <div class="form-group col-5 m-auto">
+              <button id="buttonLogin" type="submit" class="text-center"  name = "opcion" value="cancelar">Cancelar</button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
     <%end%>
   </div>
 </div>
