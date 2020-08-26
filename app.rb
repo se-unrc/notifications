@@ -113,15 +113,6 @@ class App < Sinatra::Base
     erb :notificaciones, :layout =>@layoutEnUso
   end
 
- #  post "/notificaciones" do
- #    @not.each do |element|
- #        element.update(seen: true)
- #   end
- # end
-
-
-
-
   get "/create_document" do
     @userCreate = User.all
     @categories = Category.all

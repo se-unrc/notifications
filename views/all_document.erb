@@ -51,16 +51,21 @@
             </div>
             <h6 class="mb-1"><%= element.description%></h6>
             <div class="row d-flex w-100 justify-content-between">
+              <form class="col-6" action="/selected_document" method="post">
                 <input type="hidden" name="pdf" value="<%=element.id%>"/>
                 <button id="buttonLogin" type="submit">Editar</button>
+              </form>
+              <form class="col-6" action="delete_document" method="post" >
+                <input type="hidden" name="theId" value="<%=element.id%>"/>
+                <button id="buttonLogin"  type="submit">Eliminar</button>
+              </form>
             </div>
           </a>
         </div>
       </div>
     <% end %>
   </div>
-
-
+  
   <script type="text/javascript">
   jQuery(document).ready(function($){
     $(document).ready(function() {
