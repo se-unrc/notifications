@@ -165,27 +165,30 @@ class App < Sinatra::Base
       #TODO etiquetar antes de informar 
       if doc.save
         logger.info params["tagged"]
-        
-        params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
-        logger.info settings.userlist
-        settings.userlist.each { |u| u.add_document(doc) }
-        #params["tagged"].each { |e| u= ((User.find(:username => e)).add_document(doc)) }
 
-        #name = params["tagged"].first
-        #usertag= User.first(:username => name)
-        #usertag.add_document(doc)
-        #usertaged.add_document(doc)
-        #docuid = Document.find(name:@filename).id
-       
-       # duck = DocumentsUser.new(document_id: docuid , user_id: usertaged)
-       # logger.info doc.id
-       # logger.info docuid
-       
-        #logger.info usertaged
-      
-        settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
-        redirect "/documents"
-      
+        if (params["tagged"] != nil)
+
+          params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
+          logger.info settings.userlist
+          settings.userlist.each { |u| u.add_document(doc) }
+          #params["tagged"].each { |e| u= ((User.find(:username => e)).add_document(doc)) }
+
+          #name = params["tagged"].first
+          #usertag= User.first(:username => name)
+          #usertag.add_document(doc)
+          #usertaged.add_document(doc)
+          #docuid = Document.find(name:@filename).id
+         
+         # duck = DocumentsUser.new(document_id: docuid , user_id: usertaged)
+         # logger.info doc.id
+         # logger.info docuid
+         
+          #logger.info usertaged
+        
+          settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
+          redirect "/documents"
+        end
+        redirect "/documents"  
       else
         [500, {}, "Internal Server Error"]
       end
