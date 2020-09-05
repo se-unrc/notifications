@@ -33,7 +33,15 @@ class App < Sinatra::Base
 
   before do
     if session[:isLogin]
+
+
+
       @userName = User.find(id: session[:user_id])
+
+
+      @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
+
+
       if session[:type]
         @layoutEnUso = :layout_admin
       else

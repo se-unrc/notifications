@@ -7,7 +7,12 @@
     <%= @errormsg %>
   </div>
 <% end %>
-
+<script type="text/javascript">
+  const ws  = new WebSocket('ws://localhost:9292/miwebsoket');
+  ws.onmessage = function(m) {
+    window.location.reload();
+  };
+</script>
 <div class="row">
   <% @document && @document.each do |element| %>
     <div class="col-xl-4">
