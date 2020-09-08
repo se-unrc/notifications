@@ -37,6 +37,7 @@ Table of Contents
 | Name | Date    | Reason For Changes    | Version   |
 | ---- | ------- | ----------------------| --------- |
 | DUNS     | 04/02/2020 | None. First version| 0.1   |
+| DUNS | 07/09/2020C | Added functionalities | 0.2 |
  
 
 ## 1. Introduction
@@ -57,7 +58,7 @@ Administrators are going to use this software to upload official factulty docume
 | Admin(s)        | Registered users with an administration permit |
 | Registered users/RU (acronym) | Users who are registered in the system and don't have    an administration permit |
 | Invited users | Users who have not registered but can access the system | 
-| Notification  | A email to the person who has been tagged in in a document or if that uploaded document belongs to their interest category.       |
+| Notification  | A system notification correlated with an email notification.      |
 | Document      | Official faculty's record documents.  |
 | Tagged user   | Registered user who has been tagged in a document.               |
 | Category      | Topic to which the document refers.                           |
@@ -128,6 +129,8 @@ Each of these user types has a different system usage.
     * Subscribe to an interest category
     * Be notified accordingly 
     * Be able to look through all their notifications
+    * Edit their profile
+    * Look at the document's they've been tagged in
 
 * **Administrators**: shares all the characteristics of the registered users, plus:
     * Upload documents
@@ -139,6 +142,7 @@ Each of these user types has a different system usage.
 The requirements for running this software depend on the following assumptions:
 1. that the user has an functioning internet connection,
 2. that the user has a web browser capable of running the site.
+3. that the user has an eail account.
 
 
 ## 3. Requirements
@@ -163,7 +167,7 @@ A first time user, or a registered user who has not yet logged in, will have to 
 An unregistered or unlogged user has two choices if they wish to 'unlock' the registered user's features: to sign up, or to log in, respectively.
 
 * **Sign up page**
-  Here the user who wishes to sign up will have to provide some personal information, namely their full name, their ID number, their chosen username, their email account, and their chosen password. This will grant the as-of-now registered user all of this kind of user's features, as they have been previously listed and described. This should be done by interacting with an UI akin to the one pictured below:
+  Here the user who wishes to sign up will have to provide some personal information, namely their full name, their chosen username, their email account, and their chosen password. This will grant the as-of-now registered user all of this kind of user's features, as they have been previously listed and described. This should be done by interacting with an UI akin to the one pictured below:
 
   ![Imgur](https://i.imgur.com/dcBr3Pl.png)
   
@@ -187,6 +191,9 @@ An user who has already logged into the system, will interact with two different
     A regular user profile page will allow them to select those categories they wish to subscribe to in order to receive notifications, and also to edit their personal information given at the sign up stage. It should look akin to what is pictured below:
 
     ![Imgur](https://i.imgur.com/y6B7pl7.jpg)
+    
+  * **Notification page**
+    A regular user notification page will contain a list with all the notifications they have received throughout their user history, and it will be distinguished wether the notification has been seen or not.
 
 ###### **Admins' pages**
 
@@ -242,12 +249,20 @@ DESC: All users should be allowed to search documents by the following criteria:
 RAT: In order for a user to search for documents.         
 DEP: None.
 
+###### User story 1.4
+
+**ID:** US4      
+TITLE: View documents in 2 different ways
+DESC: All users should be allowed to view the list of documents in 2 different ways: as a grid of documents with a preview of the document, as a well as in table form, with no preview but with all the relevant information. 
+RAT: In order for a user to pick their favorite viewing style.  
+DEP: US1.
+
 
 ##### 3.2.2.2 User Class 2 - The Unregistered User
 
 ###### User story 2.1
 
-**ID:** US4         
+**ID:** US5         
 TITLE: Sign up                   
 DESC: Given that the user has now accessed the website, they should be a allowed to register into the site. They will have to provide their full name, ID number, username, email, and password.              
 RAT: In order for an unregistered user to sign up.                 
@@ -257,15 +272,15 @@ DEP: None.
 
 ###### User story 3.1
 
-**ID:** US5                                   
+**ID:** US6                                   
 TITLE: Receive notifications when tagged                        
-DESC: As a RU, I want to receive notifications when I am tagged in a document.
+DESC: As a RU, I want to receive notifications when I am tagged in a document, both in-system and through emails.
 RAT: In order for a RU to receive notifications whenever tagged.             
 DEP: US4
 
 ###### User story 3.2
 
-**ID:** US6                          
+**ID:** US7                          
 TITLE: Log in                                         
 DESC: As a RU, I want to log into my account. For this I need my email account and my password.               
 RAT: In order for a registered user to log in.                                       
@@ -273,7 +288,7 @@ DEP: US4
 
 ###### User story 3.3.
 
-**ID:** US7             
+**ID:** US8             
 TITLE: Forgot my password               
 DESC: As a RU, I forgot my password. To retrieve it I need to give the website my email account.                 
 RAT: In order for a RU to retrieve their password.                 
@@ -281,7 +296,7 @@ DEP: US4
 
 ###### User story 3.4
 
-**ID:** US8                   
+**ID:** US9                   
 TITLE: Edit my profile                    
 DESC: As a RU, I want to be able to edit my profile: change my full name, my username, my password, my email, and my ID number.                 
 RAT: In order for a RU to edit their profile.                   
@@ -289,7 +304,7 @@ DEP: US6
 
 ###### User story 3.5
 
-**ID:** US9                  
+**ID:** US10                  
 TITLE: Edit my interest categories                  
 DESC: As a RU, I want to subscribe to new categories, or to unsusbcribe to categories I had previously subbed to.                
 RAT: In order for a RU to edit their interest categories.             
@@ -297,23 +312,26 @@ DEP: US6
 
 ###### User story 3.6
 
-**ID:** US10                    
+**ID:** US11                    
 TITLE: Receive notifications from my interest categories                
 DESC: As a RU, I want to receive notifications whenever a new document is uploaded to one of my interest categories.                      
 RAT: In order for a RU to receive notifications from their ICs.            
 DEP: US9           
 
-**ID:** US11 
+###### User story 3.7
+
+**ID:** US12 
 TITLE: Look through all my notifications
 DESC: As a RU, I want to be able to look through all the notifications I've received, from the website, with no need to check my emails.
 RAT: In order for a RU to look through all their notifications from within the system.
 DEP: US10
 
+
 ##### 3.2.2.4 User Class 4 - The Admin Class
 
 ###### User story 4.1 
 
-**ID:** US12                
+**ID:** US13                
 TITLE: Upload new document                 
 DESC: As an admin, I want to upload a new document as need be. For this I will need the PDF file, the title of the document, the tagged users, the date, and the document's category.                   
 RAT: In order for an admin to upload a new document.              
@@ -321,7 +339,7 @@ DEP: US4
 
 ###### User story 4.2
 
-**ID:** US13                 
+**ID:** US14                 
 TITLE: Edit docs                 
 DESC: As an admin, I want to edit any document that has already been uploaded. This means changing its title, date, PDF file, users tagged to the doc, and the doc's category.                    
 RAT: In order for an admin to edit uploaded documents.                 
@@ -329,7 +347,7 @@ DEP: US11
 
 ###### User story 4.3
 
-**ID:** US14                 
+**ID:** US15                 
 TITLE: Delete documents                
 DESC: As an admin, I want to be able to delete documents that may have been wrongfully uploaded, or that for some reason are no longer relevant.      
 RAT: In order for an admin to delete documents, no questions asked.           
@@ -337,11 +355,12 @@ DEP: US11
 
 ###### User story 4.4
 
-**ID:** US15                  
+**ID:** US16                  
 TITLE: Invite admin                     
 DESC: As an admin, I want to invite another RU in order for them to become an admin. For this I only need their username.                
 RAT: In order for an admin to invite some other RU to become an admin.            
 DEP: US4
+
 
 ### 3.3 Design Requirements 
 
@@ -387,10 +406,6 @@ DESC: The admin must have the document's PDF file stored in his computer in orde
 **ID:** DC2                           
 TITLE: Having an email account                     
 DESC: The system is designed so that all users must have an email account.
-
-**ID:** DC3           
-TITLE: Having an ID number               
-DESC: Only people with ID numbers will be able to sign up for an account.
 
 
 
