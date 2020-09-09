@@ -16,6 +16,9 @@ This is a sample readme file
   sudo docker exec -it <ID DEL CONTENEDOR NOTIFICATIONS> sequel -m db/migrations postgres://unicorn:magic@db/notificator-development
   Entrar  a la base de datos:
   sudo docker exec -it <ID DEL CONTENEDOR POSTGRES> sh -c "psql --host=db --username=unicorn dbname=notificator-development"
+  
+  reventar todas las tablas de la base de datos:
+  sudo  docker-compose down --volumes
 ```
 
 
