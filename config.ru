@@ -3,7 +3,7 @@ require "sinatra"
 require 'sequel'
 require "sinatra/config_file"
 
-sleep 15
+sleep 10
 Bundler.require
 
 # Get the values from our config file

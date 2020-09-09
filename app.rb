@@ -29,7 +29,9 @@ class App < Sinatra::Base
       redirect '/login'
     elsif session[:user_id]
       @user = User.find(id: session[:user_id])
-      is_admin
+      if @user != nil
+        is_admin
+      end
     end
     
   end
