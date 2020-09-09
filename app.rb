@@ -201,8 +201,8 @@ class App < Sinatra::Base
       erb :view_doc, :layout => :layoutlogin
   end
 
-  get '/remove/:doc_name' do
-      docu = Document.where(name: params[:doc_name])
+  get '/remove/:doc_id' do
+      docu = Document.where(id: params[:doc_id])
       docu.delete
       if docu.delete
         redirect "/documents"
