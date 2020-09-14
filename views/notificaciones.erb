@@ -1,4 +1,3 @@
-  <form class="form-group" action="/notificaciones" method="post">
     <div class="alert alert-success" role="alert">
         Notificaciones por Etiqueta
     </div>
@@ -13,16 +12,17 @@
                 <h5 class="text-muted"><%= element.date%></h5>
               </div>
               <h6 class="mb-1"><%= element.description%></h6>
-              <div class="row d-flex w-100 justify-content-between">
-                  <input type="hidden" name="leidoEt[]" value="<%=element.id%>"/>
-                  <input type="checkbox" value="<%=element.id%>">Marcar como leído
-              </div>
+              <form class="col-6" action="delete_notificaciones" method="post" >
+                <input type="hidden" name="theId" value="<%=element.id%>"/>
+                <input type="hidden" name="theDescription" value="etiquetaron">
+                <button id="buttonLogin"  type="submit">Visto</button>
+              </form>
             </a>
           </section>
         </div>
       <% end %>
     </div>
-    <div class="alert alert-success" role="alert">
+   <div class="alert alert-success" role="alert">
         Notificaciones por categorias
     </div>
     <div class="row">
@@ -37,15 +37,14 @@
               </div>
               <h6 class="mb-1"><%= element.description%></h6>
               <div class="row d-flex w-100 justify-content-between">
-                  <input type="hidden" name="leidoCat[]" value="<%=element.id%>"/>
-                  <input type="checkbox" value="<%=element.id%>">Marcar como leído
+                  <form class="col-6" action="delete_notificaciones" method="post" >
+                     <input type="hidden" name="theId" value="<%=element.id%>"/>
+                     <input type="hidden" name="theDescription" value="categoria">
+                     <button id="buttonLogin" type="submit">Visto</button>
+                  </form>
               </div>
             </a>
           </section>
         </div>
       <% end %>
     </div>
-    <div class="alert alert-success" role="alert">
-        <button id="buttonLogin"  type="submit">Eliminar</button>
-    </div>
-  </form>
