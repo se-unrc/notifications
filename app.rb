@@ -44,6 +44,14 @@ class App < Sinatra::Base
     end
   end
 
+  def findConnection(user)
+    #logger.info user.id
+    #settings.sockets.each { |test| logger.info test[:user] }
+    settings.sockets.each{ |s| if(s[:user] == user.id) then return s[:socket] end }
+    
+    return (nil) #Por si el usuario no esta conectado en ese momento
+  end
+
   get "/" do
     if !request.websocket?
       erb:index, :layout => :layoutlogin
@@ -161,33 +169,36 @@ class App < Sinatra::Base
       user = User.find(id: session[:user_id]).username
       doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
       
-      
-      
-      #params["tagged"].each { |e| DocumentsUser.new(document_id: doc.id , user_id: (User.first(username: e).id)) }
-      #TODO etiquetar antes de informar 
+     
       if doc.save
-        logger.info params["tagged"]
 
         if (params["tagged"] != nil)
-
+          
+          ## asignar documento a usuarios etiqutados.
           params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
-          logger.info settings.userlist
           settings.userlist.each { |u| u.add_document(doc) }
-          #params["tagged"].each { |e| u= ((User.find(:username => e)).add_document(doc)) }
-
-          #name = params["tagged"].first
-          #usertag= User.first(:username => name)
-          #usertag.add_document(doc)
-          #usertaged.add_document(doc)
-          #docuid = Document.find(name:@filename).id
-         
-         # duck = DocumentsUser.new(document_id: docuid , user_id: usertaged)
-         # logger.info doc.id
-         # logger.info docuid
-         
-          #logger.info usertaged
         
-          settings.sockets.each{ |s| s[:socket].send("han cargado un nuevo documento!") }
+          #logger.info usertaged
+          # esta linea no va aca  @connection = {user: user, socket: ws}
+          # to cortar if (settings.userlist.include?(s[:user])) then ............ end 
+          #settings.sockets.each{ |s|   s[:socket].send("han cargado un nuevo documento!") }
+          #if (settings.userlist.include?(user))
+          #  @isTagged= true
+        #  else
+         #   @isTagged = false 
+        #  end
+          ##  notificar 
+          
+          #logger.info params["tagged"] # esta correcto, contiene un username
+          #logger.info settings.userlist #esta correcto, hay un objeto del tipo User
+
+          socketsToBeNotified = []
+          #settings.userlist.each { |taggedUser|  socketsToBeNotified << (findConnection(taggedUser))  }
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+          
+          #logger.info socketsToBeNotified  # ya no es vacio
+          socketsToBeNotified.each { |s|  s.send("han cargado un nuevo documento!") }
+          ##settings.sockets.each{ |s|  s[:socket].send("han cargado un nuevo documento!") }
           redirect "/documents"
         end
         redirect "/documents"  
@@ -198,7 +209,7 @@ class App < Sinatra::Base
 
   get '/view/:doc_name' do
       @this_doc = "/" +params[:doc_name]
-      erb :view_doc, :layout => :layoutlogin
+      erb :view_doc , :layout => false
   end
 
   get '/remove/:doc_id' do
