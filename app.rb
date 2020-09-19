@@ -520,4 +520,6 @@ class App < Sinatra::Base
     end
   end
 
+#A partir de aca van a ir las nuevas funcionalidades
+
 end
