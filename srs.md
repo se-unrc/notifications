@@ -109,20 +109,20 @@ La aplicación se correrá mediante Docker un contenedor de software capaz de au
 |Baja de Administrador             |Eliminación de un administrador del sistema                                 |
 |Baja de Documento                 |Eliminación de un documento del sistema                                     |
 |Baja de Categoría                 |Eliminación de una categoría del sistema,la cual tendrá que pasar por un    |                                                                 
-|                                   proceso de migración de documentos a otras categorías                       |
+|                                  |proceso de migración de documentos a otras categorías                       |
 |Modificación de Administrador     |La modificación de los datos personales de un administrador en el sistema   |                                                         
 |Modificación de Usuario           |La modificación de los datos personales de un usuario en el sistema         |                                                                         
 |Modificación de Documento         |La modificación del nombre y/o categoría de un documento en el sistema      |                                                                         
 |Modificación de Categoría         |La modificación del nombre y/o descripción de una categoría en el sistema   |                                                             
 |Notificación de Usuario(Documento)|Tras el alta de un documento en el sistema aquellos usuarios ya sean        |
-|                                   administradores o comunes que sean etiquetados por nombre o                 |
-|                                   DNI(Documento Nacional de Identidad) se les enviara una notificación del    |
-|                                   documento                                                                   |
+|                                  |administradores o comunes que sean etiquetados por nombre o                 |
+|                                  |DNI(Documento Nacional de Identidad) se les enviara una notificación del    |
+|                                  |documento                                                                   |
 |Notificación de Usuario(Categoría)|Tras el alta de un documento en el sistema aquellos usuarios suscritos a    |
-|                                   una categoría correspondiente al documento serán notificados de la subida   |
-|                                   del mismo                                                                   |
+|                                  |una categoría correspondiente al documento serán notificados de la subida   |
+|                                  |del mismo                                                                   |
 |Eliminación  de Notificaciones    |Si un usuario considera que ya ha sido notificado por la subida de un       |
-|                                   documento entonces podrá eliminar la notificación correspondiente           |                                                                   
+|                                  |documento entonces podrá eliminar la notificación correspondiente           |                                                                   
 
 Nota: A excepción de la Modificación de usuario y la Eliminación de Notificaciones, el resto de funcionalidades unicamente las puede realizar un usuario Administrador.
 
