@@ -136,7 +136,7 @@ El sistema será interactivo y los retrasos serán los mínimos posibles tales q
 -Las vistas de la aplicación y  front-end sera implementado en Html y Css con el Framework Bootstrap 4 y la biblioteca de JavaScript jQuery. Así mismo se utilizara JavaScript para la implementación de funcionalidades respectivas a las vistas.
 
 -El sistema seguira el siguiente diagrama de clases:
-![Diagrama](/images/Diagrama_clases.png)
+![Diagrama](/images/Diagrama_clases2.png)
 
 
 <!-- TODO: give more guidance, similar to section 3 -->
