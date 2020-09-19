@@ -14,7 +14,7 @@ Table of Contents
   * 1.2 [Product Scope](#12-product-scope)
   * 1.3 [Definitions, Acronyms and Abbreviations](#13-definitions-acronyms-and-abbreviations)
   * 1.4 [References](#14-references)
-  * 1.5 [Overview] (#15-overview)
+  * 1.5 [Overview](#15-overview)
 * 2 [Product Overview](#2-product-overview)
   * 2.1 [Product Perspective](#21-product-perspective)
   * 2.2 [Product Functions](#22-product-functions)
@@ -37,11 +37,11 @@ Table of Contents
 ### 1.1 Proposito del Documento
  Este  documento representa los distintos requerimientos a la lógica que compete el Sistema de Notificaciones de la UNRC. Su propósito es describir las Funcionalidades y Componentes que rodean el desarrollo e implementación del mismo.
 
-### 1.2 Product Scope
+### 1.2 Objetivo del Producto
 El Sistema de notificaciones "Notifications" consiste en administrar la subida de distintos documentos varios que La Universidad Nacional de Rio Cuarto considere de carácter formal, tal como actas,reformas, etc.
 Así mismo también se encarga de notificar tanto a toda persona que sea mencionado en dichos documentos o todo aquel que quiera saber sobre documentos de esa índole.
 
-### 1.3 Definitions, Acronyms and Abbreviations
+### 1.3 Definiciones,Acronimos y Abreviaciones
 | Termino     | Descripción                                                        |
 | ------------|--------------------------------------------------------------------|
 |Usuario      |persona que puede ver documentos y recibir notificaciones si está incluido en dicho documento, Se registra con sus datos personales   |
@@ -51,10 +51,10 @@ Así mismo también se encarga de notificar tanto a toda persona que sea mencion
 |Categoria    |Tema al cual el documento refiere                                   |
 
 
-### 1.4 References
+### 1.4 Referencias
 [1] Arsaute, A., Brusatti, F., Solivellas, D., Uva, M. "srs". Unpublished
 
-### 1.5  Overview
+### 1.5  Revision
 La estructura y formato de este documento fue elegida acorde al estándar std 15288-2015 del IEEE.
 
 El resto de este documento está organizado como sigue.La sección 2 define las funciones generales del sistema, las restricciones destinadas a ser respetadas y las asunciones hechas para definir requerimientos. en resumen, profundiza en las especificaciones del sistema, sus funciones y otra información general.
@@ -62,7 +62,7 @@ El resto de este documento está organizado como sigue.La sección 2 define las 
 La Sección 3 lista los requerimientos funcionales y no funcionales en detalle.
 
 
-## 2. Product Overview
+## 2. Revision del Producto
 
 ### 2.1 Perspectiva del Producto.
 El producto a ser desarrollado,que este documento describe, es un sistema de notificaciones que forma parte de la Universidad Nacional de Rio Cuarto, el cual se considerara una extensión de la comunicación entre la entidad y los usuarios.
