@@ -2,9 +2,9 @@
 ## For Notifications System
 
 Version 1.1  
-Prepared by <author>  
-<organization>  
-<date created>  
+Prepared by Juan Pablo Bortol, Ayrton Emilio Lopez, Ezequiel Nicolas Rafti Soto,
+UNRC, 
+Marzo-2020  
 
 Table of Contents
 =================
@@ -20,18 +20,17 @@ Table of Contents
   * 2.2 [Product Functions](#22-product-functions)
   * 2.3 [User Characteristics](#23-user-characteristics)
   * 2.4 [Product Constraints](#24-product-constraints)
-  * 2.5 [Assumptions and Dependencies] (#25-Assumptions-and-dependencies)
+  * 2.5 [Assumptions and Dependencies](#25-Assumptions-and-dependencies)
 * 3 [Requirements](#3-requirements)
   * 3.1 [External Interface Requirements](#31-external-interface-requirements)
-  * 3.2 [Functional Requirements] (#32-functional-requirements)
+  * 3.2 [Functional Requirements](#32-functional-requirements)
   * 3.3 [Performance Requirements](#33-performance-requirements)
   * 3.4 [Design Constraints](#34-design-constraints)
 
 ## Revision History
 | Name             | Date     | Reason For Changes  | Version   |
+|------------------|----------|---------------------|-----------|
 | Modificaciones   |09/19/2020|  Mejoras Generales  |   1.1     |
-|                  |          |                     |           |
-|                  |          |                     |           |
 
 ## 1. Introduccion
 
@@ -45,8 +44,7 @@ Así mismo también se encarga de notificar tanto a toda persona que sea mencion
 ### 1.3 Definitions, Acronyms and Abbreviations
 | Termino     | Descripción                                                        |
 | ------------|--------------------------------------------------------------------|
-|Usuario      |persona que puede ver documentos y recibir notificaciones si está   |
-|             |incluido en dicho documento, Se registra con sus datos personales   |
+|Usuario      |persona que puede ver documentos y recibir notificaciones si está incluido en dicho documento, Se registra con sus datos personales   |
 |Admin        |Es un usuario que tiene permitido cargar documentos y etiquetar     |
 |Documento    |Documento escaneado a pdf.                                          |
 |Notificacion |Alerta indicando que el usuario ha sido nombrado en un documento    |
@@ -108,21 +106,14 @@ La aplicación se correrá mediante Docker un contenedor de software capaz de au
 |Baja de Usuario                   |Eliminación de un usuario del sistema                                       |                            
 |Baja de Administrador             |Eliminación de un administrador del sistema                                 |
 |Baja de Documento                 |Eliminación de un documento del sistema                                     |
-|Baja de Categoría                 |Eliminación de una categoría del sistema,la cual tendrá que pasar por un    |                                                                 
-|                                  |proceso de migración de documentos a otras categorías                       |
+|Baja de Categoría                 |Eliminación de una categoría del sistema,la cual tendrá que pasar por un proceso de migración de documentos a otras categorías|
 |Modificación de Administrador     |La modificación de los datos personales de un administrador en el sistema   |                                                         
 |Modificación de Usuario           |La modificación de los datos personales de un usuario en el sistema         |                                                                         
 |Modificación de Documento         |La modificación del nombre y/o categoría de un documento en el sistema      |                                                                         
 |Modificación de Categoría         |La modificación del nombre y/o descripción de una categoría en el sistema   |                                                             
-|Notificación de Usuario(Documento)|Tras el alta de un documento en el sistema aquellos usuarios ya sean        |
-|                                  |administradores o comunes que sean etiquetados por nombre o                 |
-|                                  |DNI(Documento Nacional de Identidad) se les enviara una notificación del    |
-|                                  |documento                                                                   |
-|Notificación de Usuario(Categoría)|Tras el alta de un documento en el sistema aquellos usuarios suscritos a    |
-|                                  |una categoría correspondiente al documento serán notificados de la subida   |
-|                                  |del mismo                                                                   |
-|Eliminación  de Notificaciones    |Si un usuario considera que ya ha sido notificado por la subida de un       |
-|                                  |documento entonces podrá eliminar la notificación correspondiente           |                                                                   
+|Notificación de Usuario(Documento)|Tras el alta de un documento en el sistema aquellos usuarios ya sean administradores o comunes que sean etiquetados por nombre o DNI(Documento Nacional de Identidad) se les enviara una notificación del documento|                                                                                                                   
+|Notificación de Usuario(Categoría)|Tras el alta de un documento en el sistema aquellos usuarios suscritos a una categoría correspondiente al documento serán notificados de la subida del mismo|
+|Eliminación  de Notificaciones    |Si un usuario considera que ya ha sido notificado por la subida de un documento entonces podrá eliminar la notificación correspondiente|                                                                   
 
 Nota: A excepción de la Modificación de usuario y la Eliminación de Notificaciones, el resto de funcionalidades unicamente las puede realizar un usuario Administrador.
 
