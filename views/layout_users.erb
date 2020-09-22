@@ -2,70 +2,65 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-      <script src="./Scripts/myscript.js" type="text/javascript" charset="utf-8"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-      <link rel="stylesheet" href="/style_forms.css">
-      <link rel="stylesheet" href="/style_layout.css">
-      <link rel="stylesheet" href="/style_user.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="./Scripts/myscript.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="/style_forms.css">
+    <link rel="stylesheet" href="/style_layout.css">
+    <link rel="stylesheet" href="/style_user.css">
   </head>
   <body>
-      <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
-        <div class="container">
-          <a class="navbar-brand col-xl-4" href="/profile">Sistema De Notificaciones UNRC</a>
-
-
-
-          <script type="text/javascript">
-            const ws  = new WebSocket('ws://localhost:9292/miwebsoket');
-            ws.onmessage = function(m) {
-              window.location.reload();
-            };
-          </script>
-          <%@not && @not.each do |element| %>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <%end%>
-
-
-
-          <div id="msgs"></div>
-          <button class="navbar-toggler col-lg-4 col-md-2 col-sm-2 col-xs-1" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
+      <div class="container">
+        <a class="navbar-brand col-xl-4" href="/profile">Sistema De Notificaciones UNRC</a>
+        <%@not && @not.each do |element| %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
           </button>
-          <div class="collapse navbar-collapse col-xl-4" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item dropdown">
-                <a  id="centerSlideButtonsNavBar" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= @userName.name %>
-                </a>
-                <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Editar Perfil</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/notificaciones">Notificaciones</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/all_documentUser">Documentos</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Categorias</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Cerrar Sesión</a>
-                </div>
-              </li>
-            </ul>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
-      </nav>
-
+        <%end%>
+        <div id="msgs"></div>
+        <button class="navbar-toggler col-lg-4 col-md-2 col-sm-2 col-xs-1" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse col-xl-4" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a  id="centerSlideButtonsNavBar" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= @userName.name %>
+              </a>
+              <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Editar Perfil</a>
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/notificaciones">Notificaciones</a>
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/all_documentUser">Documentos</a>
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Categorias</a>
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Cerrar Sesión</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
+  <script type="text/javascript">
+    var ws  = new WebSocket('ws://localhost:9292/miwebsoket');
+    ws.onmessage = () => {
+      console.log('PODES');
+      setTimeout("actualizar()",500);
+    }
+    function actualizar(){location.reload(true);}
+  </script>
 </html>

@@ -34,6 +34,7 @@ class App < Sinatra::Base
   before do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
+      @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
       if session[:type]
         @layoutEnUso = :layout_admin
       else
@@ -519,7 +520,5 @@ class App < Sinatra::Base
       end
     end
   end
-
-#A partir de aca van a ir las nuevas funcionalidades
 
 end
