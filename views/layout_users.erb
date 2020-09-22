@@ -16,17 +16,25 @@
     <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
       <div class="container">
         <a class="navbar-brand col-xl-4" href="/profile">Sistema De Notificaciones UNRC</a>
-        <%@not && @not.each do |element| %>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+        <%if @not && @not!=[]%>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Documentos sin leer
+            </button>
+            <div class="dropdown-menu slideButtonsNavBar " aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/notificaciones">Ver todas las notificaciones</a>
+              <%@not && @not.each do | element | %>
+                <a class="dropdown-item text-center slideButtonsNavBarHover" href="/notificaciones">
+                  <%@aux = Notification.find(id: element.notification_id)%>
+                  Descripción:
+                  <%=@aux.description%>
+                  <br>
+                  Fecha:
+                  <%=@aux.date%>
+                </a>
+              <%end%>
+            </div>
           </div>
-        </div>
         <%end%>
         <div id="msgs"></div>
         <button class="navbar-toggler col-lg-4 col-md-2 col-sm-2 col-xs-1" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
