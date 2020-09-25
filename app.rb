@@ -34,6 +34,7 @@ class App < Sinatra::Base
   before do
     if session[:isLogin]
       @userName = User.find(id: session[:user_id])
+      @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
       if session[:type]
         @layoutEnUso = :layout_admin
       else
@@ -257,6 +258,17 @@ class App < Sinatra::Base
         message = @notification.description
         notifyUser(element,message)
       end
+      @User_Names = params[:dni]
+      @User_Names &&  @User_Names.each do |element|
+        # @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
+        @userTagged = User.where(document_id: @doc.id, user_id: element)
+        if (@userTagged == nil)
+          @doc.add_user(element)
+          @notification.add_user(element)
+          message = @notification.description
+          notifyUser(element,message)
+        end
+      end
       @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
       @notification_cat.save
       @cat_notification = Category.find(id: chosenCategory.id)
@@ -381,7 +393,7 @@ class App < Sinatra::Base
     if params[:opcion] == "cancelar"
       redirect"/category"
     else
-      if  @catUp = Category.find(id:  params['id'])
+      if  @catUp = Category.find(id: params['id'])
         @catUp.update(name: params[:name],description: params[:description])
         if @catUp.save
           redirect "/category"
@@ -519,7 +531,5 @@ class App < Sinatra::Base
       end
     end
   end
-
-#A partir de aca van a ir las nuevas funcionalidades
 
 end

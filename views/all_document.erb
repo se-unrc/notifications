@@ -57,7 +57,17 @@
               </form>
               <form class="col-6" action="delete_document" method="post" >
                 <input type="hidden" name="theId" value="<%=element.id%>"/>
-                <button id="buttonLogin"  type="submit">Eliminar</button>
+                <button id="buttonLogin"  type="submit" href="javascript:funcion()">Eliminar</button>
+                <!-- <a href="javascript:funcion()">Llamar función</a>
+                <script>
+                  function funcion(){
+                    console.log("Borro el mensaje");
+                    const msg = {
+                      mens:"BORRO",
+                    }
+                    ws.send(JSON.stringify(msg));
+                  }
+                </script> -->
               </form>
             </div>
           </a>
@@ -65,7 +75,9 @@
       </div>
     <% end %>
   </div>
-  
+  <script type="text/javascript">
+
+  </script>
   <script type="text/javascript">
   jQuery(document).ready(function($){
     $(document).ready(function() {

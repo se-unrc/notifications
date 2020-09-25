@@ -47,6 +47,15 @@
         </select>
       </div>
     </div>
+    <div class="container col-xl-4">
+      <div class="backgroundFroms col-xl-10">
+        <select class="col-xl-10 form-control mi-selector" name='dni[]' multiple='multiple'>
+          <%@userCreate && @userCreate.each do |element| %>
+           <option  value = "<%= element.id%>" > <%= element.dni%> </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
   </div>
 </form>
 
