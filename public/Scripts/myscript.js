@@ -10,12 +10,17 @@ window.onload = function(){
     ws.onmessage = function(m) {
       // show('websocket message: ' + m.data);
       var msgs = document.getElementById('msgs');
-      };
-      var sender = function(f){
-        f.onsubmit = function(){
-          ws.send(msgs);
-          return true;
-        }
-        }(document.getElementById('form'));
-      })();
-    }
+    };
+    var sender = function(f){
+      f.onsubmit = function(){
+        ws.send(msgs);
+        return true;
+      }
+    }(document.getElementById('form'));
+  })();
+  elim.addEventListener('click', e => {
+    e.preventDefault();
+    const msgs = {};
+    ws.send(msgs);
+  })
+}

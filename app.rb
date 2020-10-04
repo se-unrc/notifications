@@ -164,20 +164,17 @@ class App < Sinatra::Base
     @errormsg ="Sus datos fueron actualizados."
     @User = User.find(id: session[:user_id])
     @document = Document.where(user: @User)#User.id? no iria?
-    erb :profile, :layout =>@layoutEnUso
+    redirect "/profile"
   end
 
-  post "/delete_user" do #No funciona
+  post "/delete_user" do #Funciona
     @userDelete = User.find(id: session[:user_id])
     @userDelete.remove_all_categories
-    @notification = Notification.where(user_id: @userDelete.id)
-    @notification.each do |element|
-      element.remove_all_notifications
-      element.delete
-    end
+    @userDelete.remove_all_documents
+    session.clear
     @userDelete.delete
     @errormsg ="Su cuenta fue eliminada."
-    erb :index, :layout =>@layoutEnUso
+    redirect "/login"
   end
 
   get "/notificaciones" do #Funciona
