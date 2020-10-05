@@ -164,20 +164,19 @@ class App < Sinatra::Base
     @errormsg ="Sus datos fueron actualizados."
     @User = User.find(id: session[:user_id])
     @document = Document.where(user: @User)#User.id? no iria?
-    erb :profile, :layout =>@layoutEnUso
+    redirect "/profile"
   end
 
-  post "/delete_user" do #No funciona
+  post "/delete_user" do #Funciona
     @userDelete = User.find(id: session[:user_id])
     @userDelete.remove_all_categories
-    @notification = Notification.where(user_id: @userDelete.id)
-    @notification.each do |element|
-      element.remove_all_notifications
-      element.delete
-    end
+    @userDelete.remove_all_documents
+    session.clear
     @userDelete.delete
-    @errormsg = "Su cuenta fue eliminada."
-    erb :index, :layout =>@layoutEnUso
+    @errormsg ="Su cuenta fue eliminada."
+    redirect "/login"
+
+   
   end
 
   get "/notificaciones" do #Funciona
@@ -257,6 +256,17 @@ class App < Sinatra::Base
         @notification.add_user(element)
         message = @notification.description
         notifyUser(element,message)
+      end
+      @User_Names = params[:dni]
+      @User_Names &&  @User_Names.each do |element|
+        # @not = NotificationUser.where(user_id: @userName.id, seen: 'f')
+        @userTagged = User.where(document_id: @doc.id, user_id: element)
+        if (@userTagged == nil)
+          @doc.add_user(element)
+          @notification.add_user(element)
+          message = @notification.description
+          notifyUser(element,message)
+        end
       end
       @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
       @notification_cat.save
@@ -382,7 +392,7 @@ class App < Sinatra::Base
     if params[:opcion] == "cancelar"
       redirect"/category"
     else
-      if  @catUp = Category.find(id:  params['id'])
+      if  @catUp = Category.find(id: params['id'])
         @catUp.update(name: params[:name],description: params[:description])
         if @catUp.save
           redirect "/category"

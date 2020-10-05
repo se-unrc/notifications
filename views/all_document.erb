@@ -57,7 +57,7 @@
               </form>
               <form class="col-6" action="delete_document" method="post" >
                 <input type="hidden" name="theId" value="<%=element.id%>"/>
-                <button id="buttonLogin"  type="submit">Eliminar</button>
+                <button id="elim"  type="submit" href="javascript:funcion()">Eliminar</button>
               </form>
             </div>
           </a>
@@ -65,11 +65,10 @@
       </div>
     <% end %>
   </div>
-  
   <script type="text/javascript">
-  jQuery(document).ready(function($){
-    $(document).ready(function() {
-        $('.mi-selector').select2();
+    jQuery(document).ready(function($){
+      $(document).ready(function() {
+          $('.mi-selector').select2();
+      });
     });
-  });
   </script>

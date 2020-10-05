@@ -8,18 +8,19 @@ window.onload = function(){
     ws.onerror = e => {console.log('error en la conexion', e);};
     ws.onclose = () => {console.log('desconectado');};
     ws.onmessage = function(m) {
-      show('websocket message: ' + m.data);
+      // show('websocket message: ' + m.data);
       var msgs = document.getElementById('msgs');
-        msgs.innerHTML = '\
-              <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2">\
-              <a id="buttonNotf" href="/notificaciones">Notificaciones</a>\
-              </div>';
-      };
-      var sender = function(f){
-        f.onsubmit = function(){
-          ws.send(msgs);
-          return true;
-        }
-        }(document.getElementById('form'));
-      })();
-    }
+    };
+    var sender = function(f){
+      f.onsubmit = function(){
+        ws.send(msgs);
+        return true;
+      }
+    }(document.getElementById('form'));
+  })();
+  elim.addEventListener('click', e => {
+    e.preventDefault();
+    const msgs = {};
+    ws.send(msgs);
+  })
+}

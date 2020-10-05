@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-lg navbar-light colorNavBar">
           <div class="container">
             <a class="navbar-brand col-xl-4" href="/profile">Sistema De Notificaciones UNRC</a>
-            <%if @not && @not!=[]%>
+            <%if @not && @not!=nil%>
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Documentos sin leer
@@ -49,7 +49,7 @@
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/edit_user">Editar Perfil</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/all_document">Documentos</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/notificaciones">Notificaciones</a>
-                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Cartegorias</a>
+                  <a class="dropdown-item text-center slideButtonsNavBarHover" href="/subscriptions">Categorias</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/category">Modificar Categorias</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/create_admin">Crear Usuario</a>
                   <a class="dropdown-item text-center slideButtonsNavBarHover" href="/logout">Cerrar sesión</a>
