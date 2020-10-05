@@ -175,6 +175,8 @@ class App < Sinatra::Base
     @userDelete.delete
     @errormsg ="Su cuenta fue eliminada."
     redirect "/login"
+
+   
   end
 
   get "/notificaciones" do #Funciona
@@ -195,7 +197,7 @@ class App < Sinatra::Base
 
   post "/delete_notificaciones" do #Funciona
     @notificated = Notification.find(document_id: params[:theId], description:params[:theDescription])
-    @Seen = NotificationUser.where(notification_id: @notificado.id, user_id: @userName.id)
+    @Seen = NotificationUser.where(notification_id: @notificated.id, user_id: @userName.id)
     @Seen.update(seen: true)
     redirect "/notificaciones"
   end
