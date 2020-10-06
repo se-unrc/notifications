@@ -20,7 +20,13 @@ This is a sample readme file
   reventar todas las tablas de la base de datos:
   sudo  docker-compose down --volumes
   
-  Comandos para RUBOCOP:
+  
+  
+```
+# Comandos RUBOCOP
+
+```
+
   Todos se ejecutan dentro del contenedor web, para entrar:
   sudo docker exec -it notifications_web_1 sh
   
@@ -38,9 +44,7 @@ This is a sample readme file
   
   COMPARAR EL ARCHIVO CORREGIDO  CON EL ORIGINAL (EN GITHUB):
   git diff app.rb
-  
 ```
-
 
 # Authors
 
