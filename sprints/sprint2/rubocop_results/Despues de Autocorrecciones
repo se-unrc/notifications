@@ -1,0 +1,58 @@
+Inspecting 1 file
+W
+
+Offenses:
+
+app.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/base'
+^
+app.rb:8:1: C: Metrics/ClassLength: Class has too many lines. [189/100]
+class App < Sinatra::Base ...
+^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:8:1: C: Style/Documentation: Missing top-level class documentation comment.
+class App < Sinatra::Base
+^^^^^
+app.rb:35:7: C: Naming/PredicateName: Rename is_admin to admin?.
+  def is_admin
+      ^^^^^^^^
+app.rb:37:5: C: Naming/VariableName: Use snake_case for variable names.
+    @isAdmin = true if user == 'admin'
+    ^^^^^^^^
+app.rb:40:7: C: Naming/MethodName: Use snake_case for method names.
+  def findConnection(user)
+      ^^^^^^^^^^^^^^
+app.rb:79:121: C: Layout/LineLength: Line is too long. [122/120]
+      user = User.new(name: params['name'], email: params['email'], username: params['username'], password: params['psw'])
+                                                                                                                        ^^
+app.rb:122:7: C: Naming/VariableName: Use snake_case for variable names.
+      @isAdmin = true
+      ^^^^^^^^
+app.rb:133:5: W: Lint/UselessAssignment: Useless assignment to variable - user.
+    user = User.first(username: params[:users])
+    ^^^^
+app.rb:185:9: C: Naming/VariableName: Use snake_case for variable names.
+        socketsToBeNotified = []
+        ^^^^^^^^^^^^^^^^^^^
+app.rb:187:35: C: Naming/BlockParameterName: Only use lowercase characters for block parameter.
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                  ^^^^^^^^^^
+app.rb:187:35: C: Naming/VariableName: Use snake_case for variable names.
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                  ^^^^^^^^^^
+app.rb:187:69: C: Naming/VariableName: Use snake_case for variable names.
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                                                    ^^^^^^^^^^
+app.rb:187:91: C: Naming/VariableName: Use snake_case for variable names.
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                                                                          ^^^^^^^^^^^^^^^^^^^
+app.rb:187:121: C: Layout/LineLength: Line is too long. [147/120]
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:187:130: C: Naming/VariableName: Use snake_case for variable names.
+        settings.userlist.each { |taggedUser| unless findConnection(taggedUser).nil? then socketsToBeNotified << (findConnection(taggedUser)) end }
+                                                                                                                                 ^^^^^^^^^^
+app.rb:190:9: C: Naming/VariableName: Use snake_case for variable names.
+        socketsToBeNotified.each { |s| s.send('han cargado un nuevo documento!') }
+        ^^^^^^^^^^^^^^^^^^^
+
+1 file inspected, 17 offenses detected, 3 offenses auto-correctable

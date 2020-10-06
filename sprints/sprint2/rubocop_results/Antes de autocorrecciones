@@ -1,0 +1,436 @@
+Inspecting 1 file
+W
+
+Offenses:
+
+app.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/base'
+^
+app.rb:2:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "sinatra/config_file"
+        ^^^^^^^^^^^^^^^^^^^^^
+app.rb:8:1: C: Metrics/ClassLength: Class has too many lines. [193/100]
+class App < Sinatra::Base ...
+^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:8:1: C: Style/Documentation: Missing top-level class documentation comment.
+class App < Sinatra::Base
+^^^^^
+app.rb:16:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    set :session_secret, "So0perSeKr3t!"
+                         ^^^^^^^^^^^^^^^
+app.rb:20:18: C: Layout/SpaceAfterComma: Space missing after comma.
+    set :userlist,[]
+                 ^
+app.rb:21:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:23:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:25:1: C: Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
+app.rb:26:3: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+   @path = request.path_info
+  ^
+app.rb:27:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:28:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    if !session[:user_id] && @path != '/login' && @path != '/register' ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:32:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if @user != nil
+      ^^
+app.rb:32:16: C: Style/NonNilCheck: Prefer !expression.nil? over expression != nil.
+      if @user != nil
+               ^^
+app.rb:36:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:39:28: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+  use Rack::Session::Pool, :expire_after => 2592000
+                           ^^^^^^^^^^^^^^^^
+app.rb:39:45: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+  use Rack::Session::Pool, :expire_after => 2592000
+                                            ^^^^^^^
+app.rb:40:7: C: Naming/PredicateName: Rename is_admin to admin?.
+  def is_admin
+      ^^^^^^^^
+app.rb:42:5: C: Style/GuardClause: Use a guard clause (return unless user == 'admin') instead of wrapping the code inside a conditional expression.
+    if user == 'admin'
+    ^^
+app.rb:42:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if user == 'admin'
+    ^^
+app.rb:43:7: C: Naming/VariableName: Use snake_case for variable names.
+      @isAdmin = true
+      ^^^^^^^^
+app.rb:47:7: C: Naming/MethodName: Use snake_case for method names.
+  def findConnection(user)
+      ^^^^^^^^^^^^^^
+app.rb:48:5: C: Layout/LeadingCommentSpace: Missing space after #.
+    #logger.info user.id
+    ^^^^^^^^^^^^^^^^^^^^
+app.rb:49:5: C: Layout/LeadingCommentSpace: Missing space after #.
+    #settings.sockets.each { |test| logger.info test[:user] }
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:50:26: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+    settings.sockets.each{ |s| if(s[:user] == user.id) then return s[:socket] end }
+                         ^
+app.rb:50:32: C: Layout/SpaceAroundKeyword: Space after keyword if is missing.
+    settings.sockets.each{ |s| if(s[:user] == user.id) then return s[:socket] end }
+                               ^^
+app.rb:50:32: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    settings.sockets.each{ |s| if(s[:user] == user.id) then return s[:socket] end }
+                               ^^
+app.rb:51:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:52:5: C: Style/RedundantReturn: Redundant return detected.
+    return (nil) #Por si el usuario no esta conectado en ese momento
+    ^^^^^^
+app.rb:52:12: C: Style/RedundantParentheses: Don't use parentheses around a literal.
+    return (nil) #Por si el usuario no esta conectado en ese momento
+           ^^^^^
+app.rb:52:18: C: Layout/LeadingCommentSpace: Missing space after #.
+    return (nil) #Por si el usuario no esta conectado en ese momento
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:55:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/" do
+      ^^^
+app.rb:57:10: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+      erb:index, :layout => :layoutlogin
+         
+app.rb:57:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb:index, :layout => :layoutlogin
+                 ^^^^^^^^^^
+app.rb:61:23: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+        @connection = {user: user, socket: ws}
+                      ^
+app.rb:61:46: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+        @connection = {user: user, socket: ws}
+                                             ^
+app.rb:66:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          warn("websocket closed")
+               ^^^^^^^^^^^^^^^^^^
+app.rb:73:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:74:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:76:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/register" do
+      ^^^^^^^^^^^
+app.rb:81:3: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+   if User.find(username: params[:username])
+  ^
+app.rb:82:4: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+    @error = "El Usuario ya existe"
+   ^
+app.rb:82:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @error = "El Usuario ya existe"
+             ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:84:5: C: Layout/ElseAlignment: Align else with if.
+    else
+    ^^^^
+app.rb:88:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+                                   ^^^^^^
+app.rb:88:59: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+                                                          ^^^^^^^
+app.rb:88:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+                                                                                     ^^^^^^^^^^
+app.rb:88:116: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+                                                                                                                   ^^^^^
+app.rb:88:121: C: Layout/LineLength: Line is too long. [122/120]
+      user = User.new(name: params["name"], email: params["email"], username: params["username"], password: params["psw"])
+                                                                                                                        ^^
+app.rb:90:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/login"
+                 ^^^^^^^^
+app.rb:91:9: C: Layout/ElseAlignment: Align else with if.
+        else
+        ^^^^
+app.rb:92:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          [500, {}, "Internal Server Error"]
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:94:5: W: Layout/EndAlignment: end at 94, 4 is not aligned with if at 81, 3.
+    end
+    ^^^
+app.rb:97:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/login" do
+      ^^^^^^^^
+app.rb:105:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      redirect "/"
+               ^^^
+app.rb:107:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "Usuario o contraseña incorrecta"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:119:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/profile" do
+      ^^^^^^^^^^
+app.rb:123:5: C: Layout/LeadingCommentSpace: Missing space after #.
+    #@user = session[:user_id]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:124:16: C: Layout/SpaceBeforeComma: Space found before comma.
+    erb :perfil , :layout => :layoutlogin
+               ^
+app.rb:124:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :perfil , :layout => :layoutlogin
+                  ^^^^^^^^^^
+app.rb:131:7: C: Naming/VariableName: Use snake_case for variable names.
+      @isAdmin = true
+      ^^^^^^^^
+app.rb:134:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :upload, :layout => :layoutlogin
+                   ^^^^^^^^^^
+app.rb:136:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "Para acceder a documentos debe ser administrador, si desea serlo complete los campos"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:137:17: C: Layout/SpaceBeforeComma: Space found before comma.
+      erb :admin , :layout => :layoutlogin
+                ^
+app.rb:137:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :admin , :layout => :layoutlogin
+                   ^^^^^^^^^^
+app.rb:142:5: W: Lint/UselessAssignment: Useless assignment to variable - user.
+    user = User.first(username: params[:users])
+    ^^^^
+app.rb:145:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    doc_date = params[:date] == "" ? filter_docs : Document.first(date: params[:date])
+                                ^^
+app.rb:146:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+                                   ^^
+app.rb:146:74: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+    filter_docs = params[:date] == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date }
+                                                                         ^^
+app.rb:148:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :upload, :layout => :layoutlogin
+                 ^^^^^^^^^^
+app.rb:152:33: C: Layout/LeadingCommentSpace: Missing space after #.
+    @documents = user.documents ##muestro los documentos de interes del usuario
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:153:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :userdocs, :layout => :layoutlogin
+                   ^^^^^^^^^^
+app.rb:156:30: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    @documents = Document.all 
+                             ^
+app.rb:157:22: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :publicdocs, :layout => :layoutlogin
+                     ^^^^^^^^^^
+app.rb:160:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :show_file, :layout => :layoutlogin
+                    ^^^^^^^^^^
+app.rb:164:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      @filename = params[:file][:filename]
+  ^^^^
+app.rb:170:56: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
+                                                       ^^^^^^
+app.rb:170:63: C: Layout/SpaceBeforeComma: Space found before comma.
+      doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
+                                                              ^
+app.rb:170:98: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc = Document.new(name: @filename, date: params["date"] , uploader: user, subject: params["subject"])
+                                                                                                 ^^^^^^^^^
+app.rb:171:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:172:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:175:12: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+        if (params["tagged"] != nil)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:175:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        if (params["tagged"] != nil)
+                   ^^^^^^^^
+app.rb:175:30: C: Style/NonNilCheck: Prefer !expression.nil? over expression != nil.
+        if (params["tagged"] != nil)
+                             ^^
+app.rb:176:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:178:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
+                 ^^^^^^^^
+app.rb:178:57: C: Layout/SpaceAroundOperators: Surrounding space missing for operator <<.
+          params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
+                                                        ^^
+app.rb:178:70: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          params["tagged"].each { |n| settings.userlist <<(User.find(:username => n)) }
+                                                                     ^^^^^^^^^^^^
+app.rb:180:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:181:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #logger.info usertaged
+          ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:183:86: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+          # to cortar if (settings.userlist.include?(s[:user])) then ............ end 
+                                                                                     ^
+app.rb:184:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #settings.sockets.each{ |s|   s[:socket].send("han cargado un nuevo documento!") }
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:185:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #if (settings.userlist.include?(user))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:186:11: C: Layout/CommentIndentation: Incorrect indentation detected (column 10 instead of 8).
+          #  @isTagged= true
+          ^^^^^^^^^^^^^^^^^^
+app.rb:187:9: C: Layout/CommentIndentation: Incorrect indentation detected (column 8 instead of 9).
+        #  else
+        ^^^^^^^
+app.rb:188:10: C: Layout/CommentIndentation: Incorrect indentation detected (column 9 instead of 8).
+         #   @isTagged = false 
+         ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:188:31: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+         #   @isTagged = false 
+                              ^
+app.rb:189:9: C: Layout/CommentIndentation: Incorrect indentation detected (column 8 instead of 10).
+        #  end
+        ^^^^^^
+app.rb:190:24: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+          ##  notificar 
+                       ^
+app.rb:191:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:192:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #logger.info params["tagged"] # esta correcto, contiene un username
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:193:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #logger.info settings.userlist #esta correcto, hay un objeto del tipo User
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:195:11: C: Naming/VariableName: Use snake_case for variable names.
+          socketsToBeNotified = []
+          ^^^^^^^^^^^^^^^^^^^
+app.rb:196:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #settings.userlist.each { |taggedUser|  socketsToBeNotified << (findConnection(taggedUser))  }
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:197:37: C: Naming/BlockParameterName: Only use lowercase characters for block parameter.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                    ^^^^^^^^^^
+app.rb:197:37: C: Naming/VariableName: Use snake_case for variable names.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                    ^^^^^^^^^^
+app.rb:197:52: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:197:68: C: Naming/VariableName: Use snake_case for variable names.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                   ^^^^^^^^^^
+app.rb:197:80: C: Style/NonNilCheck: Prefer !expression.nil? over expression != nil.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                               ^^
+app.rb:197:93: C: Naming/VariableName: Use snake_case for variable names.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                                            ^^^^^^^^^^^^^^^^^^^
+app.rb:197:121: C: Layout/LineLength: Line is too long. [150/120]
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:197:132: C: Naming/VariableName: Use snake_case for variable names.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                                                                                   ^^^^^^^^^^
+app.rb:197:148: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+          settings.userlist.each { |taggedUser| if (findConnection(taggedUser) != nil) then socketsToBeNotified << (findConnection(taggedUser)) end  }
+                                                                                                                                                   ^
+app.rb:198:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:199:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #logger.info socketsToBeNotified  # ya no es vacio
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:200:11: C: Naming/VariableName: Use snake_case for variable names.
+          socketsToBeNotified.each { |s|  s.send("han cargado un nuevo documento!") }
+          ^^^^^^^^^^^^^^^^^^^
+app.rb:200:41: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+          socketsToBeNotified.each { |s|  s.send("han cargado un nuevo documento!") }
+                                        ^
+app.rb:200:50: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          socketsToBeNotified.each { |s|  s.send("han cargado un nuevo documento!") }
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:201:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          ##settings.sockets.each{ |s|  s[:socket].send("han cargado un nuevo documento!") }
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:202:11: C: Layout/LeadingCommentSpace: Missing space after #.
+          #redirect "/documents"
+          ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:204:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/documents"  
+                 ^^^^^^^^^^^^
+app.rb:204:30: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        redirect "/documents"  
+                             ^^
+app.rb:206:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        [500, {}, "Internal Server Error"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:211:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      @this_doc = "/" +params[:doc_name]
+  ^^^^
+app.rb:211:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @this_doc = "/" +params[:doc_name]
+                  ^^^
+app.rb:211:23: C: Layout/SpaceAroundOperators: Surrounding space missing for operator +.
+      @this_doc = "/" +params[:doc_name]
+                      ^
+app.rb:212:20: C: Layout/SpaceBeforeComma: Space found before comma.
+      erb :view_doc , :layout => false
+                   ^
+app.rb:212:23: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :view_doc , :layout => false
+                      ^^^^^^^^^^
+app.rb:216:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      docu = Document.where(id: params[:doc_id])
+  ^^^^
+app.rb:219:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/documents"
+                 ^^^^^^^^^^^^
+app.rb:221:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        [500, {}, "Internal Server Error"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:225:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/admin" do
+      ^^^^^^^^
+app.rb:226:17: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :admin, :layout => :layoutlogin
+                ^^^^^^^^^^
+app.rb:232:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        if codigo == 'admin' ...
+        ^^^^^^^^^^^^^^^^^^^^
+app.rb:234:24: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          erb :perfil, :layout => :layoutlogin
+                       ^^^^^^^^^^
+app.rb:236:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error = "código incorrecto"
+                   ^^^^^^^^^^^^^^^^^^^
+app.rb:237:21: C: Layout/SpaceBeforeComma: Space found before comma.
+          erb :admin , :layout => :layoutlogin
+                    ^
+app.rb:237:24: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          erb :admin , :layout => :layoutlogin
+                       ^^^^^^^^^^
+app.rb:240:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "Hay algo que no está bien"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:245:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/tos" do
+      ^^^^^^
+app.rb:246:1: C: Layout/IndentationStyle: Tab detected in indentation.
+  	erb :ToS, :layout => :layoutlogin
+^^^
+app.rb:246:3: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+  	erb :ToS, :layout => :layoutlogin
+  ^
+app.rb:246:14: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+  	erb :ToS, :layout => :layoutlogin
+             ^^^^^^^^^^
+app.rb:249:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/aboutus" do
+      ^^^^^^^^^^
+app.rb:250:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :aboutus, :layout => :layoutlogin
+                  ^^^^^^^^^^
+app.rb:253:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/contactus" do
+      ^^^^^^^^^^^^
+app.rb:254:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :contactus, :layout => :layoutlogin
+                    ^^^^^^^^^^
+app.rb:258:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/contactus" do
+       ^^^^^^^^^^^^
+app.rb:259:5: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    "GRACIAS"
+    ^^^^^^^^^
+app.rb:263:15: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :tag, :layout => :layoutlogin
+              ^^^^^^^^^^
+app.rb:266:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/document_upload" do
+      ^^^^^^^^^^^^^^^^^^
+app.rb:267:27: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :document_upload, :layout => :layoutlogin
+                          ^^^^^^^^^^
+app.rb:269:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+
+1 file inspected, 153 offenses detected, 138 offenses auto-correctable
