@@ -1,0 +1,102 @@
+<div class="row blue-grey lighten-5">
+  <form class="" action="documents_filter" method="POST">
+    <div class="col m2 l3">
+      <div class="row">
+        <div class="input-field col s10 m10 l10">
+          <select  class="mi-selector" name='document_id' id="doc">
+            <option value="" disabled selected>Elija el Documento</option>
+            <%@document && @document.each do |element| %>
+            <option value='<%= element.id%>'><%= element.name%></option>
+            <% end %>
+          </select>
+          <label for="doc">Documento</label>
+        </div>
+      </div>
+    </div>
+    <div class="col m2 l3">
+      <div class="row">
+        <div class="input-field col s10 m10 l10">
+          <select  class="mi-selector" name='category_id' id="cat">
+            <option value="" disabled selected>Elija la Categoria</option>
+            <%@all_category && @all_category.each do |element| %>
+            <option value='<%= element.id%>'><%= element.name%></option>
+            <% end %>
+          </select>
+          <label for="cat">Categoria</label>
+        </div>
+      </div>
+    </div>
+    <div class="col m2 l3">
+      <div class="row">
+        <div class="input-field col s10 m10 l10">
+          <select  class="form-control mi-selector" name='filter'id="ord">
+            <option value="" disabled selected>ordenar por:</option>
+            <option value='date0'>Fecha</option>
+            <option value='date1'>Nombre</option>
+          </select>
+          <label for="ord">Orden:</label>
+        </div>
+      </div>
+    </div>
+    <div class="col m2 l2">
+      <div class="row">
+        <div class="input-field col s10 m10 l10">
+          <input type="text" id="fecha" class="datepicker" name="dateDoc">
+          <label for="fecha">Fecha</label>
+        </div>
+      </div>
+    </div>
+    <div class="col m2 l1">
+      <div class="row">
+        <div class="input-field col s6 m6 l6">
+          <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
+            <i class="material-icons">search</i>
+          </button>
+        </div>
+        <div class="input-field col s6 m6 l6">
+          <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="section blue-grey lighten-5 col s12 m12 l12"></div>
+  </form>
+</div>
+<div class="row">
+  <% @document && @document.each do |element| %>
+    <div class="container col m6 l3">
+      <div class="card small">
+        <div class="card-image waves-effect waves-block waves-light">
+          <embed  src="<%=element.fileDocument%>" type="application/pdf" width="100%" height="200%" />
+        </div>
+        <div class="card-content">
+          <div class="row">
+            <span class="card-title activator grey-text text-darken-4"><%= element.name%><i class="material-icons right">more_vert</i></span>
+            <div class="row">
+              <div class="col m3 l3">
+                <p>
+                  <a class="btn-floating btn waves-effect waves-light z-depth-3 blue lighten-3" href="<%=element.fileDocument%>" download="<%= element.name%>"><i class="material-icons">file_download</i>
+                  </a>
+                </p>
+                </div>
+                <div class="col m3 l3">
+                  <form  method="POST" action="/see_document">
+                    <input type="hidden" name="nombre" value="Documentos"></input>
+                    <input type="hidden" name="camino" value="/documents"></input>
+                    <input type="hidden" name="theId" value="<%= element.id %>"></input>
+                    <button class="btn btn-floating waves-effect waves-light blue lighten-3 z-depth-3" type="submit"><i class="material-icons">local_library</i></button>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><%= element.name%><i class="material-icons right">close</i></span>
+          <h6 class="black-text text-darken-1">Fecha: <%= element.date%></h6>
+          <h6 class="black-text text-darken-1">Descripción: <%= element.description%></h6>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

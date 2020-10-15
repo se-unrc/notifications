@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RACK_ENV'] = 'test'
 require 'minitest/autorun'
 require 'rack/test'
@@ -9,6 +11,7 @@ DB = Sequel.connect(
   database: 'notificator_test',
   host: 'db',
   user: 'unicorn',
-  password: 'magic')
+  password: 'magic'
+)
 
 require File.expand_path './app.rb'
