@@ -1,5 +1,5 @@
 <div class="row">
-  <% @document && @document.each do |element| %>
+  <% @all_documents && @all_documents.each do |element| %>
     <div class="container col m6 l3">
       <div class="card small">
         <div class="card-image waves-effect waves-block waves-light">
@@ -17,9 +17,9 @@
                 </div>
                 <div class="col m3 l3">
                   <form  method="POST" action="/see_document">
-                    <input type="hidden" name="theId" value="<%= element.id %>"></input>
-                    <input type="hidden" name="camino" value="/profile"></input>
-                    <input type="hidden" name="nombre" value="Perfil"></input>
+                    <input type="hidden" name="the_id" value="<%= element.id %>"></input>
+                    <input type="hidden" name="road" value="/profile"></input>
+                    <input type="hidden" name="name" value="Perfil"></input>
                     <button class="btn btn-floating waves-effect waves-light blue lighten-3 z-depth-3" type="submit"><i class="material-icons">local_library</i></button>
                   </form>
                 </div>

@@ -26,9 +26,9 @@
                   <%if !@page_name.nil? %>
                     <a href="<%= @page %> " class="breadcrumb"> <%= @page_name %> </a>
                   <% end %>
-                  <%if !@page_interna.nil? %>
+                  <%if !@page_intern.nil? %>
                     <a href="<%= @page_before %>" class="breadcrumb"><%= @page_before_name %></a>
-                    <a href="<%= @page %>" class="breadcrumb"><%= @page_interna %></a>
+                    <a href="<%= @page %>" class="breadcrumb"><%= @page_intern %></a>
                   <% end %>
             </div>
           </div>
@@ -42,8 +42,8 @@
             <img class="responsive-img" src="https://venngage-wordpress.s3.amazonaws.com/uploads/2018/11/15-Presentation-Background-Examples33.png">
           </div>
           <a href="#user"><img class="circle" src="https://w7.pngwing.com/pngs/527/663/png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper.png"></a>
-          <a href="#name"><span class="white-text name"><%= @userName.name %></span></a>
-          <a href="#email"><span class="white-text email"><%= @userName.email %></span></a>
+          <a href="#name"><span class="white-text name"><%= @current_user.name %></span></a>
+          <a href="#email"><span class="white-text email"><%= @current_user.email %></span></a>
         </div>
       </li>
       <li>
@@ -80,25 +80,25 @@
             <form id="form" method="POST" action="/edit_user">
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="name" type="text" class="validate" name="name" placeholder="<%= @userName.name %>">
+                  <input id="name" type="text" class="validate" name="name" value="<%= @current_user.name %>">
                   <label for="name">Nombre</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="surname" type="text" class="validate" name="surname" placeholder="<%= @userName.surname %>">
+                  <input id="surname" type="text" class="validate" name="surname" value="<%= @current_user.surname %>">
                   <label for="surname">Apellido</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="dni" type="number" class="validate" name="dni" placeholder="<%= @userName.dni %>">
+                  <input id="dni" type="number" class="validate" name="dni" value="<%= @current_user.dni %>">
                   <label for="dni">DNI</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="email" type="email" class="validate" name="email" placeholder="<%= @userName.email %>">
+                  <input id="email" type="email" class="validate" name="email" value="<%= @current_user.email %>">
                   <label for="email">Email</label>
                 </div>
               </div>
@@ -124,8 +124,8 @@
               </div>
             </form>
             <form class="card-body" action="/delete_user" method="post">
-              <input type="hidden" class="form-control rounded-pill"  name="dni" placeholder="<%= @userName.dni %>">
-              <input type="hidden" class="form-control rounded-pill"  name="email" placeholder="<%= @userName.email %>">
+              <input type="hidden" class="form-control rounded-pill"  name="dni" value="<%= @current_user.dni %>">
+              <input type="hidden" class="form-control rounded-pill"  name="email" value="<%= @current_user.email %>">
               <div class="form-group center" >
                 <button type="submit" class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3">Eliminar cuenta</button>
               </div>

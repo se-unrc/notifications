@@ -1,24 +1,24 @@
 <div class="row blue-grey lighten-5">
   <form class="" action="documents_filter" method="POST">
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='document_id' id="doc">
             <option value="" disabled selected>Elija el Documento</option>
-            <%@document && @document.each do |element| %>
-            <option value='<%= element.id%>'><%= element.name%></option>
-            <% end %>
+              <%@all_documents && @all_documents.each do |element| %>
+              <option value='<%= element.id%>'><%= element.name%></option>
+              <% end %>
           </select>
           <label for="doc">Documento</label>
         </div>
       </div>
     </div>
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='category_id' id="cat">
             <option value="" disabled selected>Elija la Categoria</option>
-            <%@all_category && @all_category.each do |element| %>
+            <%@all_categories && @all_categories.each do |element| %>
             <option value='<%= element.id%>'><%= element.name%></option>
             <% end %>
           </select>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="form-control mi-selector" name='filter'id="ord">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l2">
+    <div class="col m6 l2">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <input type="text" id="fecha" class="datepicker" name="dateDoc">
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l1">
+    <div class="center col m12 l1">
       <div class="row">
         <div class="input-field col s6 m6 l6">
           <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
@@ -64,7 +64,7 @@
   </form>
 </div>
 <div class="row">
-  <% @document && @document.each do |element| %>
+  <% @all_documents && @all_documents.each do |element| %>
     <div class="container col m6 l3">
       <div class="card small">
         <div class="card-image waves-effect waves-block waves-light">
