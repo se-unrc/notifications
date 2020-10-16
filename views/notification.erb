@@ -54,12 +54,9 @@
   <% end %>
   <div class="row col m12 divider blue lighten-3"></div>
 </div>
-
-
-
 <div class="row">
-  <%@document_tagged && @document_tagged.each do |element| %>
-    <%if element.info.seen %>
+  <%@notif_subscribed_category && @notif_subscribed_category.each do |element| %>
+    <%if !element.info.seen %>
     <div class="section container col m6 l3">
       <div class="card z-depth-3 white">
         <div class="row col m12 divider blue lighten-3"></div>

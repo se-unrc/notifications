@@ -32,7 +32,7 @@
      <div class="form-group">
        <select  class="form-control mi-selector" name='id_cat'>
          <option value="" disabled selected>Elija la categoria</option>
-         <%@allCategory && @allCategory.each do |element| %>
+         <%@all_categories && @all_categories.each do |element| %>
          <option value='<%= element.id%>'><%= element.name%></option>
          <% end %>
        </select>
