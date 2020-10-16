@@ -1,25 +1,36 @@
-<div class="alert alert-success" role="alert">
-  Documentos en los que estoy etiquetado:
-</div>
-
-<% if @errormsg %>
-  <div class="alert alert-success" role="alert">
-    <%= @errormsg %>
-  </div>
-<% end %>
 <div class="row">
   <% @document && @document.each do |element| %>
-    <div class="col-xl-4">
-      <div class="col-11 elementColor">
-        <a class="list-group-item list-group-item-action flex-column align-items-start  backgroundDoc" href="<%=element.fileDocument%>" download="<%= element.name%>">
-          <embed src="<%=element.fileDocument%>#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="75%" />
-            <div class="d-flex w-100 justify-content-between">
-              <input type="hidden" name="pdf" value="<%=element.id%>"></input>
-              <h4 class="mb-1">Nombre: <%= element.name%></h4>
-              <h5 class="text-muted"><%= element.date%></h5>
+    <div class="container col m6 l3">
+      <div class="card small">
+        <div class="card-image waves-effect waves-block waves-light">
+          <embed  src="<%=element.fileDocument%>" type="application/pdf" width="100%" height="200%" />
+        </div>
+        <div class="card-content">
+          <div class="row">
+            <span class="card-title activator grey-text text-darken-4"><%= element.name%><i class="material-icons right">more_vert</i></span>
+            <div class="row">
+              <div class="col m3 l3">
+                <p>
+                  <a class="btn-floating btn waves-effect waves-light z-depth-3 blue lighten-3" href="<%=element.fileDocument%>" download="<%= element.name%>"><i class="material-icons">file_download</i>
+                  </a>
+                </p>
+                </div>
+                <div class="col m3 l3">
+                  <form  method="POST" action="/see_document">
+                    <input type="hidden" name="theId" value="<%= element.id %>"></input>
+                    <input type="hidden" name="camino" value="/profile"></input>
+                    <input type="hidden" name="nombre" value="Perfil"></input>
+                    <button class="btn btn-floating waves-effect waves-light blue lighten-3 z-depth-3" type="submit"><i class="material-icons">local_library</i></button>
+                  </form>
+                </div>
             </div>
-            <h6 class="mb-1"><%= element.description%></h6>
-          </a>
+          </div>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><%= element.name%><i class="material-icons right">close</i></span>
+          <h6 class="black-text text-darken-1">Fecha: <%= element.date%></h6>
+          <h6 class="black-text text-darken-1">Descripción: <%= element.description%></h6>
+        </div>
       </div>
     </div>
   <% end %>

@@ -1,7 +1,9 @@
-require "bundler"
-require "sinatra"
+# frozen_string_literal: true
+
+require 'bundler'
+require 'sinatra'
 require 'sequel'
-require "sinatra/config_file"
+require 'sinatra/config_file'
 
 Bundler.require
 
@@ -15,8 +17,10 @@ DB = Sequel.connect(
   database: settings.db_name,
   host: settings.db_host,
   user: settings.db_username,
-  password: settings.db_password)
+  password: settings.db_password
+)
 
 # Require and run the main app
-require "./app.rb"
+Sequel::Model.plugin :json_serializer
+require './app.rb'
 run App

@@ -1,3 +1,4 @@
+M.AutoInit();
 window.onload = function(){
   (function(){
     var show = function(el){
@@ -24,3 +25,10 @@ window.onload = function(){
     ws.send(msgs);
   })
 }
+
+var ws  = new WebSocket('ws://localhost:9292/miwebsoket');
+ws.onmessage = () => {
+  console.log('PODES');
+  setTimeout("actualizar()",500);
+}
+function actualizar(){location.reload(true);}
