@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Modelo de Document
 class Document < Sequel::Model
   many_to_one :categories
   many_to_many :users
