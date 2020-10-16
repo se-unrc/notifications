@@ -7,8 +7,8 @@ class Category < Sequel::Model
   def validate
     super
     validates_presence %i[name description]
-    validates_length_range 3..30, :name
-    validates_length_range 3..80, :description
+    validates_length_range 3..50, :name
+    validates_length_range 3..300, :description
     validates_type String, %i[name description]
     validates_unique(%i[name description])
   end

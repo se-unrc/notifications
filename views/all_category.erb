@@ -1,5 +1,5 @@
 <div class="row">
-  <% @allCategory && @allCategory.each do |element| %>
+  <% @all_categories && @all_categories.each do |element| %>
   <div class="col m6 l3">
     <div class="card  z-depth-3 blue lighten-3">
       <div class="card-content blue lighten-3">
@@ -7,10 +7,11 @@
         <p><%=element.description%></p>
       </div>
       <ul class="card-action collapsible white">
-        <li ><div class="collapsible-header"><i class="material-icons">edit</i>Modificar</div>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">edit</i>Modificar</div>
           <div class="white collapsible-body">
             <form method="POST" action="/modify_category">
-              <input type="hidden" name="modifyId" value="<%=element.id%>"></input>
+              <input type="hidden" name="modify_id" value="<%=element.id%>"></input>
               <div class="form-group input-field">
                 <label class="active black-text">Nombre</label>
                 <input type="text" class="black-text" name="name" value="<%= element.name %>"></input>
@@ -23,54 +24,57 @@
                 <button type="submit" class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3">Guardar</button>
               </div>
             </form>
-          </div></li>
-          <li ><div class="collapsible-header"><i class="material-icons">delete</i>Eliminar</div>
-            <div class="white collapsible-body">
-              <form method="POST" action="/delete_category">
-                <input type="hidden" name="idDelete" value="<%=element.id%>"></input>
-                <div class="form-group">
-                  <label class="black-text">Migrar a:</label>
-                  <select  name="idSelect" placeholder="Seleccione la categoria">
-                    <% @catSelect && @catSelect.each do |element| %>
-                    <option class="black-text" value="<%=element.id%>"><%=element.name%></option>
-                    <% end %>
-                  </select>
-                </div>
-                <div class="form-group center">
-                  <button type="submit" class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">Eliminar</button>
-                </div>
-              </form>
-            </div></li>
-          </ul>
-        </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">delete</i>Eliminar</div>
+          <div class="white collapsible-body">
+            <form method="POST" action="/delete_category">
+              <input type="hidden" name="id_delete" value="<%=element.id%>"></input>
+              <div class="form-group">
+                <label class="black-text">Migrar a:</label>
+                <select  name="id_select" placeholder="Seleccione la categoria">
+                  <% @cat_select && @cat_select.each do |element| %>
+                  <option class="black-text" value="<%=element.id%>"><%=element.name%></option>
+                  <% end %>
+                </select>
+              </div>
+              <div class="form-group center">
+                <button type="submit" class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">Eliminar</button>
+              </div>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+</div>
+<!-- Modal Trigger -->
+<div class="fixed-action-btn">
+  <a class="waves-effect waves-light btn-large modal-trigger btn-floating red " href="#modal1"><i class="material-icons">add</i></a>
+</div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal z-depth-3">
+  <form id="form" method="post" action="create_category">
+    <div class="modal-title center light-blue-text">
+      <h4 class="section">Crear Categoria</h4>
+    </div>
+    <div class="divider light-blue lighten-2"></div>
+    <div class="modal-content">
+      <div class="form-group input-field">
+        <label class="validate black-text" >Nombre de la Categoria:</label>
+        <input class="active" id="input" type="text" name="name" required>
       </div>
-      <% end %>
+      <div class="form-group input-field">
+        <label class="active black-text">Descripcion de la categoria:</label>
+        <input type="text" name="description" required>
+      </div>
     </div>
-    <!-- Modal Trigger -->
-    <div class="fixed-action-btn">
-      <a class="waves-effect waves-light btn-large modal-trigger btn-floating red " href="#modal1"><i class="material-icons">add</i></a>
+    <div class="modal-footer">
+      <div class="center">
+        <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit">Crear</button>
+      </div>
     </div>
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal z-depth-3">
-      <form id="form" method="post" action="create_category">
-        <div class="modal-title center light-blue-text">
-          <h4 class="section">Crear Categoria</h4>
-        </div>
-        <div class="divider light-blue lighten-2"></div>
-        <div class="modal-content">
-          <div class="form-group input-field">
-            <label class="validate black-text" >Nombre de la Categoria:</label>
-            <input class="active" id="input" type="text" name="name" required>
-          </div>
-          <div class="form-group input-field">
-            <label class="active black-text">Descripcion de la categoria:</label>
-            <input type="text" name="description" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="center">
-            <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit">Crear</button>
-          </div>
-        </div>
-      </form>
-    </div>
+  </form>
+</div>

@@ -1,3 +1,0 @@
-insert into users (id, name, surnames, dni, email, password, rol, admin) values (1, 'ayrton','lopez',41000004,'ayrton1907@live.com','12345678','admin',0);
-
-insert into categories (id, name, description) values (1, 'tecnologia','tecnologia en general');

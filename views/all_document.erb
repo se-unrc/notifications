@@ -1,11 +1,11 @@
 <div class="row blue-grey lighten-5">
   <form class="" action="documents_filter" method="POST">
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='document_id' id="doc">
             <option value="" disabled selected>Elija el Documento</option>
-            <%@all_document && @all_document.each do |element| %>
+            <%@all_documents && @all_documents.each do |element| %>
             <option value='<%= element.id%>'><%= element.name%></option>
             <% end %>
           </select>
@@ -13,12 +13,12 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='category_id' id="cat">
             <option value="" disabled selected>Elija la Categoria</option>
-            <%@all_category && @all_category.each do |element| %>
+            <%@all_categories && @all_categories.each do |element| %>
             <option value='<%= element.id%>'><%= element.name%></option>
             <% end %>
           </select>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l3">
+    <div class="col m6 l3">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <select  class="form-control mi-selector" name='filter'id="ord">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l2">
+    <div class="col m6 l2">
       <div class="row">
         <div class="input-field col s10 m10 l10">
           <input type="text" id="fecha" class="datepicker" name="dateDoc">
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col m2 l1">
+    <div class="center col m12 l1">
       <div class="row">
         <div class="input-field col s6 m6 l6">
           <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
@@ -64,7 +64,7 @@
   </form>
 </div>
 <div class="row">
-  <% @all_document && @all_document.each do |element| %>
+  <% @all_documents && @all_documents.each do |element| %>
     <div class="container col m6 l3">
       <div class="card small"">
         <div class="card-image">
@@ -81,7 +81,7 @@
             </div>
             <div class="col m3 l3">
               <form method="post" action="/delete_document">
-                <input type="hidden" name="theId" value="<%=element.id%>"></input>
+                <input type="hidden" name="the_id" value="<%=element.id%>"></input>
                 <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
                   <i class="material-icons">delete</i>
                 </button>
@@ -89,7 +89,7 @@
             </div>
             <div class="col m3 l3">
               <form action="/select_document" method="post">
-                <input type="hidden" name="theId" value="<%=element.id%>"></input>
+                <input type="hidden" name="the_id" value="<%=element.id%>"></input>
                 <button class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3" type="submit">
                   <i class="material-icons">edit</i>
                 </button>
@@ -97,9 +97,9 @@
             </div>
             <div class="col m3 l3 ">
               <form  method="POST" action="/see_document">
-                <input type="hidden" name="camino" value="/all_document"></input>
-                <input type="hidden" name="nombre" value="Documentos"></input>
-                <input type="hidden" name="theId" value="<%= element.id %>"></input>
+                <input type="hidden" name="the_id" value="<%= element.id %>"></input>
+                <input type="hidden" name="road" value="/all_document"></input>
+                <input type="hidden" name="name" value="Documentos"></input>
                 <button class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3" type="submit">
                   <i class="material-icons">local_library</i>
                 </button>
@@ -135,15 +135,15 @@
        <input type="text" name="description" required>
      </div>
      <div class="form-group">
-       <select  class="form-control mi-selector" name='cat'>
+       <select  class="form-control mi-selector" name='category'>
          <option value="" disabled selected>Elija la categoria</option>
-         <%@all_category && @all_category.each do |element| %>
+         <%@all_categories && @all_categories.each do |element| %>
          <option value='<%= element.id%>'><%= element.name%></option>
          <% end %>
        </select>
-       <select name='mult[]' multiple>
+       <select name='users_tagged[]' multiple>
          <option value="" disabled selected>Etiquetar Personas</option>
-         <%@usersName && @usersName.each do |element| %>
+         <%@users_name && @users_name.each do |element| %>
          <option value= "<%= element.id%>" > <%= element.name%> </option>
          <% end %>
        </select>
