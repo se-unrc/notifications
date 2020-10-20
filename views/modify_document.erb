@@ -1,4 +1,4 @@
-<div class="row">
+ <div class="row">
   <div class="card-image col l8 m12 ">
     <embed  src="<%= @document_modify.fileDocument%>" type="application/pdf" width="100%" height="500px" />
   </div>
@@ -17,7 +17,9 @@
       </div>
       <div class="form-group">
         <select  class="form-control mi-selector" name='category'>
-          <option value="<%=@categories_modify.id%>" selected><%=@categories_modify.name%></option>
+          <%@categories_modify && @categories_modify.each do |element| %>
+          <option value="<%=element.id%>" selected><%=element.name%></option>
+          <% end %>
           <%@all_categories && @all_categories.each do |element| %>
           <option value="<%= element.id%>"><%= element.name%></option>
           <% end %>
@@ -34,7 +36,7 @@
       <div class="divider light-blue lighten-2"></div>
       <div class="section"></div>
       <div class="form-group center">
-        <button class="btn-large blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit">Guardar</button>
+        <button class="btn-large blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit" onclick="enviar();">Guardar</button>
       </div>
     </form>
   </div>

@@ -15,7 +15,7 @@ class App < Sinatra::Base
     enable :logging
     enable :session
     set :session_secret, '5fdh4h8f4jghne27w84ew4r882&(asd/&h$gfj&hdkjfjew48y' \
-                          't4hgrd56g8u84gfmjhdmhh,xg544ncd'
+    't4hgrd56g8u84gfmjhdmhh,xg544ncd'
     set :sessions, true
     set :server, 'thin'
     set :sockets, []
@@ -41,6 +41,8 @@ class App < Sinatra::Base
         user_id: @current_user.id,
         seen: 'f'
       )
+      @count_notifications = 0
+      @notification&. each { |_element| @count_notifications += 1 }
       @page = request.path_info
       @current_layout = session[:type] ? :layout_admin : :layout_users
     end
@@ -55,7 +57,7 @@ class App < Sinatra::Base
     redirect '/' if !session[:is_login] && @url_user.include?(request.path_info)
   end
 
-  get '/miwebsoket' do # para nico
+  get '/miwebsoket' do
     if !request.websocket?
       redirect '/'
     else
@@ -95,7 +97,7 @@ class App < Sinatra::Base
     end
   end
 
-  post '/create_user' do # FUNNCIONA
+  post '/create_user' do
     unless User.find(dni: params[:dni])
       @new_user = User.new(
         name: params[:name],
@@ -108,6 +110,7 @@ class App < Sinatra::Base
       @new_user.admin = params['type'] == 'Administrador'
       @new_user.save
     end
+    redirect '/profile'
   end
 
   post '/user_login' do
@@ -138,7 +141,6 @@ class App < Sinatra::Base
         @all_documents << (element2) unless @all_documents.include?(element2)
       end
     end
-
     erb :profile, layout: @current_layout
   end
 
@@ -177,38 +179,7 @@ class App < Sinatra::Base
 
   post '/documents_filter' do
     @page_name = 'Documentos'
-    @all_categories = Category.order(:name).all
-    if params[:document_id]
-      @all_documents = Document.where(id: params[:document_id]).all
-    else
-      @all_documents = if params[:filter] == 'date0'
-                         Document.order(:date).reverse.all
-                       else
-                         Document.order(:name).all
-                       end
-      if params[:category_id]
-        @documents_category = Document.where(
-          category_id: params[:category_id]
-        ).all
-        @documents = []
-        @all_documents.each do |element|
-          @documents << element if @documents_category.include?(element)
-        end
-        @all_documents = @documents
-      end
-      # if params[:dateDoc] != ""
-      #   newDate = new_date_format (params[:dateDoc])
-      #   # newDate = "2020-10-15"
-      #   @document2 = Document.where(date: newDate).all
-      #   @document = @document2
-      # end
-    end
-    if session[:type]
-      @users_name = User.order(:name).all
-      erb :all_document, layout: @current_layout
-    else
-      erb :documents, layout: @current_layout
-    end
+    filter(params[:document_id], params[:filter], params[:category_id], params[:dateDoc])
   end
 
   get '/all_document' do
@@ -227,56 +198,25 @@ class App < Sinatra::Base
     File.open("./public/PDF/#{@filename}", 'wb') do |f|
       f.write(file.read)
     end
-    date_document = Time.now.strftime('%Y-%m-%d')
-    date_notification = Time.now.strftime('%Y-%m-%d %H:%M:%S')
-    @chosen_category = Category.find(id: params[:category])
-    if !Document.find(name: params[:name])
-      @doc_save = Document.new(
-        name: params['name'],
-        description: params[:description],
-        fileDocument: direction,
-        category_id: @chosen_category.id,
-        date: date_document
+    unless Document.find(name: params[:name])
+      save_document(
+        params['name'],
+        params[:description],
+        direction,
+        params[:category]
       )
-      @doc_save.save
-      @notification = Notification.new(
-        description: 'etiquetaron',
-        date: date_notification,
-        document_id: @doc_save.id
-      )
-      @notification.save
-      @user_names = params[:users_tagged]
-      @user_names&.each do |element|
-        @doc_save.add_user(element)
-        @notification.add_user(element)
-        message = @notification.description
-        notify_user(element, message)
-      end
-      @notif_from_category = Notification.new(
-        description: 'categoria',
-        date: date_notification,
-        document_id: @doc_save.id
-      )
-      @notif_from_category.save
-      @user_tagged_category = User.where(
-        categories: Category.find(id: params[:category])
-      )
-      @user_tagged_category.each do |element|
-        @notif_from_category.add_user(element)
-      end
-      @message_screen = 'El documento fue cargado.'
-    else
-      @message_screen = 'El Documento/descripción ya existen'
+      select_user_tag(params[:users_tagged], params[:category], @doc_save.id)
     end
+    redirect '/all_document'
   end
 
   post '/select_document' do
     @page_before_name = 'Documentos'
     @page_before = '/all_document'
     @page_intern = 'Editar Documento'
-    @document_modify = Document.find(id: params[:the_id])
-    @all_categories = Category.order(:name).all
-    @categories_modify = Category.find(id: @document_modify.category_id)
+    @document_modify = Document.find(id: params[:select_id])
+    @categories_modify = Category.where(id: @document_modify.category_id)
+    @all_categories = Category.except(@categories_modify).all
     @users_tagged = User.where(documents: @document_modify)
     @users = User.except(@users_tagged).all
     erb :modify_document, layout: @current_layout
@@ -285,23 +225,20 @@ class App < Sinatra::Base
   post '/modify_document' do
     @document_modify = Document.find(id: params[:the_id])
     @document_modify.update(name: params[:new_name]) if params[:new_name] != ''
-    if params[:description] != ''
-      @document_modify.update(
-        description: params[:description]
-      )
-    end
+    @document_modify.update(description: params[:description]) if params[:description] != ''
     @document_modify.update(category_id: params[:category]) if params[:category]
     @document_modify.remove_all_users
-    if params[:users_tagged]
-      @user_ids = params[:users_tagged]
-      @user_ids.each do |element|
-        @document_modify.add_user(element)
-      end
+    @notification_delete = Notification.where(document_id: @document_modify.id).all
+    @notification_delete&.each do |element|
+      element.remove_all_users
+      element.delete
     end
+    select_user_tag(params[:users_tagged], @document_modify.category_id, @document_modify.id)
+    redirect '/all_document'
   end
 
   post '/delete_document' do
-    @pdf_delete = Document.find(id: params[:the_id])
+    @pdf_delete = Document.find(id: params[:delete_document_id])
     @pdf_delete.remove_all_users
     @notification = Notification.where(document_id: @pdf_delete.id).all
     @notification.each do |element|
@@ -309,6 +246,7 @@ class App < Sinatra::Base
       element.delete
     end
     @pdf_delete.delete
+    redirect '/all_document'
   end
 
   get '/all_category' do
@@ -328,6 +266,7 @@ class App < Sinatra::Base
         [500, {}, 'Internal Server Error']
       end
     end
+    redirect '/all_category'
   end
 
   get '/notification' do
@@ -341,27 +280,30 @@ class App < Sinatra::Base
       @notif_save = Note.new
       @notif_save.notification = @current_notif
       @notif_save.document = (Document.find(id: @current_notif.document_id))
-      @notif_save.info = (element)
+      @notif_save.info = (element.seen)
       if @current_notif.description == 'etiquetaron'
         @document_tagged << (@notif_save)
       else
         @notif_subscribed_category << (@notif_save)
       end
     end
+    @document_tagged.reverse!
+    @notif_subscribed_category.reverse!
     erb :notification, layout: @current_layout
   end
 
   post '/delete_notification' do
-    @notificated = Notification.find(id: params[:the_id])
+    @notificated = Notification.find(id: params[:delete_notification_id])
     @seen = NotificationUser.find(
       notification_id: @notificated.id,
       user_id: @current_user.id
     )
     @seen.delete
+    redirect '/notification'
   end
 
   post '/mark_notification' do
-    @notificated = Notification.find(id: params[:the_id])
+    @notificated = Notification.find(id: params[:seen_id])
     @seen = NotificationUser.find(
       notification_id: @notificated.id,
       user_id: @current_user.id
@@ -371,6 +313,7 @@ class App < Sinatra::Base
     else
       @seen.update(seen: false)
     end
+    redirect '/notification'
   end
 
   post '/see_document' do
@@ -381,15 +324,15 @@ class App < Sinatra::Base
       @page_before = params[:road]
       @page_intern = 'Documento'
     end
-    @document = Document.find(id: params[:the_id])
+    @document = Document.find(id: params[:seen_document_id])
     erb :view_document, layout: @current_layout
   end
 
-  get '/subcriptions' do
-    @page_name = 'Suscripciones'
+  get '/subscriptions' do
+    @page_name = 'Subscripciones'
     @subcriptions = Category.where(users: @current_user)
     @all_categories = Category.except(@subcriptions).all
-    erb :subcriptions, layout: @current_layout
+    erb :subscriptions, layout: @current_layout
   end
 
   post '/delete_subcriptions' do
@@ -400,6 +343,7 @@ class App < Sinatra::Base
   post '/new_suscription' do
     @subscription = Category.find(id: params[:id_cat])
     @current_user.add_category(@subscription)
+    redirect '/subscriptions'
   end
 
   post '/modify_category' do
@@ -408,6 +352,7 @@ class App < Sinatra::Base
       name: params[:name],
       description: params[:description]
     )
+    redirect '/all_category'
   end
 
   post '/delete_category' do
@@ -422,11 +367,46 @@ class App < Sinatra::Base
       @category_delete.remove_all_users
       @category_delete.delete
     end
+    redirect '/all_category'
   end
 
   get '/logout' do
     session.clear
     redirect '/'
+  end
+
+  def select_user_tag(users_tagged, category_id, document_id)
+    @user_tagged_category = User.where(
+      categories: Category.find(id: category_id)
+    )
+    @user_tagged_name = tag_users(users_tagged, @user_tagged_category)
+    @doc_save = Document.find(id: document_id)
+    @user_tagged_cate = []
+    @user_tagged_category&.each do |element|
+      @user_tagged_cate << element unless @user_tagged_name.include?(element)
+    end
+    notify(@user_tagged_name, @user_tagged_cate, @doc_save)
+  end
+
+  def save_document(
+    name_document,
+    description_document,
+    direction_document,
+    category_id
+  )
+    @chosen_category = Category.find(id: category_id)
+    @doc_save = Document.new(name: name_document,
+                             description: description_document,
+                             fileDocument: direction_document,
+                             category_id: @chosen_category.id,
+                             date: Time.now.strftime('%Y-%m-%d'))
+    @doc_save.save
+  end
+
+  def notify(user_tagged, user_category, document)
+    date_notification = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    notify_tagged(user_tagged, document, date_notification)
+    notify_subcription(user_category, document, date_notification)
   end
 
   def notify_user(user, message)
@@ -435,33 +415,137 @@ class App < Sinatra::Base
     end
   end
 
+  def notify_tagged(user_tagged, document, date_notification)
+    @user_taggeds = user_tagged
+    return unless @user_taggeds
+
+    @notification_tagged = create_notify(
+      document,
+      'etiquetaron',
+      date_notification
+    )
+    create_tagged(@user_taggeds, @notification_tagged, document)
+  end
+
+  def create_tagged(user_taggeds, _notification_tagged, document)
+    user_taggeds&.each do |element|
+      document.add_user(element)
+      @notification_tagged.add_user(element)
+    end
+  end
+
+  def notify_subcription(user_category, document, date_notification)
+    @notif_from_category = create_notify(
+      document,
+      'categoria',
+      date_notification
+    )
+    user_category&.each { |element| @notif_from_category.add_user(element) }
+  end
+
+  def create_notify(document, descriptions, date_notification)
+    @notification = Notification.new(
+      description: descriptions,
+      date: date_notification,
+      document_id: document.id
+    )
+    @notification.save
+    @notification
+  end
+
+  def tag_users(users_tagged, user_tagged_category)
+    @user_tagged_name = []
+    users_tagged&.each do |element|
+      @user_not = User.find(id: element)
+      index = user_tagged_category.include? element
+      user_tagged_category.delete(user_tagged_category[index]) if index
+      @user_tagged_name << @user_not
+    end
+    @user_tagged_name
+  end
+
+  def filter(document_id, filter, category_id, date_filter)
+    @all_documents = Document.order(:name).all
+    if document_id
+      @all_documents = Document.where(id: document_id).all
+      show_filter(@all_documents)
+    else
+      filter_advanced(@all_documents, filter, category_id, date_filter)
+    end
+  end
+
+  def filter_advanced(_all_documents, filter, category_id, date_filter)
+    if filter
+      filter_order(@all_documents, filter, category_id, date_filter)
+    elsif category_id
+      filter_category(@all_documents, category_id, date_filter)
+    elsif date_filter != ''
+      filter_date(@all_documents, date_filter)
+    else
+      show_filter(@all_documents)
+    end
+  end
+
+  def filter_order(documents, filter, category_id, date_filter)
+    @all_documents_order = order_document(documents, filter)
+    if category_id
+      filter_category(@all_documents_order, category_id, date_filter)
+    elsif date_filter != ''
+      filter_date(@all_documents_order, date_filter)
+    else
+      show_filter(@all_documents_order)
+    end
+  end
+
+  def order_document(documents, filter)
+    if filter == 'date0'
+      Document.reverse_order(:date)
+    else
+      documents
+    end
+  end
+
+  def filter_category(oder_document, category_id, date_filter)
+    @documents_category = Document.where(category_id: category_id).all
+    @documents = []
+    oder_document&.each do |element|
+      @documents << element if @documents_category.include?(element)
+    end
+    if date_filter != ''
+      filter_date(@documents, date_filter)
+    else
+      show_filter(@documents)
+    end
+  end
+
+  def filter_date(_all_documents, date_filter)
+    return unless date_filter != ''
+
+    new_date = new_date_format(date_filter)
+    @document_date = Document.where(date: new_date).all
+    @documents = []
+    oder_document&.each do |element|
+      @documents << element if @document_date.include?(element)
+    end
+    show_filter(@documents)
+  end
+
+  def show_filter(all_document)
+    @all_documents = all_document
+    @all_categories = Category.order(:name).all
+    if session[:type]
+      @users_name = User.order(:name).all
+      erb :all_document, layout: @current_layout
+    else
+      erb :documents, layout: @current_layout
+    end
+  end
+
   def new_date_format(date)
-    new_date = ''
-    case date[0, 3]
-    when 'Jan'
-      new_date = date[8, 12] + '-01-' + date[4, 6]
-    when 'Feb'
-      new_date = date[8, 12] + '-02-' + date[4, 6]
-    when 'Mar'
-      new_date = date[8, 12] + '-03-' + date[4, 6]
-    when 'Apr'
-      new_date = date[8, 12] + '-04-' + date[4, 6]
-    when 'May'
-      new_date = date[8, 12] + '-05-' + date[4, 6]
-    when 'Jun'
-      new_date = date[8, 12] + '-06-' + date[4, 6]
-    when 'Jul'
-      new_date = date[8, 12] + '-07-' + date[4, 6]
-    when 'Aug'
-      new_date = date[8, 12] + '-08-' + date[4, 6]
-    when 'Sep'
-      new_date = date[8, 12] + '-09-' + date[4, 6]
-    when 'Oct'
-      new_date = date[8, 12] + '-10-' + date[4, 6]
-    when 'Nov'
-      new_date = date[8, 12] + '-11-' + date[4, 6]
-    when 'Dec'
-      new_date = date[8, 12] + '-12-' + date[4, 6]
+    new_date = [1..12]
+    month = %w[Jan Feb Apr May Jun Jul Aug Sep Oct Nov Dec]
+    new_date.each do |element|
+      new_date = date[8, 12] + '-' + element + '-' + date[4, 6] if date[0, 3] == month[element]
     end
     new_date
   end

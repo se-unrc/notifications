@@ -34,12 +34,22 @@ class UserTest < MiniTest::Unit::TestCase
   end
 
   def test_fileDocument_nil
-    @doc = Document.create(name: 'DocPepito1', description: 'DescriptionEstandar1', category_id: 1, date: '24/05/2020 19:18:54')
+    @doc = Document.create(
+      name: 'DocPepito1',
+      description: 'DescriptionEstandar1',
+      category_id: 1,
+      date: '24/05/2020 19:18:54'
+    )
     assert_equal @doc.valid?, false
   end
 
   def test_category_nil
-    @doc = Document.create(name: 'DocPepito1', description: 'DescriptionEstandar1', fileDocument: 'PDF/Doc1.pdf', date: '24/05/2020 19:18:54')
+    @doc = Document.create(
+      name: 'DocPepito1',
+      description: 'DescriptionEstandar1',
+      fileDocument: 'PDF/Doc1.pdf',
+      date: '24/05/2020 19:18:54'
+    )
     assert_equal @doc.valid?, false
   end
 end
