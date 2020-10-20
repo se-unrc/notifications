@@ -21,7 +21,7 @@
                 <input type="text" class="form-control rounded-pill" name="description" value="<%= element.description %>"></input>
               </div>
               <div class="form-group center">
-                <button type="submit" class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3">Guardar</button>
+                <button type="submit" class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" onclick="enviar();">Guardar</button>
               </div>
             </form>
           </div>
@@ -34,13 +34,13 @@
               <div class="form-group">
                 <label class="black-text">Migrar a:</label>
                 <select  name="id_select" placeholder="Seleccione la categoria">
-                  <% @cat_select && @cat_select.each do |element| %>
+                  <% @all_categories && @all_categories.each do |element| %>
                   <option class="black-text" value="<%=element.id%>"><%=element.name%></option>
                   <% end %>
                 </select>
               </div>
               <div class="form-group center">
-                <button type="submit" class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">Eliminar</button>
+                <button type="submit" class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3" onclick="enviar();" >Eliminar</button>
               </div>
             </form>
           </div>
@@ -73,7 +73,7 @@
     </div>
     <div class="modal-footer">
       <div class="center">
-        <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit">Crear</button>
+        <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit" onclick="enviar();">Crear</button>
       </div>
     </div>
   </form>

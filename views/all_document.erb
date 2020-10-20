@@ -1,7 +1,7 @@
 <div class="row blue-grey lighten-5">
-  <form class="" action="documents_filter" method="POST">
-    <div class="col m6 l3">
-      <div class="row">
+  <form action="documents_filter" method="POST">
+    <div class="col m10 l10">
+      <div class="col m6 l3">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='document_id' id="doc">
             <option value="" disabled selected>Elija el Documento</option>
@@ -12,9 +12,7 @@
           <label for="doc">Documento</label>
         </div>
       </div>
-    </div>
-    <div class="col m6 l3">
-      <div class="row">
+      <div class="col m6 l3">
         <div class="input-field col s10 m10 l10">
           <select  class="mi-selector" name='category_id' id="cat">
             <option value="" disabled selected>Elija la Categoria</option>
@@ -25,50 +23,43 @@
           <label for="cat">Categoria</label>
         </div>
       </div>
-    </div>
-    <div class="col m6 l3">
-      <div class="row">
+      <div class="col m6 l3">
         <div class="input-field col s10 m10 l10">
           <select  class="form-control mi-selector" name='filter'id="ord">
-            <option value="" disabled selected>ordenar por:</option>
+            <option disabled selected>ordenar por:</option>
             <option value='date0'>Fecha</option>
             <option value='date1'>Nombre</option>
           </select>
           <label for="ord">Orden:</label>
         </div>
       </div>
-    </div>
-    <div class="col m6 l2">
-      <div class="row">
+      <div class="col m6 l3">
         <div class="input-field col s10 m10 l10">
           <input type="text" id="fecha" class="datepicker" name="dateDoc">
           <label for="fecha">Fecha</label>
         </div>
       </div>
     </div>
-    <div class="center col m12 l1">
-      <div class="row">
-        <div class="input-field col s6 m6 l6">
-          <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
-            <i class="material-icons">search</i>
-          </button>
-        </div>
-        <div class="input-field col s6 m6 l6">
-          <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
-            <i class="material-icons">delete</i>
-          </button>
-        </div>
+    <div class="col m2 l2">
+      <div class="input-field center col m12 l6">
+        <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
+          <i class="material-icons">search</i>
+        </button>
+      </div>
+      <div class="input-field center col m12 l6">
+        <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
-    <div class="section blue-grey lighten-5 col s12 m12 l12"></div>
   </form>
 </div>
 <div class="row">
   <% @all_documents && @all_documents.each do |element| %>
-    <div class="container col m6 l3">
-      <div class="card small"">
-        <div class="card-image">
-          <embed  src="<%=element.fileDocument%>" type="application/pdf" width="100%" height="100%" />
+  <div class="container col m6 l3">
+    <div class="card small"">
+      <div class="card-image">
+        <embed  src="<%=element.fileDocument%>" type="application/pdf" width="100%" height="100%" />
         </div>
         <div class="card-content white">
           <div class="row">
@@ -81,15 +72,15 @@
             </div>
             <div class="col m3 l3">
               <form method="post" action="/delete_document">
-                <input type="hidden" name="the_id" value="<%=element.id%>"></input>
-                <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3">
+                <input type="hidden" name="delete_document_id" value="<%=element.id%>"></input>
+                <button type="submit" class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3" onclick="enviar();">
                   <i class="material-icons">delete</i>
                 </button>
               </form>
             </div>
             <div class="col m3 l3">
               <form action="/select_document" method="post">
-                <input type="hidden" name="the_id" value="<%=element.id%>"></input>
+                <input type="hidden" name="select_id" value="<%=element.id%>"></input>
                 <button class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3" type="submit">
                   <i class="material-icons">edit</i>
                 </button>
@@ -97,7 +88,7 @@
             </div>
             <div class="col m3 l3 ">
               <form  method="POST" action="/see_document">
-                <input type="hidden" name="the_id" value="<%= element.id %>"></input>
+                <input type="hidden" name="seen_document_id" value="<%= element.id %>"></input>
                 <input type="hidden" name="road" value="/all_document"></input>
                 <input type="hidden" name="name" value="Documentos"></input>
                 <button class="btn-floating btn waves-effect waves-light blue lighten-3 z-depth-3" type="submit">
@@ -114,54 +105,54 @@
         </div>
       </div>
     </div>
-  <% end %>
-</div>
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large waves-effect waves-light modal-trigger  red z-depth-3" href="#modal1"><i class="material-icons">add</i></a>
-</div>
-<div id="modal1" class="modal">
-  <form id="form" method="post" action="create_document" enctype="multipart/form-data">
-    <div class="modal-title center light-blue-text">
-         <h4 class="section">Crear Documento</h4>
-    </div>
-    <div class="divider light-blue lighten-2"></div>
-   <div class="modal-content">
-     <div class="form-group">
-       <label class="black-text" >Nombre del documento:</label>
-       <input id="input" type="text" name="name" required>
-     </div>
-     <div class="form-group">
-       <label class="black-text">Descripcion del documento:</label>
-       <input type="text" name="description" required>
-     </div>
-     <div class="form-group">
-       <select  class="form-control mi-selector" name='category'>
-         <option value="" disabled selected>Elija la categoria</option>
-         <%@all_categories && @all_categories.each do |element| %>
-         <option value='<%= element.id%>'><%= element.name%></option>
-         <% end %>
-       </select>
-       <select name='users_tagged[]' multiple>
-         <option value="" disabled selected>Etiquetar Personas</option>
-         <%@users_name && @users_name.each do |element| %>
-         <option value= "<%= element.id%>" > <%= element.name%> </option>
-         <% end %>
-       </select>
-     </div>
-   </div>
-   <div class="modal-footer">
-     <div class="center container">
-       <div class="file-field input-field">
-         <div class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">
-            <span>Seleccione un archivo</span>
-            <input type="file" id="file" name="PDF" accept=".pdf"required>
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
+    <% end %>
+  </div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light modal-trigger  red z-depth-3" href="#modal1"><i class="material-icons">add</i></a>
+  </div>
+  <div id="modal1" class="modal">
+    <form id="form" method="post" action="create_document" enctype="multipart/form-data">
+      <div class="modal-title center light-blue-text">
+        <h4 class="section">Crear Documento</h4>
+      </div>
+      <div class="divider light-blue lighten-2"></div>
+      <div class="modal-content">
+        <div class="form-group">
+          <label class="black-text" >Nombre del documento:</label>
+          <input id="input" type="text" name="name" required>
         </div>
-       <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit">Subir</button>
-     </div>
-   </div>
-  </form>
-</div>
+        <div class="form-group">
+          <label class="black-text">Descripcion del documento:</label>
+          <input type="text" name="description" required>
+        </div>
+        <div class="form-group">
+          <select  class="form-control mi-selector validate" name='category' >
+            <option value="" disabled selected>Elija la categoria</option>
+            <%@all_categories && @all_categories.each do |element| %>
+            <option value='<%= element.id%>'><%= element.name%></option>
+            <% end %>
+          </select>
+          <select class="form-control mi-selector validate" name='users_tagged[]' multiple>
+            <option value="" disabled selected>Etiquetar Personas</option>
+            <%@users_name && @users_name.each do |element| %>
+            <option value= "<%= element.id%>" > <%= element.name%> </option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="center container">
+          <div class="file-field input-field">
+            <div class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">
+              <span>Seleccione un archivo</span>
+              <input type="file" id="file" name="PDF" accept=".pdf"required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+          <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit" onclick="enviar();">Subir</button>
+        </div>
+      </div>
+    </form>
+  </div>

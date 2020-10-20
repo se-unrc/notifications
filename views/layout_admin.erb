@@ -15,11 +15,22 @@
       <div class="navbar-fixed">
         <nav class="row black-text  blue lighten-2">
           <div class="nav-wrapper">
-            <div class="col m8">
-              <button data-target="slide-out" class="blue lighten-2 sidenav-trigger btn-flat btn-large"><i class="material-icons">menu</i></button>
-                <a class="truncate brand-logo black-text">Sistema De Notificaciones UNRC</a>
+            <div class="col m10 l7">
+                <button data-target="slide-out" class="blue lighten-2 sidenav-trigger btn-flat btn-large">
+                  <i class="material-icons">menu</i>
+                </button>
+                <div class="m10 l6">
+                  <a class="truncate brand-logo black-text ">Sistema De Notificaciones UNRC</a>
+                </div>
             </div>
-            <div class="col m4 hide-on-med-and-down">
+            <div class="col m2 l1">
+              <%if @count_notifications > 0 %>
+              <a class="btn-floating btn-small pulse center valign-wrapper red" href="/notification">
+                <i class="material-icons">notifications_active</i>
+              </a>
+              <% end %>
+            </div>
+            <div class="col l4 hide-on-med-and-down">
                   <%if @page != "/profile" %>
                     <a href="/profile" class="breadcrumb">Inicio</a>
                   <% end %>
@@ -56,7 +67,9 @@
         <a class="collapsible-header black-text" href="/notification">
           <i class="material-icons">notifications_none</i>
           Notificaciones
-          <span class="new badge">4</span>
+          <%if @count_notifications > 0%>
+           <span class="badge black-text blue lighten-2"><%=@count_notifications%> New</span>
+          <% end %>
         </a>
       </li>
       <li>
@@ -66,7 +79,7 @@
         </a>
       </li>
       <li>
-        <a class="collapsible-header black-text" href="/subcriptions">
+        <a class="collapsible-header black-text" href="/subscriptions">
           <i class="material-icons black-text">label</i>
           Suscripciones
         </a>
@@ -224,7 +237,7 @@
         </div>
       </li>
     </ul>
-    <main class=" white">
+    <main class="white">
       <%= yield %>
     </main>
     <footer class=" main body page-footer black-text blue lighten-2">
