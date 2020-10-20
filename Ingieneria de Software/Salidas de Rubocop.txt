@@ -1,0 +1,2265 @@
+app.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'sinatra/base'
+^
+app.rb:2:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "sinatra/config_file"
+        ^^^^^^^^^^^^^^^^^^^^^
+app.rb:6:1: C: Metrics/ClassLength: Class has too many lines. [415/100]
+class App < Sinatra::Base ...
+^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:6:1: C: Style/Documentation: Missing top-level class documentation comment.
+class App < Sinatra::Base
+^^^^^
+app.rb:7:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+app.rb:15:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    set :session_secret, "5fdh4h8f4jghne27w84ew4r882&(asd/&h$gfj&hdkjfjew48y49t4hgrd56g8u84gfmjhdmhh,xg544ncd"
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:21:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/" do
+      ^^^
+app.rb:22:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info "params"
+                ^^^^^^^^
+app.rb:24:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info "--------------"
+                ^^^^^^^^^^^^^^^^
+app.rb:25:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info session["session_id"]
+                        ^^^^^^^^^^^^
+app.rb:27:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info "Configurations"
+                ^^^^^^^^^^^^^^^^
+app.rb:29:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info "--------------"
+                ^^^^^^^^^^^^^^^^
+app.rb:34:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:35:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    before do
+^^^^
+app.rb:35:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    before do ...
+    ^^^^^^^^^
+app.rb:37:9: C: Naming/VariableName: Use snake_case for variable names.
+        @userName = User.find(id: session[:user_id])
+        ^^^^^^^^^
+app.rb:39:17: C: Style/RedundantParentheses: Don't use parentheses around a method call.
+        @page = (request.path_info)
+                ^^^^^^^^^^^^^^^^^^^
+app.rb:41:11: C: Naming/VariableName: Use snake_case for variable names.
+          @layoutEnUso = :layout_admin
+          ^^^^^^^^^^^^
+app.rb:42:11: C: Style/IdenticalConditionalBranches: Move @page = (request.path_info) out of the conditional.
+          @page = (request.path_info)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:42:19: C: Style/RedundantParentheses: Don't use parentheses around a method call.
+          @page = (request.path_info)
+                  ^^^^^^^^^^^^^^^^^^^
+app.rb:44:11: C: Naming/VariableName: Use snake_case for variable names.
+          @layoutEnUso = :layout_users
+          ^^^^^^^^^^^^
+app.rb:45:11: C: Style/IdenticalConditionalBranches: Move @page = (request.path_info) out of the conditional.
+          @page = (request.path_info)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:45:19: C: Style/RedundantParentheses: Don't use parentheses around a method call.
+          @page = (request.path_info)
+                  ^^^^^^^^^^^^^^^^^^^
+app.rb:48:7: C: Naming/VariableName: Use snake_case for variable names.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+      ^^^^^^^^^
+app.rb:48:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+                   ^^^^^^^^^^^^^^^
+app.rb:48:35: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+                                  ^
+app.rb:48:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+                                   ^^^^^^^^^^^^^^^
+app.rb:48:51: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+                                                  ^
+app.rb:48:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlAdmin = ["/all_category","/all_document","/modify_document"]
+                                                   ^^^^^^^^^^^^^^^^^^
+app.rb:49:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if !session[:type] &&  @urlAdmin.include?(request.path_info)
+      ^^
+app.rb:49:26: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+      if !session[:type] &&  @urlAdmin.include?(request.path_info)
+                         ^^
+app.rb:49:28: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if !session[:type] &&  @urlAdmin.include?(request.path_info)
+                           ^
+app.rb:50:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/profile"
+                 ^^^^^^^^^^
+app.rb:52:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if session[:type] &&  "/documents" == (request.path_info)
+      ^^
+app.rb:52:25: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+      if session[:type] &&  "/documents" == (request.path_info)
+                        ^^
+app.rb:52:27: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if session[:type] &&  "/documents" == (request.path_info)
+                          ^
+app.rb:52:29: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if session[:type] &&  "/documents" == (request.path_info)
+                            ^^^^^^^^^^^^
+app.rb:52:29: C: Style/YodaCondition: Reverse the order of the operands "/documents" == (request.path_info).
+      if session[:type] &&  "/documents" == (request.path_info)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:53:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/all_document"
+                 ^^^^^^^^^^^^^^^
+app.rb:55:7: C: Naming/VariableName: Use snake_case for variable names.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+      ^^^^^^^^
+app.rb:55:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                  ^^^^^^^^^^
+app.rb:55:29: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                            ^
+app.rb:55:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                             ^^^^^^^^^^^^^^^^
+app.rb:55:48: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                               ^^^^^^^^^^^^
+app.rb:55:60: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                           ^
+app.rb:55:61: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                            ^^^^^^^^^^^^
+app.rb:55:73: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                                        ^
+app.rb:55:74: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                                         ^^^^^^^^^^^^^^^
+app.rb:55:89: C: Layout/SpaceAfterComma: Space missing after comma.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                                                        ^
+app.rb:55:90: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @urlUser = ["/profile","/subscriptions", "/edit_user","/documents","/notification","/view_document"]
+                                                                                         ^^^^^^^^^^^^^^^^
+app.rb:56:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+      ^^
+app.rb:56:28: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+                           ^
+app.rb:56:30: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+      if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+                             ^^
+app.rb:56:32: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if !session[:isLogin]  &&  @urlUser.include?(request.path_info)
+                               ^
+app.rb:57:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/"
+                 ^^^
+app.rb:61:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    get "/miwebsoket" do #para nico
+^^^^
+app.rb:61:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    get "/miwebsoket" do #para nico ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:61:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    get "/miwebsoket" do #para nico
+        ^^^^^^^^^^^^^
+app.rb:61:26: C: Layout/LeadingCommentSpace: Missing space after #.
+    get "/miwebsoket" do #para nico
+                         ^^^^^^^^^^
+app.rb:63:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/"
+                 ^^^
+app.rb:66:22: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+          @connect = {id_user: session[:user_id], socket: ws}
+                     ^
+app.rb:66:61: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+          @connect = {id_user: session[:user_id], socket: ws}
+                                                            ^
+app.rb:71:50: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+            EM.next_tick { settings.sockets.each {|s| s[:socket].send(msg)}}
+                                                 ^^
+app.rb:71:75: C: Layout/SpaceInsideBlockBraces: Space missing inside }.
+            EM.next_tick { settings.sockets.each {|s| s[:socket].send(msg)}}
+                                                                          ^
+app.rb:71:76: C: Layout/SpaceInsideBlockBraces: Space missing inside }.
+            EM.next_tick { settings.sockets.each {|s| s[:socket].send(msg)}}
+                                                                           ^
+app.rb:80:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/new_user" do #FUNNCIONA
+^^^^
+app.rb:80:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/new_user" do #FUNNCIONA ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:80:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/new_user" do #FUNNCIONA
+         ^^^^^^^^^^^
+app.rb:80:25: C: Layout/LeadingCommentSpace: Missing space after #.
+    post "/new_user" do #FUNNCIONA
+                        ^^^^^^^^^^
+app.rb:81:10: W: Lint/UselessAssignment: Useless assignment to variable - user.
+      if user = User.find(dni: params[:dni])
+         ^^^^
+app.rb:81:15: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+      if user = User.find(dni: params[:dni])
+              ^
+app.rb:82:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        [400, {}, "ya existe el usuario"] #Crear UI
+                  ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:82:43: C: Layout/LeadingCommentSpace: Missing space after #.
+        [400, {}, "ya existe el usuario"] #Crear UI
+                                          ^^^^^^^^^
+app.rb:84:9: C: Naming/VariableName: Use snake_case for variable names.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+        ^^^^^^^^^^^^
+app.rb:84:52: C: Layout/SpaceAfterComma: Space missing after comma.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                   ^
+app.rb:84:78: C: Layout/SpaceAfterComma: Space missing after comma.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                             ^
+app.rb:84:96: C: Layout/SpaceAfterComma: Space missing after comma.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                               ^
+app.rb:84:118: C: Layout/SpaceAfterComma: Space missing after comma.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                     ^
+app.rb:84:121: C: Layout/LineLength: Line is too long. [164/120]
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:84:146: C: Layout/SpaceAfterComma: Space missing after comma.
+        @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                                                 ^
+app.rb:85:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+        @newUserName.admin=false
+                          ^
+app.rb:87:21: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+          @errormsg ="La cuenta fue creada."
+                    ^
+app.rb:87:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @errormsg ="La cuenta fue creada."
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:88:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          redirect "/profile"
+                   ^^^^^^^^^^
+app.rb:90:21: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+          @errormsg ="La cuenta no fue creada."
+                    ^
+app.rb:90:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @errormsg ="La cuenta no fue creada."
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:91:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          redirect "/"
+                   ^^^
+app.rb:96:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/create_user" do #FUNNCIONA
+       ^^^^^^^^^^^^^^
+app.rb:96:26: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/create_user" do #FUNNCIONA
+                         ^^^^^^^^^^
+app.rb:97:8: W: Lint/UselessAssignment: Useless assignment to variable - user.
+    if user = User.find(dni: params[:dni])
+       ^^^^
+app.rb:97:13: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+    if user = User.find(dni: params[:dni])
+            ^
+app.rb:98:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      [400, {}, "ya existe el usuario"]
+                ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:100:7: C: Naming/VariableName: Use snake_case for variable names.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+      ^^^^^^^^^^^^
+app.rb:100:50: C: Layout/SpaceAfterComma: Space missing after comma.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                 ^
+app.rb:100:76: C: Layout/SpaceAfterComma: Space missing after comma.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                           ^
+app.rb:100:94: C: Layout/SpaceAfterComma: Space missing after comma.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                             ^
+app.rb:100:116: C: Layout/SpaceAfterComma: Space missing after comma.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                   ^
+app.rb:100:121: C: Layout/LineLength: Line is too long. [162/120]
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:100:144: C: Layout/SpaceAfterComma: Space missing after comma.
+      @newUserName = User.new(name: params[:name],surname: params[:surname],dni: params[:dni],email: params[:email],password: params[:password],rol: params[:rol])
+                                                                                                                                               ^
+app.rb:101:7: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+      if (params["type"]=="Administrador") ...
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:101:10: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+      if (params["type"]=="Administrador")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:101:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if (params["type"]=="Administrador")
+                 ^^^^^^
+app.rb:101:25: C: Layout/SpaceAroundOperators: Surrounding space missing for operator ==.
+      if (params["type"]=="Administrador")
+                        ^^
+app.rb:101:27: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if (params["type"]=="Administrador")
+                          ^^^^^^^^^^^^^^^
+app.rb:102:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+        @newUserName.admin=true
+                          ^
+app.rb:104:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+        @newUserName.admin=false
+                          ^
+app.rb:110:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/user_login" do #FUNNCIONA
+       ^^^^^^^^^^^^^
+app.rb:110:25: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/user_login" do #FUNNCIONA
+                        ^^^^^^^^^^
+app.rb:111:8: C: Naming/VariableName: Use snake_case for variable names.
+    if @userName = User.find(email: params[:email])
+       ^^^^^^^^^
+app.rb:111:18: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+    if @userName = User.find(email: params[:email])
+                 ^
+app.rb:116:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/profile"
+                 ^^^^^^^^^^
+app.rb:118:19: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+        @errormsg ="La contraeña es incorrecta."
+                  ^
+app.rb:118:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @errormsg ="La contraeña es incorrecta."
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:119:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/"
+                 ^^^
+app.rb:122:17: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      @errormsg ="El Email es incorrecto."
+                ^
+app.rb:122:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errormsg ="El Email es incorrecto."
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:123:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      redirect "/"
+               ^^^
+app.rb:127:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/profile" do #FUNNCIONA
+      ^^^^^^^^^^
+app.rb:127:21: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/profile" do #FUNNCIONA
+                    ^^^^^^^^^^
+app.rb:128:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Inicio"
+                 ^^^^^^^^
+app.rb:129:5: C: Naming/VariableName: Use snake_case for variable names.
+    @User = User.find(id: session[:user_id])
+    ^^^^^
+app.rb:131:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :profile, :layout =>@layoutEnUso
+                  ^^^^^^^^^^
+app.rb:131:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :profile, :layout =>@layoutEnUso
+                          ^^
+app.rb:134:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/edit_user" do #FUNCIONA
+       ^^^^^^^^^^^^
+app.rb:134:24: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/edit_user" do #FUNCIONA
+                       ^^^^^^^^^
+app.rb:135:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:name] != "")
+    ^^
+app.rb:135:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:name] != "")
+       ^^^^^^^^^^^^^^^^^^^^^
+app.rb:135:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:name] != "")
+                         ^^
+app.rb:138:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:surname] != "")
+    ^^
+app.rb:138:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:surname] != "")
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:138:29: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:surname] != "")
+                            ^^
+app.rb:141:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:dni] != "")
+    ^^
+app.rb:141:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:dni] != "")
+       ^^^^^^^^^^^^^^^^^^^^
+app.rb:141:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:dni] != "")
+                        ^^
+app.rb:144:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:password] != "")
+    ^^
+app.rb:144:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:password] != "")
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:144:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:password] != "")
+                             ^^
+app.rb:147:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:rol] != "")
+    ^^
+app.rb:147:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:rol] != "")
+       ^^^^^^^^^^^^^^^^^^^^
+app.rb:147:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:rol] != "")
+                        ^^
+app.rb:150:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    redirect "/profile"
+             ^^^^^^^^^^
+app.rb:153:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/delete_user" do #FUNCIONA
+       ^^^^^^^^^^^^^^
+app.rb:153:26: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/delete_user" do #FUNCIONA
+                         ^^^^^^^^^
+app.rb:154:5: C: Naming/VariableName: Use snake_case for variable names.
+    @userDelete = User.find(id: session[:user_id])
+    ^^^^^^^^^^^
+app.rb:158:5: C: Style/NegatedIf: Favor unless over if for negative conditions.
+    if !@notification.empty? ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:170:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/documents" do #FUNCIONA
+      ^^^^^^^^^^^^
+app.rb:170:23: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/documents" do #FUNCIONA
+                      ^^^^^^^^^
+app.rb:171:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Documentos"
+                 ^^^^^^^^^^^^
+app.rb:173:5: C: Naming/VariableName: Use snake_case for variable names.
+    @allCat = Category.order(:name).all
+    ^^^^^^^
+app.rb:174:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :documents, :layout =>@layoutEnUso
+                    ^^^^^^^^^^
+app.rb:174:29: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :documents, :layout =>@layoutEnUso
+                            ^^
+app.rb:177:3: C: Metrics/BlockLength: Block has too many lines. [29/25]
+  post "/documents_filter" do ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:177:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/documents_filter" do
+       ^^^^^^^^^^^^^^^^^^^
+app.rb:178:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Documentos"
+                 ^^^^^^^^^^^^
+app.rb:183:7: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+      if params[:filter] == "date0" ...
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:183:29: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if params[:filter] == "date0"
+                            ^^^^^^^
+app.rb:188:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if  params[:category_id]
+        ^
+app.rb:189:9: C: Naming/VariableName: Use snake_case for variable names.
+        @documentCat = Document.where(category_id: params[:category_id]).all
+        ^^^^^^^^^^^^
+app.rb:192:11: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+          if @documentCat.include?(element)
+          ^^
+app.rb:206:7: C: Style/IdenticalConditionalBranches: Move @all_document = @document out of the conditional.
+      @all_document = @document
+      ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:207:7: C: Naming/VariableName: Use snake_case for variable names.
+      @usersName = User.order(:name).all
+      ^^^^^^^^^^
+app.rb:208:26: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :all_document, :layout =>@layoutEnUso
+                         ^^^^^^^^^^
+app.rb:208:34: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :all_document, :layout =>@layoutEnUso
+                                 ^^
+app.rb:210:7: C: Style/IdenticalConditionalBranches: Move @all_document = @document out of the conditional.
+      @all_document = @document
+      ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:211:23: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :documents, :layout =>@layoutEnUso
+                      ^^^^^^^^^^
+app.rb:211:31: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :documents, :layout =>@layoutEnUso
+                              ^^
+app.rb:215:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/all_document" do #FUNCIONA
+      ^^^^^^^^^^^^^^^
+app.rb:215:26: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/all_document" do #FUNCIONA
+                         ^^^^^^^^^
+app.rb:216:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Documentos"
+                 ^^^^^^^^^^^^
+app.rb:220:5: C: Naming/VariableName: Use snake_case for variable names.
+    @usersName = User.order(:name).all
+    ^^^^^^^^^^
+app.rb:221:24: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :all_document, :layout =>@layoutEnUso
+                       ^^^^^^^^^^
+app.rb:221:32: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :all_document, :layout =>@layoutEnUso
+                               ^^
+app.rb:224:3: C: Metrics/BlockLength: Block has too many lines. [37/25]
+  post '/create_document' do #FUNCIONA ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:224:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post '/create_document' do #FUNCIONA
+                             ^^^^^^^^^
+app.rb:226:10: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @src =  "/public/PDF/#{@filename}"
+         ^
+app.rb:226:11: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @src =  "/public/PDF/#{@filename}"
+          ^
+app.rb:232:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    date = Time.now.strftime("%Y-%m-%d")
+                             ^^^^^^^^^^
+app.rb:233:5: C: Naming/VariableName: Use snake_case for variable names.
+    dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    ^^^^^^^
+app.rb:233:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    dateNot = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+                                ^^^^^^^^^^^^^^^^^^^
+app.rb:234:5: C: Naming/VariableName: Use snake_case for variable names.
+    chosenCategory = Category.find(id: params[:cat])
+    ^^^^^^^^^^^^^^
+app.rb:236:10: C: Naming/VariableName: Use snake_case for variable names.
+    if !(@docExi= Document.find(name: params[:name])) #|| @docExi= Document.find(description: params[:description]))
+         ^^^^^^^
+app.rb:236:17: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+    if !(@docExi= Document.find(name: params[:name])) #|| @docExi= Document.find(description: params[:description]))
+                ^
+app.rb:236:55: C: Layout/LeadingCommentSpace: Missing space after #.
+    if !(@docExi= Document.find(name: params[:name])) #|| @docExi= Document.find(description: params[:description]))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:237:97: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @doc = Document.new(name: params['name'], description: params[:description], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+                                                                                                ^
+app.rb:237:121: C: Layout/LineLength: Line is too long. [152/120]
+      @doc = Document.new(name: params['name'], description: params[:description], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:237:123: C: Naming/VariableName: Use snake_case for variable names.
+      @doc = Document.new(name: params['name'], description: params[:description], fileDocument:  direction, category_id: chosenCategory.id, date: date)
+                                                                                                                          ^^^^^^^^^^^^^^
+app.rb:239:53: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @notification = Notification.new(description: "etiquetaron", date: dateNot, document_id: @doc.id)
+                                                    ^^^^^^^^^^^^^
+app.rb:239:74: C: Naming/VariableName: Use snake_case for variable names.
+      @notification = Notification.new(description: "etiquetaron", date: dateNot, document_id: @doc.id)
+                                                                         ^^^^^^^
+app.rb:241:7: C: Naming/VariableName: Use snake_case for variable names.
+      @User_Names = params[:mult]
+      ^^^^^^^^^^^
+app.rb:242:7: C: Style/SafeNavigation: Use safe navigation (&.) instead of checking if an object exists before calling the method.
+      @User_Names &&  @User_Names.each do |element| ...
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:242:19: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+      @User_Names &&  @User_Names.each do |element|
+                  ^^
+app.rb:242:21: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @User_Names &&  @User_Names.each do |element|
+                    ^
+app.rb:246:27: C: Layout/SpaceAfterComma: Space missing after comma.
+        notifyUser(element,message)
+                          ^
+app.rb:248:25: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+      @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
+                        ^
+app.rb:248:26: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
+                         ^
+app.rb:248:58: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
+                                                         ^^^^^^^^^^^
+app.rb:248:77: C: Naming/VariableName: Use snake_case for variable names.
+      @notification_cat =  Notification.new(description: "categoria", date: dateNot, document_id: @doc.id)
+                                                                            ^^^^^^^
+app.rb:250:45: C: Naming/VariableName: Use snake_case for variable names.
+      @cat_notification = Category.find(id: chosenCategory.id)
+                                            ^^^^^^^^^^^^^^
+app.rb:254:17: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      @errormsg ="El documento fue cargado."
+                ^
+app.rb:254:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errormsg ="El documento fue cargado."
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:255:7: C: Naming/VariableName: Use snake_case for variable names.
+      @allCat = Category.order(:name).all
+      ^^^^^^^
+app.rb:256:7: C: Naming/VariableName: Use snake_case for variable names.
+      @userName = User.find(id: session[:user_id])
+      ^^^^^^^^^
+app.rb:258:7: C: Naming/VariableName: Use snake_case for variable names.
+      @userCreate = User.order(:name).all
+      ^^^^^^^^^^^
+app.rb:260:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errormsg = "El Documento/descripción ya existen"
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:264:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/select_document" do #FUNCIONANDO
+       ^^^^^^^^^^^^^^^^^^
+app.rb:264:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/select_document" do #FUNCIONANDO
+                             ^^^^^^^^^^^^
+app.rb:265:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_before_name = "Documentos"
+                        ^^^^^^^^^^^^
+app.rb:266:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_before = "/all_document"
+                   ^^^^^^^^^^^^^^^
+app.rb:267:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_interna = "Editar Documento"
+                    ^^^^^^^^^^^^^^^^^^
+app.rb:268:5: C: Naming/VariableName: Use snake_case for variable names.
+    @modDocument = Document.find(id: params[:theId])
+    ^^^^^^^^^^^^
+app.rb:269:5: C: Naming/VariableName: Use snake_case for variable names.
+    @allCategory = Category.order(:name).all
+    ^^^^^^^^^^^^
+app.rb:270:5: C: Naming/VariableName: Use snake_case for variable names.
+    @modCat = Category.find(id: @modDocument.category_id)
+    ^^^^^^^
+app.rb:271:5: C: Naming/VariableName: Use snake_case for variable names.
+    @usersTag = User.where(documents: @modDocument)
+    ^^^^^^^^^
+app.rb:272:5: C: Naming/VariableName: Use snake_case for variable names.
+    @usersName = User.except(@usersTag).all
+    ^^^^^^^^^^
+app.rb:273:27: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :modify_document, :layout =>@layoutEnUso
+                          ^^^^^^^^^^
+app.rb:273:35: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :modify_document, :layout =>@layoutEnUso
+                                  ^^
+app.rb:276:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/modify_document" do #FUNCIONANDO Verificar lo de etiquetar y sumar notificaciones...
+       ^^^^^^^^^^^^^^^^^^
+app.rb:276:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/modify_document" do #FUNCIONANDO Verificar lo de etiquetar y sumar notificaciones...
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:277:5: C: Naming/VariableName: Use snake_case for variable names.
+    @newModification = Document.find(id: params[:theId])
+    ^^^^^^^^^^^^^^^^
+app.rb:278:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:newName]!= "")
+    ^^
+app.rb:278:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:newName]!= "")
+       ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:278:25: C: Layout/SpaceAroundOperators: Surrounding space missing for operator !=.
+    if (params[:newName]!= "")
+                        ^^
+app.rb:278:28: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:newName]!= "")
+                           ^^
+app.rb:281:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:description] != "")
+    ^^
+app.rb:281:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:description] != "")
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:281:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if (params[:description] != "")
+                                ^^
+app.rb:284:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if (params[:cate])
+    ^^
+app.rb:284:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:cate])
+       ^^^^^^^^^^^^^^^
+app.rb:284:8: C: Style/RedundantParentheses: Don't use parentheses around a method call.
+    if (params[:cate])
+       ^^^^^^^^^^^^^^^
+app.rb:287:8: C: Style/ParenthesesAroundCondition: Don't use parentheses around the condition of an if.
+    if (params[:mult])
+       ^^^^^^^^^^^^^^^
+app.rb:287:8: C: Style/RedundantParentheses: Don't use parentheses around a method call.
+    if (params[:mult])
+       ^^^^^^^^^^^^^^^
+app.rb:289:7: C: Naming/VariableName: Use snake_case for variable names.
+      @User_Ids = params[:mult]
+      ^^^^^^^^^
+app.rb:296:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/delete_document" do #FUNCIONA
+       ^^^^^^^^^^^^^^^^^^
+app.rb:296:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/delete_document" do #FUNCIONA
+                             ^^^^^^^^^
+app.rb:297:5: C: Naming/VariableName: Use snake_case for variable names.
+    @pdfDelete = Document.find(id: params[:theId])
+    ^^^^^^^^^^
+app.rb:307:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/all_category" do #FUNCIONA
+      ^^^^^^^^^^^^^^^
+app.rb:307:26: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/all_category" do #FUNCIONA
+                         ^^^^^^^^^
+app.rb:308:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Categorias"
+                 ^^^^^^^^^^^^
+app.rb:309:5: C: Naming/VariableName: Use snake_case for variable names.
+    @allCategory  = Category.order(:name).all
+    ^^^^^^^^^^^^
+app.rb:309:17: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @allCategory  = Category.order(:name).all
+                ^
+app.rb:309:19: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @allCategory  = Category.order(:name).all
+                  ^
+app.rb:310:24: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :all_category, :layout =>@layoutEnUso
+                       ^^^^^^^^^^
+app.rb:310:32: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :all_category, :layout =>@layoutEnUso
+                               ^^
+app.rb:313:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/create_category" do #FUNCIONA
+       ^^^^^^^^^^^^^^^^^^
+app.rb:313:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/create_category" do #FUNCIONA
+                             ^^^^^^^^^
+app.rb:314:8: W: Lint/UselessAssignment: Useless assignment to variable - cat.
+    if cat = Category.find(name: params[:name])
+       ^^^
+app.rb:314:12: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+    if cat = Category.find(name: params[:name])
+           ^
+app.rb:315:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      [500, {}, "ya existe la categoria"]
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:317:45: C: Layout/SpaceAfterComma: Space missing after comma.
+      cat = Category.new(name: params[:name],description: params[:description] )
+                                            ^
+app.rb:317:79: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+      cat = Category.new(name: params[:name],description: params[:description] )
+                                                                              ^
+app.rb:320:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        [500, {}, "Internal Server Error"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:325:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/notification" do  #FUNCIONA
+      ^^^^^^^^^^^^^^^
+app.rb:325:25: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+  get "/notification" do  #FUNCIONA
+                        ^
+app.rb:325:27: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/notification" do  #FUNCIONA
+                          ^^^^^^^^^
+app.rb:326:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    @page_name = "Notificaciones"
+    
+app.rb:326:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @page_name = "Notificaciones"
+                 ^^^^^^^^^^^^^^^^
+app.rb:327:36: C: Layout/SpaceAfterComma: Space missing after comma.
+    Note = Struct.new(:notificacion,:documento,:info)
+                                   ^
+app.rb:327:47: C: Layout/SpaceAfterComma: Space missing after comma.
+    Note = Struct.new(:notificacion,:documento,:info)
+                                              ^
+app.rb:328:5: C: Naming/VariableName: Use snake_case for variable names.
+    @documentNotificationEtq = []
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:329:5: C: Naming/VariableName: Use snake_case for variable names.
+    @documentNotificationCat = []
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:331:6: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+     @notificaciones_usuario && @notificaciones_usuario.each do |element| ...
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:331:6: C: Style/SafeNavigation: Use safe navigation (&.) instead of checking if an object exists before calling the method.
+     @notificaciones_usuario && @notificaciones_usuario.each do |element| ...
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:335:11: C: Style/IdenticalConditionalBranches: Move @notification.notificacion = @not out of the conditional.
+          @notification.notificacion = @not
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:340:11: C: Style/IdenticalConditionalBranches: Move @notification.notificacion = @not out of the conditional.
+          @notification.notificacion = @not
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:341:35: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+          @notification.documento =(Document.find(id: @not.document_id))
+                                  ^
+app.rb:345:7: C: Layout/BlockAlignment: end at 345, 6 is not aligned with @notificaciones_usuario && @notificaciones_usuario.each do |element| at 331, 5.
+      end
+      ^^^
+app.rb:346:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      erb :notification, :layout =>@layoutEnUso
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:346:26: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :notification, :layout =>@layoutEnUso
+                         ^^^^^^^^^^
+app.rb:346:34: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :notification, :layout =>@layoutEnUso
+                                 ^^
+app.rb:347:5: C: Layout/BlockAlignment: end at 347, 4 is not aligned with get "/notification" do  #FUNCIONA at 325, 2.
+    end
+    ^^^
+app.rb:349:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/delete_notification" do #FUNCIONA
+^^^^
+app.rb:349:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/delete_notification" do #FUNCIONA ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:349:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/delete_notification" do #FUNCIONA
+         ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:349:36: C: Layout/LeadingCommentSpace: Missing space after #.
+    post "/delete_notification" do #FUNCIONA
+                                   ^^^^^^^^^
+app.rb:351:7: C: Naming/VariableName: Use snake_case for variable names.
+      @Seen = NotificationUser.find(notification_id: @notificated.id, user_id: @userName.id)
+      ^^^^^
+app.rb:355:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/mark_notification" do #FUNCIONA
+^^^^
+app.rb:355:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/mark_notification" do #FUNCIONA ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:355:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/mark_notification" do #FUNCIONA
+         ^^^^^^^^^^^^^^^^^^^^
+app.rb:355:34: C: Layout/LeadingCommentSpace: Missing space after #.
+    post "/mark_notification" do #FUNCIONA
+                                 ^^^^^^^^^
+app.rb:356:5: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+        @notificated = Notification.find(id: params[:theId])
+    ^^^^
+app.rb:357:9: C: Naming/VariableName: Use snake_case for variable names.
+        @Seen = NotificationUser.find(notification_id: @notificated.id, user_id: @userName.id)
+        ^^^^^
+app.rb:365:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/see_document" do #FUNCIONA
+^^^^
+app.rb:365:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/see_document" do #FUNCIONA ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:365:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/see_document" do #FUNCIONA
+         ^^^^^^^^^^^^^^^
+app.rb:365:29: C: Layout/LeadingCommentSpace: Missing space after #.
+    post "/see_document" do #FUNCIONA
+                            ^^^^^^^^^
+app.rb:366:7: C: Style/UnlessElse: Do not use unless with else. Rewrite these with the positive case first.
+      unless params[:nombre] == "Perfil" ...
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:366:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      unless params[:nombre] == "Perfil"
+                                ^^^^^^^^
+app.rb:369:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @page_interna = "Documento"
+                        ^^^^^^^^^^^
+app.rb:371:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @page_name = "Documento"
+                     ^^^^^^^^^^^
+app.rb:374:27: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :view_document, :layout =>@layoutEnUso
+                          ^^^^^^^^^^
+app.rb:374:35: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :view_document, :layout =>@layoutEnUso
+                                  ^^
+app.rb:377:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    get "/subcriptions" do #FUNCIONA
+^^^^
+app.rb:377:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    get "/subcriptions" do #FUNCIONA ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:377:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    get "/subcriptions" do #FUNCIONA
+        ^^^^^^^^^^^^^^^
+app.rb:377:28: C: Layout/LeadingCommentSpace: Missing space after #.
+    get "/subcriptions" do #FUNCIONA
+                           ^^^^^^^^^
+app.rb:378:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @page_name = "Suscripciones"
+                   ^^^^^^^^^^^^^^^
+app.rb:380:7: C: Naming/VariableName: Use snake_case for variable names.
+      @allCategory = Category.except(@subcriptions).all
+      ^^^^^^^^^^^^
+app.rb:381:26: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :subcriptions, :layout =>@layoutEnUso
+                         ^^^^^^^^^^
+app.rb:381:34: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :subcriptions, :layout =>@layoutEnUso
+                                 ^^
+app.rb:384:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/delete_subcriptions" do
+^^^^
+app.rb:384:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/delete_subcriptions" do ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:384:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/delete_subcriptions" do
+         ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:386:7: C: Naming/VariableName: Use snake_case for variable names.
+      @userName = User.find(id: session[:user_id])
+      ^^^^^^^^^
+app.rb:390:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    post "/new_suscription" do
+^^^^
+app.rb:390:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    post "/new_suscription" do ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:390:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    post "/new_suscription" do
+         ^^^^^^^^^^^^^^^^^^
+app.rb:395:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/modify_category" do #FUNCIONA
+       ^^^^^^^^^^^^^^^^^^
+app.rb:395:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/modify_category" do #FUNCIONA
+                             ^^^^^^^^^
+app.rb:396:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      if  @catUp = Category.find(id: params[:modifyId])
+  ^^^^
+app.rb:396:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if  @catUp = Category.find(id: params[:modifyId])
+        ^
+app.rb:396:11: C: Naming/VariableName: Use snake_case for variable names.
+      if  @catUp = Category.find(id: params[:modifyId])
+          ^^^^^^
+app.rb:396:18: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+      if  @catUp = Category.find(id: params[:modifyId])
+                 ^
+app.rb:397:42: C: Layout/SpaceAfterComma: Space missing after comma.
+        @catUp.update(name: params[:name],description: params[:description])
+                                         ^
+app.rb:398:9: C: Style/IfUnlessModifier: Favor modifier unless usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+        unless @catUp.save
+        ^^^^^^
+app.rb:399:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          [500, {}, "Internal Server Error"]
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:401:5: W: Layout/EndAlignment: end at 401, 4 is not aligned with if at 396, 6.
+    end
+    ^^^
+app.rb:404:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  post "/delete_category" do #FUNCIONA
+       ^^^^^^^^^^^^^^^^^^
+app.rb:404:30: C: Layout/LeadingCommentSpace: Missing space after #.
+  post "/delete_category" do #FUNCIONA
+                             ^^^^^^^^^
+app.rb:405:5: C: Naming/VariableName: Use snake_case for variable names.
+    @catDelete = Category.find(id: params['idDelete'])
+    ^^^^^^^^^^
+app.rb:406:5: C: Naming/VariableName: Use snake_case for variable names.
+    @catSelect = Category.find(id: params['idSelect'])
+    ^^^^^^^^^^
+app.rb:407:5: C: Naming/VariableName: Use snake_case for variable names.
+    @Document = Document.where(category_id: @catDelete.id)
+    ^^^^^^^^^
+app.rb:411:5: C: Naming/VariableName: Use snake_case for variable names.
+    @allDocs = Document.where(category_id: @catDelete.id)
+    ^^^^^^^^
+app.rb:413:5: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+        @catDelete.remove_all_users
+    ^^^^
+app.rb:418:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/logout" do #FUNNCIONA
+      ^^^^^^^^^
+app.rb:418:20: C: Layout/LeadingCommentSpace: Missing space after #.
+  get "/logout" do #FUNNCIONA
+                   ^^^^^^^^^^
+app.rb:423:7: C: Naming/MethodName: Use snake_case for method names.
+  def notifyUser(user, message) #Funciona
+      ^^^^^^^^^^
+app.rb:423:33: C: Layout/LeadingCommentSpace: Missing space after #.
+  def notifyUser(user, message) #Funciona
+                                ^^^^^^^^^
+app.rb:423:33: C: Style/CommentedKeyword: Do not place comments on the same line as the def keyword.
+  def notifyUser(user, message) #Funciona
+                                ^^^^^^^^^
+app.rb:425:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if s[:id_user] == user
+      ^^
+app.rb:431:3: C: Metrics/AbcSize: Assignment Branch Condition size for newDat is too high. [<13, 73, 12> 75.11/17]
+  def newDat(date) ...
+  ^^^^^^^^^^^^^^^^
+app.rb:431:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for newDat is too high. [13/7]
+  def newDat(date) ...
+  ^^^^^^^^^^^^^^^^
+app.rb:431:3: C: Metrics/MethodLength: Method has too many lines. [28/10]
+  def newDat(date) ...
+  ^^^^^^^^^^^^^^^^
+app.rb:431:7: C: Naming/MethodName: Use snake_case for method names.
+  def newDat(date)
+      ^^^^^^
+app.rb:432:5: C: Naming/VariableName: Use snake_case for variable names.
+    newDate = ""
+    ^^^^^^^
+app.rb:432:15: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    newDate = ""
+              ^^
+app.rb:433:16: C: Layout/SpaceAfterComma: Space missing after comma.
+    case date[0,3]
+               ^
+app.rb:434:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Jan"
+         ^^^^^
+app.rb:435:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:435:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+                      ^
+app.rb:435:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+                             ^^^
+app.rb:435:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+                                   ^^^^
+app.rb:435:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+                                          ^^^
+app.rb:435:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "01" + "-" + date[4,6]
+                                                      ^
+app.rb:436:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Feb"
+         ^^^^^
+app.rb:437:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:437:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+                      ^
+app.rb:437:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+                             ^^^
+app.rb:437:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+                                   ^^^^
+app.rb:437:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+                                          ^^^
+app.rb:437:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "02" + "-" + date[4,6]
+                                                      ^
+app.rb:438:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Mar"
+         ^^^^^
+app.rb:439:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:439:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+                      ^
+app.rb:439:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+                             ^^^
+app.rb:439:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+                                   ^^^^
+app.rb:439:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+                                          ^^^
+app.rb:439:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "03" + "-" + date[4,6]
+                                                      ^
+app.rb:440:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Apr"
+         ^^^^^
+app.rb:441:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:441:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+                      ^
+app.rb:441:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+                             ^^^
+app.rb:441:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+                                   ^^^^
+app.rb:441:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+                                          ^^^
+app.rb:441:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "04" + "-" + date[4,6]
+                                                      ^
+app.rb:442:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "May"
+         ^^^^^
+app.rb:443:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:443:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+                      ^
+app.rb:443:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+                             ^^^
+app.rb:443:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+                                   ^^^^
+app.rb:443:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+                                          ^^^
+app.rb:443:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "05" + "-" + date[4,6]
+                                                      ^
+app.rb:444:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Jun"
+         ^^^^^
+app.rb:445:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:445:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+                      ^
+app.rb:445:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+                             ^^^
+app.rb:445:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+                                   ^^^^
+app.rb:445:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+                                          ^^^
+app.rb:445:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "06" + "-" + date[4,6]
+                                                      ^
+app.rb:446:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Jul"
+         ^^^^^
+app.rb:447:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:447:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+                      ^
+app.rb:447:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+                             ^^^
+app.rb:447:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+                                   ^^^^
+app.rb:447:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+                                          ^^^
+app.rb:447:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "07" + "-" + date[4,6]
+                                                      ^
+app.rb:448:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Aug"
+         ^^^^^
+app.rb:449:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:449:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+                      ^
+app.rb:449:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+                             ^^^
+app.rb:449:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+                                   ^^^^
+app.rb:449:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+                                          ^^^
+app.rb:449:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "08" + "-" + date[4,6]
+                                                      ^
+app.rb:450:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Sep"
+         ^^^^^
+app.rb:451:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:451:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+                      ^
+app.rb:451:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+                             ^^^
+app.rb:451:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+                                   ^^^^
+app.rb:451:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+                                          ^^^
+app.rb:451:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "09" + "-" + date[4,6]
+                                                      ^
+app.rb:452:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Oct"
+         ^^^^^
+app.rb:453:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:453:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+                      ^
+app.rb:453:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+                             ^^^
+app.rb:453:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+                                   ^^^^
+app.rb:453:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+                                          ^^^
+app.rb:453:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "10" + "-" + date[4,6]
+                                                      ^
+app.rb:454:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Nov"
+         ^^^^^
+app.rb:455:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:455:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+                      ^
+app.rb:455:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+                             ^^^
+app.rb:455:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+                                   ^^^^
+app.rb:455:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+                                          ^^^
+app.rb:455:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "11" + "-" + date[4,6]
+                                                      ^
+app.rb:456:10: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    when "Dec"
+         ^^^^^
+app.rb:457:7: C: Naming/VariableName: Use snake_case for variable names.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+      ^^^^^^^
+app.rb:457:23: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+                      ^
+app.rb:457:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+                             ^^^
+app.rb:457:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+                                   ^^^^
+app.rb:457:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+                                          ^^^
+app.rb:457:55: C: Layout/SpaceAfterComma: Space missing after comma.
+      newDate = date[8,12] + "-" + "12" + "-" + date[4,6]
+                                                      ^
+app.rb:459:5: C: Naming/VariableName: Use snake_case for variable names.
+    newDate
+    ^^^^^^^
+config.ru:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require "bundler"
+^
+config.ru:1:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "bundler"
+        ^^^^^^^^^
+config.ru:2:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "sinatra"
+        ^^^^^^^^^
+config.ru:4:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "sinatra/config_file"
+        ^^^^^^^^^^^^^^^^^^^^^
+config.ru:18:33: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+  password: settings.db_password)
+                                ^
+config.ru:21:21: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+Sequel::Model.plugin:json_serializer
+                    
+config.ru:22:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "./app.rb"
+        ^^^^^^^^^^
+db/migrations/0001_create_users.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0002_create_documents.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0003_create_categories.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0003_create_categories.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    create_table(:categories) do
+^^^^
+db/migrations/0003_create_categories.rb:6:25: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    String :description,  null: false
+                        ^
+db/migrations/0003_create_categories.rb:7:3: C: Layout/BlockAlignment: end at 7, 2 is not aligned with create_table(:categories) do at 3, 4.
+  end
+  ^^^
+db/migrations/0003_create_categories.rb:8:1: C: Layout/BlockAlignment: end at 8, 0 is not aligned with up do at 2, 2.
+end
+^^^
+db/migrations/0004_update_documents.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0004_update_documents.rb:4:5: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+        add_foreign_key :category_id, :categories, :null=>false
+    ^^^^
+db/migrations/0004_update_documents.rb:4:52: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        add_foreign_key :category_id, :categories, :null=>false
+                                                   ^^^^^^^
+db/migrations/0004_update_documents.rb:4:57: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+        add_foreign_key :category_id, :categories, :null=>false
+                                                        ^^
+db/migrations/0005_create_documents_users.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0005_create_documents_users.rb:4:45: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :document_id, :documents, :null=>false
+                                            ^^^^^^^
+db/migrations/0005_create_documents_users.rb:4:50: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :document_id, :documents, :null=>false
+                                                 ^^
+db/migrations/0005_create_documents_users.rb:5:37: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :user_id, :users, :null=>false
+                                    ^^^^^^^
+db/migrations/0005_create_documents_users.rb:5:42: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :user_id, :users, :null=>false
+                                         ^^
+db/migrations/0005_create_documents_users.rb:6:19: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      primary_key [:document_id, :user_id]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0005_create_documents_users.rb:7:13: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      index [:document_id, :user_id]
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0006_create_categories_users.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0006_create_categories_users.rb:4:46: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :category_id, :categories, :null=>false
+                                             ^^^^^^^
+db/migrations/0006_create_categories_users.rb:4:51: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :category_id, :categories, :null=>false
+                                                  ^^
+db/migrations/0006_create_categories_users.rb:5:37: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :user_id, :users, :null=>false
+                                    ^^^^^^^
+db/migrations/0006_create_categories_users.rb:5:42: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :user_id, :users, :null=>false
+                                         ^^
+db/migrations/0006_create_categories_users.rb:6:19: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      primary_key [:category_id, :user_id]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0006_create_categories_users.rb:7:13: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      index [:category_id, :user_id]
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0007_create_notification.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0007_create_notification.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+ up do
+^
+db/migrations/0008_update_notification.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0008_update_notification.rb:4:5: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+        add_foreign_key :document_id, :documents, :null=>false
+    ^^^^
+db/migrations/0008_update_notification.rb:4:51: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        add_foreign_key :document_id, :documents, :null=>false
+                                                  ^^^^^^^
+db/migrations/0008_update_notification.rb:4:56: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+        add_foreign_key :document_id, :documents, :null=>false
+                                                       ^^
+db/migrations/0009_create_notification_user.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+db/migrations/0009_create_notification_user.rb:4:53: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :notification_id, :notifications, :null=>false
+                                                    ^^^^^^^
+db/migrations/0009_create_notification_user.rb:4:58: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :notification_id, :notifications, :null=>false
+                                                         ^^
+db/migrations/0009_create_notification_user.rb:5:37: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      foreign_key :user_id, :users, :null=>false
+                                    ^^^^^^^
+db/migrations/0009_create_notification_user.rb:5:42: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      foreign_key :user_id, :users, :null=>false
+                                         ^^
+db/migrations/0009_create_notification_user.rb:6:19: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      primary_key [:notification_id, :user_id]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0009_create_notification_user.rb:7:13: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      index [:notification_id, :user_id]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+db/migrations/0010_update_notifications_users.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+Sequel.migration do
+^
+models/category.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Category < Sequel::Model
+^^^^^
+models/category.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Category < Sequel::Model
+^
+models/category.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many  :users
+^^^^
+models/category.rb:2:17: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    many_to_many  :users
+                ^
+models/category.rb:2:17: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+    many_to_many  :users
+                ^^
+models/category.rb:3:1: C: Layout/IndentationStyle: Tab detected in indentation.
+  	one_to_many :documents
+^^^
+models/category.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+  	one_to_many :documents
+^^^
+models/category.rb:3:4: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+  	one_to_many :documents
+   ^^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:4:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    plugin :validation_helpers
+^^^^
+models/category.rb:5:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    def validate
+^^^^
+models/category.rb:7:26: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      validates_presence [:name, :description]
+                         ^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:10:30: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      validates_type String, [:name, :description]
+                             ^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:11:24: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      validates_unique([:name, :description])
+                       ^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:13:3: W: Layout/EndAlignment: end at 13, 2 is not aligned with class at 1, 0.
+  end
+  ^^^
+models/document.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Document < Sequel::Model
+^^^^^
+models/document.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Document < Sequel::Model
+^
+models/document.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_one :categories
+^^^^
+models/document.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many :users
+^^^^
+models/document.rb:4:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    one_to_one :notification
+^^^^
+models/document.rb:5:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    plugin :validation_helpers
+^^^^
+models/document.rb:6:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    def validate
+^^^^
+models/document.rb:8:26: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      validates_presence [:name, :description, :date, :fileDocument]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/document.rb:11:30: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+      validates_type String, [:name, :description,:fileDocument]
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/document.rb:11:50: C: Layout/SpaceAfterComma: Space missing after comma.
+      validates_type String, [:name, :description,:fileDocument]
+                                                 ^
+models/document.rb:15:3: W: Layout/EndAlignment: end at 15, 2 is not aligned with class at 1, 0.
+  end
+  ^^^
+models/init.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require_relative 'user'
+^
+models/notification.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Notification < Sequel::Model
+^^^^^
+models/notification.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Notification < Sequel::Model
+^
+models/notification.rb:2:15: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+  many_to_many  :users
+              ^
+models/notification.rb:2:15: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+  many_to_many  :users
+              ^^
+models/notification.rb:4:3: W: Layout/EndAlignment: end at 4, 2 is not aligned with class at 1, 0.
+  end
+  ^^^
+models/notificationUser.rb:1:1: C: Naming/FileName: The name of this source file (notificationUser.rb) should use snake_case.
+class  NotificationUser < Sequel::Model(:notifications_users)
+^
+models/notificationUser.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class  NotificationUser < Sequel::Model(:notifications_users)
+^^^^^
+models/notificationUser.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class  NotificationUser < Sequel::Model(:notifications_users)
+^
+models/notificationUser.rb:1:6: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+class  NotificationUser < Sequel::Model(:notifications_users)
+     ^
+models/notificationUser.rb:2:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one :notification
+^
+models/notificationUser.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one :notification
+^
+models/notificationUser.rb:3:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one :user
+^
+models/notificationUser.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one :user
+^
+models/user.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class User < Sequel::Model
+^^^^^
+models/user.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class User < Sequel::Model
+^
+models/user.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many  :categories
+^^^^
+models/user.rb:2:17: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    many_to_many  :categories
+                ^
+models/user.rb:2:17: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+    many_to_many  :categories
+                ^^
+models/user.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many :documents
+^^^^
+models/user.rb:4:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    one_to_many :relations
+^^^^
+models/user.rb:5:1: C: Layout/IndentationWidth: Use 2 (not 6) spaces for indentation.
+      plugin :validation_helpers
+^^^^^^
+models/user.rb:5:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      plugin :validation_helpers
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:6:1: C: Layout/IndentationWidth: Use 2 (not 6) spaces for indentation.
+      def validate
+^^^^^^
+models/user.rb:6:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      def validate ...
+      ^^^^^^^^^^^^
+models/user.rb:8:28: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_presence [:name, :surname, :dni, :email, :password, :rol, :admin]
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:9:39: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_length_range 3..40, [:name, :surname], message: 'not allowed'
+                                      ^^^^^^^^^^^^^^^^^
+models/user.rb:11:32: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_type String, [:name, :surname, :email, :password]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:12:26: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_unique([:name, :surname, :dni], :email)
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:14:5: W: Layout/DefEndAlignment: end at 14, 4 is not aligned with def at 6, 6.
+    end
+    ^^^
+tests/models/category_test.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/category_test.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/category_test.rb:2:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/category_test.rb:3:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase
+                  ^^^^^^^^
+tests/models/category_test.rb:6:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @cat  = Category.create(name: "Cat1", description: "DescriptionEstandar1")
+        ^
+tests/models/category_test.rb:6:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @cat  = Category.create(name: "Cat1", description: "DescriptionEstandar1")
+          ^
+tests/models/category_test.rb:6:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat  = Category.create(name: "Cat1", description: "DescriptionEstandar1")
+                                  ^^^^^^
+tests/models/category_test.rb:6:56: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat  = Category.create(name: "Cat1", description: "DescriptionEstandar1")
+                                                       ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:11:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat1  = Document.create(name: "Cat1", description: "DescriptionEstandar1")
+                                   ^^^^^^
+tests/models/category_test.rb:11:57: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat1  = Document.create(name: "Cat1", description: "DescriptionEstandar1")
+                                                        ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:12:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat2  = Document.create(name: "Cat1", description: "DescriptionEstandar2")
+                                   ^^^^^^
+tests/models/category_test.rb:12:57: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat2  = Document.create(name: "Cat1", description: "DescriptionEstandar2")
+                                                        ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:18:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat1  = Document.create(name: "Cat1", description: "DescriptionEstandar1")
+                                   ^^^^^^
+tests/models/category_test.rb:18:57: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat1  = Document.create(name: "Cat1", description: "DescriptionEstandar1")
+                                                        ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:19:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat2  = Document.create(name: "Cat2", description: "DescriptionEstandar1")
+                                   ^^^^^^
+tests/models/category_test.rb:19:57: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat2  = Document.create(name: "Cat2", description: "DescriptionEstandar1")
+                                                        ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:25:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @cat  = Category.create(description: "DescriptionEstandar1")
+        ^
+tests/models/category_test.rb:25:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @cat  = Category.create(description: "DescriptionEstandar1")
+          ^
+tests/models/category_test.rb:25:42: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat  = Category.create(description: "DescriptionEstandar1")
+                                         ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:30:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @cat  = Category.create(name: "Cat1")
+        ^
+tests/models/category_test.rb:30:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @cat  = Category.create(name: "Cat1")
+          ^
+tests/models/category_test.rb:30:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat  = Category.create(name: "Cat1")
+                                  ^^^^^^
+tests/models/category_test.rb:34:7: C: Naming/MethodName: Use snake_case for method names.
+  def test_fileDocument_nil
+      ^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:35:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+        ^
+tests/models/category_test.rb:35:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+          ^
+tests/models/category_test.rb:35:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/category_test.rb:35:62: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                             ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:35:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                           ^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:35:121: C: Layout/LineLength: Line is too long. [129/120]
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^
+tests/models/category_test.rb:40:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+        ^
+tests/models/category_test.rb:40:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+          ^
+tests/models/category_test.rb:40:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/category_test.rb:40:62: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                             ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:40:100: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                   ^^^^^^^^^^^^^^
+tests/models/category_test.rb:40:121: C: Layout/LineLength: Line is too long. [143/120]
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/category_test.rb:40:122: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/document_test.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/document_test.rb:2:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/document_test.rb:3:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase
+                  ^^^^^^^^
+tests/models/document_test.rb:6:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+        ^
+tests/models/document_test.rb:6:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+          ^
+tests/models/document_test.rb:6:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/document_test.rb:6:62: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                             ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:6:100: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                   ^^^^^^^^^^^^^^
+tests/models/document_test.rb:6:121: C: Layout/LineLength: Line is too long. [159/120]
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:6:138: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:11:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                   ^^^^^^^^^^^^
+tests/models/document_test.rb:11:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                              ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:11:101: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                    ^^^^^^^^^^^^^^
+tests/models/document_test.rb:11:121: C: Layout/LineLength: Line is too long. [160/120]
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:11:139: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:12:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito1", description: "DescriptionEstandar2", fileDocument: "PDF/Doc2.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                   ^^^^^^^^^^^^
+tests/models/document_test.rb:12:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito1", description: "DescriptionEstandar2", fileDocument: "PDF/Doc2.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                              ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:12:101: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito1", description: "DescriptionEstandar2", fileDocument: "PDF/Doc2.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                    ^^^^^^^^^^^^^^
+tests/models/document_test.rb:12:121: C: Layout/LineLength: Line is too long. [160/120]
+    @doc2  = Document.create(name: "DocPepito1", description: "DescriptionEstandar2", fileDocument: "PDF/Doc2.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:12:139: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito1", description: "DescriptionEstandar2", fileDocument: "PDF/Doc2.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:17:7: C: Naming/MethodName: Use snake_case for method names.
+  def test_double_fileDocument
+      ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:18:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                   ^^^^^^^^^^^^
+tests/models/document_test.rb:18:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                              ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:18:101: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                    ^^^^^^^^^^^^^^
+tests/models/document_test.rb:18:121: C: Layout/LineLength: Line is too long. [160/120]
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:18:139: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc1  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:19:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito2", description: "DescriptionEstandar2", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                   ^^^^^^^^^^^^
+tests/models/document_test.rb:19:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito2", description: "DescriptionEstandar2", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                              ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:19:101: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito2", description: "DescriptionEstandar2", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                    ^^^^^^^^^^^^^^
+tests/models/document_test.rb:19:121: C: Layout/LineLength: Line is too long. [160/120]
+    @doc2  = Document.create(name: "DocPepito2", description: "DescriptionEstandar2", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:19:139: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc2  = Document.create(name: "DocPepito2", description: "DescriptionEstandar2", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:25:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+        ^
+tests/models/document_test.rb:25:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+          ^
+tests/models/document_test.rb:25:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/document_test.rb:25:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                              ^^^^^^^^^^^^^^
+tests/models/document_test.rb:25:101: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:25:121: C: Layout/LineLength: Line is too long. [122/120]
+    @doc  = Document.create(name: "DocPepito1", fileDocument: "PDF/Doc1.pdf", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^
+tests/models/document_test.rb:29:7: C: Naming/MethodName: Use snake_case for method names.
+  def test_fileDocument_nil
+      ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:30:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+        ^
+tests/models/document_test.rb:30:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+          ^
+tests/models/document_test.rb:30:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/document_test.rb:30:62: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                             ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:30:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                           ^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:30:121: C: Layout/LineLength: Line is too long. [129/120]
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", category_id: 1, date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^
+tests/models/document_test.rb:35:9: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+        ^
+tests/models/document_test.rb:35:11: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+          ^
+tests/models/document_test.rb:35:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                  ^^^^^^^^^^^^
+tests/models/document_test.rb:35:62: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                             ^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:35:100: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                   ^^^^^^^^^^^^^^
+tests/models/document_test.rb:35:121: C: Layout/LineLength: Line is too long. [143/120]
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_test.rb:35:122: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc  = Document.create(name: "DocPepito1", description: "DescriptionEstandar1", fileDocument: "PDF/Doc1.pdf", date: "24/05/2020 19:18:54")
+                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/user_test.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/user_test.rb:2:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/user_test.rb:3:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase
+                  ^^^^^^^^
+tests/models/user_test.rb:6:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:6:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:6:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:6:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:6:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                ^
+tests/models/user_test.rb:6:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:6:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                     ^^^^^^^^^
+tests/models/user_test.rb:6:107: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                          ^^^^^^^^
+tests/models/user_test.rb:6:121: C: Layout/LineLength: Line is too long. [161/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:6:124: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                           ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:11:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:11:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:11:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                  ^^^^^^^^^
+tests/models/user_test.rb:11:49: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                ^
+tests/models/user_test.rb:11:50: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                 ^^^^^^^^
+tests/models/user_test.rb:11:70: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                     ^^^^^^^^^
+tests/models/user_test.rb:11:91: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                          ^^^^^^^^
+tests/models/user_test.rb:11:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                           ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:11:121: C: Layout/LineLength: Line is too long. [145/120]
+    @user  = User.create(surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:16:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:16:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:16:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:16:45: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                            ^
+tests/models/user_test.rb:16:46: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                             ^^^^^^^^
+tests/models/user_test.rb:16:66: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                 ^^^^^^^^^
+tests/models/user_test.rb:16:87: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                      ^^^^^^^^
+tests/models/user_test.rb:16:104: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                       ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:16:121: C: Layout/LineLength: Line is too long. [141/120]
+    @user  = User.create(name: "Pepito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:21:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:21:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:21:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:21:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:21:72: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                       ^^^^^^^^^
+tests/models/user_test.rb:21:93: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                            ^^^^^^^^
+tests/models/user_test.rb:21:110: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                             ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:21:121: C: Layout/LineLength: Line is too long. [147/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:26:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:26:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:26:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:26:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:26:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                ^
+tests/models/user_test.rb:26:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:26:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                     ^^^^^^^^
+tests/models/user_test.rb:26:103: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                      ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:26:121: C: Layout/LineLength: Line is too long. [140/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, password: "112358", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:31:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:31:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:31:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:31:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:31:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                ^
+tests/models/user_test.rb:31:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:31:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                     ^^^^^^^^^
+tests/models/user_test.rb:31:104: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                       ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:31:121: C: Layout/LineLength: Line is too long. [141/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", email: "pablito@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:36:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+         ^
+tests/models/user_test.rb:36:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+           ^
+tests/models/user_test.rb:36:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:36:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:36:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                                ^
+tests/models/user_test.rb:36:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:36:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                                                     ^^^^^^^^^
+tests/models/user_test.rb:36:107: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                                                                          ^^^^^^^^
+tests/models/user_test.rb:36:121: C: Layout/LineLength: Line is too long. [133/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^
+tests/models/user_test.rb:41:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+         ^
+tests/models/user_test.rb:41:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+           ^
+tests/models/user_test.rb:41:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:41:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:41:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                ^
+tests/models/user_test.rb:41:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:41:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                                     ^^^^^^^^^
+tests/models/user_test.rb:41:107: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                                                          ^^^^^^^^
+tests/models/user_test.rb:41:121: C: Layout/LineLength: Line is too long. [153/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:41:124: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", admin: 0)
+                                                                                                                           ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:46:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+         ^
+tests/models/user_test.rb:46:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+           ^
+tests/models/user_test.rb:46:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                               ^^^^^^^^
+tests/models/user_test.rb:46:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                  ^^^^^^^^^
+tests/models/user_test.rb:46:65: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                ^
+tests/models/user_test.rb:46:66: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                 ^^^^^^^^
+tests/models/user_test.rb:46:86: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                                     ^^^^^^^^^
+tests/models/user_test.rb:46:107: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                                                          ^^^^^^^^
+tests/models/user_test.rb:46:121: C: Layout/LineLength: Line is too long. [151/120]
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:46:124: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito@gmail.com", rol: 0)
+                                                                                                                           ^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:51:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^^
+tests/models/user_test.rb:51:53: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                    ^^^^^^^^^^
+tests/models/user_test.rb:51:68: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                   ^
+tests/models/user_test.rb:51:69: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                    ^^^^^^^^
+tests/models/user_test.rb:51:89: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                        ^^^^^^^^^
+tests/models/user_test.rb:51:110: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                             ^^^^^^^^
+tests/models/user_test.rb:51:121: C: Layout/LineLength: Line is too long. [165/120]
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:51:127: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito1", surname: "Clavito1", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                                              ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:52:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^^
+tests/models/user_test.rb:52:53: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                    ^^^^^^^^^^
+tests/models/user_test.rb:52:68: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                   ^
+tests/models/user_test.rb:52:69: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                    ^^^^^^^^
+tests/models/user_test.rb:52:89: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                        ^^^^^^^^^
+tests/models/user_test.rb:52:110: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                             ^^^^^^^^^
+tests/models/user_test.rb:52:121: C: Layout/LineLength: Line is too long. [166/120]
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:52:128: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito2", surname: "Clavito2", dni:12345679, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                               ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:58:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^
+tests/models/user_test.rb:58:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                   ^^^^^^^^^
+tests/models/user_test.rb:58:66: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                 ^
+tests/models/user_test.rb:58:67: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                  ^^^^^^^^
+tests/models/user_test.rb:58:87: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                      ^^^^^^^^^
+tests/models/user_test.rb:58:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                           ^^^^^^^^
+tests/models/user_test.rb:58:121: C: Layout/LineLength: Line is too long. [163/120]
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:58:125: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito1@gmail.com", rol: 0, admin: 0)
+                                                                                                                            ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:59:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^
+tests/models/user_test.rb:59:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                   ^^^^^^^^^
+tests/models/user_test.rb:59:66: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                 ^
+tests/models/user_test.rb:59:67: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                  ^^^^^^^^
+tests/models/user_test.rb:59:87: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                      ^^^^^^^^^
+tests/models/user_test.rb:59:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                           ^^^^^^^^^
+tests/models/user_test.rb:59:121: C: Layout/LineLength: Line is too long. [164/120]
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:59:126: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                             ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:65:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^
+tests/models/user_test.rb:65:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                   ^^^^^^^^^
+tests/models/user_test.rb:65:66: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                 ^
+tests/models/user_test.rb:65:67: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                  ^^^^^^^^
+tests/models/user_test.rb:65:87: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                      ^^^^^^^^^
+tests/models/user_test.rb:65:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                           ^^^^^^^^
+tests/models/user_test.rb:65:121: C: Layout/LineLength: Line is too long. [163/120]
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:65:125: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user1  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "112358", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                            ^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:66:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                ^^^^^^^^
+tests/models/user_test.rb:66:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                   ^^^^^^^^^
+tests/models/user_test.rb:66:66: C: Layout/SpaceAfterColon: Space missing after colon.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                 ^
+tests/models/user_test.rb:66:67: C: Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                  ^^^^^^^^
+tests/models/user_test.rb:66:87: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                      ^^^^^^^^^
+tests/models/user_test.rb:66:108: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                           ^^^^^^^^^
+tests/models/user_test.rb:66:121: C: Layout/LineLength: Line is too long. [164/120]
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_test.rb:66:126: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user2  = User.create(name: "Pepito", surname: "Clavito", dni:12345678, username: "Clavo02", password: "1123581", email: "pablito2@gmail.com", rol: 0, admin: 0)
+                                                                                                                             ^^^^^^^^^^^^^^^^^^^^
+tests/test_helper.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+ENV['RACK_ENV'] = 'test'
+^
+tests/test_helper.rb:12:20: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+  password: 'magic')
+                   ^
+
+23 files inspected, 747 offenses detected, 649 offenses auto-correctable
+root@867fd3b1d20a:/usr/src/app# rubocop -a
+Inspecting 23 files
+
+
+
+
+Con rubocop -a
+23 files inspected, 124 offenses detected, 36 offenses auto-correctable
+root@ccb35d6f1780:/usr/src/app# 
+
+
+Corregidas variables
+23 files inspected, 68 offenses detected, 29 offenses auto-correctable
+root@ccb35d6f1780:/usr/src/app# 
+
+
+
+root@09b5cca3875a:/usr/src/app# rubocop app.rb
+Inspecting 1 file
+C
+Offenses:
+app.rb:9:1: C: Metrics/ClassLength: Class has too many lines. [493/100]
+class App < Sinatra::Base ...
+^^^^^^^^^^^^^^^^^^^^^^^^^
+1 file inspected, 1 offense detected
+root@09b5cca3875a:/usr/src/app# 
