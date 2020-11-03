@@ -1,0 +1,1821 @@
+Inspecting 25 files
+.W.......C.....WWCCCWWWW.
+
+Offenses:
+
+app.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require 'json'
+^
+app.rb:8:1: C: Style/MixinUsage: include is used at the top level. Use inside class or module.
+include ActionView::Helpers::DateHelper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:9:1: C: Style/MixinUsage: include is used at the top level. Use inside class or module.
+include FileUtils::Verbose
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:11:1: C: Metrics/ClassLength: Class has too many lines. [535/100]
+class App < Sinatra::Base ...
+^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:11:1: C: Style/Documentation: Missing top-level class documentation comment.
+class App < Sinatra::Base
+^^^^^
+app.rb:12:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:16:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    set :session_secret, "otro secret pero dificil y abstracto"
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:24:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @logged2 = session[:user_id] ? "none" : "inline-block"
+                                   ^^^^^^
+app.rb:24:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @logged2 = session[:user_id] ? "none" : "inline-block"
+                                            ^^^^^^^^^^^^^^
+app.rb:25:35: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @logged = session[:user_id] ? "inline-block" : "none"
+                                  ^^^^^^^^^^^^^^
+app.rb:25:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @logged = session[:user_id] ? "inline-block" : "none"
+                                                   ^^^^^^
+app.rb:26:47: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if user_not_logger_in? && restricted_path? 
+                                              ^
+app.rb:28:28: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    elsif session[:user_id] 
+                           ^
+app.rb:31:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @visibility = @current_user.role == "user" ? "none" : "inline"
+                                          ^^^^^^
+app.rb:31:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @visibility = @current_user.role == "user" ? "none" : "inline"
+                                                   ^^^^^^
+app.rb:31:61: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @visibility = @current_user.role == "user" ? "none" : "inline"
+                                                            ^^^^^^^^
+app.rb:35:30: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        redirect '/documents'     
+                             ^^^^^
+app.rb:38:1: C: Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+app.rb:41:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:45:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :index, :layout => :layoutIndex
+                  ^^^^^^^^^^
+app.rb:50:23: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+        @connection = {user: user, socket: ws}
+                      ^
+app.rb:50:46: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+        @connection = {user: user, socket: ws}
+                                             ^
+app.rb:55:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          warn("websocket closed")
+               ^^^^^^^^^^^^^^^^^^
+app.rb:62:3: C: Metrics/MethodLength: Method has too many lines. [25/10]
+  def send_email(useremail, doc, user, motive) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:63:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+app.rb:73:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:83:5: C: Layout/FirstHashElementIndentation: Use 2 spaces for indentation in a hash, relative to the first position after the preceding left parenthesis.
+    :to => useremail, 
+    ^^^^^^^^^^^^^^^^
+app.rb:83:5: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    :to => useremail, 
+    ^^^^^^
+app.rb:83:22: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    :to => useremail, 
+                     ^
+app.rb:84:5: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    :via => :smtp, 
+    ^^^^^^^
+app.rb:84:19: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    :via => :smtp, 
+                  ^
+app.rb:85:5: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    :via_options => {
+    ^^^^^^^^^^^^^^^
+app.rb:86:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :address => 'smtp.gmail.com',                     
+      ^^^^^^^^^^^
+app.rb:86:36: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      :address => 'smtp.gmail.com',                     
+                                   ^^^^^^^^^^^^^^^^^^^^^
+app.rb:87:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :port => '587',
+      ^^^^^^^^
+app.rb:88:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :user_name => 'documentuploadsystem@gmail.com',
+      ^^^^^^^^^^^^^
+app.rb:89:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :password => 'rstmezqnvkygptjl',
+      ^^^^^^^^^^^^
+app.rb:90:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :authentication => :plain,
+      ^^^^^^^^^^^^^^^^^^
+app.rb:91:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :domain => "gmail.com",
+      ^^^^^^^^^^
+app.rb:91:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      :domain => "gmail.com",
+                 ^^^^^^^^^^^
+app.rb:91:29: C: Style/TrailingCommaInHashLiteral: Avoid comma after the last item of a hash.
+      :domain => "gmail.com",
+                            ^
+app.rb:93:7: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+      :subject => 'You have a new notification', 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:93:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :subject => 'You have a new notification', 
+      ^^^^^^^^^^^
+app.rb:93:49: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      :subject => 'You have a new notification', 
+                                                ^
+app.rb:94:7: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+      :headers => { 'Content-Type' => 'text/html' },
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:94:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :headers => { 'Content-Type' => 'text/html' },
+      ^^^^^^^^^^^
+app.rb:95:7: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+      :body => erb(:email, layout: false)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:95:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :body => erb(:email, layout: false)
+      ^^^^^^^^
+app.rb:96:5: C: Layout/FirstHashElementIndentation: Indent the right brace the same as the first position after the preceding left parenthesis.
+    }
+    ^
+app.rb:97:3: C: Layout/ClosingParenthesisIndentation: Align ) with (.
+  )
+  ^
+app.rb:97:3: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the same line as the last argument when opening brace is on the same line as the first argument.
+  )
+  ^
+app.rb:98:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+app.rb:101:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:103:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def cant_pages(cantdocs)
+  ^^^^^^^^^^^^^^
+app.rb:105:5: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+    if cantdocs % @docsperpage == 0 ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:105:8: C: Style/NumericPredicate: Use (cantdocs % @docsperpage).zero? instead of cantdocs % @docsperpage == 0.
+    if cantdocs % @docsperpage == 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:106:44: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      @pagelimit =  cantdocs / @docsperpage 
+                                           ^
+app.rb:112:15: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  def set_page 
+              ^
+app.rb:113:5: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+    if params[:page]  ...
+    ^^^^^^^^^^^^^^^^^
+app.rb:113:21: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:page] 
+                    ^
+app.rb:116:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      page = "1"
+             ^^^
+app.rb:118:5: C: Style/RedundantReturn: Redundant return detected.
+    return page
+    ^^^^^^
+app.rb:121:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/documents" do 
+      ^^^^^^^^^^^^
+app.rb:121:22: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  get "/documents" do 
+                     ^
+app.rb:122:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info ""
+                ^^
+app.rb:123:25: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info session["session_id"]
+                        ^^^^^^^^^^^^
+app.rb:125:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info "-------------"
+                ^^^^^^^^^^^^^^^
+app.rb:126:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    logger.info ""
+                ^^
+app.rb:127:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    @view = params[:forma]  
+                          ^^
+app.rb:129:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:130:23: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:remove] 
+                      ^
+app.rb:136:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:139:77: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:userfilter] || params[:datefilter] || params[:categoryfilter]   
+                                                                            ^^^
+app.rb:142:44: C: Layout/SpaceAfterComma: Space missing after comma.
+      cargdocs = filter(params[:userfilter],params[:datefilter],params[:categoryfilter])
+                                           ^
+app.rb:142:64: C: Layout/SpaceAfterComma: Space missing after comma.
+      cargdocs = filter(params[:userfilter],params[:datefilter],params[:categoryfilter])
+                                                               ^
+app.rb:143:29: C: Layout/SpaceInsideRangeLiteral: Space inside range literal.
+      @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:143:65: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                                                                ^
+app.rb:143:94: C: Layout/SpaceAroundOperators: Surrounding space missing for operator -.
+      @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                                                                                             ^
+app.rb:146:82: C: Layout/SpaceAroundOperators: Surrounding space missing for operator -.
+      @documents = Document.where(delete: false).limit(@docsperpage, ((@page.to_i-1) * @docsperpage)).order(:date).reverse
+                                                                                 ^
+app.rb:146:121: C: Layout/LineLength: Line is too long. [122/120]
+      @documents = Document.where(delete: false).limit(@docsperpage, ((@page.to_i-1) * @docsperpage)).order(:date).reverse
+                                                                                                                        ^^
+app.rb:153:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/aboutus" do
+      ^^^^^^^^^^
+app.rb:154:3: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+   erb :aboutus, :layout => :layout
+  ^
+app.rb:154:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   erb :aboutus, :layout => :layout
+                 ^^^^^^^^^^
+app.rb:157:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/login" do
+      ^^^^^^^^
+app.rb:158:17: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :login, :layout => :layout
+                ^^^^^^^^^^
+app.rb:159:6: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  end	
+     ^
+app.rb:160:1: C: Layout/IndentationStyle: Tab detected in indentation.
+app.rb:160:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:161:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/signup" do
+      ^^^^^^^^^
+app.rb:162:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :signup, :layout => :layout
+                 ^^^^^^^^^^
+app.rb:163:6: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  end	
+     ^
+app.rb:165:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/forgotpass" do
+      ^^^^^^^^^^^^^
+app.rb:166:22: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :forgotpass, :layout => :layout
+                     ^^^^^^^^^^
+app.rb:169:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/editdocument" do
+      ^^^^^^^^^^^^^^^
+app.rb:171:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if docedit.userstaged
+    ^^
+app.rb:191:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/subscribe" do
+      ^^^^^^^^^^^^
+app.rb:192:8: C: Style/NumericPredicate: Use Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length.positive? instead of Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0.
+    if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:192:8: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+    if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:196:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :suscat, :layout => :layout
+                 ^^^^^^^^^^
+app.rb:199:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/upload" do
+      ^^^^^^^^^
+app.rb:203:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :upload, :layout => :layout
+                 ^^^^^^^^^^
+app.rb:206:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/newadmin" do
+      ^^^^^^^^^^^
+app.rb:208:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :newadmin, :layout=> :layout
+                   ^^^^^^^^^
+app.rb:208:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :newadmin, :layout=> :layout
+                          ^^
+app.rb:213:55: C: Layout/SpaceAfterComma: Space missing after comma.
+    documents = Document.select(:id).where(id: getdocs,delete: false)
+                                                      ^
+app.rb:215:66: C: Layout/SpaceAfterComma: Space missing after comma.
+    @notifications = Notification.where(user_id: @current_user.id,document_id: documents).order(:datetime).reverse
+                                                                 ^
+app.rb:216:20: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+    if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
+                   ^^
+app.rb:216:22: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
+                     ^
+app.rb:216:67: C: Layout/SpaceAfterComma: Space missing after comma.
+    if params[:id] &&  Notification.first(document_id: params[:id],user_id: @current_user.id)
+                                                                  ^
+app.rb:217:50: C: Layout/SpaceAfterComma: Space missing after comma.
+      Notification.first(document_id: params[:id],user_id: @current_user.id).update(read: true)
+                                                 ^
+app.rb:222:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/mycategories" do
+      ^^^^^^^^^^^^^^^
+app.rb:223:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if @current_user.categories_dataset.to_a.length > 0
+    ^^
+app.rb:223:8: C: Style/NumericPredicate: Use @current_user.categories_dataset.to_a.length.positive? instead of @current_user.categories_dataset.to_a.length > 0.
+    if @current_user.categories_dataset.to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:223:8: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+    if @current_user.categories_dataset.to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:224:19: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+      @categories =  @current_user.categories_dataset
+                  ^
+app.rb:224:20: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @categories =  @current_user.categories_dataset
+                   ^
+app.rb:226:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :yourcats, :layout=> :layout
+                   ^^^^^^^^^
+app.rb:226:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :yourcats, :layout=> :layout
+                          ^^
+app.rb:230:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      mydocs = @current_user.documents_dataset.where(delete: false)
+  ^^^^
+app.rb:233:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    if mydocstagedsubs.union(mydocstaged).count > 0 ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:233:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if mydocstagedsubs.union(mydocstaged).count > 0
+    ^^
+app.rb:233:8: C: Style/NumericPredicate: Use mydocstagedsubs.union(mydocstaged).count.positive? instead of mydocstagedsubs.union(mydocstaged).count > 0.
+    if mydocstagedsubs.union(mydocstaged).count > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:236:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    erb :yourdocs, :layout=> :layout
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:236:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :yourdocs, :layout=> :layout
+                   ^^^^^^^^^
+app.rb:236:27: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :yourdocs, :layout=> :layout
+                          ^^
+app.rb:239:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  get "/unsubscribe" do
+      ^^^^^^^^^^^^^^
+app.rb:240:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if @current_user.categories_dataset.to_a.length > 0
+    ^^
+app.rb:240:8: C: Style/NumericPredicate: Use @current_user.categories_dataset.to_a.length.positive? instead of @current_user.categories_dataset.to_a.length > 0.
+    if @current_user.categories_dataset.to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:240:8: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+    if @current_user.categories_dataset.to_a.length > 0
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:241:19: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+      @categories =  @current_user.categories_dataset
+                  ^
+app.rb:241:20: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @categories =  @current_user.categories_dataset
+                   ^
+app.rb:243:22: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :deletecats, :layout=> :layout
+                     ^^^^^^^^^
+app.rb:243:29: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+    erb :deletecats, :layout=> :layout
+                            ^^
+app.rb:246:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:247:19: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  get '/logout' do 
+                  ^
+app.rb:252:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:254:15: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["password"] != "" && params["username"] != ""
+              ^^^^^^^^^^
+app.rb:254:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["password"] != "" && params["username"] != ""
+                             ^^
+app.rb:254:43: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["password"] != "" && params["username"] != ""
+                                          ^^^^^^^^^^
+app.rb:254:58: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["password"] != "" && params["username"] != ""
+                                                         ^^
+app.rb:258:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        redirect "/documents"
+                 ^^^^^^^^^^^^
+app.rb:260:16: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+        @error ="Wrong username or password"
+               ^
+app.rb:260:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error ="Wrong username or password"
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:261:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        erb :login, :layout => :layout
+                    ^^^^^^^^^^
+app.rb:263:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:267:25: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  post '/editprofile' do 
+                        ^
+app.rb:268:15: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["password"] == @current_user.password
+              ^^^^^^^^^^
+app.rb:269:121: C: Layout/LineLength: Line is too long. [153/120]
+      if (User.find(username: params[:username]) && User.find(username: params[:username]).id != @current_user.id) || /\A\w{3,15}\z/ !~ params[:username]
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:270:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @errorusername = "The username is already in use or its invalid"
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:272:102: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                     ^
+app.rb:272:104: C: Layout/SpaceAroundOperators: Surrounding space missing for operator ||.
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                       ^^
+app.rb:272:106: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                         ^
+app.rb:272:121: C: Layout/LineLength: Line is too long. [234/120]
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:272:141: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      if (User.find(email: params[:email]) && User.find(email: params[:email]).id != @current_user.id )||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:273:23: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @erroremail = "The email is invalid"
+                      ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:278:53: C: Layout/SpaceAfterComma: Space missing after comma.
+        @current_user.update(name: params[:fullname],username: params[:username],email: params[:email])
+                                                    ^
+app.rb:278:81: C: Layout/SpaceAfterComma: Space missing after comma.
+        @current_user.update(name: params[:fullname],username: params[:username],email: params[:email])
+                                                                                ^
+app.rb:282:24: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpassword = "La contraseña es incorrecta"
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:283:23: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      erb :editprofile  
+                      ^^
+app.rb:288:15: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["currentpassword"] == @current_user.password
+              ^^^^^^^^^^^^^^^^^
+app.rb:289:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if params[:password] != params[:confPassword] 
+      ^^
+app.rb:289:52: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      if params[:password] != params[:confPassword] 
+                                                   ^
+app.rb:290:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @errorpasswordconf = "Passwords are not equal"
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:292:71: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      if params[:password].length < 5 || params[:password].length > 20 
+                                                                      ^
+app.rb:293:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @errorpasswordlength = "Password must be between 5 and 20 characters long"
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:302:24: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpassword = "La contraseña es incorrecta"
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:303:23: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      erb :editprofile  
+                      ^^
+app.rb:307:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:308:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:309:3: C: Metrics/BlockLength: Block has too many lines. [26/25]
+  post '/signup' do ...
+  ^^^^^^^^^^^^^^^^^
+app.rb:311:24: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorusername = "The username is already in use or its invalid"
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:313:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+    ^^
+app.rb:313:7: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+      ^^
+app.rb:313:43: C: Layout/SpaceAroundOperators: Operator || should be surrounded by a single space.
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                          ^^
+app.rb:313:45: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                            ^
+app.rb:313:80: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:313:121: C: Layout/LineLength: Line is too long. [173/120]
+    if   User.find(email: params[:email]) ||  /\A.*@.*\..*\z/ !~ params[:email]                                                                                              
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:314:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @erroremail = "The email is invalid"
+                    ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:316:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if params[:password] != params[:confPassword] 
+    ^^
+app.rb:316:50: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:password] != params[:confPassword] 
+                                                 ^
+app.rb:317:28: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpasswordconf = "Passwords are not equal"
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:319:69: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:password].length < 5 || params[:password].length > 20 
+                                                                    ^
+app.rb:320:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpasswordlength = "Password must be between 5 and 20 characters long"
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:326:39: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      params = JSON.parse hash.to_json 
+                                      ^
+app.rb:327:36: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+                                   ^^^^^^^^^^
+app.rb:327:63: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+                                                              ^^^^^^^
+app.rb:327:90: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+                                                                                         ^^^^^^^^^^
+app.rb:327:120: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+                                                                                                                       ^^^^^^^^^^
+app.rb:327:121: C: Layout/LineLength: Line is too long. [131/120]
+      user = User.new(name: params["fullname"], email: params["email"], username: params["username"], password: params["password"])
+                                                                                                                        ^^^^^^^^^^^
+app.rb:329:7: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+          session[:user_id] = user.id
+      ^^^^
+app.rb:330:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          redirect "/documents"
+                   ^^^^^^^^^^^^
+app.rb:331:11: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      else 
+          ^
+app.rb:332:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        [500, {}, "Internal server Error"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:333:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      end 
+         ^
+app.rb:335:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :signup, :layout => :layout
+                   ^^^^^^^^^^
+app.rb:339:3: C: Metrics/MethodLength: Method has too many lines. [11/10]
+  def array_to_tag (users) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:339:19: C: Layout/SpaceAfterMethodName: Do not put a space between a method name and the opening parenthesis.
+  def array_to_tag (users)
+                  ^
+app.rb:340:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+app.rb:341:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      if users && users != ""
+  ^^^^
+app.rb:341:7: C: Style/GuardClause: Use a guard clause (return unless users && users != "") instead of wrapping the code inside a conditional expression.
+      if users && users != ""
+      ^^
+app.rb:341:28: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if users && users != ""
+                           ^^
+app.rb:342:24: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        tagged_users = ""
+                       ^^
+app.rb:343:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:345:1: C: Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
+app.rb:346:11: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+          if s.equal?(params[:users].last) ...
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:348:30: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+            tagged_users += s 
+                             ^
+app.rb:350:15: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+          else 
+              ^
+app.rb:352:33: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+            tagged_users += s + ", "
+                                ^^^^
+app.rb:354:12: W: Layout/EndAlignment: end at 354, 11 is not aligned with if at 346, 10.
+           end
+           ^^^
+app.rb:357:9: C: Style/RedundantReturn: Redundant return detected.
+        return tagged_users
+        ^^^^^^
+app.rb:361:1: C: Layout/CommentIndentation: Incorrect indentation detected (column 0 instead of 2).
+# app.rb 
+^^^^^^^^^
+app.rb:361:9: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+# app.rb 
+        ^
+app.rb:363:15: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+              ^^^^^^
+app.rb:363:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                         ^^
+app.rb:363:39: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                      ^^^^^^^
+app.rb:363:51: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                  ^^
+app.rb:363:53: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                    ^
+app.rb:363:55: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                      ^^
+app.rb:363:65: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                                ^^^^^^^^^^^^
+app.rb:363:82: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                                                 ^^
+app.rb:363:95: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                                                              ^^^^^^^^^^
+app.rb:363:110: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                                                                             ^^
+app.rb:363:112: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params["date"] != "" && params["title"] != ""  && params["categories"] != "" && params["document"] != ""  
+                                                                                                               ^^
+app.rb:366:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:367:12: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+      @src =  "/file/#{@filename}"
+           ^
+app.rb:367:13: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @src =  "/file/#{@filename}"
+            ^
+app.rb:368:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:369:46: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      category = Category.first(name: params["categories"])
+                                             ^^^^^^^^^^^^
+app.rb:371:39: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
+                                      ^^^^^^
+app.rb:371:61: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
+                                                            ^^^^^^^
+app.rb:371:121: C: Layout/LineLength: Line is too long. [189/120]
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:371:135: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
+                                                                                                                                      ^^^^^^^^^^^^
+app.rb:371:164: C: Layout/SpaceAfterComma: Space missing after comma.
+      doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"], document: @src,category_id: category.id)
+                                                                                                                                                                   ^
+app.rb:372:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:374:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:377:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:378:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:379:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        tag(params["users"],doc) 
+                   ^^^^^^^
+app.rb:379:28: C: Layout/SpaceAfterComma: Space missing after comma.
+        tag(params["users"],doc) 
+                           ^
+app.rb:379:33: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        tag(params["users"],doc) 
+                                ^
+app.rb:381:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:382:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:385:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @success = "The document has been uploaded"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:389:9: C: Style/IdenticalConditionalBranches: Move erb :upload, :layout => :layout out of the conditional.
+        erb :upload, :layout => :layout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:389:22: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        erb :upload, :layout => :layout
+                     ^^^^^^^^^^
+app.rb:390:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:391:11: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      else 
+          ^
+app.rb:392:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error = "An error has ocurred when trying to upload the document"
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:395:9: C: Style/IdenticalConditionalBranches: Move erb :upload, :layout => :layout out of the conditional.
+        erb :upload, :layout => :layout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:395:22: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        erb :upload, :layout => :layout
+                     ^^^^^^^^^^
+app.rb:398:1: C: Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+app.rb:402:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    category = Category.first(name: params["categories"])
+                                           ^^^^^^^^^^^^
+app.rb:403:33: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if @current_user && category 
+                                ^
+app.rb:404:5: C: Layout/IndentationWidth: Use 2 (not 6) spaces for indentation.
+          category.add_user(@current_user)
+    ^^^^^^
+app.rb:406:22: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+            @success ="You are now subscribed to #{params[:categories]}!"
+                     ^
+app.rb:407:16: C: Style/NumericPredicate: Use Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length.positive? instead of Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0.
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:407:16: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:407:121: C: Layout/LineLength: Line is too long. [126/120]
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+                                                                                                                        ^^^^^^
+app.rb:408:121: C: Layout/LineLength: Line is too long. [123/120]
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
+                                                                                                                        ^^^
+app.rb:411:13: C: Style/IdenticalConditionalBranches: Move erb :suscat, :layout => :layout out of the conditional.
+            erb :suscat, :layout => :layout
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:411:26: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+            erb :suscat, :layout => :layout
+                         ^^^^^^^^^^
+app.rb:413:20: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+            @error ="You are already subscribed to #{params[:categories]}!"
+                   ^
+app.rb:414:16: C: Style/NumericPredicate: Use Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length.positive? instead of Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0.
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:414:16: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:414:121: C: Layout/LineLength: Line is too long. [126/120]
+            if Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id)).to_a.length > 0
+                                                                                                                        ^^^^^^
+app.rb:415:121: C: Layout/LineLength: Line is too long. [123/120]
+              @categories = Category.select(:id).except(Subscription.select(:category_id).where(user_id: @current_user.id))
+                                                                                                                        ^^^
+app.rb:418:13: C: Style/IdenticalConditionalBranches: Move erb :suscat, :layout => :layout out of the conditional.
+            erb :suscat, :layout => :layout
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:418:26: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+            erb :suscat, :layout => :layout
+                         ^^^^^^^^^^
+app.rb:420:8: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    end      
+       ^^^^^^
+app.rb:424:46: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if User.find(username: params[:username]) 
+                                             ^
+app.rb:427:9: C: Style/IdenticalConditionalBranches: Move erb  :newadmin, :layout => :layout out of the conditional.
+        erb  :newadmin, :layout => :layout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:427:12: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+        erb  :newadmin, :layout => :layout
+           ^
+app.rb:427:12: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+        erb  :newadmin, :layout => :layout
+           ^^
+app.rb:427:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        erb  :newadmin, :layout => :layout
+                        ^^^^^^^^^^
+app.rb:431:9: C: Style/IdenticalConditionalBranches: Move erb  :newadmin, :layout => :layout out of the conditional.
+        erb  :newadmin, :layout => :layout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:431:12: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+        erb  :newadmin, :layout => :layout
+           ^
+app.rb:431:12: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+        erb  :newadmin, :layout => :layout
+           ^^
+app.rb:431:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        erb  :newadmin, :layout => :layout
+                        ^^^^^^^^^^
+app.rb:433:9: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    else 
+        ^
+app.rb:435:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      erb  :newadmin, :layout => :layout
+         ^
+app.rb:435:10: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+      erb  :newadmin, :layout => :layout
+         ^^
+app.rb:435:23: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb  :newadmin, :layout => :layout
+                      ^^^^^^^^^^
+app.rb:440:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    category = Category.first(name: params["category"])
+                                           ^^^^^^^^^^
+app.rb:443:7: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+      if @current_user.categories_dataset.to_a.length > 0
+      ^^
+app.rb:443:10: C: Style/NumericPredicate: Use @current_user.categories_dataset.to_a.length.positive? instead of @current_user.categories_dataset.to_a.length > 0.
+      if @current_user.categories_dataset.to_a.length > 0
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:443:10: C: Style/ZeroLengthPredicate: Use !empty? instead of length > 0.
+      if @current_user.categories_dataset.to_a.length > 0
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:444:21: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+        @categories =  @current_user.categories_dataset
+                    ^
+app.rb:444:22: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+        @categories =  @current_user.categories_dataset
+                     ^
+app.rb:446:7: C: Style/IdenticalConditionalBranches: Move erb  :deletecats, :layout => :layout out of the conditional.
+      erb  :deletecats, :layout => :layout
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:446:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      erb  :deletecats, :layout => :layout
+         ^
+app.rb:446:10: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+      erb  :deletecats, :layout => :layout
+         ^^
+app.rb:446:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb  :deletecats, :layout => :layout
+                        ^^^^^^^^^^
+app.rb:449:19: C: Layout/SpaceAroundOperators: Operator = should be surrounded by a single space.
+      @categories =  @current_user.categories_dataset
+                  ^
+app.rb:449:20: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      @categories =  @current_user.categories_dataset
+                   ^
+app.rb:450:7: C: Style/IdenticalConditionalBranches: Move erb  :deletecats, :layout => :layout out of the conditional.
+      erb  :deletecats, :layout => :layout
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:450:10: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+      erb  :deletecats, :layout => :layout
+         ^
+app.rb:450:10: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+      erb  :deletecats, :layout => :layout
+         ^^
+app.rb:450:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb  :deletecats, :layout => :layout
+                        ^^^^^^^^^^
+app.rb:457:37: C: Layout/SpaceAfterComma: Space missing after comma.
+    cargdocs = filter(params[:users],params[:date],params[:category])
+                                    ^
+app.rb:457:51: C: Layout/SpaceAfterComma: Space missing after comma.
+    cargdocs = filter(params[:users],params[:date],params[:category])
+                                                  ^
+app.rb:458:27: C: Layout/SpaceInsideRangeLiteral: Space inside range literal.
+    @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:458:63: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                                                              ^
+app.rb:458:92: C: Layout/SpaceAroundOperators: Surrounding space missing for operator -.
+    @documents = cargdocs[((@page.to_i - 1) * @docsperpage) ..  (@page.to_i * @docsperpage)-1]
+                                                                                           ^
+app.rb:462:31: C: Layout/SpaceAfterComma: Space missing after comma.
+    @filtros = [params[:users],params[:date],params[:category]]
+                              ^
+app.rb:462:45: C: Layout/SpaceAfterComma: Space missing after comma.
+    @filtros = [params[:users],params[:date],params[:category]]
+                                            ^
+app.rb:463:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:464:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:466:16: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    erb :docs, :layout => :layout
+               ^^^^^^^^^^
+app.rb:470:60: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    document = Document.select(:document).first(id: params["id"])
+                                                           ^^^^
+app.rb:473:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @src = "/file/" + doc + ".pdf"
+             ^^^^^^^^
+app.rb:473:31: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @src = "/file/" + doc + ".pdf"
+                              ^^^^^^
+app.rb:474:27: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      if params[:read] == "true" && session[:user_id]
+                          ^^^^^^
+app.rb:475:48: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        Notification.first(document_id: params["id"],user_id: session[:user_id]).update(read: true)
+                                               ^^^^
+app.rb:475:53: C: Layout/SpaceAfterComma: Space missing after comma.
+        Notification.first(document_id: params["id"],user_id: session[:user_id]).update(read: true)
+                                                    ^
+app.rb:478:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      erb :preview, :layout=> :doclayout
+                    ^^^^^^^^^
+app.rb:478:28: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =>.
+      erb :preview, :layout=> :doclayout
+                           ^^
+app.rb:479:9: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    else 
+        ^
+app.rb:480:28: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      redirect '/documents' 
+                           ^
+app.rb:485:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    category = Category.first(name: params["categories"])
+                                           ^^^^^^^^^^^^
+app.rb:488:37: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                    ^^^^^^
+app.rb:488:59: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                                          ^^^^^^^
+app.rb:488:121: C: Layout/LineLength: Line is too long. [198/120]
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:488:133: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                                                                                                                    ^^^^^^^^^^^^
+app.rb:488:146: C: Layout/SpaceAfterComma: Space missing after comma.
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                                                                                                                                 ^
+app.rb:488:171: C: Layout/SpaceAfterComma: Space missing after comma.
+    doc = Document.new(date: params["date"], name: params["title"], userstaged: array_to_tag(params[:users]), categorytaged: params["categories"],category_id: category.id,document: editdoc.document)
+                                                                                                                                                                          ^
+app.rb:492:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      tag(params["users"],doc)
+                 ^^^^^^^
+app.rb:492:26: C: Layout/SpaceAfterComma: Space missing after comma.
+      tag(params["users"],doc)
+                         ^
+app.rb:495:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "An error has ocurred when trying edit the document"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:498:8: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    end    
+       ^^^^
+app.rb:499:6: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  end 
+     ^
+app.rb:505:7: C: Layout/ConditionPosition: Place the condition on the same line as elsif.
+      @error = "The email account does not exists"
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:505:14: W: Lint/AssignmentInCondition: Use == if you meant to do a comparison or wrap the expression in parentheses to indicate you meant to assign in a condition.
+      @error = "The email account does not exists"
+             ^
+app.rb:505:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "The email account does not exists"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:510:23: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  get '/insertcode' do 
+                      ^
+app.rb:518:16: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @error = "The code is not a match"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:519:22: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      erb :insertcode     
+                     ^^^^^
+app.rb:521:1: C: Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
+app.rb:530:5: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if params[:password] != params[:confPassword] 
+    ^^
+app.rb:530:50: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:password] != params[:confPassword] 
+                                                 ^
+app.rb:531:28: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpasswordconf = "Passwords are not equal"
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:533:69: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if params[:password].length < 5 || params[:password].length > 20 
+                                                                    ^
+app.rb:534:30: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @errorpasswordlength = "Password must be between 5 and 20 characters long"
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:537:47: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      user.update(password: params[:password])      
+                                              ^^^^^^
+app.rb:543:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:544:3: C: Metrics/MethodLength: Method has too many lines. [19/10]
+  def send_code_email(useremail,user) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:544:32: C: Layout/SpaceAfterComma: Space missing after comma.
+  def send_code_email(useremail,user)
+                               ^
+app.rb:549:7: C: Layout/FirstHashElementIndentation: Use 2 spaces for indentation in a hash, relative to the first position after the preceding left parenthesis.
+      :to => useremail, 
+      ^^^^^^^^^^^^^^^^
+app.rb:549:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :to => useremail, 
+      ^^^^^^
+app.rb:549:24: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      :to => useremail, 
+                       ^
+app.rb:550:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :via => :smtp, 
+      ^^^^^^^
+app.rb:550:21: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      :via => :smtp, 
+                    ^
+app.rb:551:7: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      :via_options => {
+      ^^^^^^^^^^^^^^^
+app.rb:552:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :address => 'smtp.gmail.com',                     
+        ^^^^^^^^^^^
+app.rb:552:38: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        :address => 'smtp.gmail.com',                     
+                                     ^^^^^^^^^^^^^^^^^^^^^
+app.rb:553:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :port => '587',
+        ^^^^^^^^
+app.rb:554:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :user_name => 'documentuploadsystem@gmail.com',
+        ^^^^^^^^^^^^^
+app.rb:555:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :password => 'rstmezqnvkygptjl',
+        ^^^^^^^^^^^^
+app.rb:556:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :authentication => :plain,
+        ^^^^^^^^^^^^^^^^^^
+app.rb:557:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :domain => "gmail.com",
+        ^^^^^^^^^^
+app.rb:557:20: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        :domain => "gmail.com",
+                   ^^^^^^^^^^^
+app.rb:557:31: C: Style/TrailingCommaInHashLiteral: Avoid comma after the last item of a hash.
+        :domain => "gmail.com",
+                              ^
+app.rb:559:9: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+        :subject => 'DUNS Verification code', 
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:559:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :subject => 'DUNS Verification code', 
+        ^^^^^^^^^^^
+app.rb:559:46: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        :subject => 'DUNS Verification code', 
+                                             ^
+app.rb:560:9: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+        :headers => { 'Content-Type' => 'text/html' },
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:560:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :headers => { 'Content-Type' => 'text/html' },
+        ^^^^^^^^^^^
+app.rb:561:9: C: Layout/HashAlignment: Align the keys of a hash literal if they span more than one line.
+        :body => erb(:retrieve, layout: false)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:561:9: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+        :body => erb(:retrieve, layout: false)
+        ^^^^^^^^
+app.rb:562:7: C: Layout/FirstHashElementIndentation: Indent the right brace the same as the first position after the preceding left parenthesis.
+      }
+      ^
+app.rb:563:5: C: Layout/ClosingParenthesisIndentation: Align ) with (.
+    )
+    ^
+app.rb:563:5: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the same line as the last argument when opening brace is on the same line as the first argument.
+    )
+    ^
+app.rb:565:5: C: Style/RedundantReturn: Redundant return detected.
+    return @code
+    ^^^^^^
+app.rb:568:1: C: Layout/EmptyLines: Extra blank line detected.
+app.rb:569:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def set_notifications_number 
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:569:31: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  def set_notifications_number 
+                              ^
+app.rb:570:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      settings.sockets.each{|s| 
+  ^^^^
+app.rb:570:28: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+      settings.sockets.each{|s| 
+                           ^
+app.rb:570:28: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+      settings.sockets.each{|s| 
+                           ^^
+app.rb:570:28: C: Style/BlockDelimiters: Avoid using {...} for multi-line blocks.
+      settings.sockets.each{|s| 
+                           ^
+app.rb:570:32: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      settings.sockets.each{|s| 
+                               ^
+app.rb:572:59: C: Layout/SpaceAfterComma: Space missing after comma.
+        documents = Document.select(:id).where(id: getdocs,delete: false)
+                                                          ^
+app.rb:573:54: C: Layout/SpaceAfterComma: Space missing after comma.
+        unread = Notification.where(user_id: s[:user],document_id: documents,read: false).to_a.length
+                                                     ^
+app.rb:573:77: C: Layout/SpaceAfterComma: Space missing after comma.
+        unread = Notification.where(user_id: s[:user],document_id: documents,read: false).to_a.length
+                                                                            ^
+app.rb:575:8: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      } 
+       ^
+app.rb:578:1: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+   def set_unread_number
+^^^
+app.rb:578:4: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+   def set_unread_number ...
+   ^^^^^^^^^^^^^^^^^^^^^
+app.rb:579:4: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+    if @current_user
+   ^
+app.rb:579:5: C: Style/GuardClause: Use a guard clause (return unless @current_user) instead of wrapping the code inside a conditional expression.
+    if @current_user
+    ^^
+app.rb:581:57: C: Layout/SpaceAfterComma: Space missing after comma.
+      documents = Document.select(:id).where(id: getdocs,delete: false)
+                                                        ^
+app.rb:582:61: C: Layout/SpaceAfterComma: Space missing after comma.
+      @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
+                                                            ^
+app.rb:582:84: C: Layout/SpaceAfterComma: Space missing after comma.
+      @unread = Notification.where(user_id: @current_user.id,document_id: documents,read: false).to_a.length
+                                                                                   ^
+app.rb:584:3: W: Layout/DefEndAlignment: end at 584, 2 is not aligned with def at 578, 3.
+  end
+  ^^^
+app.rb:585:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:590:3: C: Metrics/AbcSize: Assignment Branch Condition size for restricted_path? is too high. [<0, 16, 15> 21.93/17]
+  def restricted_path? ...
+  ^^^^^^^^^^^^^^^^^^^^
+app.rb:590:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for restricted_path? is too high. [8/7]
+  def restricted_path? ...
+  ^^^^^^^^^^^^^^^^^^^^
+app.rb:591:121: C: Layout/LineLength: Line is too long. [312/120]
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:591:161: C: Layout/SpaceAroundOperators: Operator || should be surrounded by a single space.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                ^^
+app.rb:591:163: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                  ^
+app.rb:591:198: C: Layout/SpaceAroundOperators: Operator || should be surrounded by a single space.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                                                     ^^
+app.rb:591:200: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                                                       ^
+app.rb:591:233: C: Layout/SpaceAroundOperators: Operator || should be surrounded by a single space.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                                                                                        ^^
+app.rb:591:235: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                                                                                          ^
+app.rb:591:312: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    request.path_info == '/subscribe' || request.path_info == '/mycategories' || request.path_info == '/mydocuments' || request.path_info == '/edityourprofile' ||  request.path_info == '/newadmin' ||  request.path_info == '/upload' ||  request.path_info == '/unsubscribe' || request.path_info == '/editdocument' 
+                                                                                                                                                                                                                                                                                                                       ^
+app.rb:603:27: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @current_user.role == "user"
+                          ^^^^^^
+app.rb:604:6: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  end 
+     ^
+app.rb:606:3: C: Metrics/AbcSize: Assignment Branch Condition size for filter is too high. [<12, 22, 14> 28.71/17]
+  def filter (userfilter, datefilter, categoryfilter) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:606:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for filter is too high. [8/7]
+  def filter (userfilter, datefilter, categoryfilter) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:606:3: C: Metrics/MethodLength: Method has too many lines. [17/10]
+  def filter (userfilter, datefilter, categoryfilter) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:606:3: C: Metrics/PerceivedComplexity: Perceived complexity for filter is too high. [10/8]
+  def filter (userfilter, datefilter, categoryfilter) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:606:13: C: Layout/SpaceAfterMethodName: Do not put a space between a method name and the opening parenthesis.
+  def filter (userfilter, datefilter, categoryfilter)
+            ^
+app.rb:608:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      user = User.first(username: userfilter) 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:608:46: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      user = User.first(username: userfilter) 
+                                             ^
+app.rb:610:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      if user ...
+      ^^^^^^^
+app.rb:611:60: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        filter_docs = user.documents_dataset.where(motive: "taged", delete: false).order(:date).to_a
+                                                           ^^^^^^^
+app.rb:612:9: C: Style/SelfAssignment: Use self-assignment shorthand +=.
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).order(:date).to_a
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:612:74: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).order(:date).to_a
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:612:121: C: Layout/LineLength: Line is too long. [129/120]
+        filter_docs = filter_docs + user.documents_dataset.where(motive: "taged and subscribed", delete: false).order(:date).to_a
+                                                                                                                        ^^^^^^^^^
+app.rb:616:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      doc_date = datefilter == "" ? filter_docs : Document.first(date: datefilter)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:616:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      doc_date = datefilter == "" ? filter_docs : Document.first(date: datefilter)
+                               ^^
+app.rb:617:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      if doc_date ...
+      ^^^^^^^^^^^
+app.rb:617:7: C: Style/ConditionalAssignment: Use the return of the conditional for variable assignment and comparison.
+      if doc_date ...
+      ^^^^^^^^^^^
+app.rb:618:37: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        filter_docs = datefilter == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date } 
+                                    ^^
+app.rb:618:75: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+        filter_docs = datefilter == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date } 
+                                                                          ^^
+app.rb:618:105: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        filter_docs = datefilter == "" ? filter_docs : filter_docs.select {|d| d.date == doc_date.date } 
+                                                                                                        ^
+app.rb:621:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      end  
+         ^^
+app.rb:622:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      category = Category.first(name: categoryfilter)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:623:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      filter_docs = categoryfilter == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.rb:623:39: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      filter_docs = categoryfilter == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+                                      ^^
+app.rb:623:77: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+      filter_docs = categoryfilter == "" ? filter_docs : filter_docs.select {|d| d.category_id == category.id }
+                                                                            ^^
+app.rb:624:7: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+      return filter_docs
+      ^^^^^^^^^^^^^^^^^^
+app.rb:624:7: C: Style/RedundantReturn: Redundant return detected.
+      return filter_docs
+      ^^^^^^
+app.rb:627:3: C: Metrics/AbcSize: Assignment Branch Condition size for tag is too high. [<6, 37, 7> 38.13/17]
+  def tag (users,doc) ...
+  ^^^^^^^^^^^^^^^^^^^
+app.rb:627:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for tag is too high. [8/7]
+  def tag (users,doc) ...
+  ^^^^^^^^^^^^^^^^^^^
+app.rb:627:3: C: Metrics/MethodLength: Method has too many lines. [25/10]
+  def tag (users,doc) ...
+  ^^^^^^^^^^^^^^^^^^^
+app.rb:627:3: C: Metrics/PerceivedComplexity: Perceived complexity for tag is too high. [9/8]
+  def tag (users,doc) ...
+  ^^^^^^^^^^^^^^^^^^^
+app.rb:627:10: C: Layout/SpaceAfterMethodName: Do not put a space between a method name and the opening parenthesis.
+  def tag (users,doc)
+         ^
+app.rb:627:17: C: Layout/SpaceAfterComma: Space missing after comma.
+  def tag (users,doc)
+                ^
+app.rb:628:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+app.rb:629:5: C: Style/GuardClause: Use a guard clause (return unless users) instead of wrapping the code inside a conditional expression.
+    if users 
+    ^^
+app.rb:629:13: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    if users 
+            ^
+app.rb:630:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:633:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app.rb:635:9: C: Style/Next: Use next to skip iteration.
+        if user 
+        ^^^^^^^
+app.rb:635:16: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        if user 
+               ^
+app.rb:638:46: C: Layout/SpaceAfterComma: Space missing after comma.
+          Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+                                             ^
+app.rb:638:83: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+                                                                                  ^^^^^^^
+app.rb:638:90: C: Layout/SpaceAfterComma: Space missing after comma.
+          Notification.where(user_id: user.id,document_id: doc.id).update(motive: "taged",datetime: Time.now)
+                                                                                         ^
+app.rb:641:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      end    
+         ^^^^
+app.rb:646:56: C: Layout/SpaceAfterComma: Space missing after comma.
+        if suscr && Notification.find(user_id: suscr.id,document_id: doc.id)
+                                                       ^
+app.rb:647:47: C: Layout/SpaceAfterComma: Space missing after comma.
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+                                              ^
+app.rb:647:84: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "taged and subscribed")
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^
+app.rb:649:20: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        elsif suscr 
+                   ^
+app.rb:652:47: C: Layout/SpaceAfterComma: Space missing after comma.
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+                                              ^
+app.rb:652:84: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+                                                                                   ^^^^^^^^^^^^
+app.rb:652:96: C: Layout/SpaceAfterComma: Space missing after comma.
+          Notification.where(user_id: suscr.id,document_id: doc.id).update(motive: "subscribed",datetime: Time.now)
+                                                                                               ^
+app.rb:655:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      end  
+         ^^
+app.rb:658:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+app.rb:659:4: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+end 
+   ^
+app.rb:659:5: C: Layout/TrailingEmptyLines: 1 trailing blank lines detected.
+end  ...
+    
+db/migrations/0007_create_relation _categorydocument.rb:1:1: C: Naming/FileName: The name of this source file (0007_create_relation _categorydocument.rb) should use snake_case.
+# frozen_string_literal: true
+^
+models/category.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Category < Sequel::Model 
+^^^^^
+models/category.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Category < Sequel::Model 
+^
+models/category.rb:1:31: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+class Category < Sequel::Model 
+                              ^
+models/category.rb:2:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	plugin :validation_helpers
+^
+models/category.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	plugin :validation_helpers
+^
+models/category.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    def validate
+^^^^
+models/category.rb:3:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    def validate ...
+    ^^^^^^^^^^^^
+models/category.rb:4:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    super
+    
+models/category.rb:5:1: C: Layout/IndentationStyle: Tab detected in indentation.
+		validates_presence [:name]
+^^
+models/category.rb:5:3: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+		validates_presence [:name]
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:6:1: C: Layout/IndentationStyle: Tab detected in indentation.
+		validates_unique [:name]
+^^
+models/category.rb:6:3: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+		validates_unique [:name]
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+models/category.rb:7:1: C: Layout/IndentationStyle: Tab detected in indentation.
+  	end
+^^^
+models/category.rb:7:4: W: Layout/DefEndAlignment: end at 7, 3 is not aligned with def at 3, 4.
+  	end
+   ^^^
+models/category.rb:8:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_many  :users
+^
+models/category.rb:8:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_many  :users
+^
+models/category.rb:8:14: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+	many_to_many  :users
+             ^
+models/category.rb:8:14: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+	many_to_many  :users
+             ^^
+models/category.rb:9:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	one_to_many :documents
+^
+models/category.rb:9:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	one_to_many :documents
+^
+models/category.rb:10:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	set_primary_key :id
+^
+models/category.rb:10:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	set_primary_key :id
+^
+models/document.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Document < Sequel::Model
+^^^^^
+models/document.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Document < Sequel::Model
+^
+models/document.rb:2:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	plugin :validation_helpers
+^
+models/document.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	plugin :validation_helpers
+^
+models/document.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    def validate
+^^^^
+models/document.rb:3:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    def validate ...
+    ^^^^^^^^^^^^
+models/document.rb:4:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    super
+    
+models/document.rb:5:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_presence [:date, :name, :categorytaged, :document]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/document.rb:5:28: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_presence [:date, :name, :categorytaged, :document]
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/document.rb:6:1: C: Layout/IndentationStyle: Tab detected in indentation.
+  	end
+^^^
+models/document.rb:6:4: W: Layout/DefEndAlignment: end at 6, 3 is not aligned with def at 3, 4.
+  	end
+   ^^^
+models/document.rb:7:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one  :categories
+^
+models/document.rb:7:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one  :categories
+^
+models/document.rb:7:13: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+	many_to_one  :categories
+            ^
+models/document.rb:7:13: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+	many_to_one  :categories
+            ^^
+models/document.rb:8:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_many  :users
+^
+models/document.rb:8:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_many  :users
+^
+models/document.rb:8:14: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+	many_to_many  :users
+             ^
+models/document.rb:8:14: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+	many_to_many  :users
+             ^^
+models/document.rb:9:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	set_primary_key :id
+^
+models/document.rb:9:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	set_primary_key :id
+^
+models/init.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require_relative 'user'
+^
+models/init.rb:5:32: C: Layout/TrailingEmptyLines: Final newline missing.
+require_relative 'notification'
+                               
+models/notification.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Notification < Sequel::Model(:documents_users)
+^^^^^
+models/notification.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Notification < Sequel::Model(:documents_users)
+^
+models/notification.rb:2:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one  :document
+^
+models/notification.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one  :document
+^
+models/notification.rb:2:13: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+	many_to_one  :document
+            ^
+models/notification.rb:2:13: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+	many_to_one  :document
+            ^^
+models/notification.rb:3:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one :user
+^
+models/notification.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one :user
+^
+models/notification.rb:4:4: C: Layout/TrailingEmptyLines: Final newline missing.
+end
+   
+models/subscription.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class Subscription < Sequel::Model(:categories_users)
+^^^^^
+models/subscription.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class Subscription < Sequel::Model(:categories_users)
+^
+models/subscription.rb:2:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one  :category
+^
+models/subscription.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one  :category
+^
+models/subscription.rb:2:13: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+	many_to_one  :category
+            ^
+models/subscription.rb:2:13: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+	many_to_one  :category
+            ^^
+models/subscription.rb:3:1: C: Layout/IndentationStyle: Tab detected in indentation.
+	many_to_one :user
+^
+models/subscription.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+	many_to_one :user
+^
+models/user.rb:1:1: C: Style/Documentation: Missing top-level class documentation comment.
+class User < Sequel::Model 
+^^^^^
+models/user.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+class User < Sequel::Model 
+^
+models/user.rb:1:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+class User < Sequel::Model 
+                          ^
+models/user.rb:2:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    plugin :validation_helpers
+^^^^
+models/user.rb:3:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    def validate
+^^^^
+models/user.rb:4:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    super
+    
+models/user.rb:5:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_presence [:email, :name, :password, :username]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:5:28: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+        validates_presence [:email, :name, :password, :username]
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:6:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_unique(:email, :username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:7:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_min_length 5, :password
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:8:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_max_length 20, :password
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:9:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_unique(:email, :username)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:10:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_format /\A.*@.*\..*\z/, :email, message: 'is not a valid email'
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:10:26: W: Lint/AmbiguousRegexpLiteral: Ambiguous regexp literal. Parenthesize the method arguments if it's surely a regexp literal, or add a whitespace to the right of the / if it should be a division.
+        validates_format /\A.*@.*\..*\z/, :email, message: 'is not a valid email'
+                         ^
+models/user.rb:11:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        validates_format /\A\w{3,15}\z/, :username, message: 'is not a valid username'
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/user.rb:11:26: W: Lint/AmbiguousRegexpLiteral: Ambiguous regexp literal. Parenthesize the method arguments if it's surely a regexp literal, or add a whitespace to the right of the / if it should be a division.
+        validates_format /\A\w{3,15}\z/, :username, message: 'is not a valid username'
+                         ^
+models/user.rb:13:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many  :categories
+^^^^
+models/user.rb:13:17: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+    many_to_many  :categories
+                ^
+models/user.rb:13:17: C: Layout/SpaceBeforeFirstArg: Put one space between the method name and the first argument.
+    many_to_many  :categories
+                ^^
+models/user.rb:14:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    many_to_many :documents
+^^^^
+models/user.rb:15:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    set_primary_key :id
+^^^^
+tests/models/category_tests.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/category_tests.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/category_tests.rb:3:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/category_tests.rb:4:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+tests/models/category_tests.rb:5:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase   
+                  ^^^^^^^^
+tests/models/category_tests.rb:5:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  MiniTest::Unit::TestCase   
+                          ^^^
+tests/models/category_tests.rb:8:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/category_tests.rb:15:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @cat.name = "COVID-19"
+                ^^^^^^^^^^
+tests/models/category_tests.rb:18:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/document_tests.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/document_tests.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/document_tests.rb:3:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/document_tests.rb:4:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+tests/models/document_tests.rb:5:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase   
+                  ^^^^^^^^
+tests/models/document_tests.rb:5:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  MiniTest::Unit::TestCase   
+                          ^^^
+tests/models/document_tests.rb:8:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/document_tests.rb:12:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.date = "2020-05-10"
+                ^^^^^^^^^^^^
+tests/models/document_tests.rb:13:23: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.userstaged = "john,jane"
+                      ^^^^^^^^^^^
+tests/models/document_tests.rb:14:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.categorytaged = "Scolarships"
+                         ^^^^^^^^^^^^^
+tests/models/document_tests.rb:15:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.document = "doc.pdf"
+                    ^^^^^^^^^
+tests/models/document_tests.rb:22:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/document_tests.rb:26:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/document_tests.rb:31:23: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.userstaged = "john,jane"
+                      ^^^^^^^^^^^
+tests/models/document_tests.rb:32:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.categorytaged = "Scolarships"
+                         ^^^^^^^^^^^^^
+tests/models/document_tests.rb:33:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.document = "doc.pdf"
+                    ^^^^^^^^^
+tests/models/document_tests.rb:37:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.date = "2020-04-19"
+                ^^^^^^^^^^^^
+tests/models/document_tests.rb:40:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/document_tests.rb:44:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/document_tests.rb:47:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.name = "Wire Transfer Receipt"
+                ^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/document_tests.rb:48:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.date = "2020-05-10"
+                ^^^^^^^^^^^^
+tests/models/document_tests.rb:49:23: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.userstaged = "princeofnigeria,me"
+                      ^^^^^^^^^^^^^^^^^^^^
+tests/models/document_tests.rb:51:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.document = "doc.pdf"
+                    ^^^^^^^^^
+tests/models/document_tests.rb:55:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.categorytaged = "Scams"
+                         ^^^^^^^
+tests/models/document_tests.rb:58:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/document_tests.rb:62:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/document_tests.rb:65:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.name = "Whatever"
+                ^^^^^^^^^^
+tests/models/document_tests.rb:66:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.date = "2020-05-10"
+                ^^^^^^^^^^^^
+tests/models/document_tests.rb:67:23: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.userstaged = "john,jane"
+                      ^^^^^^^^^^^
+tests/models/document_tests.rb:68:26: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.categorytaged = "Scolarships"
+                         ^^^^^^^^^^^^^
+tests/models/document_tests.rb:73:21: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @doc.document = "something.pdf"
+                    ^^^^^^^^^^^^^^^
+tests/models/document_tests.rb:76:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/document_tests.rb:78:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+tests/models/document_tests.rb:80:1: C: Layout/TrailingEmptyLines: 2 trailing blank lines detected.
+tests/models/user_tests.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+require File.expand_path '../../test_helper.rb', __FILE__
+^
+tests/models/user_tests.rb:1:14: C: Style/ExpandPathArguments: Use expand_path('../test_helper.rb', __dir__) instead of expand_path('../../test_helper.rb', __FILE__).
+require File.expand_path '../../test_helper.rb', __FILE__
+             ^^^^^^^^^^^
+tests/models/user_tests.rb:3:1: C: Style/Documentation: Missing top-level class documentation comment.
+class UserTest < MiniTest::Unit::TestCase
+^^^^^
+tests/models/user_tests.rb:4:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+tests/models/user_tests.rb:5:19: W: Lint/Void: Variable TestCase used in void context.
+  MiniTest::Unit::TestCase    
+                  ^^^^^^^^
+tests/models/user_tests.rb:5:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  MiniTest::Unit::TestCase    
+                          ^^^^
+tests/models/user_tests.rb:7:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:11:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:12:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndo@email.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:13:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:17:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:20:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:24:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:27:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:29:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndo@email.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:30:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:34:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:37:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:40:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:41:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:42:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def test_email_presence
+  ^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:43:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:45:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:46:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:48:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:52:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndoe@mail.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:55:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:59:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:61:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:62:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:63:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndoe@mail.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:68:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:71:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:74:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:75:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def test_email_format
+  ^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:76:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:78:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:79:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:80:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndoemailcom"
+                  ^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:81:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:85:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndoe@email.com"
+                  ^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:88:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:89:6: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  end 
+     ^
+tests/models/user_tests.rb:91:3: C: Metrics/AbcSize: Assignment Branch Condition size for test_username_format is too high. [<8, 16, 0> 17.89/17]
+  def test_username_format ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:91:3: C: Metrics/MethodLength: Method has too many lines. [12/10]
+  def test_username_format ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:92:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:94:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:95:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john,doe"
+                     ^^^^^^^^^^
+tests/models/user_tests.rb:96:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndo@email.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:97:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "12345"
+                     ^^^^^^^
+tests/models/user_tests.rb:101:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john doe"
+                     ^^^^^^^^^^
+tests/models/user_tests.rb:105:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "jo"
+                     ^^^^
+tests/models/user_tests.rb:109:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "johndoe"
+                     ^^^^^^^^^
+tests/models/user_tests.rb:112:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body end.
+tests/models/user_tests.rb:115:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:116:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def test_password_length
+  ^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:117:1: C: Layout/EmptyLinesAroundMethodBody: Extra empty line detected at method body beginning.
+tests/models/user_tests.rb:119:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.name = "John Doe"
+                 ^^^^^^^^^^
+tests/models/user_tests.rb:120:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.username = "john"
+                     ^^^^^^
+tests/models/user_tests.rb:121:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.email = "johndo@email.com"
+                  ^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:122:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "123"
+                     ^^^^^
+tests/models/user_tests.rb:126:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "012345678901234567890"
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:130:22: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    @user.password = "0123456789"
+                     ^^^^^^^^^^^^
+tests/models/user_tests.rb:135:3: C: Layout/LeadingCommentSpace: Missing space after #.
+  ##TODO: Add uniqueness constraint in database in order to test for that property
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/models/user_tests.rb:151:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:154:8: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  # end 
+       ^
+tests/models/user_tests.rb:168:1: C: Layout/EmptyLines: Extra blank line detected.
+tests/models/user_tests.rb:168:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+
+25 files inspected, 654 offenses detected, 611 offenses auto-correctable
