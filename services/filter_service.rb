@@ -80,9 +80,8 @@ class FilterService
     month_num = [1..12]
     month = %w[Jan Feb Apr May Jun Jul Aug Sep Oct Nov Dec]
     month_num.each do |element|
-      new_date = "#{date[8, 12]}-#{element}-#{date[4, 6]}" if date[0, 3] == month[element]
+      "#{date[8, 12]}-#{element}-#{date[4, 6]}" if date[0, 3] == month[element]
     end
-    new_date
   end
 
   def self.order_document(documents, filter)

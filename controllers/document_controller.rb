@@ -4,8 +4,8 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'sinatra-websocket'
 require './models/init'
-require './services/CreateDocumentService'
-require './services/FilterService'
+require './services/create_document_service'
+require './services/filter_service'
 
 # Controller para Document
 class DocumentController < Sinatra::Base
@@ -113,5 +113,17 @@ class DocumentController < Sinatra::Base
     end
     @pdf_delete.delete
     redirect '/all_document'
+  end
+
+  post '/see_document' do
+    if params[:name] == 'Perfil'
+      @page_name = 'Documento'
+    else
+      @page_before_name = params[:name]
+      @page_before = params[:road]
+      @page_intern = 'Documento'
+    end
+    @document = Document.find(id: params[:seen_document_id])
+    erb :view_document, layout: @current_layout
   end
 end
