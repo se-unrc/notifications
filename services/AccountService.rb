@@ -32,4 +32,13 @@ class AccountService
 
     end
 
+    def self.login_user(username, password)
+    	usuario = User.find(username: username)
+    	if usuario && usuario.password == params[:password]
+	        session[:user_id] = usuario.id
+	    else
+	    	raise ArgumentError.new("Wrong username or password")
+	    end
+	end
+	
 end
