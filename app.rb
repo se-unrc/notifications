@@ -9,11 +9,14 @@ require 'date'
 require 'action_view'
 require 'action_view/helpers'
 require 'sinatra-websocket'
+require './controllers/AccountController.rb'
 
 # Class that contains the implementation of the backend's logic.
 class App < Sinatra::Base
   include ActionView::Helpers::DateHelper
   include FileUtils::Verbose
+
+  use AccountController
 
   configure :development, :production do
     enable :logging
@@ -148,13 +151,7 @@ class App < Sinatra::Base
     erb :aboutus, layout: :layout
   end
 
-  get '/login' do
-    erb :login, layout: :layout
-  end
-
-  get '/signup' do
-    erb :signup, layout: :layout
-  end
+  
 
   get '/forgotpass' do
     erb :forgotpass, layout: :layout
@@ -291,32 +288,7 @@ class App < Sinatra::Base
     end
   end
 
-  post '/signup' do
-    if User.find(username: params[:username]) || /\A\w{3,15}\z/ !~ params[:username]
-      @errorusername = 'The username is already in use or its invalid'
-    end
-    @erroremail = 'The email is invalid' if User.find(email: params[:email]) || /\A.*@.*\..*\z/ !~ params[:email]
-    @errorpasswordconf = 'Passwords are not equal' if params[:password] != params[:confPassword]
-    if params[:password].length < 5 || params[:password].length > 20
-      @errorpasswordlength = 'Password must be between 5 and 20 characters long'
-    end
-    if !@errorusername && !@erroremail && !@errorpasswordconf && !@errorpasswordlength
-      request.body.rewind
 
-      hash = Rack::Utils.parse_nested_query(request.body.read)
-      params = JSON.parse hash.to_json
-      user = User.new(name: params['fullname'], email: params['email'], username: params['username'],
-                      password: params['password'])
-      if user.save
-        session[:user_id] = user.id
-        redirect '/documents'
-      else
-        [500, {}, 'Internal server Error']
-      end
-    else
-      erb :signup, layout: :layout
-    end
-  end
 
   def array_to_tag(users)
     if users && users != ''
