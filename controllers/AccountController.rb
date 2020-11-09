@@ -3,6 +3,22 @@ require './services/AccountService'
 
 class AccountController < Sinatra::Base
 
+	get '/login' do
+	    erb :login, layout: :layout
+	end
+
+	post '/login' do
+	    username = params[:username]
+	    password = params[:password]
+
+	    begin 
+	    	AccountService.login_user(username,password)
+	    rescue ArgumentError => e
+	    	@error = e.message
+	    end
+	    return erb :login
+	end
+
 	get '/signup' do
 	    erb :signup, layout: :layout
 	end
@@ -18,6 +34,7 @@ class AccountController < Sinatra::Base
 	    	AccountService.register_new_user(username,password1,password2,email,fullName)
 	    	redirect '/documents'
 	    rescue ArgumentError => e 
+	    	
 	    	if e.message == 'The username is already in use or its invalid'
 	    		@errorUsername = 'The username is already in use or its invalid'
 	    	elsif e.message == 'Passwords are not equal'
@@ -30,7 +47,7 @@ class AccountController < Sinatra::Base
 
 	    	# Preguntar como obtener el mensaje correctamente
 	    	# Arreglar el before
-	    		return erb :signup
+	    	return erb :signup
 	    end
   	end
 

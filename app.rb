@@ -234,19 +234,7 @@ class App < Sinatra::Base
     redirect '/login'
   end
 
-  post '/login' do
-    if params['password'] != '' && params['username'] != ''
-      usuario = User.find(username: params[:username])
-      if usuario && usuario.password == params[:password]
-        session[:user_id] = usuario.id
-        redirect '/documents'
-      else
-        @error = 'Wrong username or password'
-        erb :login, layout: :layout
-      end
-
-    end
-  end
+  
 
   post '/editprofile' do
     if params['password'] == @current_user.password
