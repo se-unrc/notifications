@@ -4,37 +4,13 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'sinatra-websocket'
 require './models/init'
+
+require './controllers/before_controller'
+
 require './services/user_service'
 
 # Controller para User
-class UserController < Sinatra::Base
-  configure :development, :production do
-    set :views, "#{settings.root}/../views"
-  end
-
-  before do
-    if session[:is_login]
-      @current_user = User.find(id: session[:user_id])
-      @notification = NotificationUser.where(
-        user_id: @current_user.id,
-        seen: 'f'
-      )
-      @count_notifications = 0
-      @notification&.each { |_element| @count_notifications += 1 }
-      @page = request.path_info
-      @current_layout = session[:type] ? :layout_admin : :layout_users
-    end
-    @url_admin = ['/all_category', '/all_document', '/modify_document']
-    redirect '/profile' if !session[:type] && @url_admin.include?(
-      request.path_info
-    )
-    redirect '/all_document' if session[:type] && (request.path_info) == '/documents'
-    @url_user =
-      ['/profile', '/subscriptions', '/edit_user', '/documents',
-       '/notification', '/view_document']
-    redirect '/' if !session[:is_login] && @url_user.include?(request.path_info)
-  end
-
+class UserController < BeforeController
   post '/new_user' do
     unless User.find(dni: params[:dni])
       @new_user = User.new(
@@ -57,7 +33,8 @@ class UserController < Sinatra::Base
   end
 
   post '/create_user' do
-    unless User.find(dni: params[:dni])
+    begin
+      UserService.revisar_datos(params[:dni], params[:email], params[:name], params[:surname])
       @new_user = User.new(
         name: params[:name],
         surname: params[:surname],
@@ -68,12 +45,13 @@ class UserController < Sinatra::Base
       )
       @new_user.admin = params['type'] == 'Administrador'
       @new_user.save
+    rescue ArgumentError => e
+      redirect '/profile'
     end
     redirect '/profile'
   end
 
   get '/profile' do
-    @page_name = 'Inicio'
     @all_documents = Document.where(users: @current_user).all
     @all_subcriptions = Category.where(users: @current_user).all
     @all_subcriptions&.each do |element|

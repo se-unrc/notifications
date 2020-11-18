@@ -4,6 +4,7 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'sinatra-websocket'
 require './models/init'
+require './services/user_service'
 
 # Service para crear documentos
 class CreateDocumentService

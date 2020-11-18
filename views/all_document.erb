@@ -1,3 +1,8 @@
+<% if @errormsg %>
+  <div class="alert alert-success" role="alert">
+    <%= @errormsg %>
+  </div>
+<% end %>
 <div class="row blue-grey lighten-5">
   <form action="documents_filter" method="POST">
     <div class="col m10 l10">
@@ -119,11 +124,11 @@
       <div class="modal-content">
         <div class="form-group">
           <label class="black-text" >Nombre del documento:</label>
-          <input id="input" type="text" name="name" required>
+          <input id="input" type="text" name="name" required minlength="3" maxlength="50">
         </div>
         <div class="form-group">
           <label class="black-text">Descripcion del documento:</label>
-          <input type="text" name="description" required>
+          <input type="text" name="description" required minlength="3" maxlength="1000">
         </div>
         <div class="form-group">
           <select  class="form-control mi-selector validate" name='category' >

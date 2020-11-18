@@ -47,28 +47,6 @@ class App < Sinatra::Base
     erb :index
   end
 
-  before do
-    if session[:is_login]
-      @current_user = User.find(id: session[:user_id])
-      @notification = NotificationUser.where(
-        user_id: @current_user.id,
-        seen: 'f'
-      )
-      @count_notifications = 0
-      @notification&.each { |_element| @count_notifications += 1 }
-      @page = request.path_info
-      @current_layout = session[:type] ? :layout_admin : :layout_users
-    end
-    @url_admin = ['/all_category', '/all_document', '/modify_document']
-    redirect '/profile' if !session[:type] && @url_admin.include?(
-      request.path_info
-    )
-    redirect '/all_document' if session[:type] && (request.path_info) == '/documents'
-    @url_user =
-      ['/profile', '/subscriptions', '/edit_user', '/documents',
-       '/notification', '/view_document']
-    redirect '/' if !session[:is_login] && @url_user.include?(request.path_info)
-  end
 
   get '/miwebsoket' do
     if !request.websocket?
