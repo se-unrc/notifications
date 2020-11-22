@@ -34,7 +34,12 @@ class UserController < BeforeController
 
   post '/create_user' do
     begin
-      UserService.revisar_datos(params[:dni], params[:email], params[:name], params[:surname])
+      UserService.revisar_datos
+      (params[:dni],
+        params[:email],
+        params[:name],
+        params[:surname]
+      )
       @new_user = User.new(
         name: params[:name],
         surname: params[:surname],

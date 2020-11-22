@@ -13,19 +13,11 @@ require './services/before_service'
 class LoginController < BeforeController
   post '/user_login' do
     @current_user = User.find(email: params[:email])
-    if @current_user
-      if @current_user.password == params[:password]
-        session[:is_login] = true
-        session[:user_id] = @current_user.id
-        session[:type] = @current_user.admin
-        redirect '/profile'
-      # else
-      #   @message_screen = 'La contraeña es incorrecta.'
-      #   redirect '/'
-      end
-    # else
-    #   @message_screen = 'El Email es incorrecto.'
-    #   redirect '/'
+    if @current_user && @current_user.password == params[:password]
+      session[:is_login] = true
+      session[:user_id] = @current_user.id
+      session[:type] = @current_user.admin
+      redirect '/profile'
     end
   end
 
