@@ -8,11 +8,8 @@
   <form class="">
     <label for="nombre">nombre</label>
     <input type="text" name="nombre" id="nombre" value="">
-    <input type="submit" value='enviar' onclick="return enviarFormulario()">
+    <input type="submit" value='enviar' onclick="return enviarFormulario();">
   </form>
-</div>
-<div class="" id="error">
-
 </div>
 
 <script type="text/javascript" src="./js/probadita.js"></script>
@@ -130,7 +127,7 @@
     <a class="btn-floating btn-large waves-effect waves-light modal-trigger  red z-depth-3" href="#modal1"><i class="material-icons">add</i></a>
   </div>
   <div id="modal1" class="modal">
-    <form id="form" method="post" action="create_document" enctype="multipart/form-data">
+    <form method="post" action="create_document" enctype="multipart/form-data">
       <div class="modal-title center light-blue-text">
         <h4 class="section">Crear Documento</h4>
       </div>
@@ -142,7 +139,7 @@
         </div>
         <div class="form-group">
           <label class="black-text">Descripcion del documento:</label>
-          <input type="text" name="description" required minlength="3" maxlength="1000">
+          <input id='descripcion' type="text" name="description">
         </div>
         <div class="form-group">
           <select  class="form-control mi-selector validate" name='category' >
@@ -164,13 +161,13 @@
           <div class="file-field input-field">
             <div class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3">
               <span>Seleccione un archivo</span>
-              <input type="file" id="file" name="PDF" accept=".pdf"required>
+              <input type="file" id="file" name="PDF" accept=".pdf" required>
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
             </div>
           </div>
-          <button class="btn blue lighten-3  waves-effect waves-light black-text z-depth-3" type="submit" onclick="return revisar();">Subir</button>
+          <button class="btn blue lighten-3 waves-effect waves-light black-text z-depth-3" type="submit" onclick="return enviarFormulario();">Subir</button>
         </div>
       </div>
     </form>
